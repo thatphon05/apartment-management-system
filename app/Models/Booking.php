@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class RoomBooking extends Model
+class Booking extends Model
 {
 
     /**
@@ -20,11 +19,11 @@ class RoomBooking extends Model
     protected $table = 'room_bookings';
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -49,6 +48,14 @@ class RoomBooking extends Model
     public function repairs(): HasMany
     {
         return $this->hasMany(Repair::class, 'booking_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'room_id');
     }
 
 }

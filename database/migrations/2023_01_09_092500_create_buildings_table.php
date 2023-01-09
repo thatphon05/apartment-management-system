@@ -10,8 +10,8 @@ class CreateBuildingsTable extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name');
+            $table->timestamps();
         });
     }
 

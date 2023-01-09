@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/building/{id}', [BuildingController::class, 'index']);
+Route::get('/floor/{id}', [BuildingController::class, 'floor']);

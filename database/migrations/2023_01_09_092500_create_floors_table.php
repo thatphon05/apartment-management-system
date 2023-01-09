@@ -10,9 +10,9 @@ class CreateFloorsTable extends Migration
     {
         Schema::create('floors', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('name');
             $table->integer('building_id')->unsigned();
+            $table->timestamps();
         });
     }
 

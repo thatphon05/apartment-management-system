@@ -10,7 +10,6 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name');
             $table->integer('floor_id')->unsigned();
             $table->decimal('rent_price');
@@ -18,6 +17,7 @@ class CreateRoomsTable extends Migration
             $table->decimal('water_price');
             $table->decimal('parking_price');
             $table->decimal('common_fee');
+            $table->timestamps();
         });
     }
 

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Floor;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class FloorSeeder extends Seeder
 {
@@ -14,13 +14,15 @@ class FloorSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 4; $i++) {
-            DB::table('floors')->insert([
-                'created_at' => now(),
-                'updated_at' => now(),
-                'name' => $i,
-                'building_id' => 1,
-            ]);
+        if (Floor::count() < 1) {
+            for ($i = 1; $i <= 4; $i++) {
+                Floor::create([
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'name' => $i,
+                    'building_id' => 1,
+                ]);
+            }
         }
     }
 }

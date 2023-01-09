@@ -52,8 +52,16 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function roomBookings(): HasMany
+    public function bookings(): HasMany
     {
         return $this->hasMany(RoomBooking::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'user_id');
     }
 }

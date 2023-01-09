@@ -10,12 +10,12 @@ class CreateUtilitiesExpensesTable extends Migration
     {
         Schema::create('utilities_expenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->integer('electric');
-            $table->integer('water');
+            $table->integer('electric_unit');
+            $table->integer('water_unit');
             $table->integer('booking_id')->unsigned();
-            $table->date('date_of_note');
             $table->integer('month');
+            $table->date('note_date');
+            $table->timestamps();
         });
     }
 

@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Floor extends Model
 {
@@ -19,17 +19,17 @@ class Floor extends Model
     protected $table = 'floors';
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function building(): HasOne
+    public function building(): BelongsTo
     {
-        return $this->hasOne(Building::class, 'building_id');
+        return $this->belongsTo(Building::class, 'building_id');
     }
 
     /**
      * @return HasMany
      */
-    public function room(): HasMany
+    public function rooms(): HasMany
     {
         return $this->hasMany(Room::class, 'floor_id');
     }

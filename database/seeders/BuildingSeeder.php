@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Building;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class BuildingSeeder extends Seeder
 {
@@ -14,10 +14,12 @@ class BuildingSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('buildings')->insert([
-            'created_at' => now(),
-            'updated_at' => now(),
-            'name' => 1,
-        ]);
+        if (Building::count() < 1) {
+            Building::create([
+                'created_at' => now(),
+                'updated_at' => now(),
+                'name' => 1,
+            ]);
+        }
     }
 }
