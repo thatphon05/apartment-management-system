@@ -23,7 +23,7 @@ class Invoice extends Model
      */
     public function booking(): BelongsTo
     {
-        return $this->belongsTo(RoomBooking::class, 'booking_id');
+        return $this->belongsTo(Booking::class, 'booking_id');
     }
 
     /**
