@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BuildingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +13,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/**
+ * User page
+ */
+Route::prefix('/')->name('user.')->group(function () {
+
+    // User login
+    Route::get('/login', function () {
+        return 'user login form';
+    })->name('login');
+
+    // After user login
+    Route::middleware('auth')->group(function () {
+
+        Route::get('/', function () {
+            return 'dashboard';
+        })->name('dashboard');
+
+    });
 });
 
-Route::get('/building/{id}', [BuildingController::class, 'index']);
-Route::get('/floor/{id}', [BuildingController::class, 'floor']);
+/**
+ * Admin page
+ */
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Admin login
+    Route::get('/login', function () {
+        return 'admin login form';
+    })->name('login');
+
+    // After admin login
+    Route::middleware('auth.admin')->group(function () {
+
+        Route::get('/', function () {
+            return 'dashboard';
+        })->name('dashboard');
+
+    });
+});
