@@ -14,33 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Admin account
-        if (User::where('role', '=', 'admin')->count() < 1) {
-            User::create([
-                'created_at' => now(),
-                'updated_at' => now(),
-                'email' => 'thatphon.t@ku.th',
-                'id_card' => '1352464874125',
-                'telephone' => '0123456789',
-                'password' => bcrypt('123'),
-                'name' => 'Administration',
-                'surname' => 'Number 1',
-                'birthdate' => now(),
-                'religion' => 'เจได',
-                'address' => '252/561 หมู่ 50',
-                'sub_district' => 'บ้านดิว',
-                'district' => 'เมือง',
-                'province' => 'สมุทรสงการ',
-                'postal_code' => '66666',
-                'id_card_copy' => '/',
-                'copy_house_registration' => '/',
-                'active' => 1,
-                'role' => 'admin'
-            ]);
-        }
-
         // User account
-        if (User::where('role', '=', 'user')->count() < 1) {
+        if (User::count() < 1) {
             User::create(array(
                 'email' => 'test@user.com',
                 'telephone' => '0123456789',
@@ -58,7 +33,6 @@ class UserSeeder extends Seeder
                 'id_card_copy' => '/',
                 'copy_house_registration' => '/',
                 'active' => 1,
-                'role' => 'user'
             ));
         }
 

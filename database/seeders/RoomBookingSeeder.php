@@ -19,7 +19,7 @@ class RoomBookingSeeder extends Seeder
             Booking::create(array(
                 'created_at' => now(),
                 'updated_at' => now(),
-                'user_id' => 2,
+                'user_id' => 1,
                 'room_id' => 1,
                 'rent_contract' => '/',
                 'contract_start' => Carbon::now(),
