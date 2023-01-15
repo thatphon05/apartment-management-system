@@ -45,7 +45,7 @@ class AuthController extends Controller
 
             $user = Auth::guard('admin')->user();
             if ($user->status == AdminStatusEnum::ACTIVE) {
-                return redirect(route('admin.dashboard.index'));
+                return to_route('admin.dashboard.index');
             }
 
             return back()->withErrors(['msg' => 'บัญชีนี้ถูกระงับการใช้'])->withInput();
@@ -62,6 +62,6 @@ class AuthController extends Controller
     {
         Auth::guard('admin')->logout();
 
-        return redirect(route('admin.login.get'));
+        return to_route('admin.login.get');
     }
 }
