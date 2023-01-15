@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Auths\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->name('user.')->group(function () {
 
     // User login
-    Route::get('/login', function () {
-        return 'user login form';
-    })->name('login');
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'getUserLogin')->name('login.get');
+        Route::post('/login', 'postUserLogin')->name('login.post');
+        Route::get('logout', 'userLogout')->name('logout');
+    });
 
     // After user login
     Route::middleware('auth')->group(function () {
@@ -39,16 +43,19 @@ Route::prefix('/')->name('user.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Admin login
-    Route::get('/login', function () {
-        return 'admin login form';
-    })->name('login');
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/login', 'getAdminLogin')->name('login.get');
+        Route::post('/login', 'postAdminLogin')->name('login.post');
+        Route::get('logout', 'adminLogout')->name('logout');
+    });
 
     // After admin login
     Route::middleware('auth.admin')->group(function () {
 
-        Route::get('/', function () {
-            return 'dashboard';
-        })->name('dashboard');
+        // dashboard
+        Route::controller(DashboardController::class)->group(function () {
+            Route::get('/', 'index')->name('dashboard.index');
+        });
 
     });
 });
