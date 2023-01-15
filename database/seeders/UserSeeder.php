@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
                 'postal_code' => '66666',
                 'id_card_copy' => '/',
                 'copy_house_registration' => '/',
-                'active' => 1,
+                'status' => 1,
             ));
         }
 

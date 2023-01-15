@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('postal_code');
             $table->string('id_card_copy');
             $table->string('copy_house_registration');
-            $table->boolean('active');
+            $table->integer('status');
             $table->rememberToken();
             $table->timestamps();
         });

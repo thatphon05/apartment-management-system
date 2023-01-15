@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
                 'email' => 'thatphon.t@ku.th',
                 'password' => bcrypt('123'),
                 'name' => 'Administration',
-                'active' => 1,
+                'status' => 1,
             ]);
         }
     }
