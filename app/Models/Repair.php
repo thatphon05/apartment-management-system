@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RepairStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -17,6 +18,15 @@ class Repair extends Model
      * @var string
      */
     protected $table = 'repairs';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => RepairStatusEnum::class,
+    ];
 
     /**
      * @return BelongsTo
