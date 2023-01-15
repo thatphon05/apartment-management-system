@@ -26,4 +26,12 @@ class Repair extends Model
         return $this->belongsTo(Booking::class, 'booking_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
 }
