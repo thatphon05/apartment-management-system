@@ -11,8 +11,10 @@ class CreateRepairsTable extends Migration
         Schema::create('repairs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('booking_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->string('subject');
             $table->longText('description');
+            $table->integer('status');
             $table->timestamps();
         });
     }

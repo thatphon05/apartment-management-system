@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BookingStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,15 @@ class Booking extends Model
      * @var string
      */
     protected $table = 'room_bookings';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => BookingStatusEnum::class,
+    ];
 
     /**
      * @return BelongsTo
@@ -39,7 +49,7 @@ class Booking extends Model
      */
     public function utilytyExpenses(): HasMany
     {
-        return $this->hasMany(UtilitiesExpense::class, 'booking_id');
+        return $this->hasMany(UtilityExpense::class, 'booking_id');
     }
 
     /**

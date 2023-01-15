@@ -33,6 +33,11 @@ class CreateForeignKeys extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+        });
         Schema::table('invoices', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('restrict')
@@ -86,6 +91,9 @@ class CreateForeignKeys extends Migration
         });
         Schema::table('repairs', function (Blueprint $table) {
             $table->dropForeign('repairs_booking_id_foreign');
+        });
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->dropForeign('repairs_user_id_foreign');
         });
         Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign('invoices_user_id_foreign');
