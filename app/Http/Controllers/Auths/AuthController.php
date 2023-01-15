@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auths;
 
+use App\Enums\AdminStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +44,7 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
 
             $user = Auth::guard('admin')->user();
-            if ($user->active == 1) {
+            if ($user->status == AdminStatusEnum::ACTIVE) {
                 return redirect(route('admin.dashboard.index'));
             }
 
