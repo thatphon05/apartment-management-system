@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ config('app.name') }} | เข้าสู่ระบบ</title>
-    @include('partials.header_assets')
+    @include('partials.admins.header_assets')
 </head>
 <body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
 <!-- loader Start -->
@@ -102,6 +102,6 @@
         </div>
     </section>
 </div>
-@include('partials.body_assets')
+@include('partials.admins.body_assets')
 </body>
 </html>

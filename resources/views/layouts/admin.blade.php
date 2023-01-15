@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ config('app.name') }} | @yield('title')</title>
-    @include('partials.header_assets')
+    @include('partials.admins.header_assets')
 </head>
 <body class="">
 <!-- loader Start -->
@@ -14,11 +14,11 @@
     </div>
 </div>
 <!-- loader END -->
-@include('partials.sidebar')
+@include('partials.admins.sidebar')
 <main class="main-content">
     <div class="position-relative iq-banner">
         <!--Nav Start-->
-        @include('partials.navbar')
+        @include('partials.admins.navbar')
         <!-- Nav Header Component Start -->
         <div class="iq-navbar-header" style="height: 215px;">
             <div class="container-fluid iq-container">
@@ -59,10 +59,10 @@
         </div>
     </div>
     <!-- Footer Section Start -->
-    @include('partials.footer')
+    @include('partials.admins.footer')
     <!-- Footer Section End -->
 </main>
-@include('partials.offcanvas')
-@include('partials.body_assets')
+@include('partials.admins.offcanvas')
+@include('partials.admins.body_assets')
 </body>
 </html>
