@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ env('app_name') }} | เข้าสู่ระบบ</title>
+    <title>{{ config('app.name') }} | เข้าสู่ระบบ</title>
     @include('partials.header_assets')
 </head>
 <body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
@@ -37,7 +37,7 @@
                                               transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
                                     </svg>
                                     <!--logo End-->
-                                    <h4 class="logo-title ms-3">{{ env('app_name') }}</h4>
+                                    <h4 class="logo-title ms-3">{{ config('app.name') }}</h4>
                                 </a>
                                 <h2 class="mb-2 text-center">เข้าสู่ระบบ</h2>
                                 <form action="{{route('admin.login.post')}}" method="post">
