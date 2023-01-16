@@ -1,3 +1,9 @@
+Run Composer update
+
+```sh
+composer update
+```
+
 Run Migration
 
 ```sh
