@@ -1,23 +1,13 @@
-<!-- Favicon -->
-<link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}"/>
+<!-- CSS files -->
+<link href="{{ asset('/dist/css/tabler.min.css?1668287865') }}" rel="stylesheet"/>
+<link href="{{ asset('/dist/css/tabler-flags.min.css?1668287865') }}" rel="stylesheet"/>
+<link href="{{ asset('/dist/css/tabler-payments.min.css?1668287865') }}" rel="stylesheet"/>
+<link href="{{ asset('/dist/css/tabler-vendors.min.css?1668287865') }}" rel="stylesheet"/>
+<link href="{{ asset('/dist/css/demo.min.css?1668287865') }}" rel="stylesheet"/>
+<style>
+    @import url('{{ asset('https://rsms.me/inter/inter.css') }}');
 
-<!-- Library / Plugin Css Build -->
-<link rel="stylesheet" href="{{ asset('assets/css/core/libs.min.css') }}"/>
-
-<!-- Aos Animation Css -->
-<link rel="stylesheet" href="{{ asset('assets/vendor/aos/dist/aos.css') }}"/>
-
-<!-- Hope Ui Design System Css -->
-<link rel="stylesheet" href="{{ asset('assets/css/hope-ui.min.css?v=1.2.0') }}"/>
-
-<!-- Custom Css -->
-<link rel="stylesheet" href="{{ asset('assets/css/custom.min.css?v=1.2.0') }}"/>
-
-<!-- Dark Css -->
-<link rel="stylesheet" href="{{ asset('assets/css/dark.min.css') }}"/>
-
-<!-- Customizer Css -->
-<link rel="stylesheet" href="{{ asset('assets/css/customizer.min.css') }}"/>
-
-<!-- RTL Css -->
-<link rel="stylesheet" href="{{ asset('assets/css/rtl.min.css') }}"/>
+    :root {
+        --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+</style>

@@ -1,30 +1,8 @@
-<!-- Library Bundle Script -->
-<script src="{{ asset('assets/js/core/libs.min.js')}}"></script>
-
-<!-- External Library Bundle Script -->
-<script src="{{ asset('assets/js/core/external.min.js') }}"></script>
-
-<!-- Widgetchart Script -->
-<script src="{{ asset('assets/js/charts/widgetcharts.js') }}"></script>
-
-<!-- mapchart Script -->
-<script src="{{ asset('assets/js/charts/vectore-chart.js') }}"></script>
-<script src="{{ asset('assets/js/charts/dashboard.js') }}"></script>
-
-<!-- fslightbox Script -->
-<script src="{{ asset('assets/js/plugins/fslightbox.js') }}"></script>
-
-<!-- Settings Script -->
-<script src="{{ asset('assets/js/plugins/setting.js') }}"></script>
-
-<!-- Slider-tab Script -->
-<script src="{{ asset('assets/js/plugins/slider-tabs.js') }}"></script>
-
-<!-- Form Wizard Script -->
-<script src="{{ asset('assets/js/plugins/form-wizard.js') }}"></script>
-
-<!-- AOS Animation Plugin-->
-<script src="{{ asset('assets/vendor/aos/dist/aos.js') }}"></script>
-
-<!-- App Script -->
-<script src="{{ asset('assets/js/hope-ui.js') }}" defer></script>
+<!-- Libs JS -->
+<script src="{{ asset('/dist/libs/apexcharts/dist/apexcharts.min.js?1668287865') }}" defer></script>
+<script src="{{ asset('/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1668287865') }}" defer></script>
+<script src="{{ asset('/dist/libs/jsvectormap/dist/maps/world.js?1668287865') }}" defer></script>
+<script src="{{ asset('/dist/libs/jsvectormap/dist/maps/world-merc.js?1668287865') }}" defer></script>
+<!-- Tabler Core -->
+<script src="{{ asset('/dist/js/tabler.min.js?1668287865') }}" defer></script>
+<script src="{{ asset('/dist/js/demo.min.js?1668287865') }}" defer></script>
