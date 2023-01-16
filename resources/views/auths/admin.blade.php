@@ -1,107 +1,99 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta16
+* @link https://tabler.io
+* Copyright 2018-2022 The Tabler Authors
+* Copyright 2018-2022 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ config('app.name') }} | เข้าสู่ระบบ</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>เข้าสู่ระบบ - {{ config('app.name') }}</title>
+
     @include('partials.admins.header_assets')
+
 </head>
-<body class=" " data-bs-spy="scroll" data-bs-target="#elements-section" data-bs-offset="0" tabindex="0">
-<!-- loader Start -->
-<div id="loading">
-    <div class="loader simple-loader">
-        <div class="loader-body"></div>
-    </div>
-</div>
-<!-- loader END -->
-<div class="wrapper">
-    <section class="login-content">
-        <div class="row m-0 align-items-center bg-white vh-100">
-            <div class="col-md-6">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        <div class="card card-transparent shadow-none d-flex justify-content-center mb-0 auth-card">
-                            <div class="card-body">
-                                <a href="../../dashboard/index.html"
-                                   class="navbar-brand d-flex align-items-center mb-3">
-                                    <!--Logo start-->
-                                    <svg width="30" class="" viewBox="0 0 30 30" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
-                                              transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                                        <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                                              transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                                        <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                                              transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                                        <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
-                                              transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                                    </svg>
-                                    <!--logo End-->
-                                    <h4 class="logo-title ms-3">{{ config('app.name') }}</h4>
-                                </a>
-                                <h2 class="mb-2 text-center">เข้าสู่ระบบ</h2>
-                                <form action="{{route('admin.login.post')}}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        @if($errors->any())
-                                            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                                <svg class="bi flex-shrink-0 me-2" width="24" height="24">
-                                                    <use xlink:href="#exclamation-triangle-fill"/>
-                                                </svg>
-                                                <ul>
-                                                    @foreach($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endif
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="email" class="form-label">อีเมล</label>
-                                                <input name="email" value="{{ old('email') }}"
-                                                       class="form-control @error('email') is-invalid @enderror"
-                                                       aria-describedby="email" placeholder=" ">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="password" class="form-label">รหัสผ่าน</label>
-                                                <input name="password" type="password"
-                                                       class="form-control @error('password') is-invalid @enderror"
-                                                       aria-describedby="password" placeholder=" ">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
-                                    </div>
-                                </form>
+<body class=" border-top-wide border-primary d-flex flex-column">
+<script src="{{ asset('/dist/js/demo-theme.min.js?1668287865')  }}"></script>
+<div class="page page-center">
+    <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+            <a href="." class="navbar-brand navbar-brand-autodark"><img src="{{ asset('/static/logo.svg') }}"
+                                                                        height="36" alt=""></a>
+        </div>
+        <div class="card card-md">
+            <div class="card-body">
+                <h2 class="h2 text-center mb-4">เข้าสู่ระบบ</h2>
+
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <div class="d-flex">
+                            <div>
+                                <!-- Download SVG icon from http://tabler-icons.io/i/alert-circle -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <circle cx="12" cy="12" r="9"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="alert-title">เกิดข้อผิดพลาด&hellip;</h4>
+                                <div class="text-muted">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                     </div>
-                </div>
-                <div class="sign-bg">
-                    <svg width="280" height="230" viewBox="0 0 431 398" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g opacity="0.05">
-                            <rect x="-157.085" y="193.773" width="543" height="77.5714" rx="38.7857"
-                                  transform="rotate(-45 -157.085 193.773)" fill="#3B8AFF"/>
-                            <rect x="7.46875" y="358.327" width="543" height="77.5714" rx="38.7857"
-                                  transform="rotate(-45 7.46875 358.327)" fill="#3B8AFF"/>
-                            <rect x="61.9355" y="138.545" width="310.286" height="77.5714" rx="38.7857"
-                                  transform="rotate(45 61.9355 138.545)" fill="#3B8AFF"/>
-                            <rect x="62.3154" y="-190.173" width="543" height="77.5714" rx="38.7857"
-                                  transform="rotate(45 62.3154 -190.173)" fill="#3B8AFF"/>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-            <div class="col-md-6 d-md-block d-none bg-primary p-0 mt-n1 vh-100 overflow-hidden">
-                <img src="{{asset('assets/images/auth/01.png')}}" class="img-fluid gradient-main animated-scaleX"
-                     alt="images">
+                @endif
+
+                <form action="{{ route('admin.login.post') }}" method="post" autocomplete="off" novalidate>
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">อีเมล</label>
+                        <input type="email" name="email" class="form-control" placeholder="your@email.com"
+                               autocomplete="off">
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label">
+                            รหัสผ่าน
+                        </label>
+                        <div class="input-group input-group-flat">
+                            <input type="password" name="password" class="form-control" placeholder="รหัสผ่าน"
+                                   autocomplete="off">
+                            <span class="input-group-text">
+                    <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12"
+                                                                                                              cy="12"
+                                                                                                              r="2"/><path
+                              d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"/></svg>
+                    </a>
+                  </span>
+                        </div>
+                    </div>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary w-100">เข้าสู่ระบบ</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 </div>
+
 @include('partials.admins.body_assets')
+
 </body>
 </html>
