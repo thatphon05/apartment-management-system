@@ -1,273 +1,461 @@
-<nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
-    <div class="container-fluid navbar-inner">
-        <a href="../dashboard/index.html" class="navbar-brand">
-            <!--Logo start-->
-            <svg width="30" class="text-primary" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)"
-                      fill="currentColor"/>
-                <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
-                      fill="currentColor"/>
-                <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)"
-                      fill="currentColor"/>
-                <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)"
-                      fill="currentColor"/>
-            </svg>
-            <!--logo End-->
-            <h4 class="logo-title">Hope UI</h4>
-        </a>
-        <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-            <i class="icon">
-                <svg width="20px" height="20px" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                          d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"/>
-                </svg>
-            </i>
-        </div>
-        <div class="input-group search-input">
-            <span class="input-group-text" id="search-input">
-                <svg width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></circle>
-                    <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor" stroke-width="1.5"
-                          stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </span>
-            <input type="search" class="form-control" placeholder="Search...">
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-        <span class="mt-2 navbar-toggler-bar bar1"></span>
-        <span class="navbar-toggler-bar bar2"></span>
-        <span class="navbar-toggler-bar bar3"></span>
-        </span>
+<header class="navbar navbar-expand-md navbar-light d-print-none">
+    <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+                aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
-                <li class="nav-item dropdown">
-                    <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
-                        <div class="m-0 border-0 shadow-none card">
-                            <div class="p-0 ">
-                                <ul class="p-0 list-group list-group-flush">
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                src="../assets/images/Flag/flag-03.png" alt="img-flaf"
-                                                class="img-fluid me-2"
-                                                style="width: 15px;height: 15px;min-width: 15px;"/>Spanish</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                src="../assets/images/Flag/flag-04.png" alt="img-flaf"
-                                                class="img-fluid me-2"
-                                                style="width: 15px;height: 15px;min-width: 15px;"/>Italian</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                src="../assets/images/Flag/flag-02.png" alt="img-flaf"
-                                                class="img-fluid me-2"
-                                                style="width: 15px;height: 15px;min-width: 15px;"/>French</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                src="../assets/images/Flag/flag-05.png" alt="img-flaf"
-                                                class="img-fluid me-2"
-                                                style="width: 15px;height: 15px;min-width: 15px;"/>German</a></li>
-                                    <li class="iq-sub-card list-group-item"><a class="p-0" href="#"><img
-                                                src="../assets/images/Flag/flag-06.png" alt="img-flaf"
-                                                class="img-fluid me-2"
-                                                style="width: 15px;height: 15px;min-width: 15px;"/>Japanese</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" id="notification-drop" data-bs-toggle="dropdown">
-                        <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href="{{ route('admin.dashboard.index') }}">
+                <img src="{{ asset('/static/logo.svg') }}" width="110" height="32" alt="Tabler"
+                     class="navbar-brand-image">
+            </a>
+        </h1>
+        <div class="navbar-nav flex-row order-md-last">
+            <div class="d-none d-md-flex">
+                <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
+                   data-bs-toggle="tooltip"
+                   data-bs-placement="bottom">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <path
+                            d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/>
+                    </svg>
+                </a>
+                <div class="nav-item dropdown d-none d-md-flex me-3">
+                    <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
+                       aria-label="Show notifications">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path
-                                d="M19.7695 11.6453C19.039 10.7923 18.7071 10.0531 18.7071 8.79716V8.37013C18.7071 6.73354 18.3304 5.67907 17.5115 4.62459C16.2493 2.98699 14.1244 2 12.0442 2H11.9558C9.91935 2 7.86106 2.94167 6.577 4.5128C5.71333 5.58842 5.29293 6.68822 5.29293 8.37013V8.79716C5.29293 10.0531 4.98284 10.7923 4.23049 11.6453C3.67691 12.2738 3.5 13.0815 3.5 13.9557C3.5 14.8309 3.78723 15.6598 4.36367 16.3336C5.11602 17.1413 6.17846 17.6569 7.26375 17.7466C8.83505 17.9258 10.4063 17.9933 12.0005 17.9933C13.5937 17.9933 15.165 17.8805 16.7372 17.7466C17.8215 17.6569 18.884 17.1413 19.6363 16.3336C20.2118 15.6598 20.5 14.8309 20.5 13.9557C20.5 13.0815 20.3231 12.2738 19.7695 11.6453Z"
-                                fill="currentColor"></path>
-                            <path opacity="0.4"
-                                  d="M14.0088 19.2283C13.5088 19.1215 10.4627 19.1215 9.96275 19.2283C9.53539 19.327 9.07324 19.5566 9.07324 20.0602C9.09809 20.5406 9.37935 20.9646 9.76895 21.2335L9.76795 21.2345C10.2718 21.6273 10.8632 21.877 11.4824 21.9667C11.8123 22.012 12.1482 22.01 12.4901 21.9667C13.1083 21.877 13.6997 21.6273 14.2036 21.2345L14.2026 21.2335C14.5922 20.9646 14.8734 20.5406 14.8983 20.0602C14.8983 19.5566 14.4361 19.327 14.0088 19.2283Z"
-                                  fill="currentColor"></path>
+                                d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"/>
+                            <path d="M9 17v1a3 3 0 0 0 6 0v-1"/>
                         </svg>
-                        <span class="bg-danger dots"></span>
+                        <span class="badge bg-red"></span>
                     </a>
-                    <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="notification-drop">
-                        <div class="m-0 shadow-none card">
-                            <div class="py-3 card-header d-flex justify-content-between bg-primary">
-                                <div class="header-title">
-                                    <h5 class="mb-0 text-white">All Notifications</h5>
+                    <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Last updates</h3>
+                            </div>
+                            <div class="list-group list-group-flush list-group-hoverable">
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span
+                                                class="status-dot status-dot-animated bg-red d-block"></span></div>
+                                        <div class="col text-truncate">
+                                            <a href="#" class="text-body d-block">Example 1</a>
+                                            <div class="d-block text-muted text-truncate mt-n1">
+                                                Change deprecated html tags to text decoration classes (#29604)
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="list-group-item-actions">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                        <div class="col text-truncate">
+                                            <a href="#" class="text-body d-block">Example 2</a>
+                                            <div class="d-block text-muted text-truncate mt-n1">
+                                                justify-content:between ⇒ justify-content:space-between (#29734)
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="list-group-item-actions show">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow"
+                                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span class="status-dot d-block"></span></div>
+                                        <div class="col text-truncate">
+                                            <a href="#" class="text-body d-block">Example 3</a>
+                                            <div class="d-block text-muted text-truncate mt-n1">
+                                                Update change-version.js (#29736)
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="list-group-item-actions">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto"><span
+                                                class="status-dot status-dot-animated bg-green d-block"></span>
+                                        </div>
+                                        <div class="col text-truncate">
+                                            <a href="#" class="text-body d-block">Example 4</a>
+                                            <div class="d-block text-muted text-truncate mt-n1">
+                                                Regenerate package-lock.json (#29730)
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a href="#" class="list-group-item-actions">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="p-0 card-body">
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                             src="../assets/images/shapes/01.png" alt="">
-                                        <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">Emma Watson Bni</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">95 MB</p>
-                                                <small class="float-end font-size-12">Just Now</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/02.png" alt="">
-                                        </div>
-                                        <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">New customer is join</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-end font-size-12">5 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                             src="../assets/images/shapes/03.png" alt="">
-                                        <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">Two customer is left</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-end font-size-12">2 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                             src="../assets/images/shapes/04.png" alt="">
-                                        <div class="w-100 ms-3">
-                                            <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-end font-size-12">3 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
                         </div>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link" id="mail-drop" data-bs-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <svg width="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path opacity="0.4"
-                                  d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z"
-                                  fill="currentColor"></path>
-                            <path
-                                d="M21.4759 5.67351C20.6099 4.04151 18.9059 2.99951 17.0299 2.99951H7.04988C5.17388 2.99951 3.46988 4.04151 2.60388 5.67351C2.40988 6.03851 2.50188 6.49351 2.82488 6.75151L10.2499 12.6905C10.7699 13.1105 11.3999 13.3195 12.0299 13.3195C12.0339 13.3195 12.0369 13.3195 12.0399 13.3195C12.0429 13.3195 12.0469 13.3195 12.0499 13.3195C12.6799 13.3195 13.3099 13.1105 13.8299 12.6905L21.2549 6.75151C21.5779 6.49351 21.6699 6.03851 21.4759 5.67351Z"
-                                fill="currentColor"></path>
-                        </svg>
-                        <span class="bg-primary count-mail"></span>
-                    </a>
-                    <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" aria-labelledby="mail-drop">
-                        <div class="m-0 shadow-none card">
-                            <div class="py-3 card-header d-flex justify-content-between bg-primary">
-                                <div class="header-title">
-                                    <h5 class="mb-0 text-white">All Message</h5>
-                                </div>
-                            </div>
-                            <div class="p-0 card-body ">
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/01.png" alt="">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                            <small class="float-start font-size-12">13 Jun</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/02.png" alt="">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                            <small class="float-start font-size-12">20 Apr</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/03.png" alt="">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Why do we use it?</h6>
-                                            <small class="float-start font-size-12">30 Jun</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/04.png" alt="">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Variations Passages</h6>
-                                            <small class="float-start font-size-12">12 Sep</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                                                 src="../assets/images/shapes/05.png" alt="">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                            <small class="float-start font-size-12">5 Dec</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                   aria-label="Open user menu">
+                    <span class="avatar avatar-sm"
+                          style="background-image: url({{ asset('/static/avatars/000m.jpg') }})"></span>
+                    <div class="d-none d-xl-block ps-2">
+                        <div>{{ Auth::guard('admin')->user()->name }}</div>
+                        <div class="mt-1 small text-muted">Administrator</div>
                     </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../assets/images/avatars/01.png" alt="User-Profile"
-                             class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
-                        <img src="../assets/images/avatars/avtar_1.png" alt="User-Profile"
-                             class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded">
-                        <img src="../assets/images/avatars/avtar_2.png" alt="User-Profile"
-                             class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded">
-                        <img src="../assets/images/avatars/avtar_4.png" alt="User-Profile"
-                             class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded">
-                        <img src="../assets/images/avatars/avtar_5.png" alt="User-Profile"
-                             class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded">
-                        <img src="../assets/images/avatars/avtar_3.png" alt="User-Profile"
-                             class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
-                        <div class="caption ms-3 d-none d-md-block ">
-                            <h6 class="mb-0 caption-title">{{ Auth::guard('admin')->user()->name }}</h6>
-                            <p class="mb-0 caption-sub-title">Administrator</p>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                        <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy
-                                Setting</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <a href="./settings.html" class="dropdown-item">Settings</a>
+                    <a href="{{ route('admin.logout') }}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+</header>
+
+<div class="navbar-expand-md">
+    <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="navbar navbar-light">
+            <div class="container-xl">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline
+                              points="5 12 3 12 12 3 21 12 19 12"/><path
+                              d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path
+                              d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></svg>
+                    </span>
+                            <span class="nav-link-title">
+                      Home
+                    </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside" role="button" aria-expanded="false">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline
+                              points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"/><line x1="12" y1="12" x2="20"
+                                                                                          y2="7.5"/><line x1="12"
+                                                                                                          y1="12"
+                                                                                                          x2="12"
+                                                                                                          y2="21"/><line
+                              x1="12" y1="12" x2="4" y2="7.5"/><line x1="16" y1="5.25" x2="8" y2="9.75"/></svg>
+                    </span>
+                            <span class="nav-link-title">
+                      Interface
+                    </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="./empty.html">
+                                        Empty page
+                                    </a>
+                                    <a class="dropdown-item" href="./accordion.html">
+                                        Accordion
+                                    </a>
+                                    <a class="dropdown-item" href="./blank.html">
+                                        Blank page
+                                    </a>
+                                    <a class="dropdown-item" href="./badges.html">
+                                        Badges
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./buttons.html">
+                                        Buttons
+                                    </a>
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-cards"
+                                           data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+                                           aria-expanded="false">
+                                            Cards
+                                            <span
+                                                class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="./cards.html" class="dropdown-item">
+                                                Sample cards
+                                            </a>
+                                            <a href="./card-actions.html" class="dropdown-item">
+                                                Card actions
+                                                <span
+                                                    class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                            </a>
+                                            <a href="./cards-masonry.html" class="dropdown-item">
+                                                Cards Masonry
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="./colors.html">
+                                        Colors
+                                    </a>
+                                    <a class="dropdown-item" href="./datagrid.html">
+                                        Data grid
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./datatables.html">
+                                        Datatables
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./dropdowns.html">
+                                        Dropdowns
+                                    </a>
+                                    <a class="dropdown-item" href="./modals.html">
+                                        Modals
+                                    </a>
+                                    <a class="dropdown-item" href="./maps.html">
+                                        Maps
+                                    </a>
+                                    <a class="dropdown-item" href="./map-fullsize.html">
+                                        Map fullsize
+                                    </a>
+                                    <a class="dropdown-item" href="./maps-vector.html">
+                                        Vector maps
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./navigation.html">
+                                        Navigation
+                                    </a>
+                                    <a class="dropdown-item" href="./charts.html">
+                                        Charts
+                                    </a>
+                                </div>
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="./pagination.html">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/pie-chart -->
+                                        Pagination
+                                    </a>
+                                    <a class="dropdown-item" href="./placeholder.html">
+                                        Placeholder
+                                    </a>
+                                    <a class="dropdown-item" href="./steps.html">
+                                        Steps
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./tabs.html">
+                                        Tabs
+                                    </a>
+                                    <a class="dropdown-item" href="./tables.html">
+                                        Tables
+                                    </a>
+                                    <a class="dropdown-item" href="./carousel.html">
+                                        Carousel
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./lists.html">
+                                        Lists
+                                    </a>
+                                    <a class="dropdown-item" href="./typography.html">
+                                        Typography
+                                    </a>
+                                    <a class="dropdown-item" href="./offcanvas.html">
+                                        Offcanvas
+                                    </a>
+                                    <a class="dropdown-item" href="./markdown.html">
+                                        Markdown
+                                    </a>
+                                    <a class="dropdown-item" href="./dropzone.html">
+                                        Dropzone
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./lightbox.html">
+                                        Lightbox
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./tinymce.html">
+                                        TinyMCE
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <a class="dropdown-item" href="./inline-player.html">
+                                        Inline player
+                                        <span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                    </a>
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication"
+                                           data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+                                           aria-expanded="false">
+                                            Authentication
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="./sign-in.html" class="dropdown-item">
+                                                Sign in
+                                            </a>
+                                            <a href="./sign-in-illustration.html" class="dropdown-item">
+                                                Sign in with illustration
+                                            </a>
+                                            <a href="./sign-in-cover.html" class="dropdown-item">
+                                                Sign in with cover
+                                            </a>
+                                            <a href="./sign-up.html" class="dropdown-item">
+                                                Sign up
+                                            </a>
+                                            <a href="./forgot-password.html" class="dropdown-item">
+                                                Forgot password
+                                            </a>
+                                            <a href="./terms-of-service.html" class="dropdown-item">
+                                                Terms of service
+                                            </a>
+                                            <a href="./auth-lock.html" class="dropdown-item">
+                                                Lock screen
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-error"
+                                           data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+                                           aria-expanded="false">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/file-minus -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1"
+                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                                 stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+                                                <path
+                                                    d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/>
+                                                <line x1="9" y1="14" x2="15" y2="14"/>
+                                            </svg>
+                                            Error pages
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="./error-404.html" class="dropdown-item">
+                                                404 page
+                                            </a>
+                                            <a href="./error-500.html" class="dropdown-item">
+                                                500 page
+                                            </a>
+                                            <a href="./error-maintenance.html" class="dropdown-item">
+                                                Maintenance page
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside" role="button" aria-expanded="false">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12"
+                                                                                                              cy="12"
+                                                                                                              r="4"/><circle
+                              cx="12" cy="12" r="9"/><line x1="15" y1="15" x2="18.35" y2="18.35"/><line x1="9" y1="15"
+                                                                                                        x2="5.65"
+                                                                                                        y2="18.35"/><line
+                              x1="5.65" y1="5.65" x2="9" y2="9"/><line x1="18.35" y1="5.65" x2="15" y2="9"/></svg>
+                    </span>
+                            <span class="nav-link-title">
+                      Help
+                    </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="./docs/">
+                                Documentation
+                            </a>
+                            <a class="dropdown-item" href="./changelog.html">
+                                Changelog
+                            </a>
+                            <a class="dropdown-item" href="https://github.com/tabler/tabler" target="_blank"
+                               rel="noopener">
+                                Source code
+                            </a>
+                            <a class="dropdown-item text-pink" href="https://github.com/sponsors/codecalm"
+                               target="_blank" rel="noopener">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-inline me-1" width="24"
+                                     height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path
+                                        d="M19.5 12.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/>
+                                </svg>
+                                Sponsor project!
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                    <form action="./" method="get" autocomplete="off" novalidate>
+                        <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                           stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                           stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10"
+                                                                                                              cy="10"
+                                                                                                              r="7"/><line
+                              x1="21" y1="21" x2="15" y2="15"/></svg>
+                    </span>
+                            <input type="text" value="" class="form-control" placeholder="Search…"
+                                   aria-label="Search in website">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
