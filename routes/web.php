@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // User management
         Route::resource('users', UserController::class);
+
+        // Setting management
+        Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
 
     });
 });

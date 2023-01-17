@@ -25,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrapFive();
+
+        view()->composer('*', function ($view) {
+            $current_route_name = request()->route()->getName();
+            $view->with('currentRouteName', $current_route_name);
+        });
     }
 }

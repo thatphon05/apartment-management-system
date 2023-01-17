@@ -172,7 +172,7 @@
         <div class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item {{ $currentRouteName == 'admin.dashboard.index' ? 'active' : '' }}">
                         <a class="nav-link" href="./">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -194,7 +194,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ request()->is('admin/users*') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -219,6 +219,31 @@
                                 เพิ่มผู้เช่า
                             </a>
                         </div>
+                    </li>
+                    <li class="nav-item {{ request()->is('admin/settings*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.settings.index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round" stroke-linejoin="round">
+                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                   <circle cx="14" cy="6" r="2"></circle>
+                                   <line x1="4" y1="6" x2="12" y2="6"></line>
+                                   <line x1="16" y1="6" x2="20" y2="6"></line>
+                                   <circle cx="8" cy="12" r="2"></circle>
+                                   <line x1="4" y1="12" x2="6" y2="12"></line>
+                                   <line x1="10" y1="12" x2="20" y2="12"></line>
+                                   <circle cx="17" cy="18" r="2"></circle>
+                                   <line x1="4" y1="18" x2="15" y2="18"></line>
+                                   <line x1="19" y1="18" x2="20" y2="18"></line>
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                            การตั้งค่า
+                            </span>
+                        </a>
                     </li>
                 </ul>
                 <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
