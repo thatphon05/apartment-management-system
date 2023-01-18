@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <div class="form-label">สถานะลูกค้า</div>
+                                    <div class="form-label">สถานะผู้เช่า</div>
                                     @foreach(\App\Enums\UserStatusEnum::values() as $key => $value)
                                         <label class="form-check form-check-inline">
                                             <input class="form-check-input" name="status[]" type="checkbox"
@@ -121,7 +121,7 @@
                                 @forelse($users as $user)
                                     <tr>
                                         <td><span class="text-muted">{{ $user->id }}</span></td>
-                                        <td>{{ $user->name }} {{ $user->surname }}</td>
+                                        <td>{{ $user->full_name }}</td>
                                         <td>{{ $user->telephone }}</td>
                                         <td>{{ \App\Enums\UserStatusEnum::getLabel($user->status) }}</td>
                                         <td>{{ $user->updated_at }}</td>
