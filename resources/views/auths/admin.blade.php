@@ -63,7 +63,7 @@
                     <div class="mb-3">
                         <label class="form-label">อีเมล</label>
                         <input type="email" name="email" class="form-control" placeholder="your@email.com"
-                               autocomplete="off">
+                               autocomplete="off" value="{{ old('email') }}">
                     </div>
                     <div class="mb-2">
                         <label class="form-label">
