@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminSettingRequest;
+use App\Models\Configuration;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        return view('admins.settings.index');
+        return view('admins.settings.index',
+            ['config' => Configuration::latest()->get()[0]]);
     }
 
     public function edit($id)
