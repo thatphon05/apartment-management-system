@@ -10,8 +10,9 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return view('admins.settings.index',
-            ['config' => Configuration::latest()->first()]);
+        return view('admins.settings.index', [
+            'config' => Configuration::latest()->first(),
+        ]);
     }
 
     public function edit($id)
