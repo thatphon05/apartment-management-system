@@ -2,34 +2,24 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
+
+    public function __construct(private UserService $userService)
+    {
+    }
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        // Get query parameter
-        $search = request()->query('search', '');
-        $searchLike = '%' . $search . '%';
-        $status = request()->query('status', UserStatusEnum::cases());
-
-        // find all users
-        $users = User::orWhere(function ($query) use ($searchLike) {
-            $query->orWhere('name', 'like', $searchLike)
-                ->orWhere('surname', 'like', $searchLike)
-                ->orWhere('telephone', 'like', $searchLike);
-        })
-            ->whereIn('status', $status)
-            ->orderBy('id', 'desc')
-            ->paginate(20);
-
-        return view('admins.users.index', ['users' => $users]);
+        return view('admins.users.index', [
+            'users' => $this->userService->searchUser(request()),
+        ]);
     }
 
     public function create()
