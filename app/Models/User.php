@@ -51,6 +51,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * @var string[]
+     */
+    protected $appends = [
+        'full_name',
+    ];
+
+    /**
      * @return HasMany
      */
     public function bookings(): HasMany
@@ -64,5 +71,13 @@ class User extends Authenticatable
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'user_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return $this->name . ' ' . $this->surname;
     }
 }

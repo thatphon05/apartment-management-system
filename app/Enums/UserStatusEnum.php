@@ -14,7 +14,7 @@ enum UserStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'INACTIVE', UserStatusEnum::INACTIVE => 'ระงับ',
+            'INACTIVE', UserStatusEnum::INACTIVE => 'ยกเลิก',
             'ACTIVE', UserStatusEnum::ACTIVE => 'กำลังเช่า',
             default => 'เกิดข้อผิดพลาด'
         };
