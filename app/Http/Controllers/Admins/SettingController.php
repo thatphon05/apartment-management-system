@@ -11,7 +11,7 @@ class SettingController extends Controller
     public function index()
     {
         return view('admins.settings.index',
-            ['config' => Configuration::latest()->get()[0]]);
+            ['config' => Configuration::latest()->first()]);
     }
 
     public function edit($id)

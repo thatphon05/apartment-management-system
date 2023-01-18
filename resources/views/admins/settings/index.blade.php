@@ -45,37 +45,37 @@
                         <div class="datagrid-item">
                             <div class="datagrid-title">ราคาค่าห้องพัก</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{number_format($config->rent_price,2)}}/เดือน</div>
+                                <div class="datagrid-content">{{number_format($config->rent_price,2)}} / เดือน</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
                             <div class="datagrid-title">ราคาค่าไฟฟ้า</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{$config->electric_price}}/หน่วย</div>
+                                <div class="datagrid-content">{{$config->electric_price}} / หน่วย</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
                             <div class="datagrid-title">ราคาค่าน้ำประปา</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{$config->water_price}}/หน่วย</div>
+                                <div class="datagrid-content">{{$config->water_price}} / หน่วย</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
                             <div class="datagrid-title">ราคาค่าที่จอดรถ</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{$config->parking_price}}/คัน</div>
+                                <div class="datagrid-content">{{$config->parking_price}} / คัน</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
                             <div class="datagrid-title">ค่าส่วนกลาง</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{$config->common_fee}}/เดือน</div>
+                                <div class="datagrid-content">{{$config->common_fee}} / เดือน</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
                             <div class="datagrid-title">ค่าปรับชำระเลยกำหนด</div>
                             <span class="status status-green">
-                                <div class="datagrid-content">{{$config->damages_price}}/วัน</div>
+                                <div class="datagrid-content">{{$config->damages_price}} / วัน</div>
                             </span>
                         </div>
                     </div>
