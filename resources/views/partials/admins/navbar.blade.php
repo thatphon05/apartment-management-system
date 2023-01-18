@@ -172,7 +172,7 @@
         <div class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item {{ $currentRouteName == 'admin.dashboard.index' ? 'active' : '' }}">
+                    <li class="nav-item @navactive('admin')">
                         <a class="nav-link" href="./">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -194,7 +194,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown {{ request()->is('admin/users*') ? 'active' : '' }}">
+                    <li class="nav-item dropdown @navactive('admin/users*')">
                         <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -220,7 +220,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item {{ request()->is('admin/settings*') ? 'active' : '' }}">
+                    <li class="nav-item @navactive('admin/settings')">
                         <a class="nav-link" href="{{ route('admin.settings.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
