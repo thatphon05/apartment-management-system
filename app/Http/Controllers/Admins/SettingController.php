@@ -10,17 +10,22 @@ class SettingController extends Controller
 {
     public function index()
     {
-        return view('admins.settings.index',
-            ['config' => Configuration::latest()->first()]);
+        return view('admins.settings.index', [
+            'config' => Configuration::latest()->first(),
+        ]);
     }
 
     public function edit($id)
     {
-        return view('admins.settings.edit');
+        return view('admins.settings.edit', [
+            'config' => Configuration::findOrFail($id),
+        ]);
     }
 
     public function update(AdminSettingRequest $request, $id)
     {
+        Configuration::where('id', $id)->update($request->validated());
+        return back()->with(['msg' => 'บันทึกสำเร็จ']);
     }
 
 }
