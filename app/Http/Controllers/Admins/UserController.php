@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserCreateRequest;
+use App\Models\Configuration;
+use App\Models\Room;
+use App\Services\BookingService;
 use App\Services\UserService;
 
 class UserController extends Controller
 {
 
-    public function __construct(private UserService $userService)
+    public function __construct(
+        private UserService    $userService,
+        private BookingService $bookingService
+    )
     {
     }
 
@@ -24,10 +31,27 @@ class UserController extends Controller
 
     public function create()
     {
+        return view('admins.users.create', [
+            'rooms' => Room::with('floor')->oldest('id')->get(),
+            'config' => Configuration::latest()->first(),
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
+        $user = $this->userService->createUser($request);
+        $this->userService->uploadDocs(
+            $request,
+            $user->id_card_copy,
+        );
+
+        $booking = $this->bookingService->createBooking($request, $user);
+        $this->bookingService->uploadDocs(
+            $request,
+            $booking->rent_contract,
+        );
+
+        return to_route('admin.users.index');
     }
 
     public function show($id)
