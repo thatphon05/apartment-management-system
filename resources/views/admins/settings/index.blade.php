@@ -43,25 +43,25 @@
                 <div class="card-body">
                     <div class="datagrid">
                         <div class="datagrid-item">
-                            <div class="datagrid-title">ราคาค่าห้องพัก</div>
+                            <div class="datagrid-title">ค่าเช่าห้อง</div>
                             <span class="status status-green">
                                 <div class="datagrid-content">{{ number_format($config->rent_price, 2) }} / เดือน</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
-                            <div class="datagrid-title">ราคาค่าไฟฟ้า</div>
+                            <div class="datagrid-title">ค่าไฟฟ้า</div>
                             <span class="status status-green">
                                 <div class="datagrid-content">{{ $config->electric_price }} / หน่วย</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
-                            <div class="datagrid-title">ราคาค่าน้ำประปา</div>
+                            <div class="datagrid-title">ค่าน้ำประปา</div>
                             <span class="status status-green">
                                 <div class="datagrid-content">{{ $config->water_price }} / หน่วย</div>
                             </span>
                         </div>
                         <div class="datagrid-item">
-                            <div class="datagrid-title">ราคาค่าที่จอดรถ</div>
+                            <div class="datagrid-title">ค่าที่จอดรถ</div>
                             <span class="status status-green">
                                 <div class="datagrid-content">{{ $config->parking_price }} / คัน</div>
                             </span>
