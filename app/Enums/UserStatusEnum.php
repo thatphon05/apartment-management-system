@@ -20,6 +20,15 @@ enum UserStatusEnum: int
         };
     }
 
+    public static function getClass($value): string
+    {
+        return match ($value) {
+            'INACTIVE', UserStatusEnum::INACTIVE => 'bg-red',
+            'ACTIVE', UserStatusEnum::ACTIVE => 'bg-green',
+            default => ''
+        };
+    }
+
     /**
      * @return array
      */

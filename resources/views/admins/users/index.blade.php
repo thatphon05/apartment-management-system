@@ -113,6 +113,7 @@
                                     <th>ชื่อ - นามสกุล</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>สถานะ</th>
+                                    <th>ห้องที่เช่า</th>
                                     <th>วันที่แก้ไขล่าสุด</th>
                                     <th></th>
                                 </tr>
@@ -123,7 +124,21 @@
                                         <td><span class="text-muted">{{ $user->id }}</span></td>
                                         <td>{{ $user->full_name }}</td>
                                         <td>{{ $user->telephone }}</td>
-                                        <td>{{ \App\Enums\UserStatusEnum::getLabel($user->status) }}</td>
+                                        <td>
+                                            <span
+                                                class="badge {{ \App\Enums\UserStatusEnum::getClass($user->status) }}">
+                                                {{ \App\Enums\UserStatusEnum::getLabel($user->status) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (isset($user->bookings->first()->room))
+                                                <a href="#">
+                                                    ตึก {{ $user->bookings->first()->room->floor->building->name ?? '' }}
+                                                    ชั้น {{ $user->bookings->first()->room->floor->name ?? '' }}
+                                                    ห้อง {{ $user->bookings->first()->room->name ?? '' }}
+                                                </a>
+                                            @endif
+                                        </td>
                                         <td>{{ $user->updated_at }}</td>
                                         <td class="text-end">
                                             <a href="{{ route('admin.users.show', ['user' => 1]) }}"
