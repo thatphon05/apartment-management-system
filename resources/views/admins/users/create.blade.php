@@ -50,7 +50,6 @@
                                             <label class="form-label required required">อีเมล</label>
                                             <input value="{{ old('email') }}" name="email" type="email"
                                                    onchange="inputChange(event)"
-                                                   onchange="inputChange(event)"
                                                    class="form-control @error('email') is-invalid @enderror @error('email') is-invalid @enderror"
                                                    placeholder="อีเมล">
                                             @error('email')
@@ -119,7 +118,7 @@
                                             <input value="{{ old('name') }}" name="name" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('name') is-invalid @enderror"
-                                                   placeholder="ชื่อจริง" value="">
+                                                   placeholder="ชื่อจริง">
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -130,7 +129,7 @@
                                             <input value="{{ old('surname') }}" name="surname" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('surname') is-invalid @enderror"
-                                                   placeholder="นามสกุล" value="">
+                                                   placeholder="นามสกุล">
                                             @error('surname')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -152,7 +151,7 @@
                                             <input value="{{ old('sub_district') }}" name="sub_district" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('sub_district') is-invalid @enderror"
-                                                   placeholder="ตำบล" value="">
+                                                   placeholder="ตำบล">
                                             @error('sub_district')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
