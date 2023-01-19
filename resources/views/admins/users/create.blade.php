@@ -226,12 +226,13 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <h3 class="card-title">เลือกห้องพัก</h3>
+                                <h3 class="card-title">รายละเอียดการเช่า</h3>
                                 <div class="row row-cards form-fieldset">
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">จำนวนที่จอดรถ</label>
-                                            <input value="{{ old('parking_amount') }}" name="parking_amount" value="1"
+                                            <input value="{{ old('parking_amount') ?? 0 }}" name="parking_amount"
+                                                   value="1"
                                                    type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('parking_amount') is-invalid @enderror"
