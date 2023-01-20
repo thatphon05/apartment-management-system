@@ -31,9 +31,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $rooms = Room::with(['floor' => function ($query) {
-            $query->with('building')->oldest()->get();
-        }])->oldest('id')->get();
+        $rooms = Room::with(['floor.building'])->oldest('id')->get();
         $rooms = $rooms->sortBy(
             ['floor.building.name', 'floor.name', 'name'],
         );

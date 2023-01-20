@@ -22,13 +22,9 @@ class UserService
         $searchLike = '%' . $search . '%';
         $status = $request->query('status', UserStatusEnum::cases());
 
-        // find all users
+        // filter all users and room information
         return User::with(['bookings' => function ($query) {
-            $query->with(['room' => function ($query) {
-                $query->with(['floor' => function ($query) {
-                    $query->with('building');
-                }]);
-            }])
+            $query->with(['room', 'room.floor.building'])
                 ->where('status', BookingStatusEnum::ACTIVE)
                 ->latest()->get('id');
         }])
