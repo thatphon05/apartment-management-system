@@ -24,7 +24,7 @@ class UserService
 
         // filter all users and room information
         return User::with(['bookings' => function ($query) {
-            $query->with(['room', 'room.floor.building'])
+            $query->with(['room.floor.building'])
                 ->where('status', BookingStatusEnum::ACTIVE)
                 ->latest()->get('id');
         }])
