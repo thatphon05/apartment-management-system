@@ -14,33 +14,34 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <div class="card">
-                <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            <div class="d-flex">
-                                <div>
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-circle -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon"
-                                         width="24" height="24"
-                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                         fill="none"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <circle cx="12" cy="12" r="9"/>
-                                        <line x1="12" y1="8" x2="12" y2="12"/>
-                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
-                                    </svg>
+            <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div class="d-flex">
+                                    <div>
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-circle -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon"
+                                             width="24" height="24"
+                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                             fill="none"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <circle cx="12" cy="12" r="9"/>
+                                            <line x1="12" y1="8" x2="12" y2="12"/>
+                                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="alert-title">เกิดข้อผิดพลาด&hellip;</h4>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 class="alert-title">เกิดข้อผิดพลาด&hellip;</h4>
-                                </div>
+                                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
                             </div>
-                            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
-                        </div>
-                    @endif
-                    <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
-                        @csrf
+                        @endif
+
                         <div class="row gx-4">
                             <div class="col-md-6">
                                 <h3 class="card-title">ข้อมูลส่วนตัว</h3>
@@ -259,12 +260,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success btn-md">เพิ่ม</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                        <a href="{{ route('admin.users.index') }}"
+                           class="btn btn-ghost-secondary">ยกเลิก</a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection
