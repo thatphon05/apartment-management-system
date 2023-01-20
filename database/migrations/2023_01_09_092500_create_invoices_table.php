@@ -13,7 +13,7 @@ class CreateInvoicesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('booking_id')->unsigned();
             $table->integer('status');
-            $table->timestamps('cycle');
+            $table->date('cycle');
             $table->integer('util_expense_id')->unsigned();
             $table->decimal('rent_price');
             $table->decimal('electric_price');
