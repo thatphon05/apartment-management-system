@@ -34,7 +34,7 @@ class UserCreateRequest extends FormRequest
             // 'contract_start' => now(),
             // 'contract_end' => now(),
             // 'deposit' => 'required|numeric',
-            'parking_amount' => 'required|numeric',
+            'parking_amount' => 'required|numeric|min:0',
         ];
     }
 
