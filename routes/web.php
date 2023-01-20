@@ -62,6 +62,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // User management
         Route::resource('users', UserController::class);
 
+        // Download file
+        Route::get('users/idcardcopy/{filename}', [UserController::class, 'downloadIdCardCopy'])
+            ->name('users.download.idcardcopy');
+        Route::get('users/housecopy/{filename}', [UserController::class, 'downloadHouseRegCopy'])
+            ->name('users.download.housecopy');
+
         // Setting management
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
 

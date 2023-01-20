@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\UserStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -68,6 +69,9 @@ class User extends Authenticatable
      */
     protected $appends = [
         'full_name',
+        'full_address',
+        'birth_date_format',
+        'age',
     ];
 
     /**
@@ -92,5 +96,21 @@ class User extends Authenticatable
     public function getFullNameAttribute(): string
     {
         return $this->name . ' ' . $this->surname;
+    }
+
+    public function getFullAddressAttribute(): string
+    {
+        return $this->address . ' ' . $this->sub_district . ' ' . $this->district . ' '
+            . $this->province . ' ' . $this->postal_code;
+    }
+
+    public function getBirthDateFormatAttribute(): string
+    {
+        return Carbon::parse($this->birthdate)->translatedFormat('l j F Y');
+    }
+
+    public function getAgeAttribute(): string
+    {
+        return Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
     }
 }

@@ -74,10 +74,10 @@ class UserService
     public function uploadDocs(Request $request, $filename): void
     {
         $request->file('id_card_copy')->storeAs(
-            'id_card_copy', $filename
+            config('custom.id_card_copy_path'), $filename
         );
         $request->file('copy_house_registration')->storeAs(
-            'copy_house_registration', $filename
+            config('custom.copy_house_registration_path'), $filename
         );
     }
 

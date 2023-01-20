@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
+use App\Models\Booking;
 use App\Models\Configuration;
+use App\Models\Invoice;
+use App\Models\Repair;
 use App\Models\Room;
+use App\Models\User;
 use App\Services\BookingService;
+use App\Services\StorageService;
 use App\Services\UserService;
 
 class UserController extends Controller
@@ -14,7 +19,8 @@ class UserController extends Controller
 
     public function __construct(
         private UserService    $userService,
-        private BookingService $bookingService
+        private BookingService $bookingService,
+        private StorageService $storageService,
     )
     {
     }
@@ -60,6 +66,24 @@ class UserController extends Controller
 
     public function show($id)
     {
+        $user = User::findOrFail($id);
+
+        $idCardPath = config('custom.id_card_copy_path') . '/' . $user->id_card_copy;
+        $idCardCopySizeMB = $this->storageService->getFileSizeMB($idCardPath);
+
+        $housePath = config('custom.copy_house_registration_path') . '/' . $user->copy_house_registration;
+        $copyHouseRegSizeMB = $this->storageService->getFileSizeMB($housePath);
+
+        return view('admins.users.show', [
+            'user' => $user,
+            'bookings' => Booking::with('room.floor.building')->where('user_id', $id)
+                ->latest()->get(),
+            'invoices' => Invoice::with('booking.room.floor.building')->where('user_id', $id)
+                ->latest()->take(5)->get(),
+            'repairs' => Repair::where('user_id', $id)->latest()->take(5)->get(),
+            'idCardCopySize' => $idCardCopySizeMB,
+            'copyHouseRegSize' => $copyHouseRegSizeMB,
+        ]);
     }
 
     public function edit($id)
@@ -70,7 +94,13 @@ class UserController extends Controller
     {
     }
 
-    public function destroy($id)
+    public function downloadIdCardCopy($filename)
     {
+        return $this->storageService->download(config('custom.id_card_copy_path') . '/' . $filename);
+    }
+
+    public function downloadHouseRegCopy($filename)
+    {
+        return $this->storageService->download(config('custom.copy_house_registration_path') . '/' . $filename);
     }
 }

@@ -16,10 +16,24 @@ enum InvoiceStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'PENDING', 0 => 'รอชำระเงิน',
-            'COMPLETE', 1 => 'ชำระเงินแล้ว',
-            'OVERDUE', 2 => 'เกินกำหนด',
-            'CANCEL', 3 => 'ยกเลิก',
+            'PENDING', InvoiceStatusEnum::PENDING => 'รอชำระเงิน',
+            'COMPLETE', InvoiceStatusEnum::COMPLETE => 'ชำระเงินแล้ว',
+            'OVERDUE', InvoiceStatusEnum::OVERDUE => 'เกินกำหนด',
+            'CANCEL', InvoiceStatusEnum::CANCEL => 'ยกเลิก',
+        };
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public static function getColor($value): string
+    {
+        return match ($value) {
+            'PENDING', InvoiceStatusEnum::PENDING => 'azure',
+            'COMPLETE', InvoiceStatusEnum::COMPLETE => 'green',
+            'OVERDUE', InvoiceStatusEnum::OVERDUE => 'orange',
+            'CANCEL', InvoiceStatusEnum::CANCEL => '',
         };
     }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\InvoiceStatusEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -26,6 +27,13 @@ class Invoice extends Model
      */
     protected $casts = [
         'status' => InvoiceStatusEnum::class,
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $appends = [
+        'cycle_date',
     ];
 
     /**
@@ -58,6 +66,16 @@ class Invoice extends Model
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'booking_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCycleDateAttribute(): string
+    {
+        $cycle = Carbon::parse($this->cycle);
+
+        return $cycle->translatedFormat('F Y');
     }
 
 }

@@ -16,15 +16,15 @@ enum UserStatusEnum: int
         return match ($value) {
             'INACTIVE', UserStatusEnum::INACTIVE => 'ระงับ',
             'ACTIVE', UserStatusEnum::ACTIVE => 'ใช้งานได้',
-            default => 'เกิดข้อผิดพลาด'
+            default => ''
         };
     }
 
-    public static function getClass($value): string
+    public static function getColor($value): string
     {
         return match ($value) {
-            'INACTIVE', UserStatusEnum::INACTIVE => 'bg-red',
-            'ACTIVE', UserStatusEnum::ACTIVE => 'bg-green',
+            'INACTIVE', UserStatusEnum::INACTIVE => 'red',
+            'ACTIVE', UserStatusEnum::ACTIVE => 'green',
             default => ''
         };
     }
