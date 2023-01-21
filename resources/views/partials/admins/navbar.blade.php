@@ -10,13 +10,6 @@
                      class="navbar-brand-image">
             </a>
         </h1>
-
-        @if (config('app.debug') === true)
-            <script>
-                console.info('Query time:', {{ $countQuery }})
-            </script>
-        @endif
-
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
                 <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"

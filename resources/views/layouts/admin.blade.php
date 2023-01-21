@@ -45,6 +45,11 @@
     function inputChange(event) {
         event.currentTarget.classList.remove("is-invalid");
     }
+
+    @if (config('app.debug') === true)
+    console.info('Query time:', {{ $countQuery }})
+    @endif
+
 </script>
 
 </body>
