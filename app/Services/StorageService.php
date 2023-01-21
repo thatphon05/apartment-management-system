@@ -17,7 +17,7 @@ class StorageService
             abort(404);
         }
 
-        return Storage::download($file);
+        return Storage::download($file, now());
     }
 
     /**
