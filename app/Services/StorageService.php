@@ -11,13 +11,16 @@ class StorageService
      * @param $file
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
      */
-    public function download($file): \Symfony\Component\HttpFoundation\StreamedResponse
+    public function download($file)
     {
         if (!Storage::get($file)) {
             abort(404);
         }
 
-        return Storage::download($file, now());
+        $fileExtension = explode('/', Storage::mimeType($file));
+
+        return Storage::download($file, now() . '.' . $fileExtension[1]);
+
     }
 
     /**
