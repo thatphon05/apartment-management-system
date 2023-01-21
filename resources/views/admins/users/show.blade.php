@@ -204,6 +204,7 @@
                                     <th>ห้อง</th>
                                     <th>สถานะ</th>
                                     <th>ประจำเดือน</th>
+                                    <th>วันครบกำหนดชำระ</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -221,13 +222,23 @@
                                             ห้อง {{ $invoice->booking->room->name }}
                                         </td>
                                         <td>
-                                            <span
-                                                class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
+                                            @if ($invoice->due_date_status && $invoice->status == \App\Enums\InvoiceStatusEnum::PENDING)
+                                                <span class="badge bg-red">
+                                                {{ \App\Enums\InvoiceStatusEnum::getLabel(\App\Enums\InvoiceStatusEnum::OVERDUE) }}
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
                                                 {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
-                                            </span>
+                                                </span>
+                                            @endif
+
                                         </td>
                                         <td>
                                             {{ $invoice->cycle_date }}
+                                        </td>
+                                        <td>
+                                            {{ $invoice->due_date }}
                                         </td>
                                     </tr>
                                 @empty
