@@ -195,7 +195,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown @navactive('admin/users*')">
-                        <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
