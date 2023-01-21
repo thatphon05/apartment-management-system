@@ -3,15 +3,16 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class StorageService
 {
 
     /**
      * @param $file
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return StreamedResponse
      */
-    public function download($file)
+    public function download($file): StreamedResponse
     {
         if (!Storage::get($file)) {
             abort(404);
