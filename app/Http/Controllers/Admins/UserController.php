@@ -50,16 +50,11 @@ class UserController extends Controller
     public function store(UserCreateRequest $request)
     {
         $user = $this->userService->createUser($request);
-        $this->userService->uploadDocs(
-            $request,
-            $user->id_card_copy,
-        );
+        $this->userService->uploadIdCardDoc($request, $user->id_card_copy);
+        $this->userService->uploadCopyHouseDoc($request, $user->copy_house_registration);
 
         $booking = $this->bookingService->createBooking($request, $user);
-        $this->bookingService->uploadDocs(
-            $request,
-            $booking->rent_contract,
-        );
+        $this->bookingService->uploadDocs($request, $booking->rent_contract);
 
         return to_route('admin.users.index');
     }

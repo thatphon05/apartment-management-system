@@ -6,7 +6,6 @@ use App\Enums\BookingStatusEnum;
 use App\Enums\UserStatusEnum;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class UserService
 {
@@ -44,8 +43,6 @@ class UserService
      */
     public function createUser(Request $request): User
     {
-        $filename = Str::uuid() . '.pdf';
-
         return User::create([
             'email' => $request->email,
             'telephone' => $request->telephone,
@@ -60,8 +57,8 @@ class UserService
             'district' => $request->district,
             'province' => $request->province,
             'postal_code' => $request->postal_code,
-            'id_card_copy' => $filename,
-            'copy_house_registration' => $filename,
+            'id_card_copy' => $request->file('id_card_copy')->hashName(),
+            'copy_house_registration' => $request->file('copy_house_registration')->hashName(),
             'status' => UserStatusEnum::ACTIVE,
         ]);
     }
@@ -71,11 +68,20 @@ class UserService
      * @param $filename
      * @return void
      */
-    public function uploadDocs(Request $request, $filename): void
+    public function uploadIdCardDoc(Request $request, $filename): void
     {
         $request->file('id_card_copy')->storeAs(
             config('custom.id_card_copy_path'), $filename
         );
+    }
+
+    /**
+     * @param Request $request
+     * @param $filename
+     * @return void
+     */
+    public function uploadCopyHouseDoc(Request $request, $filename): void
+    {
         $request->file('copy_house_registration')->storeAs(
             config('custom.copy_house_registration_path'), $filename
         );
