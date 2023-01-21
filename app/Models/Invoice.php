@@ -35,7 +35,8 @@ class Invoice extends Model
     protected $appends = [
         'cycle_date',
         'due_date',
-        'due_date_status'
+        'due_date_status',
+        'due_date_format',
     ];
 
     /**
@@ -84,7 +85,7 @@ class Invoice extends Model
      * Use for calculate due date
      * @return Carbon
      */
-    protected function calculateDueDate(): Carbon
+    public function getDueDateAttribute(): Carbon
     {
         return Carbon::parse($this->cycle)->setDay(config('custom.due_date'))->setTime(0, 0, 0)->addMonth();
     }
@@ -92,9 +93,9 @@ class Invoice extends Model
     /**
      * @return string
      */
-    public function getDueDateAttribute(): string
+    public function getDueDateFormatAttribute(): string
     {
-        return $this->calculateDueDate()->translatedFormat('d F Y');
+        return $this->due_date->translatedFormat('d F Y');
     }
 
     /**
@@ -102,7 +103,7 @@ class Invoice extends Model
      */
     public function getDueDateStatusAttribute(): bool
     {
-        return $this->calculateDueDate()->lt(now());
+        return $this->due_date->lt(now());
     }
 
 }

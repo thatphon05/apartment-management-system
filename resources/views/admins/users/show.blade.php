@@ -238,7 +238,7 @@
                                             {{ $invoice->cycle_date }}
                                         </td>
                                         <td>
-                                            {{ $invoice->due_date }}
+                                            {{ $invoice->due_date_format }}
                                         </td>
                                     </tr>
                                 @empty
