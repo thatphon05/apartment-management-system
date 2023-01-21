@@ -51,7 +51,7 @@
                                             <label class="form-label required required">อีเมล</label>
                                             <input value="{{ old('email') }}" name="email" type="email"
                                                    onchange="inputChange(event)"
-                                                   class="form-control @error('email') is-invalid @enderror @error('email') is-invalid @enderror"
+                                                   class="form-control @error('email') is-invalid @enderror"
                                                    placeholder="อีเมล">
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -62,7 +62,7 @@
                                             <label class="form-label required required">เบอร์โทรศัพท์</label>
                                             <input value="{{ old('telephone') }}" type="text" name="telephone"
                                                    onchange="inputChange(event)"
-                                                   class="form-control @error('telephone') is-invalid @enderror @error('telephone') is-invalid @enderror"
+                                                   class="form-control @error('telephone') is-invalid @enderror"
                                                    placeholder="เบอร์โทรศัพท์">
                                             @error('telephone')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -212,7 +212,7 @@
                                                name="copy_house_registration"
                                                onchange="inputChange(event)"
                                                class="form-control @error('copy_house_registration') is-invalid @enderror"
-                                               type="file" id="formFile">
+                                               type="file">
                                         @error('copy_house_registration')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
