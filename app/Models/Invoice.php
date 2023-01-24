@@ -64,6 +64,14 @@ class Invoice extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_id');
+    }
+
+    /**
      * @return HasMany
      */
     public function payments(): HasMany

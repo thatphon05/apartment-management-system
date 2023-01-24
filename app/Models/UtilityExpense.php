@@ -20,9 +20,17 @@ class UtilityExpense extends Model
     /**
      * @return BelongsTo
      */
-    public function bookings(): BelongsTo
+    public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function room(): BelongsTo
+    {
+        return $this->belongsTo(Room::class, 'room_id');
     }
 
 }

@@ -12,6 +12,7 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('booking_id')->unsigned();
+            $table->integer('room_id')->unsigned();
             $table->integer('status');
             $table->date('cycle');
             $table->integer('util_expense_id')->unsigned();
