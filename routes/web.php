@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,6 +72,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Setting management
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+
+        // Building management
+        Route::resource('buildings', BuildingController::class);
+
+        // Room management
+        Route::resource('rooms', RoomController::class);
 
     });
 });
