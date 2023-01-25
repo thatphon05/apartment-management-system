@@ -40,6 +40,7 @@ class Booking extends Model
         'deposit',
         'status',
         'parking_amount',
+        'arrival_date',
     ];
 
     /**
