@@ -87,4 +87,41 @@ class UserService
         );
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return User
+     */
+    public function updateUser(Request $request, int $id): User
+    {
+
+        $user = User::findOrFail($id);
+
+        $user->telephone = $request->telephone;
+        $user->id_card = $request->id_card;
+        $user->birthdate = $request->birthdate;
+        $user->religion = $request->religion;
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->address = $request->address;
+        $user->sub_district = $request->sub_district;
+        $user->district = $request->district;
+        $user->province = $request->province;
+        $user->postal_code = $request->postal_code;
+
+        if ($request->hasFile('id_card_copy')) {
+            $user->id_card_copy = $request->file('id_card_copy')->hashName();
+            $this->uploadIdCardDoc($request, $user->id_card_copy);
+        }
+
+        if ($request->hasFile('copy_house_registration')) {
+            $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
+            $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
+        }
+
+        $user->save();
+
+        return $user;
+    }
+
 }

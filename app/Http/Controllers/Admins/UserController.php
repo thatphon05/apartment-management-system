@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Booking;
 use App\Models\Configuration;
 use App\Models\Invoice;
@@ -35,6 +36,9 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function create()
     {
         $rooms = Room::with(['floor.building'])->oldest('id')->get();
@@ -47,6 +51,10 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param UserCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(UserCreateRequest $request)
     {
         $user = $this->userService->createUser($request);
@@ -59,6 +67,10 @@ class UserController extends Controller
         return to_route('admin.users.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -81,19 +93,41 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
+        return view('admins.users.edit', [
+            'user' => User::findOrFail($id)->first(),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * @param UserUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UserUpdateRequest $request, $id)
     {
+        $user = $this->userService->updateUser($request, $id);
+        return to_route('admin.users.show', ['user' => $user->id]);
     }
 
+    /**
+     * @param $filename
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function downloadIdCardCopy($filename)
     {
         return $this->storageService->download(config('custom.id_card_copy_path') . '/' . $filename);
     }
 
+    /**
+     * @param $filename
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
     public function downloadHouseRegCopy($filename)
     {
         return $this->storageService->download(config('custom.copy_house_registration_path') . '/' . $filename);
