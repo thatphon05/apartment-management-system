@@ -21,9 +21,8 @@ class BookingService
             'user_id' => $userData->id,
             'room_id' => $request->room_id,
             'rent_contract' => $request->file('rent_contract')->hashName(),
-            'contract_start' => now(),
-            'contract_end' => now(),
-            'deposit' => 2000,
+            'arrival_date' => $request->arrival_date,
+            'deposit' => $request->deposit,
             'status' => BookingStatusEnum::ACTIVE,
             'parking_amount' => $request->parking_amount,
         ]);

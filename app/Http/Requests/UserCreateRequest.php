@@ -31,9 +31,8 @@ class UserCreateRequest extends FormRequest
             'copy_house_registration' => 'required|file|mimes:pdf',
             'rent_contract' => 'required|mimes:pdf',
             'room_id' => ['required', new HasRoomRule(), new AvailableRoomRule],
-            // 'contract_start' => now(),
-            // 'contract_end' => now(),
-            // 'deposit' => 'required|numeric',
+            'arrival_date' => 'required|date',
+            'deposit' => 'required|numeric',
             'parking_amount' => 'required|numeric|min:0',
         ];
     }
