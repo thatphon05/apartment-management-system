@@ -46,7 +46,7 @@
                             <div class="col-md-6">
                                 <h3 class="card-title">ข้อมูลส่วนตัว</h3>
                                 <div class="row row-cards form-fieldset">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required required">อีเมล</label>
                                             <input value="{{ old('email') }}" name="email" type="email"
@@ -54,17 +54,6 @@
                                                    class="form-control @error('email') is-invalid @enderror"
                                                    placeholder="อีเมล">
                                             @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label required required">เบอร์โทรศัพท์</label>
-                                            <input value="{{ old('telephone') }}" type="text" name="telephone"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('telephone') is-invalid @enderror"
-                                                   placeholder="เบอร์โทรศัพท์">
-                                            @error('telephone')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
@@ -76,6 +65,17 @@
                                                    class="form-control @error('password') is-invalid @enderror"
                                                    placeholder="รหัสผ่าน">
                                             @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label required required">เบอร์โทรศัพท์</label>
+                                            <input value="{{ old('telephone') }}" type="text" name="telephone"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('telephone') is-invalid @enderror"
+                                                   placeholder="เบอร์โทรศัพท์">
+                                            @error('telephone')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
@@ -228,16 +228,40 @@
                                 </div>
                                 <h3 class="card-title">รายละเอียดการเช่า</h3>
                                 <div class="row row-cards form-fieldset">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label required">วันที่จะเข้าพัก</label>
+                                            <input value="{{ old('arrival_date') ?? 0 }}" name="arrival_date"
+                                                   type="date"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('arrival_date') is-invalid @enderror"
+                                                   placeholder="วันที่จะเข้าพัก">
+                                            @error('arrival_date')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">จำนวนที่จอดรถ</label>
                                             <input value="{{ old('parking_amount') ?? 0 }}" name="parking_amount"
-                                                   value="1"
                                                    type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('parking_amount') is-invalid @enderror"
                                                    placeholder="จำนวนที่จอดรถ">
                                             @error('parking_amount')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label required">ค่ามัดจำ</label>
+                                            <input value="{{ old('deposit') ?? $config->deposit }}" name="deposit"
+                                                   type="number"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('parking_amount') is-invalid @enderror"
+                                                   placeholder="ค่ามัดจำ">
+                                            @error('deposit')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
