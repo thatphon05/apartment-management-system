@@ -164,6 +164,20 @@
                                                 <input type="text" class="form-control" value="ต่อเดือน" disabled>
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" value="ค่ามัดจำ"
+                                                       disabled>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="deposit" class="form-control"
+                                                       value="{{ $config->deposit }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" value="บาท" disabled>
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>

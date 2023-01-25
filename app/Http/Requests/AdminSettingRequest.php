@@ -17,7 +17,8 @@ class AdminSettingRequest extends FormRequest
             'water_price' => 'required|numeric|min:0',
             'parking_price' => 'required|numeric|min:0',
             'common_fee' => 'required|numeric|min:0',
-            'damages_price' => 'required|numeric|min:0'
+            'damages_price' => 'required|numeric|min:0',
+            'deposit' => 'required|numeric|min:0'
         ];
     }
 
@@ -56,6 +57,11 @@ class AdminSettingRequest extends FormRequest
                 'required' => 'คุณต้องใส่ค่าปรับชำระเลยกำหนด',
                 'numeric' => 'ค่าปรับชำระเลยกำหนดกรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าปรับชำระเลยกำหนดต้องมากกว่า 0',
+            ],
+            'deposit' => [
+                'required' => 'คุณต้องใส่ค่ามัดจำ',
+                'numeric' => 'ค่ามัดจำกรอกต้องเป็นตัวเลขเท่านั้น',
+                'min' => 'ค่ามัดจำต้องมากกว่า 0',
             ],
         ];
     }
