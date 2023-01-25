@@ -78,6 +78,12 @@
                                 <div class="datagrid-content">{{ $config->damages_price }} / วัน</div>
                             </span>
                         </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">ค่ามัดจำ</div>
+                            <span class="status status-green">
+                                <div class="datagrid-content">{{ $config->deposit }} บาท</div>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
