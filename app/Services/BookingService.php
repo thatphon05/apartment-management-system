@@ -18,7 +18,6 @@ class BookingService
     public function createBooking(Request $request, User $userData): Booking
     {
         return $userData->bookings()->create([
-            'user_id' => $userData->id,
             'room_id' => $request->room_id,
             'rent_contract' => $request->file('rent_contract')->hashName(),
             'arrival_date' => $request->arrival_date,
