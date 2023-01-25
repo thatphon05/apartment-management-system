@@ -14,7 +14,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('booking_id')->unsigned();
             $table->integer('invoice_id')->unsigned();
-            $table->integer('status');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

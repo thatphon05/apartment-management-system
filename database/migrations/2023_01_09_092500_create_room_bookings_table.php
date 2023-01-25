@@ -13,10 +13,9 @@ class CreateRoomBookingsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->string('rent_contract');
-            $table->datetime('contract_start');
-            $table->datetime('contract_end');
+            $table->datetime('arrival_date');
             $table->decimal('deposit');
-            $table->integer('status');
+            $table->tinyInteger('status');
             $table->integer('parking_amount');
             $table->timestamps();
         });
