@@ -29,7 +29,7 @@ class UserCreateRequest extends FormRequest
             'postal_code' => 'required|integer',
             'id_card_copy' => 'required|file|mimes:pdf',
             'copy_house_registration' => 'required|file|mimes:pdf',
-            'rent_contract' => 'required|mimes:pdf',
+            'rent_contract' => 'required|file|mimes:pdf',
             'room_id' => ['required', new HasRoomRule(), new AvailableRoomRule],
             'arrival_date' => 'required|date',
             'deposit' => 'required|numeric',

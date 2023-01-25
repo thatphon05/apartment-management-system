@@ -23,6 +23,8 @@ class UserUpdateRequest extends FormRequest
             'district' => 'required',
             'province' => 'required',
             'postal_code' => 'required|integer',
+            'id_card_copy' => 'file|mimes:pdf',
+            'copy_house_registration' => 'file|mimes:pdf',
         ];
     }
 

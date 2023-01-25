@@ -109,6 +109,10 @@ class UserService
         $user->province = $request->province;
         $user->postal_code = $request->postal_code;
 
+        if ($request->password) {
+            $user->password = bcrypt($user->password);
+        }
+
         if ($request->hasFile('id_card_copy')) {
             $user->id_card_copy = $request->file('id_card_copy')->hashName();
             $this->uploadIdCardDoc($request, $user->id_card_copy);

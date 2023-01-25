@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'จัดการผู้เช่า')
+@section('title', 'จัดการผู้เช่า ' . $user->full_name)
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        จัดการผู้เช่า
+                        จัดการผู้เช่า - {{ $user->full_name }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -23,7 +23,7 @@
                                 <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
                                 <path d="M16 5l3 3"></path>
                             </svg>
-                            แก้ไขข้อมูล
+                            แก้ไขข้อมูลผู้เช่า
                         </a>
                         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                            data-bs-target="#modal-report" aria-label="Create new report">
@@ -179,6 +179,9 @@
                                                 class="badge bg-{{ \App\Enums\BookingStatusEnum::getColor($booking->status) }}">
                                                 {{ \App\Enums\BookingStatusEnum::getLabel($booking->status) }}
                                             </span>
+                                        </td>
+                                        <td>
+                                            <a href="#!" class="btn btn-sm">แก้ไข</a>
                                         </td>
                                     </tr>
                                 @empty

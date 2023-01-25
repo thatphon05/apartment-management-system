@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'แก้ไขผู้เช่า')
+@section('title', 'แก้ไขผู้เช่า ' . $user->full_name)
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        แก้ไขผู้เช่า {{ $user->fill_name }}
+                        แก้ไขผู้เช่า - {{ $user->full_name }}
                     </h2>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                                 <div class="row row-cards form-fieldset">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label required required">อีเมล</label>
+                                            <label class="form-label required">อีเมล</label>
                                             <input value="{{ old('email') ?? $user->email }}" name="email" type="email"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('email') is-invalid @enderror"
@@ -59,9 +59,20 @@
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">รหัสผ่าน</label>
+                                            <input value="{{ old('password') }}" name="password" type="password"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('password') is-invalid @enderror"
+                                                   placeholder="รหัสผ่าน">
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label required required">เบอร์โทรศัพท์</label>
+                                            <label class="form-label required">เบอร์โทรศัพท์</label>
                                             <input value="{{ old('telephone') ?? $user->telephone }}" type="text"
                                                    name="telephone"
                                                    onchange="inputChange(event)"
@@ -73,7 +84,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-5">
                                         <div class="mb-3">
-                                            <label class="form-label required required">หมายเลขบัตรประชาชน</label>
+                                            <label class="form-label required">หมายเลขบัตรประชาชน</label>
                                             <input value="{{ old('id_card') ?? $user->id_card }}" maxlength="13"
                                                    name="id_card"
                                                    type="text"
