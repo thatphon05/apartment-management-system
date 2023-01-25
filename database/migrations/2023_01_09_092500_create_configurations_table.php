@@ -16,6 +16,7 @@ class CreateConfigurationsTable extends Migration
             $table->decimal('parking_price');
             $table->decimal('common_fee');
             $table->decimal('damages_price');
+            $table->decimal('deposit');
             $table->timestamps();
         });
     }

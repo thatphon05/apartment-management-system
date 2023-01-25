@@ -24,6 +24,7 @@ class ConfigurationSeeder extends Seeder
                 'parking_price' => 300,
                 'common_fee' => 200,
                 'damages_price' => 50,
+                'deposit' => 5000,
             ]);
         }
     }
