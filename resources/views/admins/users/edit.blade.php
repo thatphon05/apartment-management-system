@@ -218,8 +218,6 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <h3 class="card-title">รายละเอียดการเช่า</h3>
-
                             </div>
                         </div>
                     </div>
