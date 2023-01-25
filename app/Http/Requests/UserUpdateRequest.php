@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\AvailableRoomRule;
-use App\Rules\HasRoomRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserCreateRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * @return string[]
@@ -14,9 +12,7 @@ class UserCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users',
             'telephone' => 'required|numeric',
-            'password' => 'required',
             'id_card' => 'required|integer|digits:13',
             'birthdate' => 'required|date',
             'religion' => 'required',
@@ -27,13 +23,8 @@ class UserCreateRequest extends FormRequest
             'district' => 'required',
             'province' => 'required',
             'postal_code' => 'required|integer',
-            'id_card_copy' => 'required|file|mimes:pdf',
-            'copy_house_registration' => 'required|file|mimes:pdf',
-            'rent_contract' => 'required|file|mimes:pdf',
-            'room_id' => ['required', new HasRoomRule(), new AvailableRoomRule],
-            'arrival_date' => 'required|date',
-            'deposit' => 'required|numeric',
-            'parking_amount' => 'required|numeric|min:0',
+            'id_card_copy' => 'file|mimes:pdf',
+            'copy_house_registration' => 'file|mimes:pdf',
         ];
     }
 

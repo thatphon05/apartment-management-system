@@ -1,12 +1,12 @@
 @extends('layouts.admin')
-@section('title', 'เพิ่มผู้เช่า')
+@section('title', 'แก้ไขผู้เช่า ' . $user->full_name)
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        เพิ่มผู้เช่า
+                        แก้ไขผู้เช่า - {{ $user->full_name }}
                     </h2>
                 </div>
             </div>
@@ -14,8 +14,10 @@
     </div>
     <div class="page-body">
         <div class="container-xl">
-            <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="post"
+                  enctype="multipart/form-data">
                 @csrf
+                @method('PATCH')
                 <div class="card">
                     <div class="card-body">
                         @if ($errors->any())
@@ -49,17 +51,17 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">อีเมล</label>
-                                            <input value="{{ old('email') }}" name="email" type="email"
+                                            <input value="{{ old('email') ?? $user->email }}" name="email" type="email"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('email') is-invalid @enderror"
-                                                   placeholder="อีเมล">
+                                                   placeholder="อีเมล" disabled>
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label required">รหัสผ่าน</label>
+                                            <label class="form-label">รหัสผ่าน</label>
                                             <input value="{{ old('password') }}" name="password" type="password"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('password') is-invalid @enderror"
@@ -71,7 +73,8 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">เบอร์โทรศัพท์</label>
-                                            <input value="{{ old('telephone') }}" type="text" name="telephone"
+                                            <input value="{{ old('telephone') ?? $user->telephone }}" type="text"
+                                                   name="telephone"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('telephone') is-invalid @enderror"
                                                    placeholder="เบอร์โทรศัพท์">
@@ -82,7 +85,8 @@
                                     <div class="col-sm-12 col-md-5">
                                         <div class="mb-3">
                                             <label class="form-label required">หมายเลขบัตรประชาชน</label>
-                                            <input value="{{ old('id_card') }}" maxlength="13" name="id_card"
+                                            <input value="{{ old('id_card') ?? $user->id_card }}" maxlength="13"
+                                                   name="id_card"
                                                    type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('id_card') is-invalid @enderror"
@@ -94,7 +98,8 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label required">วันเกิด</label>
-                                            <input value="{{ old('birthdate') }}" name="birthdate" type="date"
+                                            <input value="{{ old('birthdate') ?? $user->birthdate }}" name="birthdate"
+                                                   type="date"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('birthdate') is-invalid @enderror"
                                                    placeholder="เลือกวันเกิด">
@@ -105,7 +110,8 @@
                                     <div class="col-sm-12 col-md-3">
                                         <div class="mb-3">
                                             <label class="form-label required">ศาสนา</label>
-                                            <input value="{{ old('religion') }}" name="religion" type="text"
+                                            <input value="{{ old('religion') ?? $user->religion }}" name="religion"
+                                                   type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('religion') is-invalid @enderror"
                                                    placeholder=ศาสนา>
@@ -116,7 +122,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">ชื่อจริง</label>
-                                            <input value="{{ old('name') }}" name="name" type="text"
+                                            <input value="{{ old('name') ?? $user->name }}" name="name" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('name') is-invalid @enderror"
                                                    placeholder="ชื่อจริง">
@@ -127,7 +133,8 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">นามสกุล</label>
-                                            <input value="{{ old('surname') }}" name="surname" type="text"
+                                            <input value="{{ old('surname') ?? $user->surname }}" name="surname"
+                                                   type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('surname') is-invalid @enderror"
                                                    placeholder="นามสกุล">
@@ -141,7 +148,7 @@
                                             <textarea name="address" type="text"
                                                       onchange="inputChange(event)"
                                                       class="form-control @error('address') is-invalid @enderror"
-                                                      placeholder="ที่อยู่">{{ old('address') }}</textarea>
+                                                      placeholder="ที่อยู่">{{ old('address') ?? $user->address }}</textarea>
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -149,7 +156,8 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">ตำบล</label>
-                                            <input value="{{ old('sub_district') }}" name="sub_district" type="text"
+                                            <input value="{{ old('sub_district') ?? $user->sub_district }}"
+                                                   name="sub_district" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('sub_district') is-invalid @enderror"
                                                    placeholder="ตำบล">
@@ -160,7 +168,8 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">อำเภอ</label>
-                                            <input value="{{ old('district') }}" name="district" type="text"
+                                            <input value="{{ old('district') ?? $user->district }}" name="district"
+                                                   type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('district') is-invalid @enderror"
                                                    placeholder="อำเภอ">
@@ -171,7 +180,8 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">จังหวัด</label>
-                                            <input value="{{ old('province') }}" name="province" type="text"
+                                            <input value="{{ old('province') ?? $user->province }}" name="province"
+                                                   type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('province') is-invalid @enderror"
                                                    placeholder="จังหวัด">
@@ -182,7 +192,8 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">รหัสไปรษณีย์</label>
-                                            <input value="{{ old('postal_code') }}" name="postal_code" type="text"
+                                            <input value="{{ old('postal_code') ?? $user->postal_code }}"
+                                                   name="postal_code" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('postal_code') is-invalid @enderror"
                                                    placeholder="รหัสไปรษณีย์">
@@ -194,11 +205,12 @@
                             </div>
                             <div class="col-md-6">
                                 <h3 class="card-title">อัพโหลดเอกสาร</h3>
+                                <p class="text-danger">หากแนบไฟล์ใหม่จะเป็นการแก้ไข</p>
                                 <div class="row row-cards form-fieldset">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label required">สำเนาบัตรประชาชน
+                                        <label for="formFile" class="form-label">สำเนาบัตรประชาชน
                                             (.pdf)</label>
-                                        <input value="{{ old('id_card_copy') || 1 }}" name="id_card_copy"
+                                        <input name="id_card_copy"
                                                onchange="inputChange(event)"
                                                class="form-control @error('id_card_copy') is-invalid @enderror"
                                                type="file">
@@ -206,79 +218,14 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label required">สำเนาทะเบียนบ้าน
+                                        <label for="formFile" class="form-label">สำเนาทะเบียนบ้าน
                                             (.pdf)</label>
-                                        <input value="{{ old('copy_house_registration') }}"
-                                               name="copy_house_registration"
-                                               onchange="inputChange(event)"
-                                               class="form-control @error('copy_house_registration') is-invalid @enderror"
-                                               type="file">
+                                        <input
+                                            name="copy_house_registration"
+                                            onchange="inputChange(event)"
+                                            class="form-control @error('copy_house_registration') is-invalid @enderror"
+                                            type="file">
                                         @error('copy_house_registration')
-                                        <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label required">หนังสือสัญญา (.pdf)</label>
-                                        <input value="{{ old('rent_contract"') }}" name="rent_contract"
-                                               onchange="inputChange(event)"
-                                               class="form-control @error('rent_contract') is-invalid @enderror"
-                                               type="file" id="formFile">
-                                        @error('rent_contract')
-                                        <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                    </div>
-                                </div>
-                                <h3 class="card-title">รายละเอียดการเช่า</h3>
-                                <div class="row row-cards form-fieldset">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label required">วันที่จะเข้าพัก</label>
-                                            <input value="{{ old('arrival_date') ?? 0 }}" name="arrival_date"
-                                                   type="date"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('arrival_date') is-invalid @enderror"
-                                                   placeholder="วันที่จะเข้าพัก">
-                                            @error('arrival_date')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label required">จำนวนที่จอดรถ</label>
-                                            <input value="{{ old('parking_amount') ?? 0 }}" name="parking_amount"
-                                                   type="text"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('parking_amount') is-invalid @enderror"
-                                                   placeholder="จำนวนที่จอดรถ">
-                                            @error('parking_amount')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label required">ค่ามัดจำ</label>
-                                            <input value="{{ old('deposit') ?? $config->deposit }}" name="deposit"
-                                                   type="number"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('parking_amount') is-invalid @enderror"
-                                                   placeholder="ค่ามัดจำ">
-                                            @error('deposit')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="form-label required">ห้องพัก</div>
-                                        <select onchange="inputChange(event)"
-                                                class="form-select @error('room_id') is-invalid @enderror"
-                                                name="room_id">
-                                            <option value="0">โปรดเลือกห้อง</option>
-                                            @foreach($rooms as $room)
-                                                <option value="{{ $room->id }}" @selected(old('room_id') == $room->id)>
-                                                    อาคาร {{ $room->floor->building->name }}
-                                                    ชั้น {{ $room->floor->name }} ห้อง {{ $room->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('room_id')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
