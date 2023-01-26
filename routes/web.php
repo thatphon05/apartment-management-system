@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
-use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,6 +78,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Room management
         Route::resource('rooms', RoomController::class);
-
+        Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])
+            ->name('booking.download.rent_contract');
     });
 });

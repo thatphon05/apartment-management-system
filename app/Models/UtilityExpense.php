@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -16,6 +17,10 @@ class UtilityExpense extends Model
      * @var string
      */
     protected $table = 'utilities_expenses';
+
+    protected $appends = [
+        'cycle_month',
+    ];
 
     /**
      * @return BelongsTo
@@ -33,4 +38,13 @@ class UtilityExpense extends Model
         return $this->belongsTo(Room::class, 'room_id');
     }
 
+    /**
+     * @return string
+     */
+    public function getCycleMonthAttribute(): string
+    {
+        $cycle = Carbon::parse($this->cycle);
+
+        return $cycle->translatedFormat('F Y');
+    }
 }
