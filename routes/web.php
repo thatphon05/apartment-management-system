@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\PaymentController;
 use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SettingController;
@@ -86,5 +87,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Repair management
         Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
+
+        // Payment management
+        Route::resource('payments', PaymentController::class)->only(['index', 'edit', 'update']);
+
+        Route::get('payments/paymentattach/{filename}', [PaymentController::class, 'downloadPaymentAttach'])
+            ->name('payments.download.payment_attach');
+
     });
 });

@@ -91,6 +91,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'invoice_id');
+    }
+
+    /**
      * @return string
      */
     public function getFullNameAttribute(): string
