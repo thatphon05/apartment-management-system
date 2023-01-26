@@ -105,7 +105,7 @@
                                         <td>
                                             @if (isset($repair->room))
                                                 <a href="{{ route('admin.rooms.show', ['room'=> $repair->room_id]) }}">
-                                                    ตึก {{ $repair->room->floor->building->name ?? '' }}
+                                                    อาคาร {{ $repair->room->floor->building->name ?? '' }}
                                                     ชั้น {{ $repair->room->floor->name ?? '' }}
                                                     ห้อง {{ $repair->room->name ?? '' }}
                                                 </a>

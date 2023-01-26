@@ -28,7 +28,7 @@
                                     <dt class="col-3">หมายเลขแจ้งซ่อม</dt>
                                     <dd class="col-9">{{$repair->id}}</dd>
                                     <dt class="col-3">ห้อง</dt>
-                                    <dd class="col-9">ตึก {{$repair->room->floor->building->name}}
+                                    <dd class="col-9">อาคาร {{$repair->room->floor->building->name}}
                                         ชั้น {{$repair->room->floor->name}}
                                         ห้อง {{$repair->room->name}}</dd>
                                     <dt class="col-3">วันที่แจ้ง</dt>
