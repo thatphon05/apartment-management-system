@@ -94,7 +94,13 @@
                                 <tbody>
                                 @forelse($repairs as $repair)
                                     <tr>
-                                        <td><span class="text-muted">{{ $repair->id }}</span></td>
+                                        <td>
+                                            <span class="text-muted">
+                                            <a href="{{ route('admin.repairs.edit', ['repair'=> $repair->room_id]) }}">
+                                                    #{{ $repair->id }}
+                                            </a>
+                                            </span>
+                                        </td>
                                         <td><span class="text-muted">{{ $repair->subject }}</span></td>
                                         <td>
                                             <span
