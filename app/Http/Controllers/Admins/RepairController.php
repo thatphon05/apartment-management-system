@@ -39,6 +39,9 @@ class RepairController extends Controller
 
     public function update(AdminEditRepairRequest $request, $id)
     {
+        Repair::where('id', $id)
+            ->update(['status' => $request->status]);
+        return redirect()->back();
     }
 
 }
