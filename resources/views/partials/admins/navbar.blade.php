@@ -227,7 +227,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item @navactive('admin/buildings*')">
+                    <li class="nav-item @navactive('admin/buildings*') @navactive('admin/rooms*')">
                         <a class="nav-link" href="{{ route('admin.buildings.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->

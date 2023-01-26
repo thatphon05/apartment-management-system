@@ -69,8 +69,6 @@
                                         <div class="datagrid-title">เบอร์โทรศัพท์</div>
                                         <div class="datagrid-content">{{ $currentBooking->user->telephone }}</div>
                                     </div>
-                                @else
-                                    @include('partials.empty')
                                 @endif
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าเช่าห้อง</div>
@@ -216,7 +214,7 @@
 
                                         </td>
                                         <td>
-                                            ตึก {{ $invoice->booking->room->floor->building->name }}
+                                            อาคาร {{ $invoice->booking->room->floor->building->name }}
                                             ชั้น {{ $invoice->booking->room->floor->name }}
                                             ห้อง {{ $invoice->booking->room->name }}
                                         </td>
