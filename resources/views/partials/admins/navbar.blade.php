@@ -249,7 +249,25 @@
                             </span>
                         </a>
                     </li>
-
+                    <li class="nav-item @navactive('admin/repairs*')">
+                        <a class="nav-link" href="{{ route('admin.repairs.index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hammer"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                   <path
+                                       d="M11.414 10l-7.383 7.418a2.091 2.091 0 0 0 0 2.967a2.11 2.11 0 0 0 2.976 0l7.407 -7.385"></path>
+                                   <path
+                                       d="M18.121 15.293l2.586 -2.586a1 1 0 0 0 0 -1.414l-7.586 -7.586a1 1 0 0 0 -1.414 0l-2.586 2.586a1 1 0 0 0 0 1.414l7.586 7.586a1 1 0 0 0 1.414 0z"></path>
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                            รายการแจ้งซ่อม
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item @navactive('admin/settings*')">
                         <a class="nav-link" href="{{ route('admin.settings.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
