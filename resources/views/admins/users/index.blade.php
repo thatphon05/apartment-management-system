@@ -122,7 +122,7 @@
                                         <td>
                                             @if (isset($user->bookings->first()->room))
                                                 <a href="#">
-                                                    ตึก {{ $user->bookings->first()->room->floor->building->name ?? '' }}
+                                                    อาคาร {{ $user->bookings->first()->room->floor->building->name ?? '' }}
                                                     ชั้น {{ $user->bookings->first()->room->floor->name ?? '' }}
                                                     ห้อง {{ $user->bookings->first()->room->name ?? '' }}
                                                 </a>
