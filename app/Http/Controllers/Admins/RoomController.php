@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomEditRequest;
 use App\Models\Booking;
 use App\Models\Invoice;
 use App\Models\Repair;
@@ -59,14 +60,16 @@ class RoomController extends Controller
 
     public function edit($id)
     {
+        return view('admins.rooms.edit', [
+            'room' => Room::findOrFail($id),
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(RoomEditRequest $request, $id)
     {
-    }
+        Room::where('id', $id)->update($request->validated());
 
-    public function destroy($id)
-    {
+        return redirect()->back();
     }
 
     /**
