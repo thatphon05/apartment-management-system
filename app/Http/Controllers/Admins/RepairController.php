@@ -12,7 +12,6 @@ class RepairController extends Controller
 
     public function index()
     {
-
         $search = request()->query('search', '');
         $searchLike = '%' . $search . '%';
         $status = request()->query('status', RepairStatusEnum::cases());
@@ -34,7 +33,7 @@ class RepairController extends Controller
     public function edit($id)
     {
         return view('admins.repairs.edit', [
-
+            'repair' => Repair::findOrFail($id),
         ]);
     }
 
