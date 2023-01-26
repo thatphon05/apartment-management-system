@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
@@ -78,6 +79,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Room management
         Route::resource('rooms', RoomController::class);
+
+        // Repair management
+        Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
 
     });
 });
