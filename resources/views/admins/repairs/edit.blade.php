@@ -66,9 +66,8 @@
                                     <select name="status" class="form-select @error('status') is-invalid @enderror">
                                         @foreach(\App\Enums\RepairStatusEnum::values() as $key => $value)
                                             <option
-                                                value="{{ $key }}" @selected($key == $repair->status)>
+                                                value="{{ $key }}" @selected(\App\Enums\RepairStatusEnum::from($key) === $repair->status)>
                                                 {{ \App\Enums\RepairStatusEnum::getLabel($value) }}
-                                                {{ \App\Enums\RepairStatusEnum::values()[$key] == $repair->status ? 'yes' : 'no' }}
                                             </option>
                                         @endforeach
                                     </select>
