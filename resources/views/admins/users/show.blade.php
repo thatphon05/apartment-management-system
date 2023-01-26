@@ -120,7 +120,7 @@
                                             สำเนาบัตรประชาชน
                                         </a>
                                         <div class="text-muted text-truncate mt-n1">
-                                            ขนาดไฟล์ {{  number_format($idCardCopySize, 2, '.', '') }} MB
+                                            ขนาดไฟล์ {{ number_format($idCardCopySize, 2, '.', '') }} MB
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +217,6 @@
                                             <a href="#">
                                                 #{{ $invoice->id }}
                                             </a>
-
                                         </td>
                                         <td>
                                             ตึก {{ $invoice->booking->room->floor->building->name }}
@@ -274,7 +273,7 @@
                                 @forelse($repairs as $repair)
                                     <tr>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{ route('admin.repairs.edit', ['repair' => $repair->id]) }}">
                                                 #{{ $repair->id }}
                                             </a>
                                         </td>
