@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'ตึกทั้งหมด')
+@section('title', 'อาคารทั้งหมด')
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -7,7 +7,7 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <h2 class="page-title">
-                        ตึกทั้งหมด
+                        อาคารทั้งหมด
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="card-body">
-                                <h3 class="card-title">ตึก {{ $building->name }}</h3>
+                                <h3 class="card-title">อาคาร {{ $building->name }}</h3>
                             </div>
                             <!-- Card footer -->
                             <div class="card-footer">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 @empty
-                    ไม่พบตึก
+                    ไม่พบอาคาร
                 @endforelse
             </div>
         </div>
