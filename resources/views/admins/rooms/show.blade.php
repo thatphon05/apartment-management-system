@@ -51,11 +51,15 @@
                         </div>
                         <div class="card-status-start bg-primary"></div>
                         <div class="card-body">
-                            @if ($currentBooking)
-                                <div class="datagrid">
+                            <div class="datagrid">
+                                @if ($currentBooking)
                                     <div class="datagrid-item">
                                         <div class="datagrid-title">ชื่อ - นามสกุล</div>
-                                        <div class="datagrid-content">{{ $currentBooking->user->full_name }}</div>
+                                        <div class="datagrid-content">
+                                            <a href="{{ route('admin.users.show', ['user' => $currentBooking->user->id]) }}">
+                                                {{ $currentBooking->user->full_name }}
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="datagrid-item">
                                         <div class="datagrid-title">อีเมล</div>
@@ -65,42 +69,56 @@
                                         <div class="datagrid-title">เบอร์โทรศัพท์</div>
                                         <div class="datagrid-content">{{ $currentBooking->user->telephone }}</div>
                                     </div>
-                                    <div class="datagrid-item">
-                                        <div class="datagrid-title">รหัสบัตรประชาชน</div>
-                                        <div class="datagrid-content">{{ $currentBooking->user->id_card }}</div>
+                                @else
+                                    @include('partials.empty')
+                                @endif
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">ค่าเช่าห้อง</div>
+                                    <div class="datagrid-content">
+                                        {{ number_format($room->rent_price, 2) }} บาท
                                     </div>
-                                    <div class="datagrid-item">
-                                        <div class="datagrid-title">วันเกิด</div>
+                                </div>
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">ค่าไฟฟ้า</div>
+                                    <div class="datagrid-content">
                                         <div class="datagrid-content">
-                                            {{ $currentBooking->user->birth_date_format }}
-                                        </div>
-                                    </div>
-                                    <div class="datagrid-item">
-                                        <div class="datagrid-title">อายุ</div>
-                                        <div class="datagrid-content">{{ $currentBooking->user->age }}</div>
-                                    </div>
-                                    <div class="datagrid-item">
-                                        <div class="datagrid-title">สถานะ</div>
-                                        <div class="datagrid-content">
-                                          <span
-                                              class="badge bg-{{ \App\Enums\UserStatusEnum::getColor($currentBooking->user->status) }}">
-                                                    {{ \App\Enums\UserStatusEnum::getLabel($currentBooking->user->status) }}
-                                          </span>
-                                        </div>
-                                    </div>
-                                    <div class="datagrid-item">
-                                        <div class="datagrid-title">ที่อยู่</div>
-                                        <div class="datagrid-content">
-                                            {{ $currentBooking->user->full_address }}
+                                            {{ number_format($room->electric_price, 2) }} บาท / หน่วย
                                         </div>
                                     </div>
                                 </div>
-                            @else
-                                @include('partials.empty')
-                            @endif
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">ค่าน้ำประปา</div>
+                                    <div class="datagrid-content">
+                                        {{ number_format($room->water_price, 2) }} บาท / หน่วย
+                                    </div>
+                                </div>
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">ค่าที่จอดรถ</div>
+                                    <div class="datagrid-content">
+                                        <div class="datagrid-content">
+                                            {{ number_format($room->parking_price, 2) }} บาท
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="datagrid-item">
+                                    <div class="datagrid-title">ค่าส่วนกลาง</div>
+                                    <div class="datagrid-content">
+                                        {{ number_format($room->common_fee, 2) }} บาท
+                                    </div>
+                                </div>
+                                @if ($currentBooking)
+                                    <div class="datagrid-item">
+                                        <div class="datagrid-title">ค่ามัดจำ</div>
+                                        <div class="datagrid-content">
+                                            {{ number_format($currentBooking->deposit, 2) }} บาท
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
