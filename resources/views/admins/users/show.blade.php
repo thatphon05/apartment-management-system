@@ -169,7 +169,7 @@
                                     <tr>
                                         <td>
                                             <a href="#">
-                                                ตึก {{ $booking->room->floor->building->name }}
+                                                อาคาร {{ $booking->room->floor->building->name }}
                                                 ชั้น {{ $booking->room->floor->name }}
                                                 ห้อง {{ $booking->room->name }}
                                             </a>
@@ -219,7 +219,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            ตึก {{ $invoice->booking->room->floor->building->name }}
+                                            อาคาร {{ $invoice->booking->room->floor->building->name }}
                                             ชั้น {{ $invoice->booking->room->floor->name }}
                                             ห้อง {{ $invoice->booking->room->name }}
                                         </td>
