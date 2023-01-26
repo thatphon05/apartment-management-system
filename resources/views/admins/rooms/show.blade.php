@@ -269,7 +269,7 @@
                                 @forelse($repairs as $repair)
                                     <tr>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{ route('admin.repairs.edit', ['repair' => $repair->id]) }}">
                                                 #{{ $repair->id }}
                                             </a>
                                         </td>
