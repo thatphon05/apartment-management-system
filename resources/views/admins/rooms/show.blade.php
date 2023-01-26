@@ -324,6 +324,11 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <div class="m-0 ms-auto">
+                                {{ $bookings->links() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
