@@ -68,10 +68,10 @@
                                                                 : 'danger'
                                                      }}">
                                                          @if ($room->bookings->isEmpty())
-                                                             ว่าง
+                                                             {{ config('custom.labels.room_available') }}
                                                              @php($availableCount += 1)
                                                          @else
-                                                             มีผู้พักแล้ว
+                                                             {{ config('custom.labels.room_booking') }}
                                                              @php($bookingCount += 1)
                                                          @endif
                                                      </span>
