@@ -22,21 +22,7 @@
                             <form action="{{ route('admin.payments.index') }}" method="get">
                                 <div class="mb-3">
                                     <div class="form-label">สถานะแจ้งชำระเงิน</div>
-                                    @foreach(\App\Enums\PaymentStatusEnum::values() as $key => $value)
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" name="status[]" type="checkbox"
-                                                   value="{{ $key }}"
-                                                   @if ((is_array(request()->query('status'))
-                                                        && in_array($key, request()->query('status'))
-                                                   || !request()->has('status'))
-                                                   )
-                                                       checked
-                                                @endif
-                                            />
-                                            <span
-                                                class="form-check-label">{{ \App\Enums\PaymentStatusEnum::getLabel($value) }}</span>
-                                        </label>
-                                    @endforeach
+                                    @include('partials.admins.checkbox_status', ['enum' => \App\Enums\PaymentStatusEnum::class])
                                 </div>
                                 <button type="submit" class="btn btn btn-primary" role="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
