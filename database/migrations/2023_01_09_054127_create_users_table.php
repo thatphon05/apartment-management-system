@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
             $table->string('id_card');
             $table->string('name');
             $table->string('surname');
-            $table->datetime('birthdate');
+            $table->date('birthdate');
             $table->string('religion');
             $table->string('address');
             $table->string('sub_district');
