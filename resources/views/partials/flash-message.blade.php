@@ -11,8 +11,8 @@
     notyf.success('{{$message}}');
     @endif
 
-    @if ($message = session('error'))
-    notyf.error('{{$success}}');
+    @if ($message = session('errors'))
+    notyf.error('เกิดข้อผิดพลาด');
     @endif
 
 </script>

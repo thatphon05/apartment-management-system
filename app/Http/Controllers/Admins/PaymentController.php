@@ -43,7 +43,7 @@ class PaymentController extends Controller
 
         $this->invoiceService->updateInvoiceComplete($request, $id);
 
-        return redirect()->back();
+        return redirect()->back()->with(['success' => 'ดำเนินการแก้ไขสถานะสำเร็จ']);
     }
 
     /**
