@@ -15,3 +15,9 @@ Run Seeder
 ```sh
 php artisan db:seed
 ```
+
+Refresh the database and run all database seeds...
+
+```sh
+php artisan migrate:refresh --seed
+```
