@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Room;
+use App\Models\Payment;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -14,8 +14,8 @@ class PaymentSeeder extends Seeder
      */
     public function run()
     {
-        if (Room::count() < 1) {
-            Room::create([
+        if (Payment::count() < 1) {
+            Payment::create([
                 'created_at' => now(),
                 'updated_at' => now(),
                 'attachfile' => 'test.pdf',
