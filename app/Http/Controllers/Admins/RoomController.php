@@ -69,7 +69,7 @@ class RoomController extends Controller
     {
         Room::where('id', $id)->update($request->validated());
 
-        return redirect()->back();
+        return redirect()->back()->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
     /**

@@ -157,7 +157,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary">แก้ไข</button>
-                                <a href="{{ route('admin.buildings.index') }}"
+                                <a href="{{ route('admin.buildings.show', ['building' => $room->floor->building_id]) }}"
                                    class="btn btn-ghost-secondary">ยกเลิก</a>
                             </div>
                         </div>

@@ -18,7 +18,7 @@
     <title>@yield('title') - {{ config('app.name') }}</title>
 
     @include('partials.admins.header_assets')
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 <body>
 <script src="{{ asset('/dist/js/demo-theme.min.js?1668287865') }}"></script>
@@ -51,6 +51,11 @@
     @endif
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+
+@include('partials.flash-message')
 
 </body>
 </html>
