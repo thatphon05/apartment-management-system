@@ -25,7 +25,7 @@ class SettingController extends Controller
     public function update(AdminSettingRequest $request, $id)
     {
         Configuration::where('id', $id)->update($request->validated());
-        return back()->with(['msg' => 'บันทึกสำเร็จ']);
+        return back()->with(['success' => 'บันทึกสำเร็จ']);
     }
 
 }
