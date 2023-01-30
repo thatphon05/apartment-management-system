@@ -35,7 +35,7 @@ class BookingService
     public function uploadDocs(Request $request, $filename): void
     {
         $request->file('rent_contract')->storeAs(
-            config('custom.rent_contract'), $filename
+            config('custom.rent_contract_path'), $filename
         );
     }
 

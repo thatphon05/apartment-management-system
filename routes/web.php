@@ -8,6 +8,7 @@ use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
+use App\Http\Controllers\Users\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,17 +29,18 @@ Route::prefix('/')->name('user.')->group(function () {
 
     // User login
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/login', 'getUserLogin')->name('login.get');
-        Route::post('/login', 'postUserLogin')->name('login.post');
+        Route::get('login', 'getUserLogin')->name('login.get');
+        Route::post('login', 'postUserLogin')->name('login.post');
         Route::get('logout', 'userLogout')->name('logout');
     });
 
     // After user login
     Route::middleware('auth')->group(function () {
 
-        Route::get('/', function () {
-            return 'dashboard';
-        })->name('dashboard');
+        // Dashboard
+        Route::controller(UserDashboardController::class)->group(function () {
+            Route::get('/', 'index')->name('dashboard.index');
+        });
 
     });
 });

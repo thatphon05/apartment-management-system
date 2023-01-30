@@ -17,26 +17,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>@yield('title') - {{ config('app.name') }}</title>
 
-    @include('partials.admins.header_assets')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    @include('partials.users.header_assets')
+
 </head>
 <body>
 <script src="{{ asset('/dist/js/demo-theme.min.js?1668287865') }}"></script>
 <div class="page">
 
     <!-- Navbar -->
-    @include('partials.admins.navbar')
+    @include('partials.users.navbar')
 
     <div class="page-wrapper">
 
         @yield('content')
 
-        @include('partials.admins.footer')
+        @include('partials.users.footer')
 
     </div>
 </div>
 
-@include('partials.admins.body_assets')
+@include('partials.users.body_assets')
 
 @yield('script')
 
@@ -51,11 +51,6 @@
     @endif
 
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-
-
-@include('partials.flash-message')
 
 </body>
 </html>

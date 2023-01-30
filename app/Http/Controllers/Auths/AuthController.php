@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auths;
 
 use App\Enums\AdminStatusEnum;
+use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -11,17 +12,32 @@ class AuthController extends Controller
 {
     public function getUserLogin()
     {
-
+        return view('auths.user');
     }
 
-    public function postUserLogin()
+    public function postUserLogin(LoginRequest $request)
     {
+        $email = $request->string('email')->trim();
+        $password = $request->input('password');
 
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+
+            $user = Auth::user();
+            if ($user->status == UserStatusEnum::ACTIVE) {
+                return to_route('user.dashboard.index');
+            }
+
+            return back()->withErrors(['msg' => 'บัญชีนี้ถูกระงับการใช้'])->withInput();
+        }
+
+        return back()->withErrors(['msg' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])->withInput();
     }
 
     public function userLogout()
     {
+        Auth::logout();
 
+        return to_route('user.login.get');
     }
 
     /**
