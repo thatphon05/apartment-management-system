@@ -41,7 +41,7 @@ class RepairController extends Controller
     {
         Repair::where('id', $id)
             ->update(['status' => $request->status]);
-        return redirect()->back();
+        return redirect()->back()->with(['success' => 'ดำเนินการเปลี่ยนสถานะสำเร็จ']);
     }
 
 }
