@@ -67,7 +67,8 @@ class UserController extends Controller
 
         $this->bookingService->uploadDocs($request, $booking->rent_contract);
 
-        return to_route('admin.users.show', ['user' => $user->id]);
+        return to_route('admin.users.show', ['user' => $user->id])
+            ->with(['success' => 'เพิ่มผู้ใช้ใหม่สำเร็จ']);
     }
 
     /**
@@ -115,7 +116,8 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $user = $this->userService->updateUser($request, $id);
-        return to_route('admin.users.show', ['user' => $user->id]);
+        return to_route('admin.users.show', ['user' => $user->id])
+            ->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
     /**
