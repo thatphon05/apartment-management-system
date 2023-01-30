@@ -34,4 +34,28 @@ class Room extends Model
         return $this->hasMany(Booking::class, 'room_id');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function repairs(): HasMany
+    {
+        return $this->hasMany(Repair::class, 'room_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'room_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function utilityExpenses(): HasMany
+    {
+        return $this->hasMany(UtilityExpense::class, 'room_id');
+    }
+
 }

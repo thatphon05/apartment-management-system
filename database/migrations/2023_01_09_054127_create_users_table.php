@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
             $table->string('id_card');
             $table->string('name');
             $table->string('surname');
-            $table->datetime('birthdate');
+            $table->date('birthdate');
             $table->string('religion');
             $table->string('address');
             $table->string('sub_district');
@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('postal_code');
             $table->string('id_card_copy');
             $table->string('copy_house_registration');
-            $table->integer('status');
+            $table->tinyInteger('status');
             $table->rememberToken();
             $table->timestamps();
         });

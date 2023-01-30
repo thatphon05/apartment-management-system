@@ -12,9 +12,10 @@ class CreateRepairsTable extends Migration
             $table->increments('id');
             $table->integer('booking_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('room_id')->unsigned();
             $table->string('subject');
             $table->longText('description');
-            $table->integer('status');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

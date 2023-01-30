@@ -12,7 +12,7 @@
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-success d-none d-sm-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -22,17 +22,6 @@
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
                             เพิ่มผู้เช่า
-                        </a>
-                        <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                           data-bs-target="#modal-report" aria-label="Create new report">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                <line x1="12" y1="5" x2="12" y2="19"/>
-                                <line x1="5" y1="12" x2="19" y2="12"/>
-                            </svg>
                         </a>
                     </div>
                 </div>
@@ -67,21 +56,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-label">สถานะผู้เช่า</div>
-                                    @foreach(\App\Enums\UserStatusEnum::values() as $key => $value)
-                                        <label class="form-check form-check-inline">
-                                            <input class="form-check-input" name="status[]" type="checkbox"
-                                                   value="{{ $key }}"
-                                                   @if ((is_array(request()->query('status'))
-                                                        && in_array($key, request()->query('status'))
-                                                   || !request()->has('status'))
-                                                   )
-                                                       checked
-                                                @endif
-                                            />
-                                            <span
-                                                class="form-check-label">{{ \App\Enums\UserStatusEnum::getLabel($value) }}</span>
-                                        </label>
-                                    @endforeach
+                                    @include('partials.admins.checkbox_status', ['enum' => \App\Enums\UserStatusEnum::class])
                                 </div>
                                 <button type="submit" class="btn btn btn-primary" role="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -113,6 +88,7 @@
                                     <th>ชื่อ - นามสกุล</th>
                                     <th>เบอร์โทรศัพท์</th>
                                     <th>สถานะ</th>
+                                    <th>ห้องที่กำลังเช่า</th>
                                     <th>วันที่แก้ไขล่าสุด</th>
                                     <th></th>
                                 </tr>
@@ -123,11 +99,25 @@
                                         <td><span class="text-muted">{{ $user->id }}</span></td>
                                         <td>{{ $user->full_name }}</td>
                                         <td>{{ $user->telephone }}</td>
-                                        <td>{{ \App\Enums\UserStatusEnum::getLabel($user->status) }}</td>
+                                        <td>
+                                            <span
+                                                class="badge bg-{{ \App\Enums\UserStatusEnum::getColor($user->status) }}">
+                                                {{ \App\Enums\UserStatusEnum::getLabel($user->status) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if (isset($user->bookings->first()->room))
+                                                <a href="#">
+                                                    อาคาร {{ $user->bookings->first()->room->floor->building->name ?? '' }}
+                                                    ชั้น {{ $user->bookings->first()->room->floor->name ?? '' }}
+                                                    ห้อง {{ $user->bookings->first()->room->name ?? '' }}
+                                                </a>
+                                            @endif
+                                        </td>
                                         <td>{{ $user->updated_at }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('admin.users.show', ['user' => 1]) }}"
-                                               class="btn btn-primary"
+                                            <a href="{{ route('admin.users.show', ['user' => $user->id]) }}"
+                                               class="btn btn-info"
                                                role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="icon icon-tabler icon-tabler-eye" width="24" height="24"
@@ -160,25 +150,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="6">
-                                            <div class="empty">
-                                                <div class="empty-icon">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/mood-sad -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                         height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <circle cx="12" cy="12" r="9"/>
-                                                        <line x1="9" y1="10" x2="9.01" y2="10"/>
-                                                        <line x1="15" y1="10" x2="15.01" y2="10"/>
-                                                        <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0"/>
-                                                    </svg>
-                                                </div>
-                                                <p class="empty-title">ไม่พบรายการ</p>
-                                                <p class="empty-subtitle text-muted">
-                                                    โปรดตรวจสอบรายที่ป้อนเข้ามาใหม่อีกครั้ง
-                                                </p>
-                                            </div>
+                                            @include('partials.empty')
                                         </td>
                                     </tr>
                                 @endforelse

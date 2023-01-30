@@ -21,9 +21,8 @@ class RoomBookingSeeder extends Seeder
                 'updated_at' => now(),
                 'user_id' => 1,
                 'room_id' => 1,
-                'rent_contract' => '/',
-                'contract_start' => Carbon::now(),
-                'contract_end' => Carbon::now()->addMonth(6),
+                'rent_contract' => 'test.php',
+                'arrival_date' => Carbon::now()->addMonth(6),
                 'deposit' => 2000,
                 'status' => 1,
                 'parking_amount' => 1

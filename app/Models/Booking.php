@@ -29,6 +29,21 @@ class Booking extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'user_id',
+        'room_id',
+        'rent_contract',
+        'contract_start',
+        'contract_end',
+        'deposit',
+        'status',
+        'parking_amount',
+        'arrival_date',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo

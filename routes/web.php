@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
+use App\Http\Controllers\Admins\PaymentController;
+use App\Http\Controllers\Admins\RepairController;
+use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Auths\AuthController;
+use App\Http\Controllers\Users\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,17 +29,18 @@ Route::prefix('/')->name('user.')->group(function () {
 
     // User login
     Route::controller(AuthController::class)->group(function () {
-        Route::get('/login', 'getUserLogin')->name('login.get');
-        Route::post('/login', 'postUserLogin')->name('login.post');
+        Route::get('login', 'getUserLogin')->name('login.get');
+        Route::post('login', 'postUserLogin')->name('login.post');
         Route::get('logout', 'userLogout')->name('logout');
     });
 
     // After user login
     Route::middleware('auth')->group(function () {
 
-        Route::get('/', function () {
-            return 'dashboard';
-        })->name('dashboard');
+        // Dashboard
+        Route::controller(UserDashboardController::class)->group(function () {
+            Route::get('/', 'index')->name('dashboard.index');
+        });
 
     });
 });
@@ -62,8 +68,33 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // User management
         Route::resource('users', UserController::class);
 
+        // Download file
+        Route::get('users/idcardcopy/{filename}', [UserController::class, 'downloadIdCardCopy'])
+            ->name('users.download.idcardcopy');
+        Route::get('users/housecopy/{filename}', [UserController::class, 'downloadHouseRegCopy'])
+            ->name('users.download.housecopy');
+
         // Setting management
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+
+        // Building management
+        Route::resource('buildings', BuildingController::class);
+
+        // Room management
+        Route::resource('rooms', RoomController::class);
+
+        /// For download rent contract
+        Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])
+            ->name('booking.download.rent_contract');
+
+        // Repair management
+        Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
+
+        // Payment management
+        Route::resource('payments', PaymentController::class)->only(['index', 'edit', 'update']);
+
+        Route::get('payments/paymentattach/{filename}', [PaymentController::class, 'downloadPaymentAttach'])
+            ->name('payments.download.payment_attach');
 
     });
 });

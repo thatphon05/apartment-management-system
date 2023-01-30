@@ -38,6 +38,11 @@ class CreateForeignKeys extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->foreign('room_id')->references('id')->on('rooms')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+        });
         Schema::table('invoices', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('restrict')
@@ -49,7 +54,17 @@ class CreateForeignKeys extends Migration
                 ->onUpdate('restrict');
         });
         Schema::table('invoices', function (Blueprint $table) {
+            $table->foreign('room_id')->references('id')->on('rooms')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+        });
+        Schema::table('invoices', function (Blueprint $table) {
             $table->foreign('util_expense_id')->references('id')->on('utilities_expenses')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+        });
+        Schema::table('utilities_expenses', function (Blueprint $table) {
+            $table->foreign('room_id')->references('id')->on('rooms')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
@@ -95,6 +110,9 @@ class CreateForeignKeys extends Migration
         Schema::table('repairs', function (Blueprint $table) {
             $table->dropForeign('repairs_user_id_foreign');
         });
+        Schema::table('repairs', function (Blueprint $table) {
+            $table->dropForeign('repairs_room_id_foreign');
+        });
         Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign('invoices_user_id_foreign');
         });
@@ -102,7 +120,13 @@ class CreateForeignKeys extends Migration
             $table->dropForeign('invoices_booking_id_foreign');
         });
         Schema::table('invoices', function (Blueprint $table) {
+            $table->dropForeign('invoices_room_id_foreign');
+        });
+        Schema::table('invoices', function (Blueprint $table) {
             $table->dropForeign('invoices_util_expense_id_foreign');
+        });
+        Schema::table('utilities_expenses', function (Blueprint $table) {
+            $table->dropForeign('utilities_expenses_room_id_foreign');
         });
         Schema::table('utilities_expenses', function (Blueprint $table) {
             $table->dropForeign('utilities_expenses_booking_id_foreign');
