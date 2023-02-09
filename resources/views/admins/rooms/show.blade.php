@@ -138,7 +138,7 @@
                                             </span>
                                         </div>
                                         <div class="col text-truncate">
-                                            <a href="{{ route('admin.booking.download.rent_contract', ['filename' => $currentBooking->rent_contract]) }}"
+                                            <a href="{{ route('admin.booking.download.rent_contract', ['filename' => $currentBooking->rental_contract]) }}"
                                                class="text-body d-block">
                                                 หนังสือสัญญาเช่าห้องพัก
                                             </a>
