@@ -22,6 +22,8 @@ class RoomSeeder extends Seeder
                     'updated_at' => now(),
                     'name' => $i,
                     'floor_id' => $count,
+                    'building_id' => 1,
+                    'configuration_id' => 1,
                     'rent_price' => 2500,
                     'electric_price' => 5,
                     'water_price' => 10,

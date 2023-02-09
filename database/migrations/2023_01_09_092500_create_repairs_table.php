@@ -15,6 +15,8 @@ class CreateRepairsTable extends Migration
             $table->integer('room_id')->unsigned();
             $table->string('subject');
             $table->longText('description');
+            $table->longText('note')->nullable();
+            $table->dateTime('repair_date')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
         });

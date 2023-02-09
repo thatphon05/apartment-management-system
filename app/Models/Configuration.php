@@ -17,11 +17,12 @@ class Configuration extends Model
     protected $table = 'configurations';
 
     protected $fillable = [
-        'rent_price',
-        'electric_price',
-        'water_price',
-        'parking_price',
+        'name',
+        'rent_fee',
+        'electric_fee',
+        'water_fee',
+        'parking_fee',
         'common_fee',
-        'damages_price'
+        'overdue_fee',
     ];
 }

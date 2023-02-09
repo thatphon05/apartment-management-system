@@ -18,12 +18,13 @@ class ConfigurationSeeder extends Seeder
             Configuration::create([
                 'created_at' => now(),
                 'updated_at' => now(),
-                'rent_price' => 2500,
-                'electric_price' => 5,
-                'water_price' => 10,
-                'parking_price' => 300,
+                'name' => 'ทั่วไป',
+                'rent_fee' => 2500,
+                'electric_fee' => 5,
+                'water_fee' => 10,
+                'parking_fee' => 300,
                 'common_fee' => 200,
-                'damages_price' => 50,
+                'overdue_fee' => 50,
                 'deposit' => 5000,
             ]);
         }
