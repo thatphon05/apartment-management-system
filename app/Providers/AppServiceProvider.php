@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Carbon::setlocale(config('app.locale'));
+
         Paginator::useBootstrapFive();
 
         // Prevent Lazy loading
