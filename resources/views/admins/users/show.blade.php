@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">รหัสบัตรประชาชน</div>
-                                    <div class="datagrid-content">{{ $user->id_card }}</div>
+                                    <div class="datagrid-content">{{ $user->id_card_number }}</div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">วันเกิด</div>

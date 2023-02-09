@@ -156,7 +156,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">ตำบล</label>
-                                            <input value="{{ old('sub_district') ?? $user->sub_district }}"
+                                            <input value="{{ old('sub_district') ?? $user->subdistrict }}"
                                                    name="sub_district" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('sub_district') is-invalid @enderror"

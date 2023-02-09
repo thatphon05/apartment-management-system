@@ -108,7 +108,7 @@ class User extends Authenticatable
 
     public function getFullAddressAttribute(): string
     {
-        return $this->address . ' ' . $this->sub_district . ' ' . $this->district . ' '
+        return $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.'
             . $this->province . ' ' . $this->postal_code;
     }
 
