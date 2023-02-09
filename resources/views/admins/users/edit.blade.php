@@ -85,7 +85,7 @@
                                     <div class="col-sm-12 col-md-5">
                                         <div class="mb-3">
                                             <label class="form-label required">หมายเลขบัตรประชาชน</label>
-                                            <input value="{{ old('id_card') ?? $user->id_card }}" maxlength="13"
+                                            <input value="{{ old('id_card') ?? $user->id_card_number }}" maxlength="13"
                                                    name="id_card"
                                                    type="text"
                                                    onchange="inputChange(event)"
