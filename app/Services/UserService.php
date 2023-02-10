@@ -48,7 +48,7 @@ class UserService
             'telephone' => $request->telephone,
             'password' => bcrypt($request->password),
             'id_card_number' => $request->id_card,
-            'birthdate' => convertDateToAD($request->birthdate),
+            'birthdate' => $request->birthdate,
             'religion' => $request->religion,
             'name' => $request->name,
             'surname' => $request->surname,
@@ -98,13 +98,13 @@ class UserService
         $user = User::findOrFail($id);
 
         $user->telephone = $request->telephone;
-        $user->id_card = $request->id_card;
-        $user->birthdate = convertDateToAD($request->birthdate);
+        $user->id_card_number = $request->id_card;
+        $user->birthdate = $request->birthdate;
         $user->religion = $request->religion;
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->address = $request->address;
-        $user->sub_district = $request->sub_district;
+        $user->subdistrict = $request->sub_district;
         $user->district = $request->district;
         $user->province = $request->province;
         $user->postal_code = $request->postal_code;

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Casts\FormatYearCast;
 use App\Enums\UserStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -62,6 +63,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'status' => UserStatusEnum::class,
+        'birthdate' => FormatYearCast::class,
     ];
 
     /**

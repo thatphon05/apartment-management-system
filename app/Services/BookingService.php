@@ -20,7 +20,7 @@ class BookingService
         return $userData->bookings()->create([
             'room_id' => $request->room_id,
             'rental_contract' => $request->file('rent_contract')->hashName(),
-            'arrival_date' => convertDateToAD($request->arrival_date),
+            'arrival_date' => $request->arrival_date,
             'deposit' => $request->deposit,
             'status' => BookingStatusEnum::ACTIVE,
             'parking_amount' => $request->parking_amount,
