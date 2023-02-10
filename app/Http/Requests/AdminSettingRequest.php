@@ -12,6 +12,7 @@ class AdminSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required',
             'rent_fee' => 'required|numeric|min:0',
             'electric_fee' => 'required|numeric|min:0',
             'water_fee' => 'required|numeric|min:0',
@@ -28,6 +29,9 @@ class AdminSettingRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'name' => [
+                'required' => 'คุณต้องใส่ประเภทห้อง',
+            ],
             'rent_fee' => [
                 'required' => 'คุณต้องใส่ค่าเช่าห้อง',
                 'numeric' => 'ค่าเช่าห้องกรอกต้องเป็นตัวเลขเท่านั้น',

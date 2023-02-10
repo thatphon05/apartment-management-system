@@ -55,6 +55,17 @@
                                 @endif
                                 <div class="table-responsive">
                                     <table class="table mb-0">
+                                        <tbody>
+                                        <tr>
+                                            <label for="name">ประเภทห้อง:</label><br>
+                                            <td class="col-3">
+                                                <input type="text" name="name" class="form-control"
+                                                       value="{{ $config->name }}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table mb-0">
                                         <thead>
                                         <tr>
                                             <th>ประเภท</th>
