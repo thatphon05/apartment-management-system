@@ -68,8 +68,8 @@
                                                 <input type="text" class="form-control" value="ค่าเช่าห้อง" disabled>
                                             </td>
                                             <td>
-                                                <input type="number" name="rent_price" class="form-control"
-                                                       value="{{ $config->rent_price }}">
+                                                <input type="number" name="rent_fee" class="form-control"
+                                                       value="{{ $config->rent_fee }}">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" value="ต่อเดือน" disabled>
@@ -81,8 +81,8 @@
                                                 <input type="text" class="form-control" value="ค่าไฟฟ้า" disabled>
                                             </td>
                                             <td>
-                                                <input type="number" name="electric_price" class="form-control"
-                                                       value="{{ $config->electric_price }}">
+                                                <input type="number" name="electric_fee" class="form-control"
+                                                       value="{{ $config->electric_fee }}">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" value="ต่อหน่วย" disabled>
@@ -94,8 +94,8 @@
                                                 <input type="text" class="form-control" value="ค่าน้ำประปา" disabled>
                                             </td>
                                             <td>
-                                                <input type="number" name="water_price" class="form-control"
-                                                       value="{{ $config->water_price }}">
+                                                <input type="number" name="water_fee" class="form-control"
+                                                       value="{{ $config->water_fee }}">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" value="ต่อหน่วย" disabled>
@@ -107,8 +107,8 @@
                                                 <input type="text" class="form-control" value="ค่าที่จอดรถ" disabled>
                                             </td>
                                             <td>
-                                                <input type="number" name="parking_price" class="form-control"
-                                                       value="{{ $config->parking_price }}">
+                                                <input type="number" name="parking_fee" class="form-control"
+                                                       value="{{ $config->parking_fee }}">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" value="ต่อเดือน" disabled>
@@ -134,8 +134,8 @@
                                                        disabled>
                                             </td>
                                             <td>
-                                                <input type="number" name="damages_price" class="form-control"
-                                                       value="{{ $config->damages_price }}">
+                                                <input type="number" name="overdue_fee" class="form-control"
+                                                       value="{{ $config->overdue_fee }}">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control" value="ต่อเดือน" disabled>
