@@ -26,7 +26,7 @@ class UserCreateRequest extends FormRequest
             'sub_district' => 'required',
             'district' => 'required',
             'province' => 'required',
-            'postal_code' => 'required|integer',
+            'postal_code' => 'required|integer|max_digits:5',
             'id_card_copy' => 'required|file|mimes:pdf',
             'copy_house_registration' => 'required|file|mimes:pdf',
             'rent_contract' => 'required|file|mimes:pdf',

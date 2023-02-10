@@ -34,9 +34,8 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'room_id',
-        'rent_contract',
+        'rental_contract',
         'contract_start',
-        'contract_end',
         'deposit',
         'status',
         'parking_amount',

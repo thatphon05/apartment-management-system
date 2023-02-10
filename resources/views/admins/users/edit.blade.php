@@ -77,7 +77,7 @@
                                                    name="telephone"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('telephone') is-invalid @enderror"
-                                                   placeholder="เบอร์โทรศัพท์">
+                                                   placeholder="เบอร์โทรศัพท์" maxlength="10">
                                             @error('telephone')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -196,7 +196,7 @@
                                                    name="postal_code" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('postal_code') is-invalid @enderror"
-                                                   placeholder="รหัสไปรษณีย์">
+                                                   placeholder="รหัสไปรษณีย์" maxlength="5">
                                             @error('postal_code')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>

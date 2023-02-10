@@ -48,7 +48,7 @@ class UserService
             'telephone' => $request->telephone,
             'password' => bcrypt($request->password),
             'id_card_number' => $request->id_card,
-            'birthdate' => $request->birthdate,
+            'birthdate' => convertDateToAD($request->birthdate),
             'religion' => $request->religion,
             'name' => $request->name,
             'surname' => $request->surname,
@@ -99,7 +99,7 @@ class UserService
 
         $user->telephone = $request->telephone;
         $user->id_card = $request->id_card;
-        $user->birthdate = $request->birthdate;
+        $user->birthdate = convertDateToAD($request->birthdate);
         $user->religion = $request->religion;
         $user->name = $request->name;
         $user->surname = $request->surname;
