@@ -58,37 +58,44 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-
-                            <td>{{ $config->id }}</td>
-                            <td>{{ $config->name }}</td>
-                            <td>{{ $config->rent_fee }}</td>
-                            <td>{{ $config->electric_fee }}</td>
-                            <td>{{ $config->water_fee }}</td>
-                            <td>{{ $config->parking_fee }}</td>
-                            <td>{{ $config->common_fee }}</td>
-                            <td>{{ $config->overdue_fee }}</td>
-                            <td>{{ $config->deposit }}</td>
-                            <td>{{ $config->updated_at }}</td>
-                            <td class="text-end">
-                                <a href="{{ route('admin.settings.edit', ['setting' => $config->id]) }}" class="btn"
-                                   role="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="icon icon-tabler icon-tabler-edit"
-                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                         stroke="currentColor" fill="none" stroke-linecap="round"
-                                         stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                        <path
-                                            d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                        <path d="M16 5l3 3"></path>
-                                    </svg>
-                                    แก้ไขข้อมูล
-                                </a>
-                            </td>
-
-                        </tr>
+                        @forelse($config as $configs)
+                            <tr>
+                                <td>{{ $configs->id }}</td>
+                                <td>{{ $configs->name }}</td>
+                                <td>{{ $configs->rent_fee }}</td>
+                                <td>{{ $configs->electric_fee }}</td>
+                                <td>{{ $configs->water_fee }}</td>
+                                <td>{{ $configs->parking_fee }}</td>
+                                <td>{{ $configs->common_fee }}</td>
+                                <td>{{ $configs->overdue_fee }}</td>
+                                <td>{{ $configs->deposit }}</td>
+                                <td>{{ $configs->updated_at }}</td>
+                                <td class="text-end">
+                                    <a href="{{ route('admin.settings.edit', ['setting' => $configs->id]) }}"
+                                       class="btn"
+                                       role="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             class="icon icon-tabler icon-tabler-edit"
+                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                             stroke="currentColor" fill="none" stroke-linecap="round"
+                                             stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                            <path
+                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                                            <path d="M16 5l3 3"></path>
+                                        </svg>
+                                        แก้ไขข้อมูล
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6">
+                                    @include('partials.empty')
+                                </td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
