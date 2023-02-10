@@ -116,11 +116,11 @@ class User extends Authenticatable
 
     public function getBirthDateFormatAttribute(): string
     {
-        return Carbon::parse($this->birthdate)->translatedFormat('l j F Y');
+        return $this->birthdate->translatedFormat('l j F Y');
     }
 
     public function getAgeAttribute(): string
     {
-        return Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+        return $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
     }
 }
