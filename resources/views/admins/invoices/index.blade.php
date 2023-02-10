@@ -19,10 +19,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('admin.payments.index') }}" method="get">
+                            <form action="{{ route('admin.invoices.index') }}" method="get">
                                 <div class="mb-3">
                                     <div class="form-label">สถานะแจ้งชำระเงิน</div>
-                                    @include('partials.admins.checkbox_status', ['enum' => \App\Enums\PaymentStatusEnum::class])
+                                    @include('partials.admins.checkbox_status', ['enum' => \App\Enums\InvoiceStatusEnum::class])
                                 </div>
                                 <button type="submit" class="btn btn btn-primary" role="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -35,7 +35,7 @@
                                     ค้นหา
                                 </button>
                                 @if (request()->has('status'))
-                                    <a href="{{ route('admin.payments.index') }}" class="btn btn btn-danger"
+                                    <a href="{{ route('admin.invoices.index') }}" class="btn btn btn-danger"
                                        role="button">ยกเลิกการกรอง</a>
                                 @endif
                             </form>
@@ -51,37 +51,39 @@
                             <table class="table card-table table-vcenter text-nowrap table-striped">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>ผู้แจ้ง</th>
                                     <th>หมายเลขใบแจ้งหนี้</th>
+                                    <td>ห้อง</td>
                                     <th>สถานะ</th>
-                                    <th>วันที่แจ้งชำระ</th>
+                                    <th>วันที่ออก</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($payments as $payment)
+                                @forelse($invoices as $invoice)
                                     <tr>
                                         <td>
                                             <span class="text-muted">
-                                            <a href="{{ route('admin.payments.edit', ['payment'=> $payment->id]) }}">
-                                                    #{{ $payment->id }}
+                                            <a href="{{ route('admin.invoices.edit', ['invoice'=> $invoice->id]) }}">
+                                                    #{{ $invoice->id }}
                                             </a>
                                             </span>
                                         </td>
-                                        <td><span class="text-muted">{{ $payment->user->full_name }}</span></td>
                                         <td>
-                                            #{{ $payment->invoice->id }}
+                                            <span class="text-muted">
+                                                อาคาร {{ $invoice->room->floor->building->name ?? '' }}
+                                                    ชั้น {{ $invoice->room->floor->name ?? '' }}
+                                                    ห้อง {{ $invoice->room->name ?? '' }}
+                                            </span>
                                         </td>
                                         <td>
                                             <span
-                                                class="badge bg-{{ \App\Enums\PaymentStatusEnum::getColor($payment->status) }}">
-                                                {{ \App\Enums\PaymentStatusEnum::getLabel($payment->status) }}
+                                                class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
+                                                {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
                                             </span>
                                         </td>
-                                        <td>{{ $payment->created_at }}</td>
+                                        <td>{{ $invoice->created_at }}</td>
                                         <td class="">
-                                            <a href="{{ route('admin.payments.edit', ['payment' => $payment->id]) }}"
+                                            <a href="{{ route('admin.invoices.edit', ['invoice' => $invoice->id]) }}"
                                                class="btn"
                                                role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +111,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center">
                             <div class="m-0 ms-auto">
-                                {{ $payments->links() }}
+                                {{ $invoices->links() }}
                             </div>
                         </div>
                     </div>

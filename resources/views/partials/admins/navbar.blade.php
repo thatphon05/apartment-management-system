@@ -268,8 +268,8 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/payments*')">
-                        <a class="nav-link" href="{{ route('admin.payments.index') }}">
+                    <li class="nav-item @navactive('admin/invoices*')">
+                        <a class="nav-link" href="{{ route('admin.invoices.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +283,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                รายการแจ้งชำระเงิน
+                                รายการใบแจ้งหนี้
                             </span>
                         </a>
                     </li>

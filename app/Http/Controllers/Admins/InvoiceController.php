@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Enums\UserStatusEnum;
+use App\Enums\InvoiceStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentEditRequest;
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
 use App\Services\StorageService;
 
-class PaymentController extends Controller
+class InvoiceController extends Controller
 {
 
     public function __construct(
@@ -20,18 +21,18 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $status = request()->query('status', UserStatusEnum::cases());
-        return view('admins.payments.index', [
-            'payments' => Payment::with(['user', 'invoice'])->whereIn('status', $status)
-                ->latest()
+        $status = request()->query('status', InvoiceStatusEnum::cases());
+        return view('admins.invoices.index', [
+            'invoices' => Invoice::with('user', 'payments', 'room.floor.building')->whereIn('status', $status)
+                ->latest('id')
                 ->paginate(40),
         ]);
     }
 
     public function edit($id)
     {
-        return view('admins.payments.edit', [
-            'payment' => Payment::with(['user', 'booking.room.floor.building' => function ($query) {
+        return view('admins.invoices.edit', [
+            'invoice' => Invoice::with(['user', 'room.floor.building' => function ($query) {
                 $query->first();
             }])->findOrFail($id),
         ]);
