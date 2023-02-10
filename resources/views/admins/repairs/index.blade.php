@@ -73,7 +73,8 @@
                                     <th>รายการแจ้งซ่อม</th>
                                     <th>สถานะ</th>
                                     <th>ห้องที่กำลังเช่า</th>
-                                    <th>วันที่แก้ไขล่าสุด</th>
+                                    <th>วันที่แจ้ง</th>
+                                    <th>วันที่เข้าซ่อม</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -103,7 +104,8 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{ $repair->updated_at }}</td>
+                                        <td>{{ $repair->created_at }}</td>
+                                        <td>{{ $repair->repair_date ?? 'ยังไม่ได้กำหนด' }}</td>
                                         <td class="text-end">
                                             <a href="{{ route('admin.repairs.edit', ['repair' => $repair->id]) }}"
                                                class="btn"

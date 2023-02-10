@@ -14,7 +14,8 @@ class AdminEditRepairRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => [new Enum(RepairStatusEnum::class)]
+            'status' => [new Enum(RepairStatusEnum::class)],
+            'repair_date' => 'date_format:Y-m-d\TH:i|nullable',
         ];
     }
 

@@ -63,14 +63,42 @@
                                     <h4 class="card-title">ปรับสถานะ</h4>
                                 </div>
                                 <div class="card-body">
-                                    <select name="status" class="form-select @error('status') is-invalid @enderror">
-                                        @foreach(\App\Enums\RepairStatusEnum::values() as $key => $value)
-                                            <option
-                                                value="{{ $key }}" @selected(\App\Enums\RepairStatusEnum::from($key) === $repair->status)>
-                                                {{ \App\Enums\RepairStatusEnum::getLabel($value) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label">กำหนดวันที่เข้าซ่อม</label>
+                                            <input
+                                                value="{{ old('repair_date') ?? $repair->repair_date }}"
+                                                name="repair_date"
+                                                type="datetime-local"
+                                                onchange="inputChange(event)"
+                                                class="form-control @error('repair_date') is-invalid @enderror"
+                                                placeholder="เลือกเวลาเข้าซ่อม">
+                                            @error('repair_date')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">รายละเอียดเพิ่มเติม</label>
+                                            <textarea name="note" type="text"
+                                                      onchange="inputChange(event)"
+                                                      class="form-control @error('note') is-invalid @enderror"
+                                                      placeholder="รายละเอียดเพิ่มเติม">{{ old('note') ?? $repair->note }}</textarea>
+                                            @error('note')
+                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">ปรับสถานะ</label>
+                                        <select name="status" class="form-select @error('status') is-invalid @enderror">
+                                            @foreach(\App\Enums\RepairStatusEnum::values() as $key => $value)
+                                                <option
+                                                    value="{{ $key }}" @selected(\App\Enums\RepairStatusEnum::from($key) === $repair->status)>
+                                                    {{ \App\Enums\RepairStatusEnum::getLabel($value) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">แก้ไข</button>
