@@ -58,20 +58,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($config as $configs)
+                        @forelse($configs as $config)
                             <tr>
-                                <td>{{ $configs->id }}</td>
-                                <td>{{ $configs->name }}</td>
-                                <td>{{ $configs->rent_fee }}</td>
-                                <td>{{ $configs->electric_fee }}</td>
-                                <td>{{ $configs->water_fee }}</td>
-                                <td>{{ $configs->parking_fee }}</td>
-                                <td>{{ $configs->common_fee }}</td>
-                                <td>{{ $configs->overdue_fee }}</td>
-                                <td>{{ $configs->deposit }}</td>
-                                <td>{{ $configs->updated_at }}</td>
+                                <td>{{ $config->id }}</td>
+                                <td>{{ $config->name }}</td>
+                                <td>{{ $config->rent_fee }}</td>
+                                <td>{{ $config->electric_fee }}</td>
+                                <td>{{ $config->water_fee }}</td>
+                                <td>{{ $config->parking_fee }}</td>
+                                <td>{{ $config->common_fee }}</td>
+                                <td>{{ $config->overdue_fee }}</td>
+                                <td>{{ $config->deposit }}</td>
+                                <td>{{ $config->updated_at }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.settings.edit', ['setting' => $configs->id]) }}"
+                                    <a href="{{ route('admin.settings.edit', ['setting' => $config->id]) }}"
                                        class="btn"
                                        role="button">
                                         <svg xmlns="http://www.w3.org/2000/svg"
