@@ -17,8 +17,19 @@ class CreateInvoicesTable extends Migration
             $table->tinyInteger('status');
             $table->date('cycle');
             $table->decimal('rent_total')->default(0);
+
+            $table->integer('electric_unit_last')->default(0);
+            $table->integer('electric_unit_later')->default(0);
+            $table->integer('electric_unit')->default(0);
+            $table->decimal('electric_unit_price')->default(0);
             $table->decimal('electric_total')->default(0);
+
+            $table->integer('water_unit_last')->default(0);
+            $table->integer('water_unit_later')->default(0);
+            $table->integer('water_unit')->default(0);
+            $table->decimal('water_unit_price')->default(0);
             $table->decimal('water_total')->default(0);
+
             $table->decimal('parking_total')->default(0);
             $table->decimal('common_total')->default(0);
             $table->decimal('overdue_total')->default(0);
