@@ -14,6 +14,11 @@ class BladeServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->useNavActive();
+    }
+
+    private function useNavActive()
+    {
         Blade::directive('navactive', function ($expression) {
             return "<?php echo request()->is($expression) ? 'active' : ''; ?>";
         });
