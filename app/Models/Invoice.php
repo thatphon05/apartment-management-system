@@ -165,7 +165,7 @@ class Invoice extends Model
      */
     public function getDynamicSummaryAttribute(): float
     {
-        return $this->rent_total + $this->electric_total + $this->water_total
+        return (float)$this->rent_total + $this->electric_total + $this->water_total
             + $this->parking_total + $this->common_total + $this->dynamic_overdue_total;
     }
 
