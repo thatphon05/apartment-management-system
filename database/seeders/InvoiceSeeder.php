@@ -23,7 +23,7 @@ class InvoiceSeeder extends Seeder
                 'booking_id' => 1,
                 'room_id' => 1,
                 'util_expense_id' => 1,
-                'cycle' => now(),
+                'cycle' => Carbon::create(2023),
                 'status' => 0,
                 'rent_total' => 0,
                 'electric_total' => 0,
@@ -32,7 +32,7 @@ class InvoiceSeeder extends Seeder
                 'common_total' => 0,
                 'overdue_total' => 0,
                 'summary' => 0,
-                'due_date' => now()->addDays(4),
+                'due_date' => Carbon::create(2023)->addMonth()->addDays(4),
             ]);
 
             Invoice::create([
@@ -51,7 +51,7 @@ class InvoiceSeeder extends Seeder
                 'common_total' => 0,
                 'overdue_total' => 0,
                 'summary' => 0,
-                'due_date' => now()->addDays(4),
+                'due_date' => now()->addMonths(2)->setDays(5),
             ]);
         }
 
