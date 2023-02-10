@@ -8,7 +8,7 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <h2 class="page-title">
-                        รายการการคั้งค่าธรรมเนียม
+                        รายการการตั้งค่า
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -38,7 +38,7 @@
         <div class="container-xl">
             <div class="card">
                 <div class="card-header">
-                    รายการการคั้งค่าธรรมเนียม
+                    รายการการตั้งค่า
                 </div>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap table-striped">
