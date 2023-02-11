@@ -4,7 +4,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
+                <th>#เลขใบแจ้งหนี้</th>
                 <th>ห้อง</th>
                 <th>สถานะ</th>
                 <th>ประจำเดือน</th>
@@ -16,7 +16,9 @@
                 <tr>
                     <td>
                         <a href="#">
-                            #{{ $invoice->id }}
+                            <a href="{{ route('admin.invoices.edit', ['invoice' => $invoice->id]) }}">
+                                #{{ $invoice->id }}
+                            </a>
                         </a>
 
                     </td>
