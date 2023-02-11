@@ -24,6 +24,14 @@ class AdminSeeder extends Seeder
                 'name' => 'Administration',
                 'status' => 1,
             ]);
+            Admin::create([
+                'created_at' => now(),
+                'updated_at' => now(),
+                'email' => 'tanawit.w@ku.th',
+                'password' => bcrypt('123'),
+                'name' => 'Administration',
+                'status' => 1,
+            ]);
         }
     }
 }
