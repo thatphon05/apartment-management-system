@@ -11,18 +11,18 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('telephone');
+            $table->string('telephone', 10);
             $table->string('password');
-            $table->string('id_card');
+            $table->string('id_card_number', 13);
             $table->string('name');
             $table->string('surname');
             $table->date('birthdate');
             $table->string('religion');
             $table->string('address');
-            $table->string('sub_district');
+            $table->string('subdistrict');
             $table->string('district');
             $table->string('province');
-            $table->string('postal_code');
+            $table->string('postal_code', 5);
             $table->string('id_card_copy');
             $table->string('copy_house_registration');
             $table->tinyInteger('status');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\FormatYearCast;
 use App\Enums\BookingStatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +27,7 @@ class Booking extends Model
      */
     protected $casts = [
         'status' => BookingStatusEnum::class,
+        'arrival_date' => FormatYearCast::class,
     ];
 
     /**
@@ -34,9 +36,8 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'room_id',
-        'rent_contract',
+        'rental_contract',
         'contract_start',
-        'contract_end',
         'deposit',
         'status',
         'parking_amount',

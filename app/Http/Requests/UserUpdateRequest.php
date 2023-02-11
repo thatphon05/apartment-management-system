@@ -12,7 +12,7 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'telephone' => 'required|numeric',
+            'telephone' => 'required|numeric|max_digits:10',
             'id_card' => 'required|integer|digits:13',
             'birthdate' => 'required|date',
             'religion' => 'required',
@@ -22,7 +22,7 @@ class UserUpdateRequest extends FormRequest
             'sub_district' => 'required',
             'district' => 'required',
             'province' => 'required',
-            'postal_code' => 'required|integer',
+            'postal_code' => 'required|integer|max_digits:5',
             'id_card_copy' => 'file|mimes:pdf',
             'copy_house_registration' => 'file|mimes:pdf',
         ];

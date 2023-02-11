@@ -58,4 +58,20 @@ class Room extends Model
         return $this->hasMany(UtilityExpense::class, 'room_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function building(): BelongsTo
+    {
+        return $this->belongsTo(Building::class, 'building_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function configuration(): BelongsTo
+    {
+        return $this->belongsTo(Configuration::class, 'configuration_id');
+    }
+
 }

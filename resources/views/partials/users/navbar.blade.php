@@ -179,7 +179,7 @@
             <div class="container-xl">
                 <ul class="navbar-nav">
                     <li class="nav-item @navactive('/')">
-                        <a class="nav-link" href="./">
+                        <a class="nav-link" href="{{ route('user.dashboard.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

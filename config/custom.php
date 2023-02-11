@@ -13,6 +13,7 @@ return [
      * Payment config
      */
     'due_date' => 5, // date which late payment every month
+    'pay_within_day' => 15, // pay within how many days
 
     /**
      * Labels message

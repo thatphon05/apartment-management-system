@@ -26,6 +26,7 @@ class Repair extends Model
      */
     protected $casts = [
         'status' => RepairStatusEnum::class,
+        'repair_date' => 'datetime:Y-m-d H:i',
     ];
 
     /**

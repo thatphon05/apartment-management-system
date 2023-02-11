@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             UserSeeder::class,
 
+            ConfigurationSeeder::class,
+
             BuildingSeeder::class,
             FloorSeeder::class,
             RoomSeeder::class,
-
-            ConfigurationSeeder::class,
 
             RoomBookingSeeder::class,
             UtilityExpenseSeeder::class,

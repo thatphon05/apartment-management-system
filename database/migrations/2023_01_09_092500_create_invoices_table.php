@@ -13,16 +13,28 @@ class CreateInvoicesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('booking_id')->unsigned();
             $table->integer('room_id')->unsigned();
+            $table->integer('util_expense_id')->unsigned();
             $table->tinyInteger('status');
             $table->date('cycle');
-            $table->integer('util_expense_id')->unsigned();
-            $table->decimal('rent_price')->default(0);
-            $table->decimal('electric_price')->default(0);
-            $table->decimal('water_price')->default(0);
-            $table->decimal('parking_price')->default(0);
-            $table->decimal('common_fee')->default(0);
-            $table->decimal('late_fines')->default(0);
+            $table->decimal('rent_total')->default(0);
+
+            $table->integer('electric_unit_last')->default(0);
+            $table->integer('electric_unit_later')->default(0);
+            $table->integer('electric_unit')->default(0);
+            $table->decimal('electric_unit_price')->default(0);
+            $table->decimal('electric_total')->default(0);
+
+            $table->integer('water_unit_last')->default(0);
+            $table->integer('water_unit_later')->default(0);
+            $table->integer('water_unit')->default(0);
+            $table->decimal('water_unit_price')->default(0);
+            $table->decimal('water_total')->default(0);
+
+            $table->decimal('parking_total')->default(0);
+            $table->decimal('common_total')->default(0);
+            $table->decimal('overdue_total')->default(0);
             $table->decimal('summary')->default(0);
+            $table->date('due_date');
             $table->timestamps();
         });
     }

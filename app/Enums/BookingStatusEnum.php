@@ -14,8 +14,8 @@ enum BookingStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'INACTIVE', BookingStatusEnum::INACTIVE => 'ยกเลิก',
-            'ACTIVE', BookingStatusEnum::ACTIVE => 'กำลังพัก',
+            'INACTIVE', self::INACTIVE => 'ยกเลิก',
+            'ACTIVE', self::ACTIVE => 'กำลังพัก',
             default => ''
         };
     }
@@ -27,8 +27,8 @@ enum BookingStatusEnum: int
     public static function getColor($value): string
     {
         return match ($value) {
-            'INACTIVE', BookingStatusEnum::INACTIVE => 'red',
-            'ACTIVE', BookingStatusEnum::ACTIVE => 'green',
+            'INACTIVE', self::INACTIVE => 'red',
+            'ACTIVE', self::ACTIVE => 'green',
             default => ''
         };
     }

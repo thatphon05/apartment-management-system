@@ -10,12 +10,13 @@ class CreateConfigurationsTable extends Migration
     {
         Schema::create('configurations', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('rent_price');
-            $table->decimal('electric_price');
-            $table->decimal('water_price');
-            $table->decimal('parking_price');
+            $table->string('name');
+            $table->decimal('rent_fee');
+            $table->decimal('electric_fee');
+            $table->decimal('water_fee');
+            $table->decimal('parking_fee');
             $table->decimal('common_fee');
-            $table->decimal('damages_price');
+            $table->decimal('overdue_fee');
             $table->decimal('deposit');
             $table->timestamps();
         });

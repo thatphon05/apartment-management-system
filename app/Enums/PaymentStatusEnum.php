@@ -15,9 +15,9 @@ enum PaymentStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'PENDING', PaymentStatusEnum::PENDING => 'รอตรวจสอบ',
-            'COMPLETE', PaymentStatusEnum::COMPLETE => 'ชำระเงินแล้ว',
-            'CANCEL', PaymentStatusEnum::CANCEL => 'ยกเลิก',
+            'PENDING', self::PENDING => 'รอตรวจสอบ',
+            'COMPLETE', self::COMPLETE => 'ชำระเงินแล้ว',
+            'CANCEL', self::CANCEL => 'ยกเลิก',
             default => 'ผิดพลาด',
         };
     }
@@ -29,9 +29,9 @@ enum PaymentStatusEnum: int
     public static function getColor($value): string
     {
         return match ($value) {
-            'PENDING', PaymentStatusEnum::PENDING => 'azure',
-            'COMPLETE', PaymentStatusEnum::COMPLETE => 'green',
-            'CANCEL', PaymentStatusEnum::CANCEL => '',
+            'PENDING', self::PENDING => 'azure',
+            'COMPLETE', self::COMPLETE => 'green',
+            'CANCEL', self::CANCEL => '',
             default => '',
         };
     }

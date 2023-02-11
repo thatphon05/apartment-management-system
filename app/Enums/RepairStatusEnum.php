@@ -16,10 +16,10 @@ enum RepairStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'NEW', RepairStatusEnum::NEW => 'ใหม่',
-            'PENDING', RepairStatusEnum::PENDING => 'กำลังดำเนินการ',
-            'COMPLETE', RepairStatusEnum::COMPLETE => 'ดำเนินการแล้ว',
-            'CANCEL', RepairStatusEnum::CANCEL => 'ยกเลิก',
+            'NEW', self::NEW => 'ใหม่',
+            'PENDING', self::PENDING => 'กำลังดำเนินการ',
+            'COMPLETE', self::COMPLETE => 'ดำเนินการแล้ว',
+            'CANCEL', self::CANCEL => 'ยกเลิก',
         };
     }
 
@@ -30,10 +30,10 @@ enum RepairStatusEnum: int
     public static function getColor($value): string
     {
         return match ($value) {
-            'NEW', RepairStatusEnum::NEW => 'yellow',
-            'PENDING', RepairStatusEnum::PENDING => 'azure',
-            'COMPLETE', RepairStatusEnum::COMPLETE => 'green',
-            'CANCEL', RepairStatusEnum::CANCEL => '',
+            'NEW', self::NEW => 'yellow',
+            'PENDING', self::PENDING => 'azure',
+            'COMPLETE', self::COMPLETE => 'green',
+            'CANCEL', self::CANCEL => '',
         };
     }
 

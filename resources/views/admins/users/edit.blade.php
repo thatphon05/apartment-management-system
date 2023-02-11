@@ -77,7 +77,7 @@
                                                    name="telephone"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('telephone') is-invalid @enderror"
-                                                   placeholder="เบอร์โทรศัพท์">
+                                                   placeholder="เบอร์โทรศัพท์" maxlength="10">
                                             @error('telephone')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -85,7 +85,7 @@
                                     <div class="col-sm-12 col-md-5">
                                         <div class="mb-3">
                                             <label class="form-label required">หมายเลขบัตรประชาชน</label>
-                                            <input value="{{ old('id_card') ?? $user->id_card }}" maxlength="13"
+                                            <input value="{{ old('id_card') ?? $user->id_card_number }}" maxlength="13"
                                                    name="id_card"
                                                    type="text"
                                                    onchange="inputChange(event)"
@@ -156,7 +156,7 @@
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">ตำบล</label>
-                                            <input value="{{ old('sub_district') ?? $user->sub_district }}"
+                                            <input value="{{ old('sub_district') ?? $user->subdistrict }}"
                                                    name="sub_district" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('sub_district') is-invalid @enderror"
@@ -196,7 +196,7 @@
                                                    name="postal_code" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('postal_code') is-invalid @enderror"
-                                                   placeholder="รหัสไปรษณีย์">
+                                                   placeholder="รหัสไปรษณีย์" maxlength="5">
                                             @error('postal_code')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>

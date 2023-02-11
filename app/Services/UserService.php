@@ -47,13 +47,13 @@ class UserService
             'email' => $request->email,
             'telephone' => $request->telephone,
             'password' => bcrypt($request->password),
-            'id_card' => $request->id_card,
+            'id_card_number' => $request->id_card,
             'birthdate' => $request->birthdate,
             'religion' => $request->religion,
             'name' => $request->name,
             'surname' => $request->surname,
             'address' => $request->address,
-            'sub_district' => $request->sub_district,
+            'subdistrict' => $request->sub_district,
             'district' => $request->district,
             'province' => $request->province,
             'postal_code' => $request->postal_code,
@@ -98,13 +98,13 @@ class UserService
         $user = User::findOrFail($id);
 
         $user->telephone = $request->telephone;
-        $user->id_card = $request->id_card;
+        $user->id_card_number = $request->id_card;
         $user->birthdate = $request->birthdate;
         $user->religion = $request->religion;
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->address = $request->address;
-        $user->sub_district = $request->sub_district;
+        $user->subdistrict = $request->sub_district;
         $user->district = $request->district;
         $user->province = $request->province;
         $user->postal_code = $request->postal_code;

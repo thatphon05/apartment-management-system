@@ -39,8 +39,12 @@ class RepairController extends Controller
 
     public function update(AdminEditRepairRequest $request, $id)
     {
-        Repair::where('id', $id)
-            ->update(['status' => $request->status]);
+        Repair::where('id', $id)->update([
+            'status' => $request->status,
+            'repair_date' => convertDateToAD($request->repair_date),
+            'note' => $request->note,
+        ]);
+
         return redirect()->back()->with(['success' => 'ดำเนินการเปลี่ยนสถานะสำเร็จ']);
     }
 

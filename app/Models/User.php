@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Casts\FormatYearCast;
 use App\Enums\UserStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,13 +32,13 @@ class User extends Authenticatable
         'email',
         'telephone',
         'password',
-        'id_card',
+        'id_card_number',
         'birthdate',
         'religion',
         'name',
         'surname',
         'address',
-        'sub_district',
+        'subdistrict',
         'district',
         'province',
         'postal_code',
@@ -62,6 +63,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'status' => UserStatusEnum::class,
+        'birthdate' => FormatYearCast::class,
     ];
 
     /**
@@ -108,17 +110,17 @@ class User extends Authenticatable
 
     public function getFullAddressAttribute(): string
     {
-        return $this->address . ' ' . $this->sub_district . ' ' . $this->district . ' '
+        return $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.'
             . $this->province . ' ' . $this->postal_code;
     }
 
     public function getBirthDateFormatAttribute(): string
     {
-        return Carbon::parse($this->birthdate)->translatedFormat('l j F Y');
+        return $this->birthdate->translatedFormat('l j F Y');
     }
 
     public function getAgeAttribute(): string
     {
-        return Carbon::parse($this->birthdate)->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+        return $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
     }
 }

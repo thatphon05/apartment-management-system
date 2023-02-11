@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\InvoiceStatusEnum;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,6 +26,8 @@ class Invoice extends Model
      */
     protected $casts = [
         'status' => InvoiceStatusEnum::class,
+        'due_date' => 'date',
+        'cycle' => 'date',
     ];
 
     /**
@@ -34,9 +35,14 @@ class Invoice extends Model
      */
     protected $appends = [
         'cycle_date',
-        'due_date',
-        'due_date_status',
+        'is_due_date',
         'due_date_format',
+        'water_total_divided',
+        'electric_total_divided',
+        'dynamic_summary',
+        'dynamic_overdue_total',
+        'electric_unit_price_divide',
+        'water_unit_price_divide',
     ];
 
     /**
@@ -84,18 +90,7 @@ class Invoice extends Model
      */
     public function getCycleDateAttribute(): string
     {
-        $cycle = Carbon::parse($this->cycle);
-
-        return $cycle->translatedFormat('F Y');
-    }
-
-    /**
-     * Use for calculate due date
-     * @return Carbon
-     */
-    public function getDueDateAttribute(): Carbon
-    {
-        return Carbon::parse($this->cycle)->setDay(config('custom.due_date'))->setTime(0, 0, 0)->addMonth();
+        return $this->cycle->translatedFormat('F Y');
     }
 
     /**
@@ -109,9 +104,69 @@ class Invoice extends Model
     /**
      * @return string
      */
-    public function getDueDateStatusAttribute(): bool
+    public function getIsDueDateAttribute(): bool
     {
         return $this->due_date->lt(now());
+    }
+
+    /**
+     * @return float
+     */
+    public function getWaterTotalDividedAttribute(): float
+    {
+        return (float)$this->water_total / 2;
+    }
+
+    /**
+     * @return float
+     */
+    public function getElectricTotalDividedAttribute(): float
+    {
+        return (float)$this->electric_total / 2;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDynamicOverdueTotalAttribute(): float
+    {
+        if ($this->is_due_date) {
+
+            $payWithinDay = config('custom.pay_within_day');
+
+            $overdue_fee = $this->room->configuration->overdue_fee;
+
+            $dayOfDue = $this->due_date->diff(now())->days;
+
+            return (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
+        }
+
+        return 0;
+    }
+
+    /**
+     * @return float
+     */
+    public function getElectricUnitPriceDivideAttribute(): float
+    {
+        return (float)$this->electric_unit_price / 2;
+    }
+
+    /**
+     * @return float
+     */
+    public function getWaterUnitPriceDivideAttribute(): float
+    {
+        return (float)$this->water_unit_price / 2;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDynamicSummaryAttribute(): float
+    {
+        return (float)$this->rent_total + $this->electric_total + $this->water_total
+            + $this->parking_total + $this->common_total + $this->dynamic_overdue_total;
     }
 
 }

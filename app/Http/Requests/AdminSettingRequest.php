@@ -12,12 +12,13 @@ class AdminSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rent_price' => 'required|numeric|min:0',
-            'electric_price' => 'required|numeric|min:0',
-            'water_price' => 'required|numeric|min:0',
-            'parking_price' => 'required|numeric|min:0',
+            'name' => 'required',
+            'rent_fee' => 'required|numeric|min:0',
+            'electric_fee' => 'required|numeric|min:0',
+            'water_fee' => 'required|numeric|min:0',
+            'parking_fee' => 'required|numeric|min:0',
             'common_fee' => 'required|numeric|min:0',
-            'damages_price' => 'required|numeric|min:0',
+            'overdue_fee' => 'required|numeric|min:0',
             'deposit' => 'required|numeric|min:0'
         ];
     }
@@ -28,22 +29,25 @@ class AdminSettingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'rent_price' => [
+            'name' => [
+                'required' => 'คุณต้องใส่ประเภทห้อง',
+            ],
+            'rent_fee' => [
                 'required' => 'คุณต้องใส่ค่าเช่าห้อง',
                 'numeric' => 'ค่าเช่าห้องกรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าเช่าห้องต้องมากกว่า 0',
             ],
-            'electric_price' => [
+            'electric_fee' => [
                 'required' => 'คุณต้องใส่ค่าไฟฟ้า',
                 'numeric' => 'ค่าไฟฟ้ากรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าไฟฟ้าต้องมากกว่า 0',
             ],
-            'water_price' => [
+            'water_fee' => [
                 'required' => 'คุณต้องใส่ค่าน้ำประปา',
                 'numeric' => 'ค่าน้ำประปากรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าน้ำประปาต้องมากกว่า 0',
             ],
-            'parking_price' => [
+            'parking_fee' => [
                 'required' => 'คุณต้องใส่ค่าที่จอดรถ',
                 'numeric' => 'ค่าที่จอดรถกรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าที่จอดรถต้องมากกว่า 0',
@@ -53,7 +57,7 @@ class AdminSettingRequest extends FormRequest
                 'numeric' => 'ค่าส่วนกลางกรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าส่วนกลางต้องมากกว่า 0',
             ],
-            'damages_price' => [
+            'overdue_fee' => [
                 'required' => 'คุณต้องใส่ค่าปรับชำระเลยกำหนด',
                 'numeric' => 'ค่าปรับชำระเลยกำหนดกรอกต้องเป็นตัวเลขเท่านั้น',
                 'min' => 'ค่าปรับชำระเลยกำหนดต้องมากกว่า 0',

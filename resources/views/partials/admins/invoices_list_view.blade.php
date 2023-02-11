@@ -21,20 +21,19 @@
 
                     </td>
                     <td>
-                        อาคาร {{ $invoice->booking->room->floor->building->name }}
-                        ชั้น {{ $invoice->booking->room->floor->name }}
-                        ห้อง {{ $invoice->booking->room->name }}
+                        อาคาร {{ $invoice->room->floor->building->name }}
+                        ชั้น {{ $invoice->room->floor->name }}
+                        ห้อง {{ $invoice->room->name }}
                     </td>
                     <td>
-                        @if ($invoice->due_date_status && $invoice->status == \App\Enums\InvoiceStatusEnum::PENDING)
+                        @if($invoice->is_due_date && $invoice->status == \App\Enums\InvoiceStatusEnum::PENDING)
                             <span class="badge bg-red">
-                                                {{ \App\Enums\InvoiceStatusEnum::getLabel(\App\Enums\InvoiceStatusEnum::OVERDUE) }}
-                                                </span>
+                                {{ \App\Enums\InvoiceStatusEnum::getLabel(\App\Enums\InvoiceStatusEnum::OVERDUE) }}
+                            </span>
                         @else
-                            <span
-                                class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
-                                                {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
-                                                </span>
+                            <span class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
+                                {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
+                            </span>
                         @endif
 
                     </td>
@@ -55,4 +54,11 @@
             </tbody>
         </table>
     </div>
+    @if(isset($usePagination))
+        <div class="card-footer d-flex align-items-center">
+            <div class="m-0 ms-auto">
+                {{ $invoices->links() }}
+            </div>
+        </div>
+    @endif
 </div>

@@ -25,4 +25,13 @@ class Building extends Model
         return $this->hasMany(Floor::class, 'building_id');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function rooms(): HasMany
+    {
+        return $this->hasMany(Room::class, 'building_id');
+    }
+
+
 }

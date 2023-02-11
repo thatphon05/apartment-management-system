@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">รหัสบัตรประชาชน</div>
-                                    <div class="datagrid-content">{{ $user->id_card }}</div>
+                                    <div class="datagrid-content">{{ $user->id_card_number }}</div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">วันเกิด</div>
@@ -197,7 +197,7 @@
                     </div>
                 </div>
                 <div class="col-8">
-                    @include('partials.admins.payment_list_view', ['invoices' => $invoices])
+                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices])
                 </div>
                 <div class="col-12">
                     @include('partials.admins.repair_list_view', ['repairs' => $repairs])

@@ -14,8 +14,8 @@ enum UserStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'INACTIVE', UserStatusEnum::INACTIVE => 'ระงับ',
-            'ACTIVE', UserStatusEnum::ACTIVE => 'ใช้งานได้',
+            'INACTIVE', self::INACTIVE => 'ระงับ',
+            'ACTIVE', self::ACTIVE => 'ใช้งานได้',
             default => ''
         };
     }
@@ -23,8 +23,8 @@ enum UserStatusEnum: int
     public static function getColor($value): string
     {
         return match ($value) {
-            'INACTIVE', UserStatusEnum::INACTIVE => 'red',
-            'ACTIVE', UserStatusEnum::ACTIVE => 'green',
+            'INACTIVE', self::INACTIVE => 'red',
+            'ACTIVE', self::ACTIVE => 'green',
             default => ''
         };
     }
