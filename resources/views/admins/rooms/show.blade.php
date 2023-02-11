@@ -37,7 +37,7 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            ผู้พักปัจจุบัน
+                            ผู้พักปัจจุบัน ราคาห้อง {{ $room->configuration->name }}
                         </div>
                         <div class="ribbon ribbon-top bg-yellow">
                             <!-- Download SVG icon from http://tabler-icons.io/i/star -->
@@ -69,39 +69,44 @@
                                         <div class="datagrid-title">เบอร์โทรศัพท์</div>
                                         <div class="datagrid-content">{{ $currentBooking->user->telephone }}</div>
                                     </div>
+                                @else
+                                    <div class="datagrid-item">
+                                        <div class="datagrid-title">สถานะห้อง</div>
+                                        <div class="datagrid-content">ห้องว่าง</div>
+                                    </div>
                                 @endif
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าเช่าห้อง</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->rent_price, 2) }} บาท
+                                        {{ number_format($room->configuration->rent_fee, 2) }} บาท
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าไฟฟ้า</div>
                                     <div class="datagrid-content">
                                         <div class="datagrid-content">
-                                            {{ number_format($room->electric_price, 2) }} บาท / หน่วย
+                                            {{ number_format($room->configuration->electric_fee, 2) }} บาท / หน่วย
                                         </div>
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าน้ำประปา</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->water_price, 2) }} บาท / หน่วย
+                                        {{ number_format($room->configuration->water_fee, 2) }} บาท / หน่วย
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าที่จอดรถ</div>
                                     <div class="datagrid-content">
                                         <div class="datagrid-content">
-                                            {{ number_format($room->parking_price, 2) }} บาท
+                                            {{ number_format($room->configuration->parking_fee, 2) }} บาท
                                         </div>
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าส่วนกลาง</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->common_fee, 2) }} บาท
+                                        {{ number_format($room->configuration->common_fee, 2) }} บาท
                                     </div>
                                 </div>
                                 @if ($currentBooking)

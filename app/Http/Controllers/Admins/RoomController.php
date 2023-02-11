@@ -6,6 +6,7 @@ use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomEditRequest;
 use App\Models\Booking;
+use App\Models\Configuration;
 use App\Models\Invoice;
 use App\Models\Repair;
 use App\Models\Room;
@@ -46,7 +47,7 @@ class RoomController extends Controller
             : 0;
 
         return view('admins.rooms.show', [
-            'room' => Room::findOrFail($id)->first(),
+            'room' => Room::with('configuration')->findOrFail($id)->first(),
             'currentBooking' => $currentBooking,
             'rentContractSize' => $rentContractSize,
             'bookings' => Booking::with('user')->where('room_id', $id)
@@ -62,6 +63,7 @@ class RoomController extends Controller
     {
         return view('admins.rooms.edit', [
             'room' => Room::findOrFail($id),
+            'configurations' => Configuration::all(),
         ]);
     }
 
