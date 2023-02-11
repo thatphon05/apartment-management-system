@@ -32,3 +32,27 @@ if (!function_exists('convertDateToBE')) {
         return Carbon::parse($date)->addYears(543);
     }
 }
+
+if (!function_exists('getAllMonth')) {
+    /**
+     * get all month available
+     * @return string[]
+     */
+    function getAllMonth(): array
+    {
+        return [
+            'มกราคม',
+            'กุมภาพันธ์',
+            'มีนาคม',
+            'เมษายน',
+            'พฤษภาคม',
+            'มิถุนายน',
+            'กรกฎาคม',
+            'สิงหาคม',
+            'กันยายน',
+            'ตุลาคม',
+            'พฤศจิกายน',
+            'ธันวาคม',
+        ];
+    }
+}

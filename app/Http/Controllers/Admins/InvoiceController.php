@@ -22,10 +22,22 @@ class InvoiceController extends Controller
     public function index()
     {
         $status = request()->query('status', InvoiceStatusEnum::cases());
+        $month = request()->query('month', 0);
+        $year = request()->query('year', 0);
+
+        $invoices = Invoice::with('user', 'payments', 'room.floor.building')
+            ->whereIn('status', $status);
+
+        if ($month > 0) {
+            $invoices->whereMonth('cycle', $month);
+        }
+
+        if ($year > 0) {
+            $invoices->whereYear('cycle', $year);
+        }
+
         return view('admins.invoices.index', [
-            'invoices' => Invoice::with('user', 'payments', 'room.floor.building')->whereIn('status', $status)
-                ->latest('id')
-                ->paginate(40),
+            'invoices' => $invoices->latest('id')->paginate(40),
         ]);
     }
 

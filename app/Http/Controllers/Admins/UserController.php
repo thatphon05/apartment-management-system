@@ -102,7 +102,7 @@ class UserController extends Controller
             'user' => $user,
             'bookings' => Booking::with('room.floor.building')->where('user_id', $id)
                 ->latest('id')->get(),
-            'invoices' => Invoice::with('booking.room.floor.building')->where('user_id', $id)
+            'invoices' => Invoice::with('room.floor.building')->where('user_id', $id)
                 ->latest('id')->take(5)->get(),
             'repairs' => Repair::where('user_id', $id)->latest('id')->take(5)->get(),
             'idCardCopySize' => $idCardCopySizeMB,
