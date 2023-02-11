@@ -14,11 +14,6 @@ class CreateRoomsTable extends Migration
             $table->integer('floor_id')->unsigned();
             $table->integer('building_id')->unsigned();
             $table->integer('configuration_id')->unsigned();
-            $table->decimal('rent_price');
-            $table->decimal('electric_price');
-            $table->decimal('water_price');
-            $table->decimal('parking_price');
-            $table->decimal('common_fee');
             $table->timestamps();
         });
     }

@@ -44,7 +44,7 @@ class RoomController extends Controller
             'rentContractSize' => $rentContractSize,
             'bookings' => Booking::with('user')->where('room_id', $id)
                 ->latest('id')->paginate(20),
-            'invoices' => Invoice::with(['room.floor.building'])->where('room_id', $id)
+            'invoices' => Invoice::with(['room.floor.building', 'payments'])->where('room_id', $id)
                 ->latest('id')->take(5)->get(),
             'repairs' => Repair::where('room_id', $id)->latest('id')->take(5)->get(),
             'utilityExpenses' => UtilityExpense::where('room_id', $id)->take(12)->get(),
