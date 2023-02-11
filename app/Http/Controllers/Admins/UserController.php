@@ -15,7 +15,6 @@ use App\Services\BookingService;
 use App\Services\StorageService;
 use App\Services\UserService;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
@@ -59,9 +58,7 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        try {
-
-            DB::beginTransaction();
+        DB::transaction(function () {
 
             $user = $this->userService->createUser($request);
 
@@ -73,14 +70,10 @@ class UserController extends Controller
 
             $this->bookingService->uploadDocs($request, $booking->rent_contract);
 
-            DB::commit();
-
             return to_route('admin.users.show', ['user' => $user->id])
                 ->with(['success' => 'เพิ่มผู้เช่าใหม่สำเร็จ']);
 
-        } catch (Exception $e) {
-            DB::rollBack();
-        }
+        });
 
     }
 
