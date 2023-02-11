@@ -9,6 +9,7 @@
                 <th>สถานะ</th>
                 <th>ประจำเดือน</th>
                 <th>วันครบกำหนดชำระ</th>
+                <th>การแจ้งชำระเงิน</th>
             </tr>
             </thead>
             <tbody>
@@ -20,7 +21,6 @@
                                 #{{ $invoice->id }}
                             </a>
                         </a>
-
                     </td>
                     <td>
                         อาคาร {{ $invoice->room->floor->building->name }}
@@ -44,6 +44,9 @@
                     </td>
                     <td>
                         {{ $invoice->due_date_format }}
+                    </td>
+                    <td>
+                        {{ count($invoice->payments) < 1 ? 'ยังไม่ได้แจ้งชำระ' : 'ชำระแล้ว' }}
                     </td>
                 </tr>
             @empty
