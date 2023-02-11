@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Casts\FormatYearCast;
 use App\Enums\UserStatusEnum;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -101,6 +102,18 @@ class User extends Authenticatable
     }
 
     /**
+     * Hash the user's password.
+     *
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    protected function password(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => bcrypt($value),
+        );
+    }
+
+    /**
      * @return string
      */
     public function getFullNameAttribute(): string
@@ -108,17 +121,26 @@ class User extends Authenticatable
         return $this->name . ' ' . $this->surname;
     }
 
+    /**
+     * @return string
+     */
     public function getFullAddressAttribute(): string
     {
         return $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.'
             . $this->province . ' ' . $this->postal_code;
     }
 
+    /**
+     * @return string
+     */
     public function getBirthDateFormatAttribute(): string
     {
         return $this->birthdate->translatedFormat('l j F Y');
     }
 
+    /**
+     * @return string
+     */
     public function getAgeAttribute(): string
     {
         return $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');

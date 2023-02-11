@@ -8,6 +8,9 @@ use App\Models\Configuration;
 
 class SettingController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('admins.settings.index', [
@@ -15,6 +18,10 @@ class SettingController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
         return view('admins.settings.edit', [
@@ -22,9 +29,15 @@ class SettingController extends Controller
         ]);
     }
 
+    /**
+     * @param AdminSettingRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(AdminSettingRequest $request, $id)
     {
         Configuration::where('id', $id)->update($request->validated());
+
         return back()->with(['success' => 'บันทึกสำเร็จ']);
     }
 

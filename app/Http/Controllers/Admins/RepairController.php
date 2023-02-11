@@ -10,6 +10,9 @@ use App\Models\Repair;
 class RepairController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $search = request()->query('search', '');
@@ -22,7 +25,7 @@ class RepairController extends Controller
                 $query->orWhere('subject', 'like', $searchLike);
             })
             ->whereIn('status', $status)
-            ->orderBy('id', 'desc')
+            ->latest('id')
             ->paginate(40);
 
         return view('admins.repairs.index', [
@@ -30,6 +33,10 @@ class RepairController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
         return view('admins.repairs.edit', [
@@ -37,6 +44,11 @@ class RepairController extends Controller
         ]);
     }
 
+    /**
+     * @param AdminEditRepairRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(AdminEditRepairRequest $request, $id)
     {
         Repair::where('id', $id)->update([

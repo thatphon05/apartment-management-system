@@ -12,35 +12,27 @@ use App\Models\Repair;
 use App\Models\Room;
 use App\Models\UtilityExpense;
 use App\Services\StorageService;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RoomController extends Controller
 {
 
-    public function __construct(private StorageService $storageService)
+    /**
+     * @param StorageService $storageService
+     */
+    public function __construct(private readonly StorageService $storageService)
     {
     }
 
-    public function index()
-    {
-
-    }
-
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show($id)
     {
         $currentBooking = Booking::where('room_id', $id)
             ->where('status', BookingStatusEnum::ACTIVE)
             ->latest('id')->first();
-
 
         $rentContractSize = $currentBooking
             ? $this->storageService->getFileSizeMB(config('custom.rent_contract_path') . '/' . $currentBooking->rent_contract)
@@ -59,6 +51,10 @@ class RoomController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function edit($id)
     {
         return view('admins.rooms.edit', [
@@ -67,6 +63,11 @@ class RoomController extends Controller
         ]);
     }
 
+    /**
+     * @param RoomEditRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(RoomEditRequest $request, $id)
     {
         Room::where('id', $id)->update($request->validated());

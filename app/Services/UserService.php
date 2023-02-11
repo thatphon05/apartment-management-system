@@ -15,7 +15,6 @@ class UserService
      */
     public function searchUser(Request $request)
     {
-
         // Get query parameter
         $search = $request->query('search', '');
         $searchLike = '%' . $search . '%';
@@ -25,7 +24,8 @@ class UserService
         return User::with(['bookings' => function ($query) {
             $query->with(['room.floor.building'])
                 ->where('status', BookingStatusEnum::ACTIVE)
-                ->latest()->get('id');
+                ->latest()
+                ->get('id');
         }])
             ->orWhere(function ($query) use ($searchLike) {
                 $query->orWhere('name', 'like', $searchLike)
@@ -46,7 +46,7 @@ class UserService
         return User::create([
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
             'id_card_number' => $request->id_card,
             'birthdate' => $request->birthdate,
             'religion' => $request->religion,
@@ -110,7 +110,7 @@ class UserService
         $user->postal_code = $request->postal_code;
 
         if ($request->password) {
-            $user->password = bcrypt($user->password);
+            $user->password = $request->password;
         }
 
         if ($request->hasFile('id_card_copy')) {

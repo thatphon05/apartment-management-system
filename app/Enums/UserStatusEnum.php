@@ -20,6 +20,10 @@ enum UserStatusEnum: int
         };
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     public static function getColor($value): string
     {
         return match ($value) {

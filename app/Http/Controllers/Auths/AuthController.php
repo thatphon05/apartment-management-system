@@ -10,11 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function getUserLogin()
     {
         return view('auths.user');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postUserLogin(LoginRequest $request)
     {
         $email = $request->string('email')->trim();
@@ -33,6 +40,9 @@ class AuthController extends Controller
         return back()->withErrors(['msg' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])->withInput();
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function userLogout()
     {
         Auth::logout();

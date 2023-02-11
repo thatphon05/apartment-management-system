@@ -9,6 +9,11 @@ use App\Models\Invoice;
 
 class InvoiceService
 {
+    /**
+     * @param PaymentEditRequest $request
+     * @param int $invoiceId
+     * @return bool
+     */
     public function updateInvoiceComplete(PaymentEditRequest $request, int $invoiceId): bool
     {
         if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::COMPLETE) {

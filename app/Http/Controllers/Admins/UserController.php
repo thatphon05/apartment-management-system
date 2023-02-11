@@ -20,9 +20,9 @@ class UserController extends Controller
 {
 
     public function __construct(
-        private UserService    $userService,
-        private BookingService $bookingService,
-        private StorageService $storageService,
+        private readonly UserService    $userService,
+        private readonly BookingService $bookingService,
+        private readonly StorageService $storageService,
     )
     {
     }
@@ -46,6 +46,7 @@ class UserController extends Controller
         $rooms = $rooms->sortBy(
             ['floor.building.name', 'floor.name', 'name'],
         );
+
         return view('admins.users.create', [
             'rooms' => $rooms,
             'config' => Configuration::latest()->first(),

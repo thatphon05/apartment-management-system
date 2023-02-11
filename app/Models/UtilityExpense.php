@@ -18,6 +18,9 @@ class UtilityExpense extends Model
      */
     protected $table = 'utilities_expenses';
 
+    /**
+     * @var string[]
+     */
     protected $appends = [
         'cycle_month',
     ];

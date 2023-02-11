@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admins;
 use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
-use Illuminate\Http\Request;
 
 class BuildingController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         return view('admins.buildings.index', [
@@ -16,14 +18,10 @@ class BuildingController extends Controller
         ]);
     }
 
-    public function create()
-    {
-    }
-
-    public function store(Request $request)
-    {
-    }
-
+    /**
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show(int $id)
     {
         return view('admins.buildings.show', [
@@ -33,15 +31,4 @@ class BuildingController extends Controller
         ]);
     }
 
-    public function edit($id)
-    {
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
-    }
 }

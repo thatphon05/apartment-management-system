@@ -60,13 +60,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // After admin login
     Route::middleware('auth.admin')->group(function () {
 
-        // dashboard
+        // Dashboard
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard.index');
         });
 
         // User management
-        Route::resource('users', UserController::class);
+        Route::resource('users', UserController::class)->except(['destroy']);
 
         // Download file
         Route::get('users/idcardcopy/{filename}', [UserController::class, 'downloadIdCardCopy'])
@@ -78,10 +78,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
 
         // Building management
-        Route::resource('buildings', BuildingController::class);
+        Route::resource('buildings', BuildingController::class)->only(['index', 'show']);
 
         // Room management
-        Route::resource('rooms', RoomController::class);
+        Route::resource('rooms', RoomController::class)->only(['show', 'edit', 'update']);
 
         /// For download rent contract
         Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])
@@ -93,6 +93,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Payment management
         Route::resource('invoices', InvoiceController::class)->only(['index', 'edit', 'update']);
 
+        // Download payment attach file
         Route::get('payments/paymentattach/{filename}', [InvoiceController::class, 'downloadPaymentAttach'])
             ->name('payments.download.payment_attach');
 

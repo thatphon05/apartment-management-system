@@ -34,7 +34,16 @@ class AppServiceProvider extends ServiceProvider
         // Prevent Lazy loading
         Model::preventLazyLoading(!$this->app->isProduction());
 
-        // For check query number
+        $this->useDBListening();
+
+    }
+
+    /**
+     * Check query number
+     * @return void
+     */
+    private function useDBListening()
+    {
         if (!$this->app->isProduction()) {
             $counter = 0;
             $debugQuery = '';
