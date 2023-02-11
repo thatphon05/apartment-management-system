@@ -38,6 +38,7 @@
                             </div>
                             <div class="col-12 my-5">
                                 <h1>
+                                    ใบแจ้งหนี้ #{{ $invoice->id }}
                                     อาคาร {{ $invoice->room->floor->building->name ?? '' }}
                                     ชั้น {{ $invoice->room->floor->name ?? '' }}
                                     ห้อง {{ $invoice->room->name ?? '' }}
@@ -155,10 +156,78 @@
                             </tr>
                             </tbody>
                         </table>
-                        <p class="text-muted text-center mt-5">Thank you very much for doing business with us. We look
-                            forward
-                            to working with
-                            you again!</p>
+                        <div class="card mt-5">
+                            <div class="card-header">
+                                <h4 class="card-title">ปรับรายการชำระเงิน</h4>
+                            </div>
+                            <div class="card-body">
+                                @if($payment)
+                                    <dl class="row">
+                                        <dt class="col-3">หมายเลขแจ้งชำระเงิน</dt>
+                                        <dd class="col-9">#{{$payment->id}}</dd>
+                                        <dt class="col-3">หมายเลขใบแจ้งหนี้</dt>
+                                        <dd class="col-9">
+                                            <a href="#!">
+                                                #{{$payment->invoice->id}}
+                                            </a>
+                                        </dd>
+                                        <dt class="col-3">ห้อง</dt>
+                                        <dd class="col-9">
+                                            อาคาร {{ $payment->booking->room->name }}
+                                            ชั้น {{ $payment->booking->room->floor->name }}
+                                            ห้อง {{ $payment->booking->room->name }}
+                                        </dd>
+                                        <dt class="col-3">วันที่แจ้ง</dt>
+                                        <dd class="col-9">{{$payment->created_at}}</dd>
+                                        <dt class="col-3">ชื่อผู้แจ้ง</dt>
+                                        <dd class="col-9">
+                                            <a href="{{ route('admin.users.show', ['user' => $payment->user->id]) }}">
+                                                {{ $payment->user->full_name }}
+                                            </a>
+                                        </dd>
+                                        <dt class="col-3">สถานะ</dt>
+                                        <dd class="col-9">
+                                        <span
+                                            class="badge bg-{{ \App\Enums\PaymentStatusEnum::getColor($payment->status) }}">
+                                                {{ \App\Enums\PaymentStatusEnum::getLabel($payment->status) }}
+                                        </span>
+                                        </dd>
+                                        <dt class="col-3">ไฟล์สลิปโอนเงิน</dt>
+                                        <dd class="col-9">
+                                            <a href="{{ route('admin.payments.download.payment_attach', ['filename' => $payment->attachfile]) }}"
+                                               target="_blank">
+                                                ดูสลิป
+                                            </a>
+                                        </dd>
+                                    </dl>
+                                    <div class="row mt-4">
+                                        <form action="{{ route('admin.invoices.update', ['invoice' => $invoice->id]) }}"
+                                              method="post">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="col-md-5">
+                                                <select name="status"
+                                                        class="form-select @error('status') is-invalid @enderror">
+                                                    @foreach(\App\Enums\PaymentStatusEnum::values() as $key => $value)
+                                                        <option
+                                                            value="{{ $key }}" @selected(\App\Enums\PaymentStatusEnum::from($key) === $payment->status)>
+                                                            {{ \App\Enums\PaymentStatusEnum::getLabel($value) }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="mt-3">
+                                                    <button type="submit" class="btn btn-primary">แก้ไข</button>
+                                                    <a href="{{ route('admin.invoices.index') }}"
+                                                       class="btn btn-ghost-secondary">ย้อนกลับ</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                @else
+                                    @include('partials.empty')
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

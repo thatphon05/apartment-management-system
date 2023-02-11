@@ -20,6 +20,15 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'status',
+        'overdue_total',
+        'summary',
+    ];
+
+    /**
      * The attributes that should be cast.
      *
      * @var array
