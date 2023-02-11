@@ -58,7 +58,7 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        DB::transaction(function () {
+        DB::transaction(function () use ($request) {
 
             $user = $this->userService->createUser($request);
 

@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
 use App\Services\StorageService;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -47,14 +48,19 @@ class InvoiceController extends Controller
             'invoice' => Invoice::with(['user', 'room.floor.building' => function ($query) {
                 $query->first();
             }])->findOrFail($id),
+            'payment' => Payment::where('invoice_id', $id)->latest()->first(),
         ]);
     }
 
     public function update(PaymentEditRequest $request, $id)
     {
-        $payment = Payment::where('id', $id)->update($request->validated());
+        DB::transaction(function () use ($id, $request) {
 
-        $this->invoiceService->updateInvoiceComplete($request, $id);
+            $payment = Payment::where('invoice_id', $id)->latest()->update($request->validated());
+
+            $this->invoiceService->updateInvoiceComplete($request, $id);
+
+        });
 
         return redirect()->back()->with(['success' => 'ดำเนินการแก้ไขสถานะสำเร็จ']);
     }
