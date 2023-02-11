@@ -171,12 +171,17 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">จังหวัด</label>
-                                            <input value="{{ old('province') }}" name="province" type="text"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('province') is-invalid @enderror"
-                                                   placeholder="จังหวัด">
+                                            <select name="province" class="form-select">
+                                                @foreach(getAllProvince() as $province)
+                                                    <option
+                                                        value="{{ $province }}" @selected(old('province') == $province)>
+                                                        {{ $province }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @error('province')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -187,7 +192,8 @@
                                                    class="form-control @error('postal_code') is-invalid @enderror"
                                                    placeholder="รหัสไปรษณีย์" maxlength="5">
                                             @error('postal_code')
-                                            <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +207,7 @@
                                         <input value="{{ old('id_card_copy') || 1 }}" name="id_card_copy"
                                                onchange="inputChange(event)"
                                                class="form-control @error('id_card_copy') is-invalid @enderror"
-                                               type="file">
+                                               type="file" accept="application/pdf">
                                         @error('id_card_copy')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -212,7 +218,7 @@
                                                name="copy_house_registration"
                                                onchange="inputChange(event)"
                                                class="form-control @error('copy_house_registration') is-invalid @enderror"
-                                               type="file">
+                                               type="file" accept="application/pdf">
                                         @error('copy_house_registration')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -221,7 +227,7 @@
                                         <input value="{{ old('rent_contract"') }}" name="rent_contract"
                                                onchange="inputChange(event)"
                                                class="form-control @error('rent_contract') is-invalid @enderror"
-                                               type="file" id="formFile">
+                                               type="file" id="formFile" accept="application/pdf">
                                         @error('rent_contract')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>

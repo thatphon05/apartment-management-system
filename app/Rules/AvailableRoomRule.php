@@ -24,7 +24,7 @@ class AvailableRoomRule implements InvokableRule
             ->first(['id']);
 
         if ($room) {
-            $fail('ห้องที่คุณเลือกมีผู้เช่าแล้ว');
+            $fail('ห้องที่คุณเลือกมีผู้อื่นเช่าแล้ว');
         }
     }
 }
