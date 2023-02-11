@@ -41,7 +41,7 @@ class RepairController extends Controller
     {
         Repair::where('id', $id)->update([
             'status' => $request->status,
-            'repair_date' => convertDateToAD($request->repair_date),
+            'repair_date' => $request->repair_date !== null ? convertDateToAD($request->repair_date) : null,
             'note' => $request->note,
         ]);
 
