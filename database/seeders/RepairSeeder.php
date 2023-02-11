@@ -21,9 +21,9 @@ class RepairSeeder extends Seeder
                 'user_id' => 1,
                 'room_id' => 1,
                 'booking_id' => 1,
-                'subject' => 'ส้วมระเบิด',
-                'description' => 'ส้วมระเบิดดังตู้ม',
-                'status' => 1,
+                'subject' => 'หลอดไฟเสีย',
+                'description' => 'หลอดไฟหน้าห้องเสีย',
+                'status' => 0,
             ]);
         }
 

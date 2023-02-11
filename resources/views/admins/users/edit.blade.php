@@ -98,7 +98,8 @@
                                     <div class="col-sm-12 col-md-4">
                                         <div class="mb-3">
                                             <label class="form-label required">วันเกิด</label>
-                                            <input value="{{ old('birthdate') ?? $user->birthdate }}" name="birthdate"
+                                            <input value="{{ old('birthdate') ?? $user->birthdate->format('Y-m-d') }}"
+                                                   name="birthdate"
                                                    type="date"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('birthdate') is-invalid @enderror"
@@ -180,11 +181,17 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label required">จังหวัด</label>
-                                            <input value="{{ old('province') ?? $user->province }}" name="province"
-                                                   type="text"
-                                                   onchange="inputChange(event)"
-                                                   class="form-control @error('province') is-invalid @enderror"
-                                                   placeholder="จังหวัด">
+                                            <select name="province" class="form-select">
+                                                @foreach(getAllProvince() as $province)
+                                                    <option
+                                                        value="{{ $province }}"
+                                                        @selected($user->province == $province)
+                                                        @selected(old('province') == $province)
+                                                    >
+                                                        {{ $province }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             @error('province')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -213,7 +220,7 @@
                                         <input name="id_card_copy"
                                                onchange="inputChange(event)"
                                                class="form-control @error('id_card_copy') is-invalid @enderror"
-                                               type="file">
+                                               type="file" accept="application/pdf">
                                         @error('id_card_copy')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -224,7 +231,7 @@
                                             name="copy_house_registration"
                                             onchange="inputChange(event)"
                                             class="form-control @error('copy_house_registration') is-invalid @enderror"
-                                            type="file">
+                                            type="file" accept="application/pdf">
                                         @error('copy_house_registration')
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
