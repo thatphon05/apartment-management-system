@@ -46,7 +46,7 @@
                         {{ $invoice->due_date_format }}
                     </td>
                     <td>
-                        {{ count($invoice->payments) < 1 ? 'ยังไม่ได้แจ้งชำระ' : 'ชำระแล้ว' }}
+                        {{ count($invoice->payments) < 1 ? 'ยังไม่ได้แจ้งชำระเงิน' : 'แจ้งชำระเงินแล้ว' }}
                     </td>
                 </tr>
             @empty
