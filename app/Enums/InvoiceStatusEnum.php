@@ -16,10 +16,10 @@ enum InvoiceStatusEnum: int
     public static function getLabel($value): string
     {
         return match ($value) {
-            'PENDING', InvoiceStatusEnum::PENDING => 'รอชำระเงิน',
-            'COMPLETE', InvoiceStatusEnum::COMPLETE => 'ชำระเงินแล้ว',
-            'OVERDUE', InvoiceStatusEnum::OVERDUE => 'เกินกำหนด',
-            'CANCEL', InvoiceStatusEnum::CANCEL => 'ยกเลิก',
+            'PENDING', self::PENDING => 'รอชำระเงิน',
+            'COMPLETE', self::COMPLETE => 'ชำระเงินแล้ว',
+            'OVERDUE', self::OVERDUE => 'เกินกำหนด',
+            'CANCEL', self::CANCEL => 'ยกเลิก',
         };
     }
 
@@ -30,10 +30,10 @@ enum InvoiceStatusEnum: int
     public static function getColor($value): string
     {
         return match ($value) {
-            'PENDING', InvoiceStatusEnum::PENDING => 'azure',
-            'COMPLETE', InvoiceStatusEnum::COMPLETE => 'green',
-            'OVERDUE', InvoiceStatusEnum::OVERDUE => 'orange',
-            'CANCEL', InvoiceStatusEnum::CANCEL => '',
+            'PENDING', self::PENDING => 'azure',
+            'COMPLETE', self::COMPLETE => 'green',
+            'OVERDUE', self::OVERDUE => 'orange',
+            'CANCEL', self::CANCEL => '',
         };
     }
 
@@ -42,7 +42,11 @@ enum InvoiceStatusEnum: int
      */
     public static function values(): array
     {
-        return array_column(self::cases(), 'name', 'value');
+        $listOfEnum = array_column(self::cases(), 'name', 'value');
+
+        unset($listOfEnum[self::OVERDUE->value]);
+
+        return $listOfEnum;
     }
 
 }
