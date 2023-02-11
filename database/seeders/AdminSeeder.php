@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
                 'updated_at' => now(),
                 'email' => 'thatphon.t@ku.th',
                 'password' => bcrypt('123'),
-                'name' => 'Administration',
+                'name' => 'Thatpon',
                 'status' => 1,
             ]);
             Admin::create([
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
                 'updated_at' => now(),
                 'email' => 'tanawit.w@ku.th',
                 'password' => bcrypt('123'),
-                'name' => 'Administration',
+                'name' => 'Tanawit',
                 'status' => 1,
             ]);
         }
