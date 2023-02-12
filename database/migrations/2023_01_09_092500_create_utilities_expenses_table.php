@@ -12,10 +12,8 @@ class CreateUtilitiesExpensesTable extends Migration
             $table->increments('id');
             $table->integer('electric_unit');
             $table->integer('water_unit');
-            $table->integer('booking_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->date('cycle');
-            $table->date('note_date');
             $table->timestamps();
         });
     }
