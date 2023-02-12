@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">แก้ไข</button>
+                                <button type="submit" class="btn btn-primary">เพิ่ม</button>
                                 <a href="{{ route('admin.expenses.show', ['roomId' => request()->query('roomId')]) }}"
                                    class="btn btn-ghost-secondary">ย้อนกลับ</a>
                             </div>
