@@ -15,7 +15,10 @@ class UtilityExpenseController extends Controller
     public function show($roomId)
     {
         return view('admins.utility_expenses.index', [
-            'expenses' => UtilityExpense::where('room_id', $roomId)->paginate(40),
+            'expenses' => UtilityExpense::with(['room.floor.building'])
+                ->where('room_id', $roomId)
+                ->latest('cycle')
+                ->paginate(40),
         ]);
     }
 
