@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 class RepairController extends Controller
 {
 
-    public function __construct(private readonly RoomService $roomService)
+    public function __construct(
+        private readonly RoomService $roomService
+    )
     {
     }
 
@@ -25,13 +27,22 @@ class RepairController extends Controller
         $search = $request->query('search', '');
         $searchLike = '%' . $search . '%';
         $status = $request->query('status', RepairStatusEnum::cases());
+        $repairs_date = $request->query('repair_date', 0);
+        $room = $request->query('room', 0);
 
         // filter
         $repairs = Repair::with(['room.floor.building'])
             ->orWhere(function ($query) use ($searchLike) {
                 $query->orWhere('subject', 'like', $searchLike);
             })
-            ->whereIn('status', $status);
+            ->whereIn('status', $status)
+            ->when($repairs_date > 0, function ($query) use ($repairs_date) {
+                $query->whereDate('repair_date', $repairs_date);
+            })
+            ->when($room > 0, function ($query) use ($room) {
+                $query->where('room_id', $room);
+            });
+
 
         return view('admins.repairs.index', [
             'repairs' => $repairs->latest('id')->paginate(40),
