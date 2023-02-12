@@ -27,12 +27,12 @@ class UserService
                 ->latest('id')
                 ->get('id');
         }])
-            ->orWhere(function ($query) use ($searchLike) {
-                $query->orWhere('name', 'like', $searchLike)
+            ->whereIn('status', $status)
+            ->when($search != '', function ($query) use ($searchLike) {
+                $query->Where('name', 'like', $searchLike)
                     ->orWhere('surname', 'like', $searchLike)
                     ->orWhere('telephone', 'like', $searchLike);
             })
-            ->whereIn('status', $status)
             ->latest('id')
             ->paginate(40);
     }
