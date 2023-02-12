@@ -39,4 +39,15 @@ class BookingService
         );
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function cancelBooking($id): bool
+    {
+        return Booking::findOrFail($id)->update([
+            'status' => BookingStatusEnum::INACTIVE
+        ]);
+    }
+
 }

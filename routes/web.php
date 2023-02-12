@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\InvoiceController;
@@ -83,6 +84,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Room management
         Route::resource('rooms', RoomController::class)->only(['show', 'edit', 'update']);
+
+        // Booking
+        Route::patch('bookings/{id}', [BookingController::class, 'cancelBooking'])
+            ->name('booking.booking-cancel');
 
         /// For download rent contract
         Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])

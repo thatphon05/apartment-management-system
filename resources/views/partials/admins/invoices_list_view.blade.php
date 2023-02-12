@@ -23,7 +23,7 @@
                         </a>
                     </td>
                     <td>
-                        อาคาร {{ $invoice->room->floor->building->name }}
+                        อาคาร {{ $invoice->room->building->name }}
                         ชั้น {{ $invoice->room->floor->name }}
                         ห้อง {{ $invoice->room->name }}
                     </td>

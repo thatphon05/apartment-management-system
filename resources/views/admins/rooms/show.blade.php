@@ -6,7 +6,10 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        รายละเอียดห้องพัก {{ $room->name }}
+                        รายละเอียดห้องพัก
+                        อาคาร {{ $room->building->name }}
+                        ชั้น {{ $room->floor->name }}
+                        ห้อง {{ $room->name }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -36,20 +39,83 @@
             <div class="row row-cards">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">
-                            ผู้พักปัจจุบัน ราคาห้อง {{ $room->configuration->name }}
+                        {{--                        <div class="card-header">--}}
+                        {{--                            ผู้พักปัจจุบัน ราคาห้อง {{ $room->configuration->name }}--}}
+                        {{--                        </div>--}}
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                ประวัติค่าน้ำค่าไฟ
+                            </div>
+                            @if ($currentBooking)
+                                <div class="col-auto ms-auto">
+                                    <button data-bs-toggle="modal" data-bs-target="#modal-danger"
+                                            class="btn btn-pink btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                             stroke="currentColor" fill="none" stroke-linecap="round"
+                                             stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M18 6l-12 12"></path>
+                                            <path d="M6 6l12 12"></path>
+                                        </svg>
+                                        ยกเลิกการให้เช่า
+                                    </button>
+                                    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                <div class="modal-status bg-danger"></div>
+                                                <div class="modal-body text-center py-4">
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                         fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <path d="M12 9v2m0 4v.01"/>
+                                                        <path
+                                                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"/>
+                                                    </svg>
+                                                    <h3>ยืนยันการยกเลิกการเช่าห้อง</h3>
+                                                    <div class="text-muted">
+                                                        คุณต้องการยกเลิก
+                                                        อาคาร {{ $room->building->name }}
+                                                        ชั้น {{ $room->floor->name }}
+                                                        ห้อง {{ $room->name }}
+                                                        หรือไม่
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="w-100">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <a href="#" class="btn w-100"
+                                                                   data-bs-dismiss="modal">
+                                                                    ยกเลิก
+                                                                </a>
+                                                            </div>
+                                                            <div class="col">
+                                                                <form method="post"
+                                                                      action="{{ route('admin.booking.booking-cancel', ['id' => $currentBooking->id]) }}">
+                                                                    @csrf
+                                                                    @method('PATCH')
+                                                                    <button type="submit" class="btn btn-danger w-100"
+                                                                            data-bs-dismiss="modal">
+                                                                        ยืนยัน
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="ribbon ribbon-top bg-yellow">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-                            </svg>
-                        </div>
-                        <div class="card-status-start bg-primary"></div>
                         <div class="card-body">
                             <div class="datagrid">
                                 @if ($currentBooking)
@@ -168,7 +234,7 @@
                             </div>
                             <div class="col-auto ms-auto">
                                 <a href="{{ route('admin.expenses.create', ['roomId' => $room->id]) }}"
-                                   class="btn btn-success btn-sm">
+                                   class="btn btn-azure btn-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
                                          width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor" fill="none" stroke-linecap="round"
