@@ -27,6 +27,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>ประจำเดือน</th>
+                                    <th>ห้อง</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -41,6 +42,15 @@
                                             </span>
                                         </td>
                                         <td><span class="text-muted">{{ $expense->cycle_month }}</span></td>
+                                        <td>
+                                            <span class="text-muted">
+                                                <a href="#">
+                                                    อาคาร {{ $expense->room->floor->building->name ?? '' }}
+                                                    ชั้น {{ $expense->room->floor->name ?? '' }}
+                                                    ห้อง {{ $expense->room->name ?? '' }}
+                                                </a>
+                                            </span>
+                                        </td>
                                         <td class="text-end">
                                             <a href=""
                                                class="btn"
