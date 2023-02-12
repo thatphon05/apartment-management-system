@@ -7,6 +7,7 @@ use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
+use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
 use App\Http\Controllers\Users\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -96,6 +97,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Download payment attach file
         Route::get('payments/paymentattach/{filename}', [InvoiceController::class, 'downloadPaymentAttach'])
             ->name('payments.download.payment_attach');
+
+        // Utility Expense management
+        Route::prefix('expenses')->name('expenses.')->group(function () {
+
+            Route::get('/', [UtilityExpenseController::class, 'index'])->name('index');
+
+            Route::get('room/{roomId}', [UtilityExpenseController::class, 'show'])->name('show');
+
+            Route::get('{id}/edit', [UtilityExpenseController::class, 'edit'])->name('edit');
+            Route::patch('{id}', [UtilityExpenseController::class, 'update'])->name('update');
+
+            Route::get('/create/room/{roomId}', [UtilityExpenseController::class, 'create'])->name('create');
+            Route::post('/', [UtilityExpenseController::class, 'store'])->name('store');
+
+        });
+
 
     });
 });

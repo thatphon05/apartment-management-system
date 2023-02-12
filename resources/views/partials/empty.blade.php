@@ -1,4 +1,4 @@
-<div class="empty">
+<div class="empty p-2">
     <div class="empty-icon">
         <!-- Download SVG icon from http://tabler-icons.io/i/mood-sad -->
         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"

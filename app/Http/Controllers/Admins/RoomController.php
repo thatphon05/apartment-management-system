@@ -39,7 +39,7 @@ class RoomController extends Controller
             : 0;
 
         return view('admins.rooms.show', [
-            'room' => Room::with('configuration')->findOrFail($id)->first(),
+            'room' => Room::with('configuration')->findOrFail($id),
             'currentBooking' => $currentBooking,
             'rentContractSize' => $rentContractSize,
             'bookings' => Booking::with('user')->where('room_id', $id)

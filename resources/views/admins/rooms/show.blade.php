@@ -162,7 +162,25 @@
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3 class="card-header">ประวัติค่าน้ำค่าไฟ</h3>
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                ประวัติค่าน้ำค่าไฟ
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <a href="{{ route('admin.expenses.create', ['roomId' => $room->id]) }}"
+                                   class="btn btn-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 5l0 14"></path>
+                                        <path d="M5 12l14 0"></path>
+                                    </svg>
+                                    เพิ่มรายการ
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-table table-responsive">
                             <table class="table">
                                 <thead>
@@ -172,15 +190,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($utilityExpenses as $utilityExpenses)
+                                @forelse($utilityExpenses as $utilityExpense)
                                     <tr>
                                         <td>
                                             <a href="#">
-                                                {{ $utilityExpenses->id }}
+                                                {{ $utilityExpense->id }}
                                             </a>
                                         </td>
                                         <td>
-                                            {{ $utilityExpenses->cycle_month }}
+                                            {{ $utilityExpense->cycle_month }}
                                         </td>
                                     </tr>
                                 @empty
@@ -193,6 +211,11 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="card-footer text-center">
+                            <a href="{{ route('admin.expenses.show', ['roomId' => $room->id]) }}">ดูทั้งหมด</a>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-8">
