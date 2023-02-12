@@ -46,7 +46,9 @@
                                     <div class="col-md-2">
                                         <div class="mb-3">
                                             <div class="form-label">เลือกวันที่เข้าซ่อม</div>
-                                            <input name="repair_date" class="form-control" type="date">
+                                            <input value="{{ request()->query('repair_date') }}" name="repair_date"
+                                                   class="form-control"
+                                                   type="date">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
