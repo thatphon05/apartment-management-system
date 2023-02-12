@@ -14,11 +14,17 @@ use App\Models\User;
 use App\Services\BookingService;
 use App\Services\StorageService;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
 
+    /**
+     * @param UserService $userService
+     * @param BookingService $bookingService
+     * @param StorageService $storageService
+     */
     public function __construct(
         private readonly UserService    $userService,
         private readonly BookingService $bookingService,
@@ -28,12 +34,13 @@ class UserController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('admins.users.index', [
-            'users' => $this->userService->searchUser(request()),
+            'users' => $this->userService->searchUser($request),
         ]);
     }
 

@@ -89,10 +89,10 @@ class UserService
 
     /**
      * @param Request $request
-     * @param int $id
+     * @param $id
      * @return User
      */
-    public function updateUser(Request $request, int $id): User
+    public function updateUser(Request $request, $id): User
     {
 
         $user = User::findOrFail($id);

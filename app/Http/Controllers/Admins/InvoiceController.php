@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
 use App\Services\StorageService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
@@ -25,13 +26,14 @@ class InvoiceController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $status = request()->query('status', InvoiceStatusEnum::cases());
-        $month = request()->query('month', 0);
-        $year = request()->query('year', 0);
+        $status = $request->query('status', InvoiceStatusEnum::cases());
+        $month = $request->query('month', 0);
+        $year = $request->query('year', 0);
 
         $invoices = Invoice::with('user', 'payments', 'room.floor.building')
             ->whereIn('status', $status);
@@ -51,7 +53,7 @@ class InvoiceController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
@@ -80,7 +82,6 @@ class InvoiceController extends Controller
 
         return redirect()->back()->with(['success' => 'ดำเนินการแก้ไขสถานะสำเร็จ']);
     }
-
 
     /**
      * @param string $filename

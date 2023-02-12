@@ -6,18 +6,20 @@ use App\Enums\RepairStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminEditRepairRequest;
 use App\Models\Repair;
+use Illuminate\Http\Request;
 
 class RepairController extends Controller
 {
 
     /**
+     * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $search = request()->query('search', '');
+        $search = $request->query('search', '');
         $searchLike = '%' . $search . '%';
-        $status = request()->query('status', RepairStatusEnum::cases());
+        $status = $request->query('status', RepairStatusEnum::cases());
 
         // filter
         $repairs = Repair::with(['room.floor.building'])

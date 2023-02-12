@@ -11,10 +11,10 @@ class InvoiceService
 {
     /**
      * @param PaymentEditRequest $request
-     * @param int $invoiceId
+     * @param $invoiceId
      * @return bool
      */
-    public function updateInvoiceComplete(PaymentEditRequest $request, int $invoiceId): bool
+    public function updateInvoiceComplete(PaymentEditRequest $request, $invoiceId): bool
     {
         if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::COMPLETE) {
 
