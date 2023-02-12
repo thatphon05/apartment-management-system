@@ -50,8 +50,9 @@
                                     <div class="mb-3">
                                         <label class="form-label required">จดประจำเดือน</label>
                                         <input value="{{ old('cycle') ??
-                                                ((integer)\Carbon\Carbon::today()->isSameDay(\Carbon\Carbon::today()->endOfMonth()))
-                                                ? \Carbon\Carbon::today()->format('Y-m') : \Carbon\Carbon::today()->subMonth()->format('Y-m')
+                                                (\Carbon\Carbon::today()->isSameDay(\Carbon\Carbon::today()->endOfMonth())
+                                                    ? \Carbon\Carbon::today()->format('Y-m')
+                                                    : \Carbon\Carbon::today()->subMonth()->format('Y-m'))
                                                 }}"
                                                name="cycle" type="month"
                                                onchange="inputChange(event)"

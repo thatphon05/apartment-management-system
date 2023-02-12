@@ -19,12 +19,14 @@ class UtilityExpenseCycleExistedRule implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        $cycle = Carbon::parse($value)->setDay(1);
+        $cycle = Carbon::parse($value);
 
-        $expenses = UtilityExpense::whereDate('cycle', $cycle)
-            ->where('room_id', request()->room_id)
+        $expenses = UtilityExpense::where('room_id', request()->room_id)
+            ->whereYear('cycle', $cycle->year)
+            ->whereMonth('cycle', $cycle->month)
             ->latest('id')
             ->first(['id']);
+        //->first('id');
 
         if ($expenses) {
             $fail('มีรายการมิเตอร์ของเดือนที่เลือกแล้ว');
