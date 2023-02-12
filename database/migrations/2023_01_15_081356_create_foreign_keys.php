@@ -103,6 +103,12 @@ class CreateForeignKeys extends Migration
         Schema::table('rooms', function (Blueprint $table) {
             $table->dropForeign('rooms_floor_id_foreign');
         });
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->dropForeign('rooms_building_id_foreign');
+        });
+        Schema::table('rooms', function (Blueprint $table) {
+            $table->dropForeign('rooms_configuration_id_foreign');
+        });
         Schema::table('room_bookings', function (Blueprint $table) {
             $table->dropForeign('room_bookings_user_id_foreign');
         });
