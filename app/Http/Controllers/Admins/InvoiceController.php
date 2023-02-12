@@ -8,6 +8,7 @@ use App\Http\Requests\PaymentEditRequest;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Services\InvoiceService;
+use App\Services\RoomService;
 use App\Services\StorageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,9 @@ class InvoiceController extends Controller
      */
     public function __construct(
         private readonly StorageService $storageService,
-        private readonly InvoiceService $invoiceService)
+        private readonly InvoiceService $invoiceService,
+        private readonly RoomService    $roomService,
+    )
     {
     }
 
@@ -34,6 +37,7 @@ class InvoiceController extends Controller
         $status = $request->query('status', InvoiceStatusEnum::cases());
         $month = $request->query('month', 0);
         $year = $request->query('year', 0);
+        $room = $request->query('room', 0);
 
         $invoices = Invoice::with('user', 'payments', 'room.floor.building')
             ->whereIn('status', $status);
@@ -46,14 +50,20 @@ class InvoiceController extends Controller
             $invoices->whereYear('cycle', $year);
         }
 
+        if ($room > 0) {
+            $invoices->where('room_id', $room);
+        }
+
         return view('admins.invoices.index', [
             'invoices' => $invoices->latest('id')->paginate(40),
+            'rooms' => $this->roomService->getRooms(),
         ]);
     }
 
+
     /**
      * @param $id
-     * @return Application|Factory|View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
