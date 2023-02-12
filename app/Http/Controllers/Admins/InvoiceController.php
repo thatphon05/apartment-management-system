@@ -40,19 +40,16 @@ class InvoiceController extends Controller
         $room = $request->query('room', 0);
 
         $invoices = Invoice::with('user', 'payments', 'room.floor.building')
-            ->whereIn('status', $status);
-
-        if ($month > 0) {
-            $invoices->whereMonth('cycle', $month);
-        }
-
-        if ($year > 0) {
-            $invoices->whereYear('cycle', $year);
-        }
-
-        if ($room > 0) {
-            $invoices->where('room_id', $room);
-        }
+            ->whereIn('status', $status)
+            ->when($month > 0, function ($query) use ($month) {
+                $query->whereMonth('cycle', $month);
+            })
+            ->when($year > 0, function ($query) use ($year) {
+                $query->whereYear('cycle', $year);
+            })
+            ->when($room > 0, function ($query) use ($room) {
+                $query->where('room_id', $room);
+            });
 
         return view('admins.invoices.index', [
             'invoices' => $invoices->latest('id')->paginate(40),
