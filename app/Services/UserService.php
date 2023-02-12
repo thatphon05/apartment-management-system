@@ -24,7 +24,7 @@ class UserService
         return User::with(['bookings' => function ($query) {
             $query->with(['room.floor.building'])
                 ->where('status', BookingStatusEnum::ACTIVE)
-                ->latest()
+                ->latest('id')
                 ->get('id');
         }])
             ->orWhere(function ($query) use ($searchLike) {
@@ -33,7 +33,7 @@ class UserService
                     ->orWhere('telephone', 'like', $searchLike);
             })
             ->whereIn('status', $status)
-            ->orderBy('id', 'desc')
+            ->latest('id')
             ->paginate(40);
     }
 

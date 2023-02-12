@@ -23,7 +23,7 @@ class RoomBookingSeeder extends Seeder
                 'room_id' => 1,
                 'rental_contract' => 'test.pdf',
                 'arrival_date' => Carbon::now()->addMonth(1),
-                'deposit' => 2000,
+                'deposit' => 5000,
                 'status' => 1,
                 'parking_amount' => 1
             ));

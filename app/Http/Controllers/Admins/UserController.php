@@ -59,7 +59,9 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        DB::transaction(function () use ($request) {
+        static $user;
+
+        DB::transaction(function () use ($request, &$user) {
 
             $user = $this->userService->createUser($request);
 
@@ -71,10 +73,10 @@ class UserController extends Controller
 
             $this->bookingService->uploadDocs($request, $booking->rent_contract);
 
-            return to_route('admin.users.show', ['user' => $user->id])
-                ->with(['success' => 'เพิ่มผู้เช่าใหม่สำเร็จ']);
-
         });
+
+        return to_route('admin.users.show', ['user' => $user->id])
+            ->with(['success' => 'เพิ่มผู้เช่าใหม่สำเร็จ']);
 
     }
 
