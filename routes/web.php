@@ -113,7 +113,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('{id}/edit', [UtilityExpenseController::class, 'edit'])->name('edit');
             Route::patch('{id}', [UtilityExpenseController::class, 'update'])->name('update');
 
-            Route::get('/create/room/{roomId}', [UtilityExpenseController::class, 'create'])->name('create');
+            Route::get('/create', [UtilityExpenseController::class, 'create'])->name('create');
             Route::post('/', [UtilityExpenseController::class, 'store'])->name('store');
 
         });

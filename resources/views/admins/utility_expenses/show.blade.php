@@ -18,8 +18,27 @@
             <div class="row row-deck row-cards">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            รายการจดมิเตอร์
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                <a class="btn btn-white"
+                                   href="{{ route('admin.rooms.show', ['room' => $roomId]) }}">
+                                    ย้อนกลับ
+                                </a>
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <a href="{{ route('admin.expenses.create', ['roomId' => $roomId]) }}"
+                                   class="btn btn-azure">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 5l0 14"></path>
+                                        <path d="M5 12l14 0"></path>
+                                    </svg>
+                                    เพิ่มรายการ
+                                </a>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap table-striped">
@@ -45,7 +64,7 @@
                                         <td>
                                             <span class="text-muted">
                                                 <a href="#">
-                                                    อาคาร {{ $expense->room->floor->building->name ?? '' }}
+                                                    อาคาร {{ $expense->room->building->name ?? '' }}
                                                     ชั้น {{ $expense->room->floor->name ?? '' }}
                                                     ห้อง {{ $expense->room->name ?? '' }}
                                                 </a>

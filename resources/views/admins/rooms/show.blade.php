@@ -230,7 +230,7 @@
                     <div class="card">
                         <div class="card-header row align-items-center">
                             <div class="col-auto fs-3">
-                                ประวัติค่าน้ำค่าไฟ
+                                ประวัติค่าน้ำค่าไฟล่าสุด
                             </div>
                             <div class="col-auto ms-auto">
                                 <a href="{{ route('admin.expenses.create', ['roomId' => $room->id]) }}"

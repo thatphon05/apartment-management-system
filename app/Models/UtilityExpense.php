@@ -26,6 +26,23 @@ class UtilityExpense extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'water_unit',
+        'electric_unit',
+        'cycle',
+        'room_id',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'cycle' => 'date',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function booking(): BelongsTo

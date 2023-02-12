@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\HasConfigurationRule;
+use App\Rules\HasRoomRule;
+use App\Rules\UtilityExpenseCycleExistedRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomEditRequest extends FormRequest
+class UtilityExpenseCreateRequest extends FormRequest
 {
     /**
      * @return string[]
@@ -13,7 +14,10 @@ class RoomEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'configuration_id' => ['required', 'integer', new HasConfigurationRule],
+            'water_unit' => 'required|numeric|min:0',
+            'electric_unit' => 'required|numeric|min:0',
+            'cycle' => ['date_format:Y-m', new UtilityExpenseCycleExistedRule],
+            'room_id' => [new HasRoomRule],
         ];
     }
 
@@ -23,7 +27,7 @@ class RoomEditRequest extends FormRequest
     public function messages(): array
     {
         return [
-            //
+
         ];
     }
 

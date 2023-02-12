@@ -272,20 +272,8 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label required">ห้องพัก</div>
-                                        <select onchange="inputChange(event)"
-                                                class="form-select @error('room_id') is-invalid @enderror"
-                                                name="room_id">
-                                            <option value="0">โปรดเลือกห้อง</option>
-                                            @foreach($rooms as $room)
-                                                <option value="{{ $room->id }}" @selected(old('room_id') == $room->id)>
-                                                    อาคาร {{ $room->floor->building->name }}
-                                                    ชั้น {{ $room->floor->name }} ห้อง {{ $room->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('room_id')
-                                        <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        <div class="form-label required">เลือกห้องพัก</div>
+                                        @include('partials.admins.room_select', ['rooms' => $rooms])
                                     </div>
                                 </div>
                             </div>

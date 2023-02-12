@@ -9,9 +9,9 @@ use App\Models\Booking;
 use App\Models\Configuration;
 use App\Models\Invoice;
 use App\Models\Repair;
-use App\Models\Room;
 use App\Models\User;
 use App\Services\BookingService;
+use App\Services\RoomService;
 use App\Services\StorageService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -29,6 +29,7 @@ class UserController extends Controller
         private readonly UserService    $userService,
         private readonly BookingService $bookingService,
         private readonly StorageService $storageService,
+        private readonly RoomService    $roomService,
     )
     {
     }
@@ -49,13 +50,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $rooms = Room::with(['floor.building'])->oldest('id')->get();
-        $rooms = $rooms->sortBy(
-            ['floor.building.name', 'floor.name', 'name'],
-        );
-
         return view('admins.users.create', [
-            'rooms' => $rooms,
+            'rooms' => $this->roomService->getRooms(),
             'config' => Configuration::latest()->first(),
         ]);
     }
