@@ -61,9 +61,16 @@
     </div>
     @if(isset($usePagination))
         <div class="card-footer d-flex align-items-center">
+
             <div class="m-0 ms-auto">
                 {{ $invoices->links() }}
             </div>
+
+
+        </div>
+    @else
+        <div class="card-footer text-center">
+            <a href="#">ดูทั้งหมด</a>
         </div>
     @endif
 </div>

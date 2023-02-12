@@ -22,10 +22,9 @@
                         {{ $repair->subject }}
                     </td>
                     <td>
-                                            <span
-                                                class="badge bg-{{ \App\Enums\RepairStatusEnum::getColor($repair->status) }}">
-                                                {{ \App\Enums\RepairStatusEnum::getLabel($repair->status) }}
-                                            </span>
+                        <span class="badge bg-{{ \App\Enums\RepairStatusEnum::getColor($repair->status) }}">
+                            {{ \App\Enums\RepairStatusEnum::getLabel($repair->status) }}
+                        </span>
                     </td>
                     <td>
                         {{ $repair->created_at }}
@@ -40,5 +39,8 @@
             @endforelse
             </tbody>
         </table>
+    </div>
+    <div class="card-footer text-center">
+        <a href="#">ดูทั้งหมด</a>
     </div>
 </div>
