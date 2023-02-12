@@ -6,10 +6,15 @@ use App\Enums\RepairStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminEditRepairRequest;
 use App\Models\Repair;
+use App\Services\RoomService;
 use Illuminate\Http\Request;
 
 class RepairController extends Controller
 {
+
+    public function __construct(private readonly RoomService $roomService)
+    {
+    }
 
     /**
      * @param Request $request
@@ -26,12 +31,11 @@ class RepairController extends Controller
             ->orWhere(function ($query) use ($searchLike) {
                 $query->orWhere('subject', 'like', $searchLike);
             })
-            ->whereIn('status', $status)
-            ->latest('id')
-            ->paginate(40);
+            ->whereIn('status', $status);
 
         return view('admins.repairs.index', [
-            'repairs' => $repairs,
+            'repairs' => $repairs->latest('id')->paginate(40),
+            'rooms' => $this->roomService->getRooms(),
         ]);
     }
 
