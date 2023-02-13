@@ -18,7 +18,8 @@
         <div class="page-body">
             <div class="container-xl">
                 <div class="row row-cards">
-                    <form action="{{ route('admin.settings.update' , ['setting' => $config->id])}}" method="post">
+                    <form action="{{ route('admin.configurations.update' , ['configuration' => $config->id])}}"
+                          method="post">
                         @csrf
                         @method('PATCH')
                         <div class="card">
@@ -172,7 +173,7 @@
                             </div>
                             <div class="card-footer text-end">
                                 <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
-                                <a href="{{ route('admin.settings.index') }}"
+                                <a href="{{ route('admin.configurations.index') }}"
                                    class="btn btn-ghost-secondary">ยกเลิก</a>
                             </div>
                         </div>

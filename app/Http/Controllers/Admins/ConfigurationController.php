@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminSettingRequest;
 use App\Models\Configuration;
 
-class SettingController extends Controller
+class ConfigurationController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admins.settings.index', [
+        return view('admins.configurations.index', [
             'configs' => Configuration::all(),
         ]);
     }
@@ -24,7 +24,7 @@ class SettingController extends Controller
      */
     public function edit($id)
     {
-        return view('admins.settings.edit', [
+        return view('admins.configurations.edit', [
             'config' => Configuration::findOrFail($id),
         ]);
     }
