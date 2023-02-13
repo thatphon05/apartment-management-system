@@ -46,8 +46,8 @@
 
                         <div class="row gx-4">
                             <div class="col-md-6">
-                                <h3 class="card-title">ข้อมูลส่วนตัว</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header fw-bold">ข้อมูลส่วนตัว</h3>
+                                <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">อีเมล</label>
@@ -211,10 +211,10 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h3 class="card-title">อัพโหลดเอกสาร</h3>
-                                <p class="text-danger">หากแนบไฟล์ใหม่จะเป็นการแก้ไข</p>
-                                <div class="row row-cards form-fieldset">
-                                    <div class="mb-3">
+                                <h3 class="card-header fw-bold">อัพโหลดเอกสาร</h3>
+                                <div class="row card-body">
+                                    <label class="form-label text-danger required">หากแนบไฟล์ใหม่จะเป็นการแก้ไข</label>
+                                    <div class="mb-3 mt-3">
                                         <label for="formFile" class="form-label">สำเนาบัตรประชาชน
                                             (.pdf)</label>
                                         <input name="id_card_copy"

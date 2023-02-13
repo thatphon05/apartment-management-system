@@ -44,8 +44,8 @@
 
                         <div class="row gx-4">
                             <div class="col-md-6">
-                                <h3 class="card-title">ข้อมูลส่วนตัว</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header fw-bold">ข้อมูลส่วนตัว</h3>
+                                <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">อีเมล</label>
@@ -198,9 +198,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <h3 class="card-title">อัพโหลดเอกสาร</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header row-cards fw-bold">อัพโหลดเอกสาร</h3>
+                                <div class="row card-body">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label required">สำเนาบัตรประชาชน
                                             (.pdf)</label>
@@ -232,8 +233,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <h3 class="card-title">รายละเอียดการเช่า</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header fw-bold">รายละเอียดการเช่า</h3>
+                                <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">วันที่จะเข้าพัก</label>
