@@ -71,7 +71,7 @@
                                 <td>{{ $config->deposit }}</td>
                                 <td>{{ $config->updated_at }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.settings.edit', ['setting' => $config->id]) }}"
+                                    <a href="{{ route('admin.configurations.edit', ['configuration' => $config->id]) }}"
                                        class="btn"
                                        role="button">
                                         <svg xmlns="http://www.w3.org/2000/svg"

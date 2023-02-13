@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\BuildingController;
+use App\Http\Controllers\Admins\ConfigurationController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\InvoiceController;
 use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
-use App\Http\Controllers\Admins\SettingController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
@@ -76,8 +76,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('users/housecopy/{filename}', [UserController::class, 'downloadHouseRegCopy'])
             ->name('users.download.housecopy');
 
-        // Setting management
-        Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+        // Room Configuration management
+        Route::resource('configurations', ConfigurationController::class)->only(['index', 'edit', 'update']);
 
         // Building management
         Route::resource('buildings', BuildingController::class)->only(['index', 'show']);
