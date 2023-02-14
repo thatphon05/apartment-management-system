@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'email' => 'thatphon.t@ku.th',
-                'password' => bcrypt('123'),
+                'password' => '123',
                 'name' => 'Thatpon',
                 'status' => 1,
             ]);
@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'email' => 'tanawit.w@ku.th',
-                'password' => bcrypt('123'),
+                'password' => '123',
                 'name' => 'Tanawit',
                 'status' => 1,
             ]);

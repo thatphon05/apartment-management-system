@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             User::create(array(
                 'email' => 'test@user.com',
                 'telephone' => '0123456789',
-                'password' => bcrypt('123'),
+                'password' => '123',
                 'id_card_number' => '1352464874125',
                 'name' => 'ภพธร',
                 'surname' => 'มกรธวัช',

@@ -25,7 +25,7 @@ class UserService
             $query->with(['room.floor.building'])
                 ->where('status', BookingStatusEnum::ACTIVE)
                 ->latest('id')
-                ->get('id');
+                ->get(['id', 'room_id']);
         }])
             ->whereIn('status', $status)
             ->when($search != '', function ($query) use ($searchLike) {

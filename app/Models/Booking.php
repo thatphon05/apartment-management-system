@@ -63,14 +63,6 @@ class Booking extends Model
     /**
      * @return HasMany
      */
-    public function utilytyExpenses(): HasMany
-    {
-        return $this->hasMany(UtilityExpense::class, 'booking_id');
-    }
-
-    /**
-     * @return HasMany
-     */
     public function repairs(): HasMany
     {
         return $this->hasMany(Repair::class, 'booking_id');

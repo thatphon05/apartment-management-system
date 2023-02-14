@@ -35,19 +35,27 @@ class RoomController extends Controller
             ->latest('id')->first();
 
         $rentContractSize = $currentBooking
-            ? $this->storageService->getFileSizeMB(config('custom.rent_contract_path') . '/' . $currentBooking->rent_contract)
+            ? $this->storageService->getFileSizeMB(config('custom.rent_contract_path') . '/' . $currentBooking->rental_contract)
             : 0;
 
         return view('admins.rooms.show', [
-            'room' => Room::with('configuration')->findOrFail($id),
+            'room' => Room::with('configuration')
+                ->findOrFail($id),
             'currentBooking' => $currentBooking,
             'rentContractSize' => $rentContractSize,
-            'bookings' => Booking::with('user')->where('room_id', $id)
+            'bookings' => Booking::with('user')
+                ->where('room_id', $id)
                 ->latest('id')->paginate(20),
-            'invoices' => Invoice::with(['room.floor.building', 'payments'])->where('room_id', $id)
-                ->latest('id')->take(5)->get(),
-            'repairs' => Repair::where('room_id', $id)->latest('id')->take(5)->get(),
-            'utilityExpenses' => UtilityExpense::where('room_id', $id)->take(12)->get(),
+            'invoices' => Invoice::with(['room.floor.building', 'payments'])
+                ->where('room_id', $id)
+                ->latest('id')->take(5)
+                ->get(),
+            'repairs' => Repair::where('room_id', $id)
+                ->latest('id')->take(5)
+                ->get(),
+            'utilityExpenses' => UtilityExpense::where('room_id', $id)
+                ->take(12)
+                ->get(),
         ]);
     }
 
