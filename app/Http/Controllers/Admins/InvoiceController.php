@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Enums\InvoiceStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentEditRequest;
 use App\Models\Invoice;
@@ -34,29 +33,8 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $status = $request->query('status', InvoiceStatusEnum::cases());
-        $month = $request->query('month', 0);
-        $year = $request->query('year', 0);
-        $room = $request->query('room', 0);
-        $user = $request->query('user', 0);
-
-        $invoices = Invoice::with('user', 'payments', 'room.floor.building')
-            ->whereIn('status', $status)
-            ->when($month > 0, function ($query) use ($month) {
-                $query->whereMonth('cycle', $month);
-            })
-            ->when($year > 0, function ($query) use ($year) {
-                $query->whereYear('cycle', $year);
-            })
-            ->when($room > 0, function ($query) use ($room) {
-                $query->where('room_id', $room);
-            })
-            ->when($user > 0, function ($query) use ($user) {
-                $query->where('user_id', $user);
-            });
-
         return view('admins.invoices.index', [
-            'invoices' => $invoices->latest('id')->paginate(40),
+            'invoices' => $this->invoiceService->searchInvoice($request),
             'rooms' => $this->roomService->getRooms(),
         ]);
     }
