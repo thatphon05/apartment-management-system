@@ -194,13 +194,16 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card-footer text-center">
+                            <a href="">ดูทั้งหมด</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-8">
-                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices])
+                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'parameters' => ['user' => $user->id]])
                 </div>
                 <div class="col-12">
-                    @include('partials.admins.repair_list_view', ['repairs' => $repairs])
+                    @include('partials.admins.repair_list_view', ['repairs' => $repairs, 'parameters' => ['user' => $user->id]])
                 </div>
             </div>
         </div>

@@ -70,7 +70,7 @@
         </div>
     @else
         <div class="card-footer text-center">
-            <a href="#">ดูทั้งหมด</a>
+            <a href="{{ route('admin.invoices.index', $parameters) }}">ดูทั้งหมด</a>
         </div>
     @endif
 </div>

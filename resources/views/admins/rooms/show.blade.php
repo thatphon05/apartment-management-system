@@ -285,10 +285,10 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices])
+                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'parameters' => ['room' => $room->id]])
                 </div>
                 <div class="col-12">
-                    @include('partials.admins.repair_list_view', ['repairs' => $repairs])
+                    @include('partials.admins.repair_list_view', ['repairs' => $repairs, 'parameters' => ['room' => $room->id]])
                 </div>
                 <div class="col-12">
                     <div class="card">

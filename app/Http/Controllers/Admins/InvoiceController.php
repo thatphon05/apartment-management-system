@@ -38,6 +38,7 @@ class InvoiceController extends Controller
         $month = $request->query('month', 0);
         $year = $request->query('year', 0);
         $room = $request->query('room', 0);
+        $user = $request->query('user', 0);
 
         $invoices = Invoice::with('user', 'payments', 'room.floor.building')
             ->whereIn('status', $status)
@@ -49,6 +50,9 @@ class InvoiceController extends Controller
             })
             ->when($room > 0, function ($query) use ($room) {
                 $query->where('room_id', $room);
+            })
+            ->when($user > 0, function ($query) use ($user) {
+                $query->where('user_id', $user);
             });
 
         return view('admins.invoices.index', [
