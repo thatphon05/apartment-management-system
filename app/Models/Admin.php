@@ -39,7 +39,7 @@ class Admin extends Authenticatable
     /**
      * Hash the administrator's password.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     * @return Attribute
      */
     protected function password(): Attribute
     {

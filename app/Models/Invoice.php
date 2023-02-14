@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\InvoiceStatusEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -95,50 +96,72 @@ class Invoice extends Model
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getCycleDateAttribute(): string
+    protected function cycleDate(): Attribute
     {
-        return $this->cycle->translatedFormat('F Y');
+        $value = $this->cycle->translatedFormat('F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getDueDateFormatAttribute(): string
+    protected function dueDateFormat(): Attribute
     {
-        return $this->due_date->translatedFormat('d F Y');
+        $value = $this->due_date->translatedFormat('d F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getIsDueDateAttribute(): bool
+    protected function isDueDate(): Attribute
     {
-        return $this->due_date->lt(now());
+        $value = $this->due_date->lt(now());
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getWaterTotalDividedAttribute(): float
+    protected function waterTotalDivided(): Attribute
     {
-        return (float)$this->water_total / 2;
+        $value = (float)$this->water_total / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getElectricTotalDividedAttribute(): float
+    protected function electricTotalDivided(): Attribute
     {
-        return (float)$this->electric_total / 2;
+        $value = (float)$this->electric_total / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getDynamicOverdueTotalAttribute(): float
+    protected function dynamicOverdueTotal(): Attribute
     {
+        $value = 0;
+
         if ($this->is_due_date) {
 
             $payWithinDay = config('custom.pay_within_day');
@@ -147,35 +170,49 @@ class Invoice extends Model
 
             $dayOfDue = $this->due_date->diff(now())->days;
 
-            return (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
+            $value = (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
         }
 
-        return 0;
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getElectricUnitPriceDivideAttribute(): float
+    protected function electricUnitPriceDivide(): Attribute
     {
-        return (float)$this->electric_unit_price / 2;
+        $value = (float)$this->electric_unit_price / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getWaterUnitPriceDivideAttribute(): float
+    protected function waterUnitPriceDivide(): Attribute
     {
-        return (float)$this->water_unit_price / 2;
+        $value = (float)$this->water_unit_price / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return float
+     * @return Attribute
      */
-    public function getDynamicSummaryAttribute(): float
+    protected function dynamicSummary(): Attribute
     {
-        return (float)$this->rent_total + $this->electric_total + $this->water_total
+        $value = (float)$this->rent_total + $this->electric_total + $this->water_total
             + $this->parking_total + $this->common_total + $this->dynamic_overdue_total;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
 }

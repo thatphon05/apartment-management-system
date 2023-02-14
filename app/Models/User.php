@@ -104,7 +104,7 @@ class User extends Authenticatable
     /**
      * Hash the user's password.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     * @return Attribute
      */
     protected function password(): Attribute
     {
@@ -114,35 +114,51 @@ class User extends Authenticatable
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getFullNameAttribute(): string
+    protected function fullName(): Attribute
     {
-        return $this->name . ' ' . $this->surname;
+        $value = $this->name . ' ' . $this->surname;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getFullAddressAttribute(): string
+    protected function fullAddress(): Attribute
     {
-        return $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.'
-            . $this->province . ' ' . $this->postal_code;
+        $value = $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.' .
+            $this->province . ' ' . $this->postal_code;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getBirthDateFormatAttribute(): string
+    protected function birthDateFormat(): Attribute
     {
-        return $this->birthdate->translatedFormat('l j F Y');
+        $value = $this->birthdate->translatedFormat('l j F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getAgeAttribute(): string
+    protected function age(): Attribute
     {
-        return $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+        $value = $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 }

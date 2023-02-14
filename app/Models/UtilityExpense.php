@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -40,6 +40,7 @@ class UtilityExpense extends Model
      */
     protected $casts = [
         'cycle' => 'date',
+        'cycle_month' => 'date',
     ];
 
     /**
@@ -59,12 +60,14 @@ class UtilityExpense extends Model
     }
 
     /**
-     * @return string
+     * @return Attribute
      */
-    public function getCycleMonthAttribute(): string
+    protected function cycleMonth(): Attribute
     {
-        $cycle = Carbon::parse($this->cycle);
+        $value = $this->cycle->translatedFormat('F Y');
 
-        return $cycle->translatedFormat('F Y');
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 }
