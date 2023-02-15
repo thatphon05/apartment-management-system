@@ -18,9 +18,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'กรุณากรอก Email',
-            'email.email' => 'รูปแบบ Email ไม่ถูกต้อง',
-            'password.required' => 'กรุณากรอกรหัสผ่าน'
+
         ];
     }
 
