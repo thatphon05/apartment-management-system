@@ -68,6 +68,18 @@
                                 <div class="mb-3">
                                     <div class="form-label">สถานะใบแจ้งหนี้</div>
                                     @include('partials.admins.checkbox_status', ['enum' => \App\Enums\InvoiceStatusEnum::class])
+                                    <label class="form-check form-check-inline">
+                                        <input class="form-check-input" name="status[]" type="checkbox"
+                                               value="{{ \App\Enums\InvoiceStatusEnum::OVERDUE }}"
+                                               @if ((is_array(request()->query('status'))
+                                                        && in_array(\App\Enums\InvoiceStatusEnum::OVERDUE->value, request()->query('status'))
+                                                   || !request()->has('status')))
+                                                   checked
+                                            @endif
+                                        />
+                                        <span
+                                            class="form-check-label">{{ \App\Enums\InvoiceStatusEnum::getLabel(\App\Enums\InvoiceStatusEnum::OVERDUE) }}</span>
+                                    </label>
                                 </div>
                                 <button type="submit" class="btn btn btn-primary" role="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

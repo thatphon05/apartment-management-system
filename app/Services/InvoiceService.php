@@ -20,8 +20,19 @@ class InvoiceService
         $room = $request->query('room', 0);
         $user = $request->query('user', 0);
 
+        $dateNow = now();
+
         return Invoice::with(['user', 'payments', 'room.floor.building'])
-            ->whereIn('status', $status)
+            // Filter all status except OVERDUE
+            ->orWhere(function ($query) use ($status, $dateNow) {
+                $query->WhereIn('status', $status)
+                    ->whereDate('due_date', '>', $dateNow);
+            })
+            // Filter OVERDUE
+            ->when(in_array(InvoiceStatusEnum::OVERDUE->value, $status), function ($query) use ($status, $dateNow) {
+                $query->orWhere('status', InvoiceStatusEnum::PENDING->value)
+                    ->whereDate('due_date', '<', $dateNow);
+            })
             ->when($month > 0, function ($query) use ($month) {
                 $query->whereMonth('cycle', $month);
             })
