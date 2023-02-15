@@ -8,9 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -37,9 +35,6 @@ class UserCreateRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function messages(): array
     {
         return [

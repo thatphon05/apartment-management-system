@@ -9,10 +9,8 @@ class RoomSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Room::count() < 1) {
             $count = 1;

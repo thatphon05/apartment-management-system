@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 class BookingService
 {
 
-    /**
-     * @param Request $request
-     * @param User $userData
-     * @return Booking
-     */
     public function createBooking(Request $request, User $userData): Booking
     {
         return $userData->bookings()->create([
@@ -27,22 +22,13 @@ class BookingService
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param $filename
-     * @return void
-     */
-    public function uploadDocs(Request $request, $filename): void
+    public function uploadDocs(Request $request, string $filename): void
     {
         $request->file('rent_contract')->storeAs(
             config('custom.rent_contract_path'), $filename
         );
     }
 
-    /**
-     * @param $id
-     * @return bool
-     */
     public function cancelBooking($id): bool
     {
         return Booking::findOrFail($id)->update([

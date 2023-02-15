@@ -15,6 +15,7 @@ class Invoice extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
@@ -55,49 +56,31 @@ class Invoice extends Model
         'water_unit_price_divide',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function utilExpenses(): HasMany
     {
         return $this->hasMany(UtilityExpense::class, 'util_expense_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'invoice_id');
     }
 
-    /**
-     * @return Attribute
-     */
     protected function cycleDate(): Attribute
     {
         $value = $this->cycle->translatedFormat('F Y');
@@ -107,9 +90,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function dueDateFormat(): Attribute
     {
         $value = $this->due_date->translatedFormat('d F Y');
@@ -119,9 +99,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function isDueDate(): Attribute
     {
         $value = $this->due_date->lt(now());
@@ -131,9 +108,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function waterTotalDivided(): Attribute
     {
         $value = (float)$this->water_total / 2;
@@ -143,9 +117,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function electricTotalDivided(): Attribute
     {
         $value = (float)$this->electric_total / 2;
@@ -155,9 +126,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function dynamicOverdueTotal(): Attribute
     {
         $value = 0;
@@ -178,9 +146,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function electricUnitPriceDivide(): Attribute
     {
         $value = (float)$this->electric_unit_price / 2;
@@ -190,9 +155,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function waterUnitPriceDivide(): Attribute
     {
         $value = (float)$this->water_unit_price / 2;
@@ -202,9 +164,6 @@ class Invoice extends Model
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function dynamicSummary(): Attribute
     {
         $value = (float)$this->rent_total + $this->electric_total + $this->water_total

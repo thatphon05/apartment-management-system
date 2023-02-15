@@ -5,15 +5,12 @@ namespace App\Services;
 use App\Enums\RepairStatusEnum;
 use App\Models\Repair;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RepairService
 {
 
-    /**
-     * @param Request $request
-     * @return Repair[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Pagination\LengthAwarePaginator|\LaravelIdea\Helper\App\Models\_IH_Repair_C
-     */
-    public function searchRepair(Request $request)
+    public function searchRepair(Request $request): LengthAwarePaginator
     {
         $search = $request->query('search');
         $searchLike = '%' . $search . '%';

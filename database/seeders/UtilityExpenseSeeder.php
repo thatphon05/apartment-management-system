@@ -10,10 +10,8 @@ class UtilityExpenseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (UtilityExpense::count() < 1) {
             UtilityExpense::create([

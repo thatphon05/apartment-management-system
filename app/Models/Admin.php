@@ -38,8 +38,6 @@ class Admin extends Authenticatable
 
     /**
      * Hash the administrator's password.
-     *
-     * @return Attribute
      */
     protected function password(): Attribute
     {

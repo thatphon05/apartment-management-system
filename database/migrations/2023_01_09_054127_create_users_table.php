@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateUsersTable extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::drop('users');
     }

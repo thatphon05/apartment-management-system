@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -17,9 +15,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function messages(): array
     {
         return [
@@ -29,9 +24,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

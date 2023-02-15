@@ -7,11 +7,12 @@ use App\Http\Requests\AdminEditRepairRequest;
 use App\Models\Repair;
 use App\Services\RepairService;
 use App\Services\RoomService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RepairController extends Controller
 {
-
     public function __construct(
         private readonly RoomService   $roomService,
         private readonly RepairService $repairService,
@@ -19,11 +20,7 @@ class RepairController extends Controller
     {
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('admins.repairs.index', [
             'repairs' => $this->repairService->searchRepair($request),
@@ -31,23 +28,14 @@ class RepairController extends Controller
         ]);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit($id)
+    public function edit(string $id): View
     {
         return view('admins.repairs.edit', [
             'repair' => Repair::findOrFail($id),
         ]);
     }
 
-    /**
-     * @param AdminEditRepairRequest $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(AdminEditRepairRequest $request, $id)
+    public function update(AdminEditRepairRequest $request, string $id): RedirectResponse
     {
         Repair::where('id', $id)->update([
             'status' => $request->status,

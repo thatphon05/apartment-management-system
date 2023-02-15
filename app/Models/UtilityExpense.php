@@ -13,6 +13,7 @@ class UtilityExpense extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
@@ -43,25 +44,16 @@ class UtilityExpense extends Model
         'cycle_month' => 'date',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    /**
-     * @return Attribute
-     */
     protected function cycleMonth(): Attribute
     {
         $value = $this->cycle->translatedFormat('F Y');

@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateAdminsTable extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
@@ -19,7 +19,7 @@ class CreateAdminsTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::drop('admins');
     }

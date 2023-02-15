@@ -8,9 +8,7 @@ use Illuminate\Validation\Rules\Enum;
 
 class AdminEditRepairRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     **/
+
     public function rules(): array
     {
         return [
@@ -19,9 +17,6 @@ class AdminEditRepairRequest extends FormRequest
         ];
     }
 
-    /*
-    * @return string[]
-    **/
     public function messages(): array
     {
         return [
@@ -29,9 +24,6 @@ class AdminEditRepairRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

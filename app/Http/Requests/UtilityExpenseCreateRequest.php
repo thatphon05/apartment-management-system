@@ -8,9 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UtilityExpenseCreateRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -21,9 +19,6 @@ class UtilityExpenseCreateRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function messages(): array
     {
         return [
@@ -31,9 +26,6 @@ class UtilityExpenseCreateRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

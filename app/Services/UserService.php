@@ -6,14 +6,12 @@ use App\Enums\BookingStatusEnum;
 use App\Enums\UserStatusEnum;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
-    /**
-     * @param Request $request
-     * @return User[]|\Illuminate\Pagination\LengthAwarePaginator|\LaravelIdea\Helper\App\Models\_IH_User_C
-     */
-    public function searchUser(Request $request)
+
+    public function searchUser(Request $request): LengthAwarePaginator
     {
         // Get query parameter
         $search = $request->query('search', '');
@@ -37,10 +35,6 @@ class UserService
             ->paginate(40);
     }
 
-    /**
-     * @param Request $request
-     * @return User
-     */
     public function createUser(Request $request): User
     {
         return User::create([
@@ -63,36 +57,21 @@ class UserService
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param $filename
-     * @return void
-     */
-    public function uploadIdCardDoc(Request $request, $filename): void
+    public function uploadIdCardDoc(Request $request, string $filename): void
     {
         $request->file('id_card_copy')->storeAs(
             config('custom.id_card_copy_path'), $filename
         );
     }
 
-    /**
-     * @param Request $request
-     * @param $filename
-     * @return void
-     */
-    public function uploadCopyHouseDoc(Request $request, $filename): void
+    public function uploadCopyHouseDoc(Request $request, string $filename): void
     {
         $request->file('copy_house_registration')->storeAs(
             config('custom.copy_house_registration_path'), $filename
         );
     }
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @return User
-     */
-    public function updateUser(Request $request, $id): User
+    public function updateUser(Request $request, string $id): User
     {
 
         $user = User::findOrFail($id);

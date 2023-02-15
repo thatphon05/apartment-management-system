@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -11,11 +9,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class StorageService
 {
 
-    /**
-     * @param $file
-     * @return StreamedResponse
-     */
-    public function download($file): StreamedResponse
+    public function download(string $file): StreamedResponse
     {
         $this->isFileExists($file);
 
@@ -24,33 +18,21 @@ class StorageService
         return Storage::download($file, now() . '.' . $fileExtension);
     }
 
-    /**
-     * @param $file
-     * @return Application|ResponseFactory|Response
-     */
-    public function viewFile($file): Response|Application|ResponseFactory
+    public function viewFile(string $file): Response
     {
         $this->isFileExists($file);
 
         return response(Storage::get($file))->header('Content-Type', Storage::mimeType($file));
     }
 
-    /**
-     * @param $file
-     * @return void
-     */
-    public function isFileExists($file): void
+    public function isFileExists(string $file): void
     {
         if (!Storage::get($file)) {
             abort(404);
         }
     }
 
-    /**
-     * @param $file
-     * @return float
-     */
-    public function getFileSizeMB($file): float
+    public function getFileSizeMB(string $file): float
     {
         return (Storage::get($file) ? Storage::size($file) : 0) / 1024 / 1024;
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UtilityExpenseCreateRequest;
 use App\Models\UtilityExpense;
 use App\Services\RoomService;
+use Illuminate\View\View;
 
 class UtilityExpenseController extends Controller
 {
@@ -21,7 +22,7 @@ class UtilityExpenseController extends Controller
 
     }
 
-    public function show($roomId)
+    public function show(string $roomId): View
     {
         return view('admins.utility_expenses.show', [
             'expenses' => UtilityExpense::with(['room.floor.building'])
@@ -32,7 +33,7 @@ class UtilityExpenseController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): View
     {
         return view('admins.utility_expenses.create', [
             'rooms' => $this->roomService->getRooms(),
@@ -51,12 +52,12 @@ class UtilityExpenseController extends Controller
         return to_route('admin.expenses.show', ['roomId' => $request->room_id]);
     }
 
-    public function edit($id)
+    public function edit(string $id)
     {
 
     }
 
-    public function update($id)
+    public function update(string $id)
     {
 
     }

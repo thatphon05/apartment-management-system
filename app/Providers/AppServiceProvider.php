@@ -11,21 +11,17 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
-     *
-     * @return void
+     * Register blade services.
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * Bootstrap blade services.
      */
-    public function boot()
+    public function boot(): void
     {
         Carbon::setlocale(config('app.locale'));
 
@@ -38,10 +34,9 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Check query number
-     * @return void
+     * Check query amount
      */
-    private function useDBListening()
+    protected function useDBListening(): void
     {
         if (!$this->app->isProduction()) {
             $counter = 0;

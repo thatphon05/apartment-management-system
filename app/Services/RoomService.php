@@ -3,18 +3,18 @@
 namespace App\Services;
 
 use App\Models\Room;
+use Illuminate\Database\Eloquent\Collection;
 
 class RoomService
 {
-    /**
-     * @return Room[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\LaravelIdea\Helper\App\Models\_IH_Room_C|\LaravelIdea\Helper\App\Models\_IH_Room_QB[]
-     */
-    public function getRooms()
-    {
-        $rooms = Room::with(['floor.building'])->oldest('id')->get();
 
-        return $rooms->sortBy(
-            ['floor.building.name', 'floor.name', 'name'],
-        );
+    public function getRooms(): Collection
+    {
+        return Room::with(['floor.building'])
+            ->oldest('id')
+            ->get()
+            ->sortBy(
+                ['floor.building.name', 'floor.name', 'name']
+            );
     }
 }

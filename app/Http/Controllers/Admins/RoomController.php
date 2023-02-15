@@ -12,23 +12,18 @@ use App\Models\Repair;
 use App\Models\Room;
 use App\Models\UtilityExpense;
 use App\Services\StorageService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RoomController extends Controller
 {
 
-    /**
-     * @param StorageService $storageService
-     */
     public function __construct(private readonly StorageService $storageService)
     {
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function show($id)
+    public function show(string $id): View
     {
         $currentBooking = Booking::where('room_id', $id)
             ->where('status', BookingStatusEnum::ACTIVE)
@@ -59,11 +54,7 @@ class RoomController extends Controller
         ]);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit($id)
+    public function edit(string $id): View
     {
         return view('admins.rooms.edit', [
             'room' => Room::findOrFail($id),
@@ -71,12 +62,7 @@ class RoomController extends Controller
         ]);
     }
 
-    /**
-     * @param RoomEditRequest $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(RoomEditRequest $request, $id)
+    public function update(RoomEditRequest $request, string $id): RedirectResponse
     {
         Room::where('id', $id)->update($request->validated());
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateUtilitiesExpensesTable extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::create('utilities_expenses', function (Blueprint $table) {
             $table->increments('id');
@@ -18,7 +18,7 @@ class CreateUtilitiesExpensesTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::drop('utilities_expenses');
     }

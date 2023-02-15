@@ -8,9 +8,7 @@ use Illuminate\Validation\Rules\Enum;
 
 class PaymentEditRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     **/
+
     public function rules(): array
     {
         return [
@@ -18,9 +16,6 @@ class PaymentEditRequest extends FormRequest
         ];
     }
 
-    /*
-    * @return string[]
-    **/
     public function messages(): array
     {
         return [
@@ -28,9 +23,6 @@ class PaymentEditRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

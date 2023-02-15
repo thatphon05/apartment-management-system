@@ -10,10 +10,8 @@ class RoomBookingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Booking::count() < 1) {
             Booking::create(array(

@@ -5,6 +5,7 @@ namespace App\Rules;
 
 use App\Models\UtilityExpense;
 use Carbon\Carbon;
+use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\InvokableRule;
 
@@ -19,11 +20,9 @@ class UtilityExpenseCycleExistedRule implements DataAwareRule, InvokableRule
 
     /**
      * Set the data under validation.
-     *
-     * @param array $data
-     * @return $this
+     * @param array<string, mixed> $data
      */
-    public function setData($data)
+    public function setData(array $data): static
     {
         $this->data = $data;
 
@@ -38,7 +37,7 @@ class UtilityExpenseCycleExistedRule implements DataAwareRule, InvokableRule
      * @param \Closure $fail
      * @return void
      */
-    public function __invoke($attribute, $value, $fail)
+    public function __invoke(string $attribute, mixed $value, Closure $fail): void
     {
         $cycle = Carbon::parse($value);
 

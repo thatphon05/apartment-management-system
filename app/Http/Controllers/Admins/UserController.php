@@ -14,17 +14,15 @@ use App\Services\BookingService;
 use App\Services\RoomService;
 use App\Services\StorageService;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
 {
 
-    /**
-     * @param UserService $userService
-     * @param BookingService $bookingService
-     * @param StorageService $storageService
-     */
     public function __construct(
         private readonly UserService    $userService,
         private readonly BookingService $bookingService,
@@ -34,21 +32,14 @@ class UserController extends Controller
     {
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('admins.users.index', [
             'users' => $this->userService->searchUser($request),
         ]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function create()
+    public function create(): View
     {
         return view('admins.users.create', [
             'rooms' => $this->roomService->getRooms(),
@@ -56,11 +47,7 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * @param UserCreateRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(UserCreateRequest $request)
+    public function store(UserCreateRequest $request): RedirectResponse
     {
         static $user;
 
@@ -74,7 +61,7 @@ class UserController extends Controller
 
             $booking = $this->bookingService->createBooking($request, $user);
 
-            $this->bookingService->uploadDocs($request, $booking->rent_contract);
+            $this->bookingService->uploadDocs($request, $booking->rental_contract);
 
         });
 
@@ -83,11 +70,7 @@ class UserController extends Controller
 
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function show($id)
+    public function show(string $id): View
     {
         $user = User::findOrFail($id);
 
@@ -109,23 +92,14 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit($id)
+    public function edit(string $id): View
     {
         return view('admins.users.edit', [
             'user' => User::findOrFail($id)->first(),
         ]);
     }
 
-    /**
-     * @param UserUpdateRequest $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, string $id): RedirectResponse
     {
         $user = $this->userService->updateUser($request, $id);
 
@@ -133,20 +107,12 @@ class UserController extends Controller
             ->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
-    /**
-     * @param $filename
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function downloadIdCardCopy($filename)
+    public function downloadIdCardCopy(string $filename): StreamedResponse
     {
         return $this->storageService->download(config('custom.id_card_copy_path') . '/' . $filename);
     }
 
-    /**
-     * @param $filename
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function downloadHouseRegCopy($filename)
+    public function downloadHouseRegCopy(string $filename): StreamedResponse
     {
         return $this->storageService->download(config('custom.copy_house_registration_path') . '/' . $filename);
     }

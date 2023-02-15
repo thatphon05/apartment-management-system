@@ -7,15 +7,12 @@ use App\Enums\PaymentStatusEnum;
 use App\Http\Requests\PaymentEditRequest;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class InvoiceService
 {
 
-    /**
-     * @param Request $request
-     * @return Invoice[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Pagination\LengthAwarePaginator|\LaravelIdea\Helper\App\Models\_IH_Invoice_C
-     */
-    public function searchInvoice(Request $request)
+    public function searchInvoice(Request $request): LengthAwarePaginator
     {
         $status = $request->query('status', InvoiceStatusEnum::cases());
         $month = $request->query('month', 0);
@@ -41,12 +38,7 @@ class InvoiceService
             ->paginate(40);
     }
 
-    /**
-     * @param PaymentEditRequest $request
-     * @param $invoiceId
-     * @return bool
-     */
-    public function updateInvoiceStatus(PaymentEditRequest $request, $invoiceId): bool
+    public function updateInvoiceStatus(PaymentEditRequest $request, string $invoiceId): bool
     {
         if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::COMPLETE) {
             return $this->setInvoiceStatusSuccess($invoiceId);
@@ -59,11 +51,7 @@ class InvoiceService
         return false;
     }
 
-    /**
-     * @param $invoiceId
-     * @return true
-     */
-    public function setInvoiceStatusSuccess($invoiceId): bool
+    public function setInvoiceStatusSuccess(string $invoiceId): bool
     {
         $invoice = Invoice::findOrFail($invoiceId);
 
@@ -82,11 +70,7 @@ class InvoiceService
         return true;
     }
 
-    /**
-     * @param $invoiceId
-     * @return true
-     */
-    public function setInvoiceStatusCancel($invoiceId): bool
+    public function setInvoiceStatusCancel(string $invoiceId): bool
     {
         $invoice = Invoice::findOrFail($invoiceId);
 

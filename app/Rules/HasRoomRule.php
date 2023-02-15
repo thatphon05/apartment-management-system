@@ -4,19 +4,15 @@
 namespace App\Rules;
 
 use App\Models\Room;
+use Closure;
 use Illuminate\Contracts\Validation\InvokableRule;
 
 class HasRoomRule implements InvokableRule
 {
     /**
      * Run the validation rule.
-     *
-     * @param string $attribute
-     * @param mixed $value
-     * @param \Closure $fail
-     * @return void
      */
-    public function __invoke($attribute, $value, $fail)
+    public function __invoke(string $attribute, mixed $value, Closure $fail): void
     {
         $room = Room::where('id', $value)->first(['id']);
 

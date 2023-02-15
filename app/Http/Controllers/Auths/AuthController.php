@@ -6,23 +6,19 @@ use App\Enums\AdminStatusEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function getUserLogin()
+
+    public function getUserLogin(): View
     {
         return view('auths.user');
     }
 
-    /**
-     * @param LoginRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postUserLogin(LoginRequest $request)
+    public function postUserLogin(LoginRequest $request): RedirectResponse
     {
         $email = $request->string('email')->trim();
         $password = $request->input('password');
@@ -40,29 +36,19 @@ class AuthController extends Controller
         return back()->withErrors(['msg' => 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])->withInput();
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function userLogout()
+    public function userLogout(): RedirectResponse
     {
         Auth::logout();
 
         return to_route('user.login.get');
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function getAdminLogin()
+    public function getAdminLogin(): View
     {
         return view('auths.admin');
     }
 
-    /**
-     * @param LoginRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function postAdminLogin(LoginRequest $request)
+    public function postAdminLogin(LoginRequest $request): RedirectResponse
     {
         $email = $request->string('email')->trim();
         $password = $request->input('password');
@@ -81,10 +67,7 @@ class AuthController extends Controller
 
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function adminLogout()
+    public function adminLogout(): RedirectResponse
     {
         Auth::guard('admin')->logout();
 

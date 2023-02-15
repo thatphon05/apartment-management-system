@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AdminSettingRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -23,9 +21,6 @@ class AdminSettingRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
     public function messages(): array
     {
         return [
@@ -70,9 +65,6 @@ class AdminSettingRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

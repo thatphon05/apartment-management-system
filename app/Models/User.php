@@ -21,6 +21,7 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
+
     /**
      * @var bool
      */
@@ -77,25 +78,16 @@ class User extends Authenticatable
         'age',
     ];
 
-    /**
-     * @return HasMany
-     */
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'invoice_id');
@@ -103,8 +95,6 @@ class User extends Authenticatable
 
     /**
      * Hash the user's password.
-     *
-     * @return Attribute
      */
     protected function password(): Attribute
     {
@@ -113,9 +103,6 @@ class User extends Authenticatable
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function fullName(): Attribute
     {
         $value = $this->name . ' ' . $this->surname;
@@ -125,9 +112,6 @@ class User extends Authenticatable
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function fullAddress(): Attribute
     {
         $value = $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.' .
@@ -138,9 +122,6 @@ class User extends Authenticatable
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function birthDateFormat(): Attribute
     {
         $value = $this->birthdate->translatedFormat('l j F Y');
@@ -150,9 +131,6 @@ class User extends Authenticatable
         );
     }
 
-    /**
-     * @return Attribute
-     */
     protected function age(): Attribute
     {
         $value = $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');

@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateForeignKeys extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::table('floors', function (Blueprint $table) {
             $table->foreign('building_id')->references('id')->on('buildings')
@@ -95,7 +95,7 @@ class CreateForeignKeys extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('floors', function (Blueprint $table) {
             $table->dropForeign('floors_building_id_foreign');

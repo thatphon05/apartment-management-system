@@ -14,6 +14,7 @@ class Repair extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
@@ -29,25 +30,16 @@ class Repair extends Model
         'repair_date' => 'datetime:Y-m-d H:i',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id');
