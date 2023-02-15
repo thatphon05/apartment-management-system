@@ -17,11 +17,11 @@ class StorageService
      */
     public function download($file): StreamedResponse
     {
-        $this->isFileExist($file);
+        $this->isFileExists($file);
 
-        $fileExtension = explode('/', Storage::mimeType($file));
+        $fileExtension = explode('/', Storage::mimeType($file))[1];
 
-        return Storage::download($file, now() . '.' . $fileExtension[1]);
+        return Storage::download($file, now() . '.' . $fileExtension);
     }
 
     /**
@@ -30,7 +30,7 @@ class StorageService
      */
     public function viewFile($file): Response|Application|ResponseFactory
     {
-        $this->isFileExist($file);
+        $this->isFileExists($file);
 
         return response(Storage::get($file))->header('Content-Type', Storage::mimeType($file));
     }
@@ -39,7 +39,7 @@ class StorageService
      * @param $file
      * @return void
      */
-    public function isFileExist($file): void
+    public function isFileExists($file): void
     {
         if (!Storage::get($file)) {
             abort(404);

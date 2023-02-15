@@ -46,7 +46,7 @@ class InvoiceService
      * @param $invoiceId
      * @return bool
      */
-    public function updateInvoiceComplete(PaymentEditRequest $request, $invoiceId): bool
+    public function updateInvoiceStatus(PaymentEditRequest $request, $invoiceId): bool
     {
         if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::COMPLETE) {
             return $this->setInvoiceStatusSuccess($invoiceId);

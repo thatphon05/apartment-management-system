@@ -65,7 +65,7 @@ class InvoiceController extends Controller
 
             Payment::where('invoice_id', $id)->latest()->update($request->validated());
 
-            $this->invoiceService->updateInvoiceComplete($request, $id);
+            $this->invoiceService->updateInvoiceStatus($request, $id);
 
         });
 
