@@ -32,7 +32,8 @@ class UserService
                     ->orWhere('telephone', 'like', $searchLike);
             })
             ->latest('id')
-            ->paginate(40);
+            ->paginate(40)
+            ->withQueryString();
     }
 
     public function createUser(Request $request): User

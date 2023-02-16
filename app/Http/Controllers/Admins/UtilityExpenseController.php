@@ -28,7 +28,8 @@ class UtilityExpenseController extends Controller
             'expenses' => UtilityExpense::with(['room.floor.building'])
                 ->where('room_id', $roomId)
                 ->latest('cycle')
-                ->paginate(40),
+                ->paginate(40)
+                ->withQueryString(),
             'roomId' => $roomId,
         ]);
     }

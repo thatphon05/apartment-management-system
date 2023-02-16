@@ -41,6 +41,6 @@
         </table>
     </div>
     <div class="card-footer text-center">
-        <a href="{{ route('admin.repairs.index', $parameters) }}">ดูทั้งหมด</a>
+        <a href="{{ route('admin.repairs.index', $parameters ?? []) }}">ดูทั้งหมด</a>
     </div>
 </div>

@@ -97,7 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
 
         // Payment management
-        Route::resource('invoices', InvoiceController::class)->only(['index', 'edit', 'update']);
+        Route::resource('invoices', InvoiceController::class)->except(['destroy']);
 
         // Download payment attach file
         Route::get('payments/paymentattach/{filename}', [InvoiceController::class, 'downloadPaymentAttach'])

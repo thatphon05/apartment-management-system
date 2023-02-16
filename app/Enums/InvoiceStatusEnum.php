@@ -34,11 +34,7 @@ enum InvoiceStatusEnum: int
      */
     public static function values(): array
     {
-        $listOfEnum = array_column(self::cases(), 'name', 'value');
-
-        unset($listOfEnum[self::OVERDUE->value]);
-
-        return $listOfEnum;
+        return array_column(self::cases(), 'name', 'value');
     }
 
 }

@@ -25,7 +25,26 @@ class Invoice extends Model
      * @var string[]
      */
     protected $fillable = [
+        'user_id',
+        'booking_id',
+        'room_id',
+        'util_expense_id',
+        'cycle',
         'status',
+        'rent_total',
+        'electric_unit_last',
+        'electric_unit_later',
+        'electric_total',
+        'electric_unit',
+        'electric_unit_price',
+        'water_unit_last',
+        'water_unit_later',
+        'water_unit',
+        'water_unit_price',
+        'water_total',
+        'parking_total',
+        'common_total',
+        'due_date',
         'overdue_total',
         'summary',
     ];

@@ -65,4 +65,14 @@ class InvoiceController extends Controller
     {
         return $this->storageService->viewFile(config('custom.payment_attachment_path') . '/' . $filename);
     }
+
+    public function create()
+    {
+        return 'Create invoice page';
+    }
+
+    public function store()
+    {
+
+    }
 }

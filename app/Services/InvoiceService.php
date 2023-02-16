@@ -2,10 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\BookingStatusEnum;
 use App\Enums\InvoiceStatusEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Http\Requests\PaymentEditRequest;
+use App\Models\Booking;
+use App\Models\Configuration;
 use App\Models\Invoice;
+use App\Models\Room;
+use App\Models\UtilityExpense;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -14,7 +20,7 @@ class InvoiceService
 
     public function searchInvoice(Request $request): LengthAwarePaginator
     {
-        $status = $request->query('status', InvoiceStatusEnum::cases());
+        $status = $request->query('status');
         $month = $request->query('month', 0);
         $year = $request->query('year', 0);
         $room = $request->query('room', 0);
@@ -23,15 +29,32 @@ class InvoiceService
         $dateNow = now();
 
         return Invoice::with(['user', 'payments', 'room.floor.building'])
-            // Filter all status except OVERDUE
-            ->orWhere(function ($query) use ($status, $dateNow) {
-                $query->WhereIn('status', $status)
-                    ->whereDate('due_date', '>', $dateNow);
-            })
-            // Filter OVERDUE
-            ->when(in_array(InvoiceStatusEnum::OVERDUE->value, $status), function ($query) use ($status, $dateNow) {
-                $query->orWhere('status', InvoiceStatusEnum::PENDING->value)
-                    ->whereDate('due_date', '<', $dateNow);
+            // Filter Status
+            ->when(!empty($status), function ($query) use ($status, $dateNow) {
+                $query->where(function ($query) use ($status, $dateNow) {
+                    // Query PENDING
+                    $query->when(in_array(InvoiceStatusEnum::PENDING->value, $status), function ($query) use ($dateNow) {
+                        $query->orWhere(function () use ($query, $dateNow) {
+                            $query->orWhereDate('due_date', '>', $dateNow);
+                            $query->where('status', InvoiceStatusEnum::PENDING->value);
+                        });
+                    });
+                    // Query OVERDUE
+                    $query->when(in_array(InvoiceStatusEnum::OVERDUE->value, $status), function ($query) use ($dateNow) {
+                        $query->orWhere(function () use ($query, $dateNow) {
+                            $query->orWhereDate('due_date', '<', $dateNow);
+                            $query->where('status', InvoiceStatusEnum::PENDING->value);
+                        });
+                    });
+                    // Query COMPLETE
+                    $query->when(in_array(InvoiceStatusEnum::COMPLETE->value, $status), function ($query) {
+                        $query->orWhere('status', InvoiceStatusEnum::COMPLETE);
+                    });
+                    // Query CANCEL
+                    $query->when(in_array(InvoiceStatusEnum::CANCEL->value, $status), function ($query) {
+                        $query->orWhere('status', InvoiceStatusEnum::CANCEL);
+                    });
+                });
             })
             ->when($month > 0, function ($query) use ($month) {
                 $query->whereMonth('cycle', $month);
@@ -45,8 +68,9 @@ class InvoiceService
             ->when($user > 0, function ($query) use ($user) {
                 $query->where('user_id', $user);
             })
-            ->latest('id')
-            ->paginate(40);
+            ->latest('cycle')
+            ->paginate(2)
+            ->withQueryString();
     }
 
     public function updateInvoiceStatus(PaymentEditRequest $request, string $invoiceId): bool
@@ -92,6 +116,53 @@ class InvoiceService
         $invoice->save();
 
         return true;
+    }
+
+    public function createInvoice(string $roomId, string $cycle): Invoice
+    {
+        $room = Room::findOrFail($roomId);
+        $configuration = Configuration::findOrFail($room);
+        $cycle = Carbon::parse($cycle);
+        $booking = Booking::where('room_id', $room->id)
+            ->where('status', BookingStatusEnum::ACTIVE)
+            ->latest('id')
+            ->first();
+        $currentUtilExpense = UtilityExpense::where('room_id', $room->id)
+            ->where('cycle', $cycle)
+            ->first();
+        $lastUtilExpense = UtilityExpense::where('room_id', $room->id)
+            ->whereNot('cycle', $cycle)
+            ->latest('cycle')
+            ->first();
+
+        $electricUnitDiff = $currentUtilExpense->electric_unit - $lastUtilExpense->electric_unit;
+        $waterUnitDiff = $currentUtilExpense->water_unit - $lastUtilExpense->water_unit;
+
+        $electricUnitFee = $configuration->electric_fee;
+        $waterUnitFee = $configuration->water_fee;
+
+        return Invoice::create([
+            'user_id' => $booking->user_id,
+            'booking_id' => $booking->id,
+            'room_id' => $room->id,
+            'util_expense_id' => $currentUtilExpense->id,
+            'cycle' => $cycle,
+            'status' => InvoiceStatusEnum::PENDING,
+            'rent_total' => $configuration->rent_fee,
+            'electric_unit_last' => $lastUtilExpense->electric_unit, // จดไฟครั้งก่อน
+            'electric_unit_later' => $currentUtilExpense->electric_unit, // จดไฟครั้งหลัง
+            'electric_unit' => $electricUnitDiff, // หน่วยที่ใช้
+            'electric_unit_price' => $electricUnitFee, // ราคาไฟต่อหน่วย
+            'electric_total' => $electricUnitDiff * $configuration->electric_fee, // รวมค่าไฟ
+            'water_unit_last' => $lastUtilExpense->water_unit, // จดน้ำครั้งก่อน
+            'water_unit_later' => $currentUtilExpense->water_unit, // จดน้ำครั้งหลัง
+            'water_unit' => $waterUnitDiff, // หน่วยที่ใช้
+            'water_unit_price' => $waterUnitFee, // ราคาน้ำต่อหน่วย
+            'water_total' => $waterUnitDiff * $waterUnitFee, // รวมค่าน้ำ
+            'parking_total' => $configuration->parking_fee,
+            'common_total' => $configuration->common_fee,
+            'due_date' => $cycle->addMonth()->setDay(config('custom.due_date')),
+        ]);
     }
 
 }

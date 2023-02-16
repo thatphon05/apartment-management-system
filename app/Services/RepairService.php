@@ -35,7 +35,8 @@ class RepairService
                 $query->where('room_id', $room);
             })
             ->latest('id')
-            ->paginate(40);
+            ->paginate(40)
+            ->withQueryString();
     }
 
 }
