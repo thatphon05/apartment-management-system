@@ -69,7 +69,7 @@ class InvoiceService
                 $query->where('user_id', $user);
             })
             ->latest('cycle')
-            ->paginate(2)
+            ->paginate(40)
             ->withQueryString();
     }
 

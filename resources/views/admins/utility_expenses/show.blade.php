@@ -47,6 +47,8 @@
                                     <th>ID</th>
                                     <th>ประจำเดือน</th>
                                     <th>ห้อง</th>
+                                    <th>หน่วยค่าไฟที่จด</th>
+                                    <th>หน่วยค่าน้ำที่จด</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -70,6 +72,10 @@
                                                 </a>
                                             </span>
                                         </td>
+                                        <td><span
+                                                class="text-muted">{{ $expense->electric_unit }}</span>
+                                        </td>
+                                        <td><span class="text-muted">{{ $expense->water_unit }}</span></td>
                                         <td class="text-end">
                                             <a href=""
                                                class="btn"
