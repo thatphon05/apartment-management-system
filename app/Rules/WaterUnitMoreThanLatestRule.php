@@ -44,7 +44,7 @@ class WaterUnitMoreThanLatestRule implements DataAwareRule, InvokableRule
             ->first(['water_unit']);
 
         if ($value < ($expenses->water_unit ?? 0)) {
-            $fail('กรุณาใส่เลขน้ำที่มากกว่าเดือนที่แล้ว');
+            $fail('กรุณาใส่เลขน้ำที่มากกว่าเดือนล่าสุด');
         }
     }
 }

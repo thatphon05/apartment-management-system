@@ -44,7 +44,7 @@ class ElectricUnitMoreThanLatestRule implements DataAwareRule, InvokableRule
             ->first(['electric_unit']);
 
         if ($value < ($expenses->electric_unit ?? 0)) {
-            $fail('กรุณาใส่เลขไฟฟ้าที่มากกว่าเดือนที่แล้ว');
+            $fail('กรุณาใส่เลขไฟฟ้าที่มากกว่าเดือนล่าสุด');
         }
     }
 }
