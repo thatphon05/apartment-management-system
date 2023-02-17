@@ -164,12 +164,12 @@ class InvoiceService
             'electric_unit_later' => $currentUseElectricUnit, // จดไฟครั้งหลัง
             'electric_unit' => $electricUnitDiff, // หน่วยที่ใช้
             'electric_unit_price' => $electricUnitFee, // ราคาไฟต่อหน่วย
-            'electric_total' => $electricUnitDiff * $configuration->electric_fee, // รวมค่าไฟ
+            'electric_total' => $electricUnitDiff * $configuration->electric_fee * 2, // รวมค่าไฟ
             'water_unit_last' => $lastUseWaterUnit, // จดน้ำครั้งก่อน
             'water_unit_later' => $currentUseWaterUnit, // จดน้ำครั้งหลัง
             'water_unit' => $waterUnitDiff, // หน่วยที่ใช้
             'water_unit_price' => $waterUnitFee, // ราคาน้ำต่อหน่วย
-            'water_total' => $waterUnitDiff * $waterUnitFee, // รวมค่าน้ำ
+            'water_total' => $waterUnitDiff * $waterUnitFee * 2, // รวมค่าน้ำ
             'parking_total' => $booking->parking_amount * $configuration->parking_fee,
             'common_total' => $configuration->common_fee,
             'due_date' => $cycleParse->addMonth()->setDay(config('custom.due_date')),

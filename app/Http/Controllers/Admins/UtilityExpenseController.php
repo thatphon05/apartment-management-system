@@ -69,7 +69,7 @@ class UtilityExpenseController extends Controller
             'room_id' => $request->room_id,
         ]);
 
-        return to_route('admin.expenses.show', ['roomId' => $request->room_id]);
+        return to_route('admin.expenses.index', ['room' => $request->room_id]);
     }
 
     public function edit(string $id)

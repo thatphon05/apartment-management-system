@@ -66,8 +66,8 @@
                                 <td class="text-center">{{ $invoice->water_unit_last }}</td>
                                 <td class="text-center">{{ $invoice->water_unit_later }}</td>
                                 <td class="text-center">{{ $invoice->water_unit }}</td>
-                                <td class="text-center">{{ $invoice->water_unit_price_divide }}</td>
-                                <td class="text-end">{{ $invoice->water_total_divided }}</td>
+                                <td class="text-center">{{ $invoice->water_unit_price }}</td>
+                                <td class="text-end">{{ number_format($invoice->water_total_divided, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">2</td>
@@ -77,8 +77,8 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">{{ $invoice->water_unit }}</td>
-                                <td class="text-center">{{ $invoice->water_unit_price_divide }}</td>
-                                <td class="text-end">{{ $invoice->water_total_divided }}</td>
+                                <td class="text-center">{{ $invoice->water_unit_price }}</td>
+                                <td class="text-end">{{ number_format($invoice->water_total_divided, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">3</td>
@@ -88,8 +88,8 @@
                                 <td class="text-center">{{ $invoice->electric_unit_last }}</td>
                                 <td class="text-center">{{ $invoice->electric_unit_later }}</td>
                                 <td class="text-center">{{ $invoice->electric_unit }}</td>
-                                <td class="text-center">{{ $invoice->electric_unit_price_divide }}</td>
-                                <td class="text-end">{{ $invoice->electric_total_divided }}</td>
+                                <td class="text-center">{{ $invoice->electric_unit_price }}</td>
+                                <td class="text-end">{{ number_format($invoice->electric_total_divided, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">4</td>
@@ -99,8 +99,8 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">{{ $invoice->electric_unit }}</td>
-                                <td class="text-center">{{ $invoice->electric_unit_price_divide }}</td>
-                                <td class="text-end">{{ $invoice->electric_total_divided }}</td>
+                                <td class="text-center">{{ $invoice->electric_unit_price }}</td>
+                                <td class="text-end">{{ number_format($invoice->electric_total_divided, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">5</td>
@@ -148,11 +148,15 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
-                                <td class="text-end">{{ $invoice->overdue_total <= 0 ? $invoice->dynamic_overdue_total : $invoice->overdue_total }}</td>
+                                <td class="text-end">
+                                    {{ number_format($invoice->overdue_total <= 0 ? $invoice->dynamic_overdue_total : $invoice->overdue_total, 2) }}
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="6" class="strong text-end">รวมทั้งสิ้น</td>
-                                <td class="text-end">{{ number_format($invoice->summary <= 0 ? $invoice->dynamic_summary : $invoice->summary, 2) }}</td>
+                                <td class="text-end">
+                                    {{ number_format($invoice->summary <= 0 ? $invoice->dynamic_summary : $invoice->summary, 2) }}
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -71,8 +71,6 @@ class Invoice extends Model
         'electric_total_divided',
         'dynamic_summary',
         'dynamic_overdue_total',
-        'electric_unit_price_divide',
-        'water_unit_price_divide',
         'due_date_late',
     ];
 
@@ -160,24 +158,6 @@ class Invoice extends Model
 
             $value = (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
         }
-
-        return new Attribute(
-            get: fn() => $value,
-        );
-    }
-
-    protected function electricUnitPriceDivide(): Attribute
-    {
-        $value = (float)$this->electric_unit_price / 2;
-
-        return new Attribute(
-            get: fn() => $value,
-        );
-    }
-
-    protected function waterUnitPriceDivide(): Attribute
-    {
-        $value = (float)$this->water_unit_price / 2;
 
         return new Attribute(
             get: fn() => $value,
