@@ -101,7 +101,7 @@
                                                                 ดูข้อมูลห้องพัก
                                                             </a>
                                                             <a class="dropdown-item"
-                                                               href="{{ route('admin.expenses.show', ['roomId' => $room->id]) }}">
+                                                               href="{{ route('admin.expenses.index', ['room' => $room->id]) }}">
                                                                 ดูค่าน้ำค่าไฟ
                                                             </a>
                                                         </div>

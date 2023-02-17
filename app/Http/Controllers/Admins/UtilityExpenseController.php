@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UtilityExpenseCreateRequest;
 use App\Models\UtilityExpense;
 use App\Services\RoomService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class UtilityExpenseController extends Controller
@@ -17,21 +19,38 @@ class UtilityExpenseController extends Controller
     {
     }
 
-    public function index()
+    public function index(Request $request): View
     {
+        $search = $request->query('search');
+        $searchLike = '%' . $search . '%';
+        $month = $request->query('month', 0);
+        $year = $request->query('year', 0);
+        $room = $request->query('room', 0);
 
+        return view('admins.utility_expenses.index', [
+            'rooms' => $this->roomService->getRooms(),
+            'expenses' => UtilityExpense::with(['room.floor.building', 'room.building'])
+                ->when($search != '', function ($query) use ($searchLike) {
+                    $query->where('subject', 'like', $searchLike);
+                })
+                ->when($month > 0, function ($query) use ($month) {
+                    $query->whereMonth('cycle', $month);
+                })
+                ->when($year > 0, function ($query) use ($year) {
+                    $query->whereYear('cycle', $year);
+                })
+                ->when($room > 0, function ($query) use ($room) {
+                    $query->where('room_id', $room);
+                })
+                ->latest('id')
+                ->paginate(40)
+                ->withQueryString(),
+        ]);
     }
 
     public function show(string $roomId): View
     {
-        return view('admins.utility_expenses.show', [
-            'expenses' => UtilityExpense::with(['room.floor.building'])
-                ->where('room_id', $roomId)
-                ->latest('cycle')
-                ->paginate(40)
-                ->withQueryString(),
-            'roomId' => $roomId,
-        ]);
+        //
     }
 
     public function create(): View
@@ -41,7 +60,7 @@ class UtilityExpenseController extends Controller
         ]);
     }
 
-    public function store(UtilityExpenseCreateRequest $request)
+    public function store(UtilityExpenseCreateRequest $request): RedirectResponse
     {
         UtilityExpense::create([
             'water_unit' => $request->water_unit,

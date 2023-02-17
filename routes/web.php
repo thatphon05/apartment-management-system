@@ -104,20 +104,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('payments.download.payment_attach');
 
         // Utility Expense management
-        Route::prefix('expenses')->name('expenses.')->group(function () {
-
-            Route::get('/', [UtilityExpenseController::class, 'index'])->name('index');
-
-            Route::get('room/{roomId}', [UtilityExpenseController::class, 'show'])->name('show');
-
-            Route::get('{id}/edit', [UtilityExpenseController::class, 'edit'])->name('edit');
-            Route::patch('{id}', [UtilityExpenseController::class, 'update'])->name('update');
-
-            Route::get('/create', [UtilityExpenseController::class, 'create'])->name('create');
-            Route::post('/', [UtilityExpenseController::class, 'store'])->name('store');
-
-        });
-
+        Route::resource('expenses', UtilityExpenseController::class)->except(['destroy']);
 
     });
 });

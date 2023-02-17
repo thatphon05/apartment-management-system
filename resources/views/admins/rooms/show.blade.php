@@ -279,7 +279,7 @@
                         </div>
 
                         <div class="card-footer text-center">
-                            <a href="{{ route('admin.expenses.show', ['roomId' => $room->id]) }}">ดูทั้งหมด</a>
+                            <a href="{{ route('admin.expenses.index', ['room' => $room->id]) }}">ดูทั้งหมด</a>
                         </div>
 
                     </div>
