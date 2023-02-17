@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ElectricUnitMoreThanLatestRule;
 use App\Rules\HasRoomRule;
 use App\Rules\UtilityExpenseCycleExistedRule;
+use App\Rules\WaterUnitMoreThanLatestRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UtilityExpenseCreateRequest extends FormRequest
@@ -12,8 +14,8 @@ class UtilityExpenseCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'water_unit' => 'required|numeric|min:0',
-            'electric_unit' => 'required|numeric|min:0',
+            'water_unit' => ['required', 'numeric', 'min:0', new WaterUnitMoreThanLatestRule],
+            'electric_unit' => ['required', 'numeric', 'min:0', new ElectricUnitMoreThanLatestRule],
             'cycle' => ['date_format:Y-m', new UtilityExpenseCycleExistedRule],
             'room_id' => [new HasRoomRule],
         ];
