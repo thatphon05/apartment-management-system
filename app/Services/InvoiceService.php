@@ -75,11 +75,11 @@ class InvoiceService
 
     public function updateInvoiceStatus(PaymentEditRequest $request, string $invoiceId): bool
     {
-        if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::COMPLETE) {
+        if (PaymentStatusEnum::from($request->status) === PaymentStatusEnum::COMPLETE) {
             return $this->setInvoiceStatusSuccess($invoiceId);
         }
 
-        if (PaymentStatusEnum::from($request->status) == PaymentStatusEnum::CANCEL) {
+        if (PaymentStatusEnum::from($request->status) === PaymentStatusEnum::CANCEL) {
             return $this->setInvoiceStatusCancel($invoiceId);
         }
 
