@@ -42,7 +42,7 @@ class UtilityExpenseController extends Controller
                 ->when($room > 0, function ($query) use ($room) {
                     $query->where('room_id', $room);
                 })
-                ->latest('id')
+                ->latest('cycle')
                 ->paginate(40)
                 ->withQueryString(),
         ]);
