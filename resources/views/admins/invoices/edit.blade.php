@@ -140,8 +140,8 @@
                                 <td>
                                     <p class="strong mb-1">ค่าปรับชำระเลยกำหนด</p>
                                     <div class="text-muted">หากชำระเงินเกินวันที่ {{ $invoice->due_date_format }}
-                                        จะเสียค่าปรับวันละ 50 บาท
-                                        แต่ปรับไม่เกิน 15 วัน
+                                        จะเสียค่าปรับวันละ {{ $invoice->room->configuration->overdue_fee }} บาท
+                                        แต่ปรับไม่เกินวันที่ {{ $invoice->due_date_late }}
                                     </div>
                                 </td>
                                 <td class="text-center"></td>
@@ -152,7 +152,7 @@
                             </tr>
                             <tr>
                                 <td colspan="6" class="strong text-end">รวมทั้งสิ้น</td>
-                                <td class="text-end">{{ $invoice->summary <= 0 ? $invoice->dynamic_summary : $invoice->summary }}</td>
+                                <td class="text-end">{{ number_format($invoice->summary <= 0 ? $invoice->dynamic_summary : $invoice->summary, 2) }}</td>
                             </tr>
                             </tbody>
                         </table>

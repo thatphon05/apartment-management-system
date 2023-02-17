@@ -4,7 +4,7 @@
     <option value="0">โปรดเลือกห้อง</option>
     @foreach($rooms as $room)
         <option value="{{ $room->id }}"
-            @selected(request()->query('roomId') == $room->id)
+            @selected(request()->query('room') == $room->id)
             @selected(old('room_id') == $room->id)
         >
             อาคาร {{ $room->floor->building->name }}

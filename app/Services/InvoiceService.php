@@ -121,25 +121,36 @@ class InvoiceService
     public function createInvoice(string $roomId, string $cycle): Invoice
     {
         $room = Room::findOrFail($roomId);
-        $configuration = Configuration::findOrFail($room);
-        $cycle = Carbon::parse($cycle);
+        $configuration = Configuration::findOrFail($room->configuration_id);
+        $cycleParse = Carbon::parse($cycle);
+
         $booking = Booking::where('room_id', $room->id)
             ->where('status', BookingStatusEnum::ACTIVE)
             ->latest('id')
             ->first();
         $currentUtilExpense = UtilityExpense::where('room_id', $room->id)
-            ->where('cycle', $cycle)
+            ->whereMonth('cycle', $cycleParse->month)
+            ->whereYear('cycle', $cycleParse->year)
+            ->latest('cycle')
             ->first();
         $lastUtilExpense = UtilityExpense::where('room_id', $room->id)
-            ->whereNot('cycle', $cycle)
+            ->whereDate('cycle', '<', $cycleParse)
             ->latest('cycle')
             ->first();
 
-        $electricUnitDiff = $currentUtilExpense->electric_unit - $lastUtilExpense->electric_unit;
-        $waterUnitDiff = $currentUtilExpense->water_unit - $lastUtilExpense->water_unit;
+        $currentUseElectricUnit = $currentUtilExpense->electric_unit ?? 0;
+        $lastUseElectricUnit = $lastUtilExpense->electric_unit ?? 0;
+
+        $currentUseWaterUnit = $currentUtilExpense->water_unit ?? 0;
+        $lastUseWaterUnit = $lastUtilExpense->water_unit ?? 0;
+
+        $electricUnitDiff = $currentUseElectricUnit - $lastUseElectricUnit;
+        $waterUnitDiff = $currentUseWaterUnit - $lastUseWaterUnit;
 
         $electricUnitFee = $configuration->electric_fee;
         $waterUnitFee = $configuration->water_fee;
+
+        //return dd($cycle);
 
         return Invoice::create([
             'user_id' => $booking->user_id,
@@ -149,19 +160,19 @@ class InvoiceService
             'cycle' => $cycle,
             'status' => InvoiceStatusEnum::PENDING,
             'rent_total' => $configuration->rent_fee,
-            'electric_unit_last' => $lastUtilExpense->electric_unit, // จดไฟครั้งก่อน
-            'electric_unit_later' => $currentUtilExpense->electric_unit, // จดไฟครั้งหลัง
+            'electric_unit_last' => $lastUseElectricUnit, // จดไฟครั้งก่อน
+            'electric_unit_later' => $currentUseElectricUnit, // จดไฟครั้งหลัง
             'electric_unit' => $electricUnitDiff, // หน่วยที่ใช้
             'electric_unit_price' => $electricUnitFee, // ราคาไฟต่อหน่วย
             'electric_total' => $electricUnitDiff * $configuration->electric_fee, // รวมค่าไฟ
-            'water_unit_last' => $lastUtilExpense->water_unit, // จดน้ำครั้งก่อน
-            'water_unit_later' => $currentUtilExpense->water_unit, // จดน้ำครั้งหลัง
+            'water_unit_last' => $lastUseWaterUnit, // จดน้ำครั้งก่อน
+            'water_unit_later' => $currentUseWaterUnit, // จดน้ำครั้งหลัง
             'water_unit' => $waterUnitDiff, // หน่วยที่ใช้
             'water_unit_price' => $waterUnitFee, // ราคาน้ำต่อหน่วย
             'water_total' => $waterUnitDiff * $waterUnitFee, // รวมค่าน้ำ
-            'parking_total' => $configuration->parking_fee,
+            'parking_total' => $booking->parking_amount * $configuration->parking_fee,
             'common_total' => $configuration->common_fee,
-            'due_date' => $cycle->addMonth()->setDay(config('custom.due_date')),
+            'due_date' => $cycleParse->addMonth()->setDay(config('custom.due_date')),
         ]);
     }
 

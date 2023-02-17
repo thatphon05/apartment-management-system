@@ -73,6 +73,7 @@ class Invoice extends Model
         'dynamic_overdue_total',
         'electric_unit_price_divide',
         'water_unit_price_divide',
+        'due_date_late',
     ];
 
     public function booking(): BelongsTo
@@ -187,6 +188,15 @@ class Invoice extends Model
     {
         $value = (float)$this->rent_total + $this->electric_total + $this->water_total
             + $this->parking_total + $this->common_total + $this->dynamic_overdue_total;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
+    }
+
+    protected function dueDateLate(): Attribute
+    {
+        $value = $this->due_date->addDays(config('custom.pay_within_day'))->translatedFormat('d F Y');
 
         return new Attribute(
             get: fn() => $value,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InvoiceCreateRequest;
 use App\Http\Requests\PaymentEditRequest;
 use App\Models\Invoice;
 use App\Models\Payment;
@@ -41,7 +42,7 @@ class InvoiceController extends Controller
     public function edit(string $id): View
     {
         return view('admins.invoices.edit', [
-            'invoice' => Invoice::with(['user', 'room.floor.building' => function ($query) {
+            'invoice' => Invoice::with(['user', 'room.floor.building', 'room.configuration' => function ($query) {
                 $query->first();
             }])->findOrFail($id),
             'payment' => Payment::where('invoice_id', $id)->latest()->first(),
@@ -66,13 +67,17 @@ class InvoiceController extends Controller
         return $this->storageService->viewFile(config('custom.payment_attachment_path') . '/' . $filename);
     }
 
-    public function create()
+    public function create(): View
     {
-        return 'Create invoice page';
+        return view('admins.invoices.create', [
+            'rooms' => $this->roomService->getRooms(),
+        ]);
     }
 
-    public function store()
+    public function store(InvoiceCreateRequest $request): RedirectResponse
     {
+        $this->invoiceService->createInvoice($request->room_id, $request->cycle);
 
+        return to_route('admin.invoices.index');
     }
 }
