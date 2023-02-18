@@ -205,8 +205,9 @@
                                         </dd>
                                     </dl>
                                     <div class="row mt-4">
-                                        <form action="{{ route('admin.invoices.update', ['invoice' => $invoice->id]) }}"
-                                              method="post">
+                                        <form
+                                            action="{{ route('admin.payments.update', ['id' => $invoice->id]) }}"
+                                            method="post">
                                             @csrf
                                             @method('PATCH')
                                             <div class="col-md-5">

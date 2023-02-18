@@ -36,7 +36,7 @@
                 <tr>
                     <td>
                         <a href="#">
-                            <a href="{{ route('admin.invoices.edit', ['invoice' => $invoice->id]) }}">
+                            <a href="{{ route('admin.invoices.show', ['invoice' => $invoice->id]) }}">
                                 #{{ $invoice->id }}
                             </a>
                         </a>

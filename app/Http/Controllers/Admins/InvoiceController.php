@@ -41,25 +41,10 @@ class InvoiceController extends Controller
 
     public function edit(string $id): View
     {
-        return view('admins.invoices.edit', [
-            'invoice' => Invoice::with(['user', 'room.floor.building', 'room.configuration' => function ($query) {
-                $query->first();
-            }])->findOrFail($id),
-            'payment' => Payment::where('invoice_id', $id)->latest()->first(),
-        ]);
     }
 
     public function update(PaymentEditRequest $request, string $id): RedirectResponse
     {
-        DB::transaction(function () use ($id, $request) {
-
-            Payment::where('invoice_id', $id)->latest()->update($request->validated());
-
-            $this->invoiceService->updateInvoiceStatus($request, $id);
-
-        });
-
-        return redirect()->back()->with(['success' => 'ดำเนินการแก้ไขสถานะสำเร็จ']);
     }
 
     public function downloadPaymentAttach(string $filename): Response
@@ -79,5 +64,29 @@ class InvoiceController extends Controller
         $this->invoiceService->createInvoice($request->room_id, $request->cycle);
 
         return to_route('admin.invoices.index');
+    }
+
+    public function show(string $id): View
+    {
+        return view('admins.invoices.show', [
+            'invoice' => Invoice::with(['user', 'room.floor.building', 'room.configuration' => function ($query) {
+                $query->first();
+            }])->findOrFail($id),
+            'payment' => Payment::where('invoice_id', $id)->latest()->first(),
+        ]);
+    }
+
+    public function updatePayment(PaymentEditRequest $request, string $id): RedirectResponse
+    {
+        DB::transaction(function () use ($id, $request) {
+
+            Payment::where('invoice_id', $id)->latest()->update($request->validated());
+
+            $this->invoiceService->updateInvoiceStatus($request, $id);
+
+        });
+
+        return to_route('admin.invoices.show', ['invoice' => $id])
+            ->with(['success' => 'ดำเนินการแก้ไขสถานะสำเร็จ']);
     }
 }
