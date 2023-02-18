@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col text-truncate">
                                         <a href="{{ route('admin.users.download.idcardcopy', ['filename' => $user->id_card_copy]) }}"
-                                           class="text-body d-block">
+                                           class="text-body d-block" target="_blank">
                                             สำเนาบัตรประชาชน
                                         </a>
                                         <div class="text-muted text-truncate mt-n1">

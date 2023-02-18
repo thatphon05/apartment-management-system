@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Enums\InvoiceStatusEnum;
+use App\Enums\PaymentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceCreateRequest;
 use App\Http\Requests\PaymentEditRequest;
@@ -43,8 +45,21 @@ class InvoiceController extends Controller
     {
     }
 
-    public function update(PaymentEditRequest $request, string $id): RedirectResponse
+    public function update(string $id): RedirectResponse
     {
+        DB::transaction(function () use ($id) {
+
+            Invoice::findOrFail($id)->update([
+                'status' => InvoiceStatusEnum::CANCEL,
+            ]);
+
+            Payment::where('invoice_id', $id)->latest()->update([
+                'status' => PaymentStatusEnum::CANCEL,
+            ]);
+
+        });
+
+        return to_route('admin.invoices.show', ['invoice' => $id]);
     }
 
     public function downloadPaymentAttach(string $filename): Response
@@ -61,9 +76,9 @@ class InvoiceController extends Controller
 
     public function store(InvoiceCreateRequest $request): RedirectResponse
     {
-        $this->invoiceService->createInvoice($request->room_id, $request->cycle);
+        $invoice = $this->invoiceService->createInvoice($request->room_id, $request->cycle);
 
-        return to_route('admin.invoices.index');
+        return to_route('admin.invoices.show', ['invoice' => $invoice->id]);
     }
 
     public function show(string $id): View

@@ -11,6 +11,72 @@
                             ใบแจ้งหนี้ #{{ $invoice->id }}
                         </h2>
                     </div>
+                    <!-- Page title actions -->
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                            <a data-bs-toggle="modal" data-bs-target="#modal-danger"
+                               class="btn btn-danger d-none d-sm-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M18 6l-12 12"></path>
+                                    <path d="M6 6l12 12"></path>
+                                </svg>
+                                ยกเลิกใบแจ้งหนี้
+                            </a>
+                            <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        <div class="modal-status bg-danger"></div>
+                                        <div class="modal-body text-center py-4">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                <path d="M12 9v2m0 4v.01"/>
+                                                <path
+                                                    d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"/>
+                                            </svg>
+                                            <h3>ยืนยันการยกเลิกใบแจ้งหนี้</h3>
+                                            <div class="text-muted">
+                                                คุณต้องการยกเลิก ใบแจ้งหนี้ #{{ $invoice->id }} หรือไม่
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="w-100">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="#" class="btn w-100"
+                                                           data-bs-dismiss="modal">
+                                                            ยกเลิก
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form method="post"
+                                                              action="{{ route('admin.invoices.update', ['invoice' => $invoice->id]) }}">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" class="btn btn-danger w-100"
+                                                                    data-bs-dismiss="modal">
+                                                                ยืนยัน
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -19,33 +85,47 @@
             <div class="container-xl">
                 <div class="card card-lg">
                     <div class="card-body">
+                        <div class="row text-end mb-3">
+                            <h1>ใบแจ้งหนี้ #{{ $invoice->id }}</h1>
+                        </div>
                         <div class="row">
                             <div class="col-6">
                                 <p class="h3">โทพาซ</p>
                                 <address>
-                                    Street Address<br>
-                                    State, City<br>
-                                    Region, Postal Code<br>
+                                    20/20 ม.2 ถ.กิ่งแก้ว<br>
+                                    ต.ราชาเทวะ อ.บางพลี<br>
+                                    จ.สมุทรปราการ<br>
                                     ltd@example.com
                                 </address>
                             </div>
                             <div class="col-6 text-end">
-                                <p class="h3">Client</p>
+                                <p class="h3">ผู้เช่า</p>
                                 <address>
                                     {{ $invoice->user->full_name }} <br>
                                     {{ $invoice->user->full_address }}
                                 </address>
                             </div>
-                            <div class="col-12 my-5">
-                                <h1>
-                                    ใบแจ้งหนี้ #{{ $invoice->id }}
-                                    อาคาร {{ $invoice->room->floor->building->name ?? '' }}
-                                    ชั้น {{ $invoice->room->floor->name ?? '' }}
-                                    ห้อง {{ $invoice->room->name ?? '' }}
-                                </h1>
+                            <div class="col-12 mt-1 mb-4 text-end">
+                                <h3>
+                                    สถานะ: <span
+                                        class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
+                                                {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
+                                        </span>
+                                </h3>
+                                <h3>
+                                    อาคาร: {{ $invoice->room->floor->building->name ?? '' }}
+                                    ชั้น: {{ $invoice->room->floor->name ?? '' }}
+                                    ห้อง: {{ $invoice->room->name ?? '' }}
+                                </h3>
+                                <h3>
+                                    วันที่ออก: {{ $invoice->created_at->translatedFormat('d F Y') }}
+                                </h3>
+                                <h3>
+                                    กำหนดชำระ: {{ $invoice->due_date_format }}
+                                </h3>
                             </div>
                         </div>
-                        <table class="table table-transparent table-responsive">
+                        <table class="table border table-responsive">
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 1%"></th>
@@ -105,7 +185,7 @@
                             <tr>
                                 <td class="text-center">5</td>
                                 <td>
-                                    <p class="strong mb-1">ค่าเช่าห้อง</p>
+                                    <p class="strong mb-1">ค่าเช่าห้อง ({{ $invoice->cycle_date }})</p>
                                 </td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
@@ -160,47 +240,49 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div class="card mt-5">
+                        <div class="card mt-5 d-print-none">
                             <div class="card-header">
                                 <h4 class="card-title">ปรับรายการชำระเงิน</h4>
                             </div>
                             <div class="card-body">
                                 @if($payment)
                                     <dl class="row">
-                                        <dt class="col-3">หมายเลขแจ้งชำระเงิน</dt>
+                                        <dt class="col-3">หมายเลขแจ้งชำระเงิน:</dt>
                                         <dd class="col-9">#{{$payment->id}}</dd>
-                                        <dt class="col-3">หมายเลขใบแจ้งหนี้</dt>
+                                        <dt class="col-3">หมายเลขใบแจ้งหนี้:</dt>
                                         <dd class="col-9">
                                             <a href="#!">
                                                 #{{$payment->invoice->id}}
                                             </a>
                                         </dd>
-                                        <dt class="col-3">ห้อง</dt>
+                                        <dt class="col-3">ห้อง:</dt>
                                         <dd class="col-9">
                                             อาคาร {{ $payment->booking->room->name }}
                                             ชั้น {{ $payment->booking->room->floor->name }}
                                             ห้อง {{ $payment->booking->room->name }}
                                         </dd>
-                                        <dt class="col-3">วันที่แจ้ง</dt>
+                                        <dt class="col-3">วันและเวลาที่แจ้ง:</dt>
                                         <dd class="col-9">{{$payment->created_at}}</dd>
-                                        <dt class="col-3">ชื่อผู้แจ้ง</dt>
+                                        <dt class="col-3">ชื่อผู้แจ้ง:</dt>
                                         <dd class="col-9">
                                             <a href="{{ route('admin.users.show', ['user' => $payment->user->id]) }}">
                                                 {{ $payment->user->full_name }}
                                             </a>
                                         </dd>
-                                        <dt class="col-3">สถานะ</dt>
+                                        <dt class="col-3">สถานะ:</dt>
                                         <dd class="col-9">
                                         <span
                                             class="badge bg-{{ \App\Enums\PaymentStatusEnum::getColor($payment->status) }}">
                                                 {{ \App\Enums\PaymentStatusEnum::getLabel($payment->status) }}
                                         </span>
                                         </dd>
-                                        <dt class="col-3">ไฟล์สลิปโอนเงิน</dt>
+                                        <dt class="col-3">ไฟล์สลิปโอนเงิน:</dt>
                                         <dd class="col-9">
                                             <a href="{{ route('admin.payments.download.payment_attach', ['filename' => $payment->attachfile]) }}"
                                                target="_blank">
-                                                ดูสลิป
+                                                <img class="img-fluid img-responsive-3x4 img-thumbnail rounded"
+                                                     style="max-width: 200px"
+                                                     src="{{ route('admin.payments.download.payment_attach', ['filename' => $payment->attachfile]) }}">
                                             </a>
                                         </dd>
                                     </dl>

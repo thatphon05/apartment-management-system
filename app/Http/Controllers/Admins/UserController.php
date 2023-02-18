@@ -16,6 +16,7 @@ use App\Services\StorageService;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -107,13 +108,13 @@ class UserController extends Controller
             ->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
-    public function downloadIdCardCopy(string $filename): StreamedResponse
+    public function downloadIdCardCopy(string $filename): StreamedResponse|Response
     {
-        return $this->storageService->download(config('custom.id_card_copy_path') . '/' . $filename);
+        return $this->storageService->viewFile(config('custom.id_card_copy_path') . '/' . $filename);
     }
 
-    public function downloadHouseRegCopy(string $filename): StreamedResponse
+    public function downloadHouseRegCopy(string $filename): StreamedResponse|Response
     {
-        return $this->storageService->download(config('custom.copy_house_registration_path') . '/' . $filename);
+        return $this->storageService->viewFile(config('custom.copy_house_registration_path') . '/' . $filename);
     }
 }

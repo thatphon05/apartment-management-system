@@ -109,7 +109,7 @@ class InvoiceService
     {
         $invoice = Invoice::findOrFail($invoiceId);
 
-        $invoice->status = InvoiceStatusEnum::COMPLETE;
+        $invoice->status = InvoiceStatusEnum::PENDING;
         $invoice->overdue_total = 0;
         $invoice->summary = 0;
 

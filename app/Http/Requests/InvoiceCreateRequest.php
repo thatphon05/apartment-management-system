@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\HasRoomRule;
+use App\Rules\InvoiceExistedRule;
 use App\Rules\UtilityExpenseCycleNotExistedRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,7 +13,7 @@ class InvoiceCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cycle' => ['date_format:Y-m', new UtilityExpenseCycleNotExistedRule],
+            'cycle' => ['date_format:Y-m', new UtilityExpenseCycleNotExistedRule, new InvoiceExistedRule],
             'room_id' => [new HasRoomRule],
         ];
     }

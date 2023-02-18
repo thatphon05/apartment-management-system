@@ -13,6 +13,7 @@ use App\Models\Room;
 use App\Models\UtilityExpense;
 use App\Services\StorageService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -69,12 +70,8 @@ class RoomController extends Controller
         return redirect()->back()->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
-    /**
-     * @param string $filename
-     * @return StreamedResponse
-     */
-    public function downloadRentContract(string $filename): StreamedResponse
+    public function downloadRentContract(string $filename): StreamedResponse|Response
     {
-        return $this->storageService->download(config('custom.rent_contract_path') . '/' . $filename);
+        return $this->storageService->viewFile(config('custom.rent_contract_path') . '/' . $filename);
     }
 }
