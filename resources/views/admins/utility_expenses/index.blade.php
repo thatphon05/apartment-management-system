@@ -146,19 +146,20 @@
                                         </td>
                                         <td><span class="text-muted">{{ $expense->water_unit }}</span></td>
                                         <td class="text-end">
-                                            <a href=""
-                                               class="btn"
-                                               role="button">
+                                            <a href="{{ route('admin.expenses.edit', ['expense' => $expense->id]) }}"
+                                               class="btn" role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                     class="icon icon-tabler icon-tabler-eye" width="24" height="24"
+                                                     class="icon icon-tabler icon-tabler-edit" width="24" height="24"
                                                      viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                                      fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <circle cx="12" cy="12" r="2"></circle>
                                                     <path
-                                                        d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                                        d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                                    <path
+                                                        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                                                    <path d="M16 5l3 3"></path>
                                                 </svg>
-                                                ดูข้อมูล
+                                                แก้ไข
                                             </a>
                                         </td>
                                     </tr>

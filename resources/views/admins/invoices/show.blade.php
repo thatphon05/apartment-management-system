@@ -94,8 +94,7 @@
                                 <address>
                                     20/20 ม.2 ถ.กิ่งแก้ว<br>
                                     ต.ราชาเทวะ อ.บางพลี<br>
-                                    จ.สมุทรปราการ<br>
-                                    ltd@example.com
+                                    จ.สมุทรปราการ
                                 </address>
                             </div>
                             <div class="col-6 text-end">
@@ -105,24 +104,24 @@
                                     {{ $invoice->user->full_address }}
                                 </address>
                             </div>
-                            <div class="col-12 mt-1 mb-4 text-end">
-                                <h3>
+                            <div class="col-12 mt-1 mb-4 text-end border-top p-3 border-bottom">
+                                <h4>
                                     สถานะ: <span
                                         class="badge bg-{{ \App\Enums\InvoiceStatusEnum::getColor($invoice->status) }}">
                                                 {{ \App\Enums\InvoiceStatusEnum::getLabel($invoice->status) }}
                                         </span>
-                                </h3>
-                                <h3>
+                                </h4>
+                                <h4>
                                     อาคาร: {{ $invoice->room->floor->building->name ?? '' }}
                                     ชั้น: {{ $invoice->room->floor->name ?? '' }}
                                     ห้อง: {{ $invoice->room->name ?? '' }}
-                                </h3>
-                                <h3>
+                                </h4>
+                                <h4>
                                     วันที่ออก: {{ $invoice->created_at->translatedFormat('d F Y') }}
-                                </h3>
-                                <h3>
+                                </h4>
+                                <h4>
                                     กำหนดชำระ: {{ $invoice->due_date_format }}
-                                </h3>
+                                </h4>
                             </div>
                         </div>
                         <table class="table border table-responsive">
@@ -191,7 +190,7 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
-                                <td class="text-end">{{ $invoice->rent_total }}</td>
+                                <td class="text-end">{{ number_format($invoice->rent_total, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">6</td>
@@ -202,7 +201,7 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
-                                <td class="text-end">{{ $invoice->common_total }}</td>
+                                <td class="text-end">{{ number_format($invoice->common_total, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">7</td>
@@ -213,14 +212,15 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
-                                <td class="text-end">{{ $invoice->parking_total }}</td>
+                                <td class="text-end">{{ number_format($invoice->parking_total, 2) }}</td>
                             </tr>
                             <tr>
                                 <td class="text-center">8</td>
                                 <td>
                                     <p class="strong mb-1">ค่าปรับชำระเลยกำหนด</p>
                                     <div class="text-muted">หากชำระเงินเกินวันที่ {{ $invoice->due_date_format }}
-                                        จะเสียค่าปรับวันละ {{ $invoice->room->configuration->overdue_fee }} บาท
+                                        จะเสียค่าปรับวันละ {{ number_format($invoice->room->configuration->overdue_fee) }}
+                                        บาท
                                         แต่ปรับไม่เกินวันที่ {{ $invoice->due_date_late }}
                                     </div>
                                 </td>

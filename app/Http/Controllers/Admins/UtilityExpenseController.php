@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UtilityExpenseCreateRequest;
+use App\Http\Requests\UtilityExpenseUpdateRequest;
 use App\Models\UtilityExpense;
 use App\Services\RoomService;
 use Illuminate\Http\RedirectResponse;
@@ -72,13 +73,16 @@ class UtilityExpenseController extends Controller
         return to_route('admin.expenses.index', ['room' => $request->room_id]);
     }
 
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-
+        return view('admins.utility_expenses.edit', [
+            'utilityExpense' => UtilityExpense::with('room.floor.building')->findOrFail($id),
+        ]);
     }
 
-    public function update(string $id)
+    public function update(UtilityExpenseUpdateRequest $request, string $id)
     {
-
+        UtilityExpense::findOrFail($id)->update($request->validated());
+        return to_route('admin.expenses.index')->with('success', 'แก้ไขสำเร็จ');
     }
 }

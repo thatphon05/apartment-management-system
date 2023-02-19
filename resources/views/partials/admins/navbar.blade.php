@@ -145,6 +145,26 @@
                             </span>
                         </a>
                     </li>
+                    <li class="nav-item @navactive('admin/expense*')">
+                        <a class="nav-link" href="{{ route('admin.expenses.index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-engine"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                   <path d="M3 10v6"></path>
+                                   <path d="M12 5v3"></path>
+                                   <path d="M10 5h4"></path>
+                                   <path d="M5 13h-2"></path>
+                                   <path
+                                       d="M6 10h2l2 -2h3.382a1 1 0 0 1 .894 .553l1.448 2.894a1 1 0 0 0 .894 .553h1.382v-2h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2v-2h-3v2a1 1 0 0 1 -1 1h-3.465a1 1 0 0 1 -.832 -.445l-1.703 -2.555h-2v-6z"></path>
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                            จัดการค่าสาธารณูปโภค
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item @navactive('admin/invoices*')">
                         <a class="nav-link" href="{{ route('admin.invoices.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -164,26 +184,6 @@
                             </span>
                             <span class="nav-link-title">
                                 รายการใบแจ้งหนี้
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item @navactive('admin/expense*')">
-                        <a class="nav-link" href="{{ route('admin.expenses.index') }}">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-engine"
-                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                   <path d="M3 10v6"></path>
-                                   <path d="M12 5v3"></path>
-                                   <path d="M10 5h4"></path>
-                                   <path d="M5 13h-2"></path>
-                                   <path
-                                       d="M6 10h2l2 -2h3.382a1 1 0 0 1 .894 .553l1.448 2.894a1 1 0 0 0 .894 .553h1.382v-2h2a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-2v-2h-3v2a1 1 0 0 1 -1 1h-3.465a1 1 0 0 1 -.832 -.445l-1.703 -2.555h-2v-6z"></path>
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">
-                            จัดการค่าสาธารณูปโภค
                             </span>
                         </a>
                     </li>
