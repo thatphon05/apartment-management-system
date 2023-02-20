@@ -9,6 +9,7 @@
         >
             อาคาร {{ $room->floor->building->name }}
             ชั้น {{ $room->floor->name }} ห้อง {{ $room->name }}
+            ({{ $room->bookings->isEmpty() ? 'ว่าง' : 'ไม่ว่าง' }})
         </option>
     @endforeach
 </select>
