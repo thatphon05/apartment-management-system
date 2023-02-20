@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'จัดหารห้องพักอาคาร ' . $building->name)
+@section('title', 'จัดการห้องพักอาคาร ' . $building->name)
 @section('content')
 
     <div class="page-header d-print-none">
@@ -160,7 +160,7 @@
 
                             </div>
                             <div class="list-group-item list-group-item-action">
-                                ห้องพักที่จองแล้ว {{ $bookingCount }}
+                                ห้องพักที่ไม่ว่าง {{ $bookingCount }}
                             </div>
                         </div>
                     </div>

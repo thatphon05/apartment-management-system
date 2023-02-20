@@ -130,7 +130,7 @@
                                                 </svg>
                                                 ดูข้อมูล
                                             </a>
-                                            <a href="{{ route('admin.users.edit', ['user' => 1]) }}" class="btn"
+                                            <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn"
                                                role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="icon icon-tabler icon-tabler-edit" width="24" height="24"

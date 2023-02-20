@@ -24,11 +24,11 @@
                             <div class="card-body">
                                 <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label class="form-label required">หน่วยค่าน้ำ</label>
+                                        <label class="form-label required">มิเตอร์น้ำ</label>
                                         <input value="{{ old('water_unit') }}" name="water_unit" type="number"
                                                onchange="inputChange(event)"
                                                class="form-control  @error('water_unit') is-invalid @enderror"
-                                               placeholder="หน่วยค่าน้ำ">
+                                               placeholder="มิเตอร์น้ำ">
                                         @error('water_unit')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -36,11 +36,11 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label class="form-label required">หน่วยค่าไฟ</label>
+                                        <label class="form-label required">มิเตอร์ไฟ</label>
                                         <input value="{{ old('electric_unit') }}" name="electric_unit" type="number"
                                                onchange="inputChange(event)"
                                                class="form-control @error('electric_unit') is-invalid @enderror"
-                                               placeholder="หน่วยค่าไฟ">
+                                               placeholder="มิเตอร์ไฟ">
                                         @error('electric_unit')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

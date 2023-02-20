@@ -16,8 +16,7 @@ class RoomService
             'floor.building',
             'bookings' => function (HasMany $hasMany) {
                 $hasMany->where('status', BookingStatusEnum::ACTIVE)
-                    ->latest()
-                    ->first();
+                    ->latest();
             }
         ])
             ->oldest('id')

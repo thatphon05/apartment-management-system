@@ -54,6 +54,7 @@ class RoomController extends Controller
                 ->take(5)
                 ->get(),
             'utilityExpenses' => UtilityExpense::where('room_id', $id)
+                ->latest('cycle')
                 ->take(12)
                 ->get(),
         ]);

@@ -12,7 +12,7 @@
         </h1>
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
-                <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
+                <a class="nav-link px-0 hide-theme-light" title="Enable light mode"
                    data-bs-toggle="tooltip"
                    data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
@@ -208,7 +208,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                            การตั้งค่า
+                                การตั้งค่าบริการ
                             </span>
                         </a>
                     </li>

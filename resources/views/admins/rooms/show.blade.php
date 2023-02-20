@@ -44,12 +44,12 @@
                         {{--                        </div>--}}
                         <div class="card-header row align-items-center">
                             <div class="col-auto fs-3">
-                                ประวัติค่าน้ำค่าไฟ
+                                ข้อมูลห้อง
                             </div>
                             @if ($currentBooking)
                                 <div class="col-auto ms-auto">
                                     <button data-bs-toggle="modal" data-bs-target="#modal-danger"
-                                            class="btn btn-pink btn-sm">
+                                            class="btn btn-outline-pink btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
                                              width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                              stroke="currentColor" fill="none" stroke-linecap="round"
@@ -234,7 +234,7 @@
                             </div>
                             <div class="col-auto ms-auto">
                                 <a href="{{ route('admin.expenses.create', ['roomId' => $room->id]) }}"
-                                   class="btn btn-azure btn-sm">
+                                   class="btn btn-outline-success btn-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
                                          width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                          stroke="currentColor" fill="none" stroke-linecap="round"
@@ -247,24 +247,33 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-table table-responsive">
+                        <div class="card-table table-responsive align-middle">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>ประจำเดือน</th>
+                                    <th>มิเตอร์น้ำ</th>
+                                    <th>มิเตอร์ไฟ</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($utilityExpenses as $utilityExpense)
                                     <tr>
-                                        <td>
-                                            <a href="#">
-                                                {{ $utilityExpense->id }}
-                                            </a>
-                                        </td>
-                                        <td>
+                                        <td class="align-middle">
                                             {{ $utilityExpense->cycle_month }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ $utilityExpense->water_unit }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ $utilityExpense->electric_unit }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <a class="btn"
+                                               href="{{ route('admin.expenses.edit', ['expense' => $utilityExpense->id]) }}">
+                                                ดู
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
@@ -297,7 +306,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>ผู้เช่า</th>
                                     <th>สถานะ</th>
                                     <th>วันที่เข้าพัก</th>
@@ -306,11 +314,6 @@
                                 <tbody>
                                 @forelse($bookings as $booking)
                                     <tr>
-                                        <td>
-                                            <a href="#">
-                                                #{{ $booking->id }}
-                                            </a>
-                                        </td>
                                         <td>
                                             {{ $booking->user->full_name}}
                                         </td>

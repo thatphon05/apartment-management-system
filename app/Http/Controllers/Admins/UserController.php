@@ -104,7 +104,7 @@ class UserController extends Controller
     public function edit(string $id): View
     {
         return view('admins.users.edit', [
-            'user' => User::findOrFail($id)->first(),
+            'user' => User::findOrFail($id),
         ]);
     }
 

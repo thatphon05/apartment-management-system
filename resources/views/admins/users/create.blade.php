@@ -238,7 +238,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">วันที่จะเข้าพัก</label>
-                                            <input value="{{ old('arrival_date') ?? 0 }}" name="arrival_date"
+                                            <input value="{{ old('arrival_date') }}" name="arrival_date"
                                                    type="date"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('arrival_date') is-invalid @enderror"

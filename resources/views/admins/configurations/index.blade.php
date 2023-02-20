@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'การตั้งค่า')
+@section('title', 'รายการตั้งค่าบริการ')
 @section('content')
 
     <div class="page-header d-print-none">
@@ -8,7 +8,7 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <h2 class="page-title">
-                        รายการการตั้งค่า
+                        รายการตั้งค่าบริการ
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -38,7 +38,6 @@
         <div class="container-xl">
             <div class="card">
                 <div class="card-header">
-                    รายการการตั้งค่า
                 </div>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap table-striped">

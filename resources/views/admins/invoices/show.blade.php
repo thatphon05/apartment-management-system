@@ -117,10 +117,10 @@
                                     ห้อง: {{ $invoice->room->name ?? '' }}
                                 </h4>
                                 <h4>
-                                    วันที่ออก: {{ $invoice->created_at->translatedFormat('d F Y') }}
+                                    วันที่สร้าง: {{ $invoice->created_at->translatedFormat('d F Y') }}
                                 </h4>
                                 <h4>
-                                    กำหนดชำระ: {{ $invoice->due_date_format }}
+                                    ครบกำหนดชำระ: {{ $invoice->due_date_format }}
                                 </h4>
                             </div>
                         </div>
