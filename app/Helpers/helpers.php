@@ -34,7 +34,7 @@ if (!function_exists('convertDateToBE')) {
 if (!function_exists('getAllMonth')) {
     /**
      * get all month available
-     * @return array
+     * @return array<string>
      */
     function getAllMonth(): array
     {
@@ -57,8 +57,8 @@ if (!function_exists('getAllMonth')) {
 
 if (!function_exists('getAllProvinces')) {
     /**
-     * get all province in thailand available
-     * @return array
+     * get all available province in Thailand.
+     * @return array<string>
      */
     function getAllProvince(): array
     {

@@ -7,6 +7,7 @@ use App\Http\Requests\UtilityExpenseCreateRequest;
 use App\Http\Requests\UtilityExpenseUpdateRequest;
 use App\Models\UtilityExpense;
 use App\Services\RoomService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,8 +23,6 @@ class UtilityExpenseController extends Controller
 
     public function index(Request $request): View
     {
-        $search = $request->query('search');
-        $searchLike = '%' . $search . '%';
         $month = $request->query('month', 0);
         $year = $request->query('year', 0);
         $room = $request->query('room', 0);
@@ -31,16 +30,13 @@ class UtilityExpenseController extends Controller
         return view('admins.utility_expenses.index', [
             'rooms' => $this->roomService->getRooms(),
             'expenses' => UtilityExpense::with(['room.floor.building', 'room.building'])
-                ->when($search != '', function ($query) use ($searchLike) {
-                    $query->where('subject', 'like', $searchLike);
-                })
-                ->when($month > 0, function ($query) use ($month) {
+                ->when($month > 0, function (Builder $query) use ($month) {
                     $query->whereMonth('cycle', $month);
                 })
-                ->when($year > 0, function ($query) use ($year) {
+                ->when($year > 0, function (Builder $query) use ($year) {
                     $query->whereYear('cycle', $year);
                 })
-                ->when($room > 0, function ($query) use ($room) {
+                ->when($room > 0, function (Builder $query) use ($room) {
                     $query->where('room_id', $room);
                 })
                 ->latest('cycle')
@@ -76,13 +72,15 @@ class UtilityExpenseController extends Controller
     public function edit(string $id): View
     {
         return view('admins.utility_expenses.edit', [
-            'utilityExpense' => UtilityExpense::with('room.floor.building')->findOrFail($id),
+            'utilityExpense' => UtilityExpense::with('room.floor.building')
+                ->findOrFail($id),
         ]);
     }
 
     public function update(UtilityExpenseUpdateRequest $request, string $id)
     {
         UtilityExpense::findOrFail($id)->update($request->validated());
+
         return to_route('admin.expenses.index')->with('success', 'แก้ไขสำเร็จ');
     }
 }

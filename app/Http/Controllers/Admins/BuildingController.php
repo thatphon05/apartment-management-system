@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admins;
 use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\View\View;
 
 class BuildingController extends Controller
@@ -20,9 +21,11 @@ class BuildingController extends Controller
     public function show(string $id): View
     {
         return view('admins.buildings.show', [
-            'building' => Building::findOrFail($id)->with(['floors.rooms.bookings' => function ($query) {
-                $query->where('status', BookingStatusEnum::ACTIVE)->get();
-            }])->first(),
+            'building' => Building::findOrFail($id)->with([
+                'floors.rooms.bookings' => function (HasMany $hasMany) {
+                    $hasMany->where('status', BookingStatusEnum::ACTIVE)->get();
+                }
+            ])->first(),
         ]);
     }
 

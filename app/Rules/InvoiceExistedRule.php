@@ -8,9 +8,10 @@ use App\Models\Invoice;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Database\Eloquent\Builder;
 
-class InvoiceExistedRule implements DataAwareRule, InvokableRule
+class InvoiceExistedRule implements DataAwareRule, ValidationRule
 {
     /**
      * All of the data under validation.
@@ -38,14 +39,14 @@ class InvoiceExistedRule implements DataAwareRule, InvokableRule
      * @param \Closure $fail
      * @return void
      */
-    public function __invoke(string $attribute, mixed $value, Closure $fail): void
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $cycle = Carbon::parse($value);
 
         $invoice = Invoice::where('room_id', $this->data['room_id'])
             ->whereYear('cycle', $cycle->year)
             ->whereMonth('cycle', $cycle->month)
-            ->where(function ($query) {
+            ->where(function (Builder $query) {
                 $query->orWhere('status', InvoiceStatusEnum::PENDING)
                     ->orWhere('status', InvoiceStatusEnum::COMPLETE);
             })
@@ -56,4 +57,5 @@ class InvoiceExistedRule implements DataAwareRule, InvokableRule
             $fail('มีรายการใบแจ้งหนี้ของห้องและเดือนที่เลือกแล้ว กรุณายกเลิกใบแจ้งหนี้เก่าก่อน');
         }
     }
+
 }

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Enums\BookingStatusEnum;
 use App\Enums\UserStatusEnum;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -19,14 +21,18 @@ class UserService
         $status = $request->query('status', UserStatusEnum::cases());
 
         // filter all users and room information
-        return User::with(['bookings' => function ($query) {
-            $query->with(['room.floor.building'])
-                ->where('status', BookingStatusEnum::ACTIVE)
-                ->latest('id')
-                ->get(['id', 'room_id']);
-        }])
+        return User::with([
+            'bookings' => function (HasMany $hasMany) {
+                $hasMany->with([
+                    'room.floor.building'
+                ])
+                    ->where('status', BookingStatusEnum::ACTIVE)
+                    ->latest('id')
+                    ->get(['id', 'room_id']);
+            }
+        ])
             ->whereIn('status', $status)
-            ->when($search != '', function ($query) use ($searchLike) {
+            ->when($search != '', function (Builder $query) use ($searchLike) {
                 $query->Where('name', 'like', $searchLike)
                     ->orWhere('surname', 'like', $searchLike)
                     ->orWhere('telephone', 'like', $searchLike);
@@ -61,20 +67,21 @@ class UserService
     public function uploadIdCardDoc(Request $request, string $filename): void
     {
         $request->file('id_card_copy')->storeAs(
-            config('custom.id_card_copy_path'), $filename
+            config('custom.id_card_copy_path'),
+            $filename
         );
     }
 
     public function uploadCopyHouseDoc(Request $request, string $filename): void
     {
         $request->file('copy_house_registration')->storeAs(
-            config('custom.copy_house_registration_path'), $filename
+            config('custom.copy_house_registration_path'),
+            $filename
         );
     }
 
     public function updateUser(Request $request, string $id): User
     {
-
         $user = User::findOrFail($id);
 
         $user->telephone = $request->telephone;

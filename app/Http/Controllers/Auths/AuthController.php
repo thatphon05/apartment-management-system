@@ -26,6 +26,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
 
             $user = Auth::user();
+
             if ($user->status == UserStatusEnum::ACTIVE) {
                 return to_route('user.dashboard.index');
             }
@@ -56,6 +57,7 @@ class AuthController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $email, 'password' => $password])) {
 
             $user = Auth::guard('admin')->user();
+
             if ($user->status == AdminStatusEnum::ACTIVE) {
                 return to_route('admin.dashboard.index');
             }

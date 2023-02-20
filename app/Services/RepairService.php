@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\RepairStatusEnum;
 use App\Models\Repair;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -22,16 +23,16 @@ class RepairService
         // filter
         return Repair::with('room.floor.building')
             ->whereIn('status', $status)
-            ->when($search != '', function ($query) use ($searchLike) {
+            ->when($search != '', function (Builder $query) use ($searchLike) {
                 $query->where('subject', 'like', $searchLike);
             })
-            ->when($user > 0, function ($query) use ($user) {
+            ->when($user > 0, function (Builder $query) use ($user) {
                 $query->where('user_id', $user);
             })
-            ->when($repairs_date > 0, function ($query) use ($repairs_date) {
+            ->when($repairs_date > 0, function (Builder $query) use ($repairs_date) {
                 $query->whereDate('repair_date', $repairs_date);
             })
-            ->when($room > 0, function ($query) use ($room) {
+            ->when($room > 0, function (Builder $query) use ($room) {
                 $query->where('room_id', $room);
             })
             ->latest('id')

@@ -5,14 +5,14 @@ namespace App\Rules;
 
 use App\Models\Configuration;
 use Closure;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class HasConfigurationRule implements InvokableRule
+class HasConfigurationRule implements ValidationRule
 {
     /**
      * Run the validation rule.
      */
-    public function __invoke(string $attribute, mixed $value, Closure $fail): void
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $room = Configuration::where('id', $value)->first(['id']);
 

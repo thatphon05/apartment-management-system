@@ -6,14 +6,14 @@ namespace App\Rules;
 use App\Enums\BookingStatusEnum;
 use App\Models\Booking;
 use Closure;
-use Illuminate\Contracts\Validation\InvokableRule;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class AvailableRoomRule implements InvokableRule
+class AvailableRoomRule implements ValidationRule
 {
     /**
      * Run the validation rule.
      */
-    public function __invoke(string $attribute, mixed $value, Closure $fail): void
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $room = Booking::where('room_id', $value)
             ->where('status', BookingStatusEnum::ACTIVE)

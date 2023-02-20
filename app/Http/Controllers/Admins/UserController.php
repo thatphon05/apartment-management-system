@@ -83,11 +83,19 @@ class UserController extends Controller
 
         return view('admins.users.show', [
             'user' => $user,
-            'bookings' => Booking::with('room.floor.building')->where('user_id', $id)
-                ->latest('id')->get(),
-            'invoices' => Invoice::with(['room.floor.building', 'payments'])->where('user_id', $id)
-                ->latest('id')->take(5)->get(),
-            'repairs' => Repair::where('user_id', $id)->latest('id')->take(5)->get(),
+            'bookings' => Booking::with('room.floor.building')
+                ->where('user_id', $id)
+                ->latest('id')
+                ->get(),
+            'invoices' => Invoice::with(['room.floor.building', 'payments'])
+                ->where('user_id', $id)
+                ->latest('id')
+                ->take(5)
+                ->get(),
+            'repairs' => Repair::where('user_id', $id)
+                ->latest('id')
+                ->take(5)
+                ->get(),
             'idCardCopySize' => $idCardCopySizeMB,
             'copyHouseRegSize' => $copyHouseRegSizeMB,
         ]);

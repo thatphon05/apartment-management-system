@@ -12,6 +12,7 @@ use App\Models\Invoice;
 use App\Models\Room;
 use App\Models\UtilityExpense;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -30,42 +31,42 @@ class InvoiceService
 
         return Invoice::with(['user', 'payments', 'room.floor.building'])
             // Filter Status
-            ->when(!empty($status), function ($query) use ($status, $dateNow) {
+            ->when(!empty($status), function (Builder $query) use ($status, $dateNow) {
                 $query->where(function ($query) use ($status, $dateNow) {
                     // Query PENDING
-                    $query->when(in_array(InvoiceStatusEnum::PENDING->value, $status), function ($query) use ($dateNow) {
+                    $query->when(in_array(InvoiceStatusEnum::PENDING->value, $status), function (Builder $query) use ($dateNow) {
                         $query->orWhere(function () use ($query, $dateNow) {
                             $query->orWhereDate('due_date', '>', $dateNow);
                             $query->where('status', InvoiceStatusEnum::PENDING->value);
                         });
                     });
                     // Query OVERDUE
-                    $query->when(in_array(InvoiceStatusEnum::OVERDUE->value, $status), function ($query) use ($dateNow) {
+                    $query->when(in_array(InvoiceStatusEnum::OVERDUE->value, $status), function (Builder $query) use ($dateNow) {
                         $query->orWhere(function () use ($query, $dateNow) {
                             $query->orWhereDate('due_date', '<', $dateNow);
                             $query->where('status', InvoiceStatusEnum::PENDING->value);
                         });
                     });
                     // Query COMPLETE
-                    $query->when(in_array(InvoiceStatusEnum::COMPLETE->value, $status), function ($query) {
+                    $query->when(in_array(InvoiceStatusEnum::COMPLETE->value, $status), function (Builder $query) {
                         $query->orWhere('status', InvoiceStatusEnum::COMPLETE);
                     });
                     // Query CANCEL
-                    $query->when(in_array(InvoiceStatusEnum::CANCEL->value, $status), function ($query) {
+                    $query->when(in_array(InvoiceStatusEnum::CANCEL->value, $status), function (Builder $query) {
                         $query->orWhere('status', InvoiceStatusEnum::CANCEL);
                     });
                 });
             })
-            ->when($month > 0, function ($query) use ($month) {
+            ->when($month > 0, function (Builder $query) use ($month) {
                 $query->whereMonth('cycle', $month);
             })
-            ->when($year > 0, function ($query) use ($year) {
+            ->when($year > 0, function (Builder $query) use ($year) {
                 $query->whereYear('cycle', $year);
             })
-            ->when($room > 0, function ($query) use ($room) {
+            ->when($room > 0, function (Builder $query) use ($room) {
                 $query->where('room_id', $room);
             })
-            ->when($user > 0, function ($query) use ($user) {
+            ->when($user > 0, function (Builder $query) use ($user) {
                 $query->where('user_id', $user);
             })
             ->latest('cycle')
@@ -149,8 +150,6 @@ class InvoiceService
 
         $electricUnitFee = $configuration->electric_fee;
         $waterUnitFee = $configuration->water_fee;
-
-        //return dd($cycle);
 
         return Invoice::create([
             'user_id' => $booking->user_id,
