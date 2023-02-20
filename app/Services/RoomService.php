@@ -13,7 +13,8 @@ class RoomService
     public function getRooms(): Collection
     {
         return Room::with([
-            'floor.building', 'bookings' => function (HasMany $hasMany) {
+            'floor.building',
+            'bookings' => function (HasMany $hasMany) {
                 $hasMany->where('status', BookingStatusEnum::ACTIVE)
                     ->latest()
                     ->first();

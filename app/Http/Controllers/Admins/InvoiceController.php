@@ -86,7 +86,9 @@ class InvoiceController extends Controller
     {
         return view('admins.invoices.show', [
             'invoice' => Invoice::with([
-                'user', 'room.floor.building', 'room.configuration' => function (BelongsTo $belongsTo) {
+                'user',
+                'room.floor.building',
+                'room.configuration' => function (BelongsTo $belongsTo) {
                     $belongsTo->first();
                 }
             ])->findOrFail($id),
