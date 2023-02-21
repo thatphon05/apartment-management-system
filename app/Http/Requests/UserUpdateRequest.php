@@ -29,7 +29,19 @@ class UserUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'telephone' => 'เบอร์โทรศัพท์',
+            'id_card' => 'หมายเลขบัตรประชาชน',
+            'birthdate' => 'วันเกิด',
+            'religion' => 'ศาสนา',
+            'name' => 'ชื่อ',
+            'surname' => 'นามสกุล',
+            'address' => 'ที่อยู่',
+            'sub_district' => 'ตำบล',
+            'district' => 'อำเภอ',
+            'province' => 'จังหวัด',
+            'postal_code' => 'รหัสไปรษณีย์',
+            'id_card_copy' => 'ไฟล์สำเนาบัตรประชาชน',
+            'copy_house_registration' => 'ไฟล์สำเนาทะเบียนบ้าน',
         ];
     }
 
