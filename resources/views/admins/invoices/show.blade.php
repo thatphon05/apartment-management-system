@@ -11,6 +11,7 @@
                             ใบแจ้งหนี้ #{{ $invoice->id }}
                         </h2>
                     </div>
+                    @if($invoice->status == \App\Enums\InvoiceStatusEnum::PENDING)
                     <!-- Page title actions -->
                     <div class="col-auto ms-auto d-print-none">
                         <div class="btn-list">
@@ -74,9 +75,9 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -118,6 +119,9 @@
                                 </h4>
                                 <h4>
                                     วันที่สร้าง: {{ $invoice->created_at->translatedFormat('d F Y') }}
+                                </h4>
+                                <h4>
+                                    ประจำเดือน: {{ $invoice->cycle_date }}
                                 </h4>
                                 <h4>
                                     ครบกำหนดชำระ: {{ $invoice->due_date_format }}

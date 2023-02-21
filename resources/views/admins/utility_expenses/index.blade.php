@@ -111,8 +111,8 @@
                                     <th>ID</th>
                                     <th>ประจำเดือน</th>
                                     <th>ห้อง</th>
-                                    <th>หน่วยค่าไฟที่จด</th>
-                                    <th>หน่วยค่าน้ำที่จด</th>
+                                    <th>มิเตอร์น้ำ</th>
+                                    <th>มิเตอร์ค่าไฟ</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -121,7 +121,7 @@
                                     <tr>
                                         <td>
                                             <span class="text-muted">
-                                            <a href="">
+                                            <a href="{{ route('admin.rooms.show', ['room' => $expense->room->id]) }}">
                                                     #{{ $expense->id }}
                                             </a>
                                             </span>
@@ -129,17 +129,23 @@
                                         <td><span class="text-muted">{{ $expense->cycle_month }}</span></td>
                                         <td>
                                             <span class="text-muted">
-                                                <a href="#">
+                                                <a href="{{ route('admin.rooms.show', ['room' => $expense->room->id]) }}">
                                                     อาคาร {{ $expense->room->floor->building->name ?? '' }}
                                                     ชั้น {{ $expense->room->floor->name ?? '' }}
                                                     ห้อง {{ $expense->room->name ?? '' }}
                                                 </a>
                                             </span>
                                         </td>
-                                        <td><span
-                                                class="text-muted">{{ $expense->electric_unit }}</span>
+                                        <td>
+                                            <span class="text-muted">
+                                                {{ $expense->water_unit }}
+                                            </span>
                                         </td>
-                                        <td><span class="text-muted">{{ $expense->water_unit }}</span></td>
+                                        <td>
+                                            <span class="text-muted">
+                                                {{ $expense->electric_unit }}
+                                            </span>
+                                        </td>
                                         <td class="text-end">
                                             <a href="{{ route('admin.expenses.edit', ['expense' => $expense->id]) }}"
                                                class="btn" role="button">

@@ -112,6 +112,8 @@
                                                     ชั้น {{ $user->bookings->first()->room->floor->name ?? '' }}
                                                     ห้อง {{ $user->bookings->first()->room->name ?? '' }}
                                                 </a>
+                                            @else
+                                                ไม่ได้เช่าห้อง
                                             @endif
                                         </td>
                                         <td>{{ $user->updated_at }}</td>
