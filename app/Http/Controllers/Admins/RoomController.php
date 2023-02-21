@@ -26,7 +26,8 @@ class RoomController extends Controller
 
     public function show(string $id): View
     {
-        $currentBooking = Booking::where('room_id', $id)
+        $currentBooking = Booking::with('user')
+            ->where('room_id', $id)
             ->where('status', BookingStatusEnum::ACTIVE)
             ->latest('id')
             ->first();
@@ -36,7 +37,7 @@ class RoomController extends Controller
             : 0;
 
         return view('admins.rooms.show', [
-            'room' => Room::with('configuration')
+            'room' => Room::with(['configuration', 'floor.building'])
                 ->findOrFail($id),
             'currentBooking' => $currentBooking,
             'rentContractSize' => $rentContractSize,

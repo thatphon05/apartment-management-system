@@ -27,13 +27,12 @@ class UserService
                     'room.floor.building'
                 ])
                     ->where('status', BookingStatusEnum::ACTIVE)
-                    ->latest('id')
-                    ->get(['id', 'room_id']);
+                    ->latest('id');
             }
         ])
             ->whereIn('status', $status)
             ->when($search != '', function (Builder $query) use ($searchLike) {
-                $query->Where('name', 'like', $searchLike)
+                $query->where('name', 'like', $searchLike)
                     ->orWhere('surname', 'like', $searchLike)
                     ->orWhere('telephone', 'like', $searchLike);
             })

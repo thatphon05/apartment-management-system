@@ -12,7 +12,6 @@ use App\Models\Payment;
 use App\Services\InvoiceService;
 use App\Services\RoomService;
 use App\Services\StorageService;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -84,11 +83,12 @@ class InvoiceController extends Controller
             'invoice' => Invoice::with([
                 'user',
                 'room.floor.building',
-                'room.configuration' => function (BelongsTo $belongsTo) {
-                    $belongsTo->first();
-                }
+                'room.configuration',
             ])->findOrFail($id),
-            'payment' => Payment::where('invoice_id', $id)->latest()->first(),
+            'payment' => Payment::where('invoice_id', $id)
+                ->with(['booking.room.floor', 'user'])
+                ->latest()
+                ->first(),
         ]);
     }
 

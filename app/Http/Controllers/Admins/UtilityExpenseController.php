@@ -31,7 +31,6 @@ class UtilityExpenseController extends Controller
             'rooms' => $this->roomService->getRooms(),
             'expenses' => UtilityExpense::with([
                 'room.floor.building',
-                'room.building'
             ])
                 ->when($month > 0, function (Builder $query) use ($month) {
                     $query->whereMonth('cycle', $month);

@@ -7,7 +7,7 @@
                 <div class="col">
                     <h2 class="page-title">
                         รายละเอียดห้องพัก
-                        อาคาร {{ $room->building->name }}
+                        อาคาร {{ $room->floor->building->name }}
                         ชั้น {{ $room->floor->name }}
                         ห้อง {{ $room->name }}
                     </h2>
@@ -81,7 +81,7 @@
                                                     <h3>ยืนยันการยกเลิกการเช่าห้อง</h3>
                                                     <div class="text-muted">
                                                         คุณต้องการยกเลิก
-                                                        อาคาร {{ $room->building->name }}
+                                                        อาคาร {{ $room->floor->building->name }}
                                                         ชั้น {{ $room->floor->name }}
                                                         ห้อง {{ $room->name }}
                                                         หรือไม่

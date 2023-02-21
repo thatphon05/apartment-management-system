@@ -21,11 +21,11 @@ class BuildingController extends Controller
     public function show(string $id): View
     {
         return view('admins.buildings.show', [
-            'building' => Building::findOrFail($id)->with([
+            'building' => Building::with([
                 'floors.rooms.bookings' => function (HasMany $hasMany) {
-                    $hasMany->where('status', BookingStatusEnum::ACTIVE)->get();
+                    $hasMany->where('status', BookingStatusEnum::ACTIVE);
                 }
-            ])->first(),
+            ])->findOrFail($id),
         ]);
     }
 

@@ -61,7 +61,7 @@
                                 <div class="col-md-3">
                                     <div class="form-label required">ห้องพัก</div>
                                     <input
-                                        value="อาคาร {{ $utilityExpense->room->building->name }} ชั้น {{ $utilityExpense->room->floor->name }} ห้อง {{ $utilityExpense->room->name }}"
+                                        value="อาคาร {{ $utilityExpense->room->floor->building->name }} ชั้น {{ $utilityExpense->room->floor->name }} ห้อง {{ $utilityExpense->room->name }}"
                                         disabled class="form-control">
                                 </div>
                             </div>

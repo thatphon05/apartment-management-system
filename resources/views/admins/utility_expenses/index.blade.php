@@ -130,7 +130,7 @@
                                         <td>
                                             <span class="text-muted">
                                                 <a href="#">
-                                                    อาคาร {{ $expense->room->building->name ?? '' }}
+                                                    อาคาร {{ $expense->room->floor->building->name ?? '' }}
                                                     ชั้น {{ $expense->room->floor->name ?? '' }}
                                                     ห้อง {{ $expense->room->name ?? '' }}
                                                 </a>
