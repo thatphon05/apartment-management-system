@@ -18,7 +18,8 @@ class UtilityExpenseUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'water_unit' => 'มิเตอร์น้ำ',
+            'electric_unit' => 'มิเตอร์ไฟ',
         ];
     }
 

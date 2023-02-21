@@ -115,11 +115,11 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">ชื่อจริง</label>
+                                            <label class="form-label required">ชื่อ</label>
                                             <input value="{{ old('name') }}" name="name" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('name') is-invalid @enderror"
-                                                   placeholder="ชื่อจริง">
+                                                   placeholder="ชื่อ">
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>

@@ -39,6 +39,25 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'email' => 'อีเมล',
+            'telephone' => 'เบอร์โทรศัพท์',
+            'password' => 'รหัสผ่าน',
+            'id_card' => 'หมายเลขบัตรประชาชน',
+            'birthdate' => 'วันเกิด',
+            'religion' => 'ศาสนา',
+            'name' => 'ชื่อจริง',
+            'surname' => 'นามสกุล',
+            'address' => 'ที่อยู่',
+            'sub_district' => 'ตำบล',
+            'district' => 'อำเภอ',
+            'province' => 'จังหวัด',
+            'postal_code' => 'รหัสไปรษณีย์',
+            'id_card_copy' => 'ไฟล์สำเนาบัตรประชาชน',
+            'copy_house_registration' => 'ไฟล์สำเนาทะเบียนบ้าน',
+            'rent_contract' => 'ไฟล์หนังสือสัญญาเช่าห้องพัก',
+            'room_id' => 'ห้อง',
+            'arrival_date' => 'วันที่จะเข้าพัก',
+            'deposit' => 'ค่ามัดจำ',
+            'parking_amount' => 'จำนวนที่จอดรถ',
         ];
     }
 

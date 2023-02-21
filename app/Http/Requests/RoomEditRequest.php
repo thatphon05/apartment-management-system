@@ -18,7 +18,7 @@ class RoomEditRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            //
+            'configuration_id' => 'ตั้งค่าการบริการ',
         ];
     }
 

@@ -24,7 +24,10 @@ class UtilityExpenseCreateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'water_unit' => 'มิเตอร์น้ำ',
+            'electric_unit' => 'มิเตอร์ไฟ',
+            'cycle' => 'ประจำเดือน',
+            'room_id' => 'ห้อง',
         ];
     }
 
