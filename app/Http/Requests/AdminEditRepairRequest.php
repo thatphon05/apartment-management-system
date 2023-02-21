@@ -20,7 +20,8 @@ class AdminEditRepairRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'status' => 'สถานะ',
+            'repair_date' => 'วันที่เข้าซ่อม',
         ];
     }
 

@@ -297,6 +297,7 @@
                                             @csrf
                                             @method('PATCH')
                                             <div class="col-md-5">
+                                                <label class="form-label">สถานะการชำระเงิน:</label>
                                                 <select name="status"
                                                         class="form-select @error('status') is-invalid @enderror">
                                                     @foreach(\App\Enums\PaymentStatusEnum::values() as $key => $value)

@@ -24,7 +24,14 @@ class AdminSettingRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'name' => 'ประเภทห้อง',
+            'rent_fee' => 'ค่าเช่าห้อง',
+            'electric_fee' => 'ค่าเช่าห้องไฟฟ้า',
+            'water_fee' => 'ค่าน้ำประปา',
+            'parking_fee' => 'ค่าที่จอดรถ',
+            'common_fee' => 'ค่าส่วนกลาง',
+            'overdue_fee' => 'ค่าปรับชำระเลยกำหนด',
+            'deposit' => 'ค่ามัดจำ'
         ];
     }
 

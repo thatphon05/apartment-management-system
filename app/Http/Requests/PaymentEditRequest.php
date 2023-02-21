@@ -19,7 +19,7 @@ class PaymentEditRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'status' => 'สถานะการชำระเงิน'
         ];
     }
 

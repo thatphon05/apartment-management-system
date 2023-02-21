@@ -21,7 +21,8 @@ class InvoiceCreateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'cycle' => 'ใบแจ้งหนี้ประจำเดือน',
+            'room_id' => 'เลือกห้องพัก',
         ];
     }
 

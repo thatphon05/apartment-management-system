@@ -18,7 +18,8 @@ class LoginRequest extends FormRequest
     public function attributes(): array
     {
         return [
-
+            'email' => 'อีเมล',
+            'password' => 'รหัสผ่าน'
         ];
     }
 
