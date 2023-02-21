@@ -42,6 +42,13 @@ class UserCreateRequest extends FormRequest
         ];
     }
 
+    public function attributes(): array
+    {
+        return [
+            'email' => 'อีเมล',
+        ];
+    }
+
     /**
      * @return bool
      */
