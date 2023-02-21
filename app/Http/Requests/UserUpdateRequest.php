@@ -26,7 +26,7 @@ class UserUpdateRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
+    public function attributes(): array
     {
         return [
 
