@@ -336,7 +336,9 @@
                                 @forelse($bookings as $booking)
                                     <tr>
                                         <td>
-                                            {{ $booking->user->full_name}}
+                                            <a href="{{ route('admin.users.show', ['user' => $booking->user->id]) }}">
+                                                {{ $booking->user->full_name }}
+                                            </a>
                                         </td>
                                         <td>
                                             <span
