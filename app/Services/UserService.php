@@ -115,4 +115,11 @@ class UserService
         return $user;
     }
 
+    public function suspendUser(string $userId): bool
+    {
+        return User::findOrFail($userId)->update([
+            'status' => UserStatusEnum::INACTIVE,
+        ]);
+    }
+
 }

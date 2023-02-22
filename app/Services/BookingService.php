@@ -30,7 +30,7 @@ class BookingService
         );
     }
 
-    public function cancelBooking($id): bool
+    public function cancelBooking(string $id): bool
     {
         return Booking::findOrFail($id)->update([
             'status' => BookingStatusEnum::INACTIVE

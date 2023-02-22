@@ -64,52 +64,64 @@
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                <div class="modal-status bg-danger"></div>
-                                                <div class="modal-body text-center py-4">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                         class="icon mb-2 text-danger icon-lg" width="24" height="24"
-                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                         fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                        <path d="M12 9v2m0 4v.01"/>
-                                                        <path
-                                                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"/>
-                                                    </svg>
-                                                    <h3>ยืนยันการยกเลิกการเช่าห้อง</h3>
-                                                    <div class="text-muted">
-                                                        คุณต้องการยกเลิก
-                                                        อาคาร {{ $room->floor->building->name }}
-                                                        ชั้น {{ $room->floor->name }}
-                                                        ห้อง {{ $room->name }}
-                                                        หรือไม่
+                                                <form method="post"
+                                                      action="{{ route('admin.booking.booking-cancel', ['id' => $currentBooking->id]) }}">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    <div class="modal-status bg-danger"></div>
+                                                    <div class="modal-body text-center py-4">
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon mb-2 text-danger icon-lg" width="24"
+                                                             height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M12 9v2m0 4v.01"/>
+                                                            <path
+                                                                d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"/>
+                                                        </svg>
+                                                        <h3>ยืนยันการยกเลิกการเช่าห้อง</h3>
+                                                        <div class="text-muted">
+                                                            คุณต้องการยกเลิก
+                                                            อาคาร {{ $room->floor->building->name }}
+                                                            ชั้น {{ $room->floor->name }}
+                                                            ห้อง {{ $room->name }}
+                                                            หรือไม่
+                                                        </div>
+                                                        <input type="hidden" name="user_id"
+                                                               value="{{ $currentBooking->user->id }}">
+                                                        <div class="mt-4">
+                                                            <label class="form-check">
+                                                                <input name="is_suspend_user" class="form-check-input"
+                                                                       type="checkbox" checked>
+                                                                <span class="form-check-label">
+                                                                ต้องการระงับบัญชีของ {{ $currentBooking->user->full_name }} หรือไม่
+                                                            </span>
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <div class="w-100">
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <a href="#" class="btn w-100"
-                                                                   data-bs-dismiss="modal">
-                                                                    ยกเลิก
-                                                                </a>
-                                                            </div>
-                                                            <div class="col">
-                                                                <form method="post"
-                                                                      action="{{ route('admin.booking.booking-cancel', ['id' => $currentBooking->id]) }}">
-                                                                    @csrf
-                                                                    @method('PATCH')
+                                                    <div class="modal-footer">
+                                                        <div class="w-100">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#" class="btn w-100"
+                                                                       data-bs-dismiss="modal">
+                                                                        ยกเลิก
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col">
                                                                     <button type="submit" class="btn btn-danger w-100"
                                                                             data-bs-dismiss="modal">
                                                                         ยืนยัน
                                                                     </button>
-                                                                </form>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -270,8 +282,17 @@
                                             {{ $utilityExpense->electric_unit }}
                                         </td>
                                         <td class="align-middle">
-                                            <a class="btn"
+                                            <a class="btn btn-info btn-sm"
                                                href="{{ route('admin.expenses.edit', ['expense' => $utilityExpense->id]) }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="icon icon-tabler icon-tabler-eye" width="24" height="24"
+                                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="12" cy="12" r="2"></circle>
+                                                    <path
+                                                        d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                                </svg>
                                                 ดู
                                             </a>
                                         </td>
