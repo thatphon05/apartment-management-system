@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\UserStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UserUpdateRequest extends FormRequest
 {
@@ -23,6 +25,7 @@ class UserUpdateRequest extends FormRequest
             'postal_code' => 'required|integer|max_digits:5',
             'id_card_copy' => 'file|mimes:pdf',
             'copy_house_registration' => 'file|mimes:pdf',
+            'status' => [new Enum(UserStatusEnum::class)],
         ];
     }
 
@@ -42,6 +45,7 @@ class UserUpdateRequest extends FormRequest
             'postal_code' => 'รหัสไปรษณีย์',
             'id_card_copy' => 'ไฟล์สำเนาบัตรประชาชน',
             'copy_house_registration' => 'ไฟล์สำเนาทะเบียนบ้าน',
+            'status' => 'สถานะ',
         ];
     }
 

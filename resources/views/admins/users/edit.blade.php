@@ -236,6 +236,24 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
+                                <h3 class="card-header fw-bold">ปรับสถานะบัญชี</h3>
+                                <div class="row card-body">
+                                    <div class="mb-3">
+                                        @foreach(\App\Enums\UserStatusEnum::values() as $key => $value)
+                                            <label class="form-check form-check-inline">
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="status" value="{{ $key }}"
+                                                    @checked(\App\Enums\UserStatusEnum::from($key) === $user->status)
+                                                >
+                                                <span
+                                                    class="form-check-label">
+                                                    {{ \App\Enums\UserStatusEnum::getLabel($value) }}
+                                                </span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

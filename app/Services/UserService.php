@@ -94,6 +94,7 @@ class UserService
         $user->district = $request->district;
         $user->province = $request->province;
         $user->postal_code = $request->postal_code;
+        $user->status = $request->status;
 
         if ($request->password) {
             $user->password = $request->password;
