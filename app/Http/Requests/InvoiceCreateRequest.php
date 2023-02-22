@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\HasBooking;
 use App\Rules\HasRoomRule;
 use App\Rules\InvoiceExistedRule;
 use App\Rules\UtilityExpenseCycleNotExistedRule;
@@ -14,7 +15,7 @@ class InvoiceCreateRequest extends FormRequest
     {
         return [
             'cycle' => ['date_format:Y-m', new UtilityExpenseCycleNotExistedRule, new InvoiceExistedRule],
-            'room_id' => [new HasRoomRule],
+            'room_id' => [new HasRoomRule, new HasBooking],
         ];
     }
 
