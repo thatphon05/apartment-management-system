@@ -245,7 +245,7 @@
                                 ประวัติค่าน้ำค่าไฟล่าสุด
                             </div>
                             <div class="col-auto ms-auto">
-                                <a href="{{ route('admin.expenses.create', ['roomId' => $room->id]) }}"
+                                <a href="{{ route('admin.expenses.create', ['room' => $room->id]) }}"
                                    class="btn btn-outline-success btn-sm">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
                                          width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
