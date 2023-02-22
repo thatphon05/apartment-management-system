@@ -88,7 +88,11 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'usePagination' => true])
+                    @include('partials.admins.invoices_list_view', [
+                            'invoices' => $invoices,
+                            'usePagination' => true,
+                            'parameters' => ['room' => request()->query('room')]
+                            ])
                 </div>
             </div>
         </div>
