@@ -7,6 +7,7 @@ use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\InvoiceController;
 use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
+use App\Http\Controllers\Admins\SummaryController;
 use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
@@ -99,6 +100,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Invoice and Payment management
         Route::resource('invoices', InvoiceController::class)->except(['destroy']);
         Route::patch('payments/{id}/update', [InvoiceController::class, 'updatePayment'])->name('payments.update');
+
+        // Summary report
+        Route::get('summary', [SummaryController::class, 'index'])
+            ->name('summary.index');
+        Route::post('summary', [SummaryController::class, 'exportPdf'])
+            ->name('summary.export-pdf');
 
         // Download payment attach file
         Route::get('payments/paymentattach/{filename}', [InvoiceController::class, 'downloadPaymentAttach'])
