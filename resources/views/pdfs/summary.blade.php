@@ -4,11 +4,11 @@
 @section('content')
     <div class="card-body">
         <div class="row text-center mb-3">
-            <h1 class="bold">สรุปยอดประจำเดือน {{ $cycle_month }}</h1>
+            <h1 class="bold heading">สรุปยอดประจำเดือน {{ $cycle_month }}</h1>
         </div>
         <div class="row">
             <div class="col-6">
-                <h3 class="bold">โทพาซ</h3>
+                <h3 class="bold heading-2">โทพาซ</h3>
                 <address>
                     20/20 ม.2 ถ.กิ่งแก้ว
                     ต.ราชาเทวะ อ.บางพลี
@@ -16,10 +16,10 @@
                 </address>
             </div>
         </div>
-        <table class="table border table-responsive">
+        <table class="table">
             <thead>
             <tr>
-                <td class="text-center bold" colspan="7">สรุปยอดรวมทั้งหมด (ทั้งหมด {{ $total_room }} ห้อง)</td>
+                <td class="text-center pt-0" colspan="7">สรุปยอดรวมทั้งหมด (ทั้งหมด {{ $total_room }} ห้อง)</td>
             </tr>
             <tr>
                 <td class="" style="width: 5%"></td>

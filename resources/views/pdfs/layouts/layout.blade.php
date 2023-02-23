@@ -42,6 +42,14 @@
             font-weight: bold;
         }
 
+        .heading {
+            font-size: 26px;
+        }
+
+        .heading-2 {
+            font-size: 22px;
+        }
+
         td, tr {
             border: 1px solid;
         }
