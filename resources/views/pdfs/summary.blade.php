@@ -77,7 +77,7 @@
                 <td class="text-end pe-1">{{ number_format($electric_total, 2) }}</td>
             </tr>
             <tr>
-                <td class="text-center">4</td>
+                <td class="text-center">5</td>
                 <td>
                     <p class="strong mb-1 ps-1">ค่าเช่าห้อง</p>
                 </td>
@@ -88,7 +88,7 @@
                 <td class="text-end pe-1">{{ number_format($rent_total, 2) }}</td>
             </tr>
             <tr>
-                <td class="text-center">5</td>
+                <td class="text-center">6</td>
                 <td>
                     <p class="strong mb-1 ps-1">ค่าส่วนกลาง</p>
                 </td>
@@ -99,7 +99,7 @@
                 <td class="text-end pe-1">{{ number_format($common_total, 2) }}</td>
             </tr>
             <tr>
-                <td class="text-center">6</td>
+                <td class="text-center">7</td>
                 <td>
                     <p class="strong mb-1 ps-1">ค่าจอดรถ</p>
                 </td>
@@ -110,7 +110,7 @@
                 <td class="text-end pe-1">{{ number_format($parking_total, 2) }}</td>
             </tr>
             <tr>
-                <td class="text-center">6</td>
+                <td class="text-center">8</td>
                 <td>
                     <p class="strong mb-1 ps-1">ค่าปรับชำระเลยกำหนด</p>
                 </td>
