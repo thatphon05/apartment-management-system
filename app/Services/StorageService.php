@@ -34,6 +34,13 @@ class StorageService
 
     public function getFileSizeMB(string $file): float
     {
-        return (Storage::get($file) ? Storage::size($file) : 0) / 1024 / 1024;
+        return (float)(Storage::get($file) ? Storage::size($file) : 0) / 1024 / 1024;
+    }
+
+    public function removeFile(string $file): void
+    {
+        if (Storage::get($file)) {
+            Storage::delete($file);
+        }
     }
 }

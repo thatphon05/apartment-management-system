@@ -79,6 +79,20 @@ class UserService
         );
     }
 
+    public function deletePreviousIdCardDoc(string $filename): void
+    {
+        (new StorageService())->removeFile(
+            config('custom.id_card_copy_path') . '/' . $filename
+        );
+    }
+
+    public function deletePreviousCopyHouseDoc(string $filename): void
+    {
+        (new StorageService())->removeFile(
+            config('custom.copy_house_registration_path') . '/' . $filename
+        );
+    }
+
     public function updateUser(Request $request, string $id): User
     {
         $user = User::findOrFail($id);
@@ -101,13 +115,21 @@ class UserService
         }
 
         if ($request->hasFile('id_card_copy')) {
+            $oldIdCardCopy = $user->id_card_copy;
             $user->id_card_copy = $request->file('id_card_copy')->hashName();
+
             $this->uploadIdCardDoc($request, $user->id_card_copy);
+
+            $this->deletePreviousIdCardDoc($oldIdCardCopy);
         }
 
         if ($request->hasFile('copy_house_registration')) {
+            $oldCopyHouseRegistration = $user->copy_house_registration;
             $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
+
             $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
+
+            $this->deletePreviousCopyHouseDoc($oldCopyHouseRegistration);
         }
 
         $user->save();
