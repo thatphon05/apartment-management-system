@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'สร้างใบแจ้งหนี้')
+@section('breadcrumb', Breadcrumbs::render('admin.invoice-create'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">

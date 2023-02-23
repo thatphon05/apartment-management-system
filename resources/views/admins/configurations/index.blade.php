@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'รายการตั้งค่าบริการ')
+@section('breadcrumb', Breadcrumbs::render('admin.configuration'))
 @section('content')
-
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขการแจ้งซ่อม')
+@section('breadcrumb', Breadcrumbs::render('admin.repair-edit', $repair))
 @section('content')
     <div class="page-wrapper">
         <!-- Page header -->

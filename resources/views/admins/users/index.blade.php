@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'จัดการผู้เช่า')
+@section('breadcrumb', Breadcrumbs::render('admin.user'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">

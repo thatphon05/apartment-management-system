@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขรายการจดมิเตอร์ ประจำเดือน' . $utilityExpense->cycle_month)
+@section('breadcrumb', Breadcrumbs::render('admin.expense-edit', $utilityExpense))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">

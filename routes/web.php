@@ -98,7 +98,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
 
         // Invoice and Payment management
-        Route::resource('invoices', InvoiceController::class)->except(['destroy']);
+        Route::resource('invoices', InvoiceController::class)->except(['destroy', 'edit']);
         Route::patch('payments/{id}/update', [InvoiceController::class, 'updatePayment'])->name('payments.update');
 
         // Summary report
@@ -112,7 +112,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('payments.download.payment_attach');
 
         // Utility Expense management
-        Route::resource('expenses', UtilityExpenseController::class)->except(['destroy']);
+        Route::resource('expenses', UtilityExpenseController::class)->except(['destroy', 'show']);
 
     });
 });

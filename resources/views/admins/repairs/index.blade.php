@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'จัดการรายการแจ้งซ่อมทั้งหมด')
+@section('breadcrumb', Breadcrumbs::render('admin.repair'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        จัดการรายการแจ้งซ่อมทั้งหมด
+                        รายการแจ้งซ่อมทั้งหมด
                     </h2>
                 </div>
             </div>

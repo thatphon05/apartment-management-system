@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'อาคารทั้งหมด')
+@section('breadcrumb', Breadcrumbs::render('admin.building'))
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">

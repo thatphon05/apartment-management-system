@@ -1,5 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'จัดการห้องพัก ' . $room->name )
+@section('title', 'จัดการห้องพัก ' . $room->name)
+@section('breadcrumb', Breadcrumbs::render('admin.room-show', $room))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">

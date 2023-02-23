@@ -161,7 +161,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                            จัดการค่าสาธารณูปโภค
+                            รายการค่าสาธารณูปโภค
                             </span>
                         </a>
                     </li>

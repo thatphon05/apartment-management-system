@@ -37,10 +37,6 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function edit(string $id): View
-    {
-    }
-
     public function update(string $id): RedirectResponse
     {
         DB::transaction(function () use ($id) {

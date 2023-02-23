@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขการห้อง ' . $room->name)
+@section('breadcrumb', Breadcrumbs::render('admin.room-edit', $room))
 @section('content')
     <div class="page-wrapper">
         <!-- Page header -->

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขการตั้งค่า')
+@section('breadcrumb', Breadcrumbs::render('admin.configuration-edit', $config))
 @section('content')
     <div class="page-wrapper">
         <!-- Page header -->

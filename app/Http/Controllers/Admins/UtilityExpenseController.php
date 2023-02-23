@@ -47,11 +47,6 @@ class UtilityExpenseController extends Controller
         ]);
     }
 
-    public function show(string $roomId): View
-    {
-        //
-    }
-
     public function create(): View
     {
         return view('admins.utility_expenses.create', [

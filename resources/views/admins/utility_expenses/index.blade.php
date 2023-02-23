@@ -1,12 +1,13 @@
 @extends('layouts.admin')
-@section('title', 'จัดการค่าน้ำค่าไฟ')
+@section('title', 'รายการค่าสาธารณูปโภค')
+@section('breadcrumb', Breadcrumbs::render('admin.expense'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        จัดการค่าสาธารณูปโภค
+                        รายการค่าสาธารณูปโภค
                     </h2>
                 </div>
                 <!-- Page title actions -->

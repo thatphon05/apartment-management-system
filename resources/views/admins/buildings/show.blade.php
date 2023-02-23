@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'จัดการห้องพักอาคาร ' . $building->name)
+@section('breadcrumb', Breadcrumbs::render('admin.building-show', $building))
 @section('content')
-
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">

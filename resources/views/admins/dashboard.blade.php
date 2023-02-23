@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'หน้าแรก')
+@section('breadcrumb', Breadcrumbs::render('admin.dashboard'))
 @section('content')
     <!-- Page header -->
     {{--    <div class="page-header d-print-none">--}}

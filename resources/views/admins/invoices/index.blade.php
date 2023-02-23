@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'จัดการรายการใบแจ้งหนี้')
+@section('breadcrumb', Breadcrumbs::render('admin.invoice'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        จัดการรายการใบแจ้งหนี้
+                        รายการใบแจ้งหนี้
                     </h2>
                 </div>
             </div>

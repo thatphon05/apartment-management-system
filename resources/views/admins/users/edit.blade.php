@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขผู้เช่า ' . $user->full_name)
+@section('breadcrumb', Breadcrumbs::render('admin.user-edit', $user))
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'ใบแจ้งหนี้ #' . $invoice->id)
+@section('breadcrumb', Breadcrumbs::render('admin.invoice-show', $invoice))
 @section('content')
     <div class="page-wrapper">
         <!-- Page header -->
