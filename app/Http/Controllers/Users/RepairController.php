@@ -50,7 +50,6 @@ class RepairController extends Controller
         ]);
     }
 
-
     public function create(): View
     {
         return view('users.repairs.create', [
@@ -68,9 +67,12 @@ class RepairController extends Controller
             ->where('id', $request->booking_id)
             ->where('status', BookingStatusEnum::ACTIVE)
             ->first();
+
+        // Check permission.
         if (!$booking) {
             abort(404);
         }
+
         Repair::create([
             'booking_id' => $request->booking_id,
             'user_id' => auth()->user()->id,
@@ -79,19 +81,23 @@ class RepairController extends Controller
             'description' => $request->description,
             'status' => RepairStatusEnum::NEW,
         ]);
+
         return to_route('user.repairs.index');
     }
 
     public function show(string $id): View
     {
-        $repair = Booking::where('user_id', auth()->user()->id)
+        $repair = Repair::where('user_id', auth()->user()->id)
             ->where('id', $id)
             ->first();
+
+        // Check permission
         if (!$repair) {
             abort(404);
         }
+
         return view('users.repairs.show', [
-            'repair' => Repair::findOrFail($id),
+            'repair' => $repair,
         ]);
     }
 

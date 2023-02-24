@@ -47,7 +47,7 @@ Route::prefix('/')->name('user.')->group(function () {
         });
 
         // Repair
-        Route::resource('repairs', UserRepairController::class)->except(['destroy']);
+        Route::resource('repairs', UserRepairController::class)->except(['destroy', 'edit', 'update']);
 
     });
 });
