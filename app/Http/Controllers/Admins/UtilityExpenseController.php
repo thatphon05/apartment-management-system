@@ -42,6 +42,7 @@ class UtilityExpenseController extends Controller
                     $query->where('room_id', $room);
                 })
                 ->latest('cycle')
+                ->oldest('room_id')
                 ->paginate(40)
                 ->withQueryString(),
         ]);

@@ -109,7 +109,6 @@
                             <table class="table card-table table-vcenter text-nowrap table-striped">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>ประจำเดือน</th>
                                     <th>ห้อง</th>
                                     <th>มิเตอร์น้ำ</th>
@@ -120,13 +119,6 @@
                                 <tbody>
                                 @forelse($expenses as $expense)
                                     <tr>
-                                        <td>
-                                            <span class="text-muted">
-                                            <a href="{{ route('admin.expenses.edit', ['expense' => $expense->id]) }}">
-                                                    #{{ $expense->id }}
-                                            </a>
-                                            </span>
-                                        </td>
                                         <td><span class="text-muted">{{ $expense->cycle_month }}</span></td>
                                         <td>
                                             <span class="text-muted">
