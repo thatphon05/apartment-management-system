@@ -84,6 +84,12 @@ class RepairController extends Controller
 
     public function show(string $id): View
     {
+        $repair = Booking::where('user_id', auth()->user()->id)
+            ->where('id', $id)
+            ->first();
+        if (!$repair) {
+            abort(404);
+        }
         return view('users.repairs.show', [
             'repair' => Repair::findOrFail($id),
         ]);
