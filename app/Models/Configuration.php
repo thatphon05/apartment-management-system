@@ -11,11 +11,15 @@ class Configuration extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
     protected $table = 'configurations';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name',
         'rent_fee',

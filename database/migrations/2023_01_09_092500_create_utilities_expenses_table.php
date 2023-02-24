@@ -6,21 +6,19 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateUtilitiesExpensesTable extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::create('utilities_expenses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('electric_unit');
             $table->integer('water_unit');
-            $table->integer('booking_id')->unsigned();
             $table->integer('room_id')->unsigned();
             $table->date('cycle');
-            $table->date('note_date');
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::drop('utilities_expenses');
     }

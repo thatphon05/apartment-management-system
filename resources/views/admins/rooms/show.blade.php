@@ -1,12 +1,16 @@
 @extends('layouts.admin')
-@section('title', 'จัดการห้องพัก ' . $room->name )
+@section('title', 'จัดการห้องพัก ' . $room->name)
+@section('breadcrumb', Breadcrumbs::render('admin.room-show', $room))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        รายละเอียดห้องพัก {{ $room->name }}
+                        รายละเอียดห้องพัก
+                        อาคาร {{ $room->floor->building->name }}
+                        ชั้น {{ $room->floor->name }}
+                        ห้อง {{ $room->name }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -36,20 +40,95 @@
             <div class="row row-cards">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">
-                            ผู้พักปัจจุบัน
+                        {{--                        <div class="card-header">--}}
+                        {{--                            ผู้พักปัจจุบัน ราคาห้อง {{ $room->configuration->name }}--}}
+                        {{--                        </div>--}}
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                ข้อมูลห้อง
+                            </div>
+                            @if ($currentBooking)
+                                <div class="col-auto ms-auto">
+                                    <button data-bs-toggle="modal" data-bs-target="#modal-danger"
+                                            class="btn btn-outline-pink btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x"
+                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                             stroke="currentColor" fill="none" stroke-linecap="round"
+                                             stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M18 6l-12 12"></path>
+                                            <path d="M6 6l12 12"></path>
+                                        </svg>
+                                        ยกเลิกการให้เช่า
+                                    </button>
+                                    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <form method="post"
+                                                      action="{{ route('admin.booking.booking-cancel', ['id' => $currentBooking->id]) }}">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    <div class="modal-status bg-danger"></div>
+                                                    <div class="modal-body text-center py-4">
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon mb-2 text-danger icon-lg" width="24"
+                                                             height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M12 9v2m0 4v.01"/>
+                                                            <path
+                                                                d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"/>
+                                                        </svg>
+                                                        <h3>ยืนยันการยกเลิกการเช่าห้อง</h3>
+                                                        <div class="text-muted">
+                                                            คุณต้องการยกเลิก
+                                                            อาคาร {{ $room->floor->building->name }}
+                                                            ชั้น {{ $room->floor->name }}
+                                                            ห้อง {{ $room->name }}
+                                                            หรือไม่
+                                                        </div>
+                                                        <input type="hidden" name="user_id"
+                                                               value="{{ $currentBooking->user->id }}">
+                                                        <div class="mt-4">
+                                                            <label class="form-check">
+                                                                <input name="is_suspend_user" class="form-check-input"
+                                                                       type="checkbox" checked>
+                                                                <span class="form-check-label">
+                                                                ต้องการระงับบัญชีของ {{ $currentBooking->user->full_name }} หรือไม่
+                                                            </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="w-100">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <a href="#" class="btn w-100"
+                                                                       data-bs-dismiss="modal">
+                                                                        ยกเลิก
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col">
+                                                                    <button type="submit" class="btn btn-danger w-100"
+                                                                            data-bs-dismiss="modal">
+                                                                        ยืนยัน
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="ribbon ribbon-top bg-yellow">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
-                            </svg>
-                        </div>
-                        <div class="card-status-start bg-primary"></div>
                         <div class="card-body">
                             <div class="datagrid">
                                 @if ($currentBooking)
@@ -69,39 +148,44 @@
                                         <div class="datagrid-title">เบอร์โทรศัพท์</div>
                                         <div class="datagrid-content">{{ $currentBooking->user->telephone }}</div>
                                     </div>
+                                @else
+                                    <div class="datagrid-item">
+                                        <div class="datagrid-title">สถานะห้อง</div>
+                                        <div class="datagrid-content">ห้องว่าง</div>
+                                    </div>
                                 @endif
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าเช่าห้อง</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->rent_price, 2) }} บาท
+                                        {{ number_format($room->configuration->rent_fee, 2) }} บาท
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าไฟฟ้า</div>
                                     <div class="datagrid-content">
                                         <div class="datagrid-content">
-                                            {{ number_format($room->electric_price, 2) }} บาท / หน่วย
+                                            {{ number_format($room->configuration->electric_fee, 2) }} บาท / หน่วย
                                         </div>
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าน้ำประปา</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->water_price, 2) }} บาท / หน่วย
+                                        {{ number_format($room->configuration->water_fee, 2) }} บาท / หน่วย
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าที่จอดรถ</div>
                                     <div class="datagrid-content">
                                         <div class="datagrid-content">
-                                            {{ number_format($room->parking_price, 2) }} บาท
+                                            {{ number_format($room->configuration->parking_fee, 2) }} บาท
                                         </div>
                                     </div>
                                 </div>
                                 <div class="datagrid-item">
                                     <div class="datagrid-title">ค่าส่วนกลาง</div>
                                     <div class="datagrid-content">
-                                        {{ number_format($room->common_fee, 2) }} บาท
+                                        {{ number_format($room->configuration->common_fee, 2) }} บาท
                                     </div>
                                 </div>
                                 @if ($currentBooking)
@@ -139,7 +223,7 @@
                                         </div>
                                         <div class="col text-truncate">
                                             <a href="{{ route('admin.booking.download.rent_contract', ['filename' => $currentBooking->rental_contract]) }}"
-                                               class="text-body d-block">
+                                               class="text-body d-block" target="_blank">
                                                 หนังสือสัญญาเช่าห้องพัก
                                             </a>
                                             <div class="text-muted text-truncate mt-n1">
@@ -155,27 +239,63 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card">
-                        <h3 class="card-header">ประวัติค่าน้ำค่าไฟ</h3>
-                        <div class="card-table table-responsive">
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                ประวัติค่าน้ำค่าไฟล่าสุด
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <a href="{{ route('admin.expenses.create', ['room' => $room->id]) }}"
+                                   class="btn btn-outline-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 5l0 14"></path>
+                                        <path d="M5 12l14 0"></path>
+                                    </svg>
+                                    เพิ่มรายการ
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-table table-responsive align-middle">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>ประจำเดือน</th>
+                                    <th>มิเตอร์น้ำ</th>
+                                    <th>มิเตอร์ไฟ</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($utilityExpenses as $utilityExpenses)
+                                @forelse($utilityExpenses as $utilityExpense)
                                     <tr>
-                                        <td>
-                                            <a href="#">
-                                                {{ $utilityExpenses->id }}
-                                            </a>
+                                        <td class="align-middle">
+                                            {{ $utilityExpense->cycle_month }}
                                         </td>
-                                        <td>
-                                            {{ $utilityExpenses->cycle_month }}
+                                        <td class="align-middle">
+                                            {{ $utilityExpense->water_unit }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ $utilityExpense->electric_unit }}
+                                        </td>
+                                        <td class="align-middle">
+                                            <a class="btn btn-info btn-sm"
+                                               href="{{ route('admin.expenses.edit', ['expense' => $utilityExpense->id]) }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     class="icon icon-tabler icon-tabler-eye" width="24" height="24"
+                                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                     fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <circle cx="12" cy="12" r="2"></circle>
+                                                    <path
+                                                        d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                                </svg>
+                                                ดู
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
@@ -188,13 +308,18 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="card-footer text-center">
+                            <a href="{{ route('admin.expenses.index', ['room' => $room->id]) }}">ดูทั้งหมด</a>
+                        </div>
+
                     </div>
                 </div>
-                <div class="col-8">
-                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices])
+                <div class="col-md-8">
+                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'parameters' => ['room' => $room->id]])
                 </div>
                 <div class="col-12">
-                    @include('partials.admins.repair_list_view', ['repairs' => $repairs])
+                    @include('partials.admins.repair_list_view', ['repairs' => $repairs, 'parameters' => ['room' => $room->id]])
                 </div>
                 <div class="col-12">
                     <div class="card">
@@ -203,7 +328,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>ผู้เช่า</th>
                                     <th>สถานะ</th>
                                     <th>วันที่เข้าพัก</th>
@@ -213,12 +337,9 @@
                                 @forelse($bookings as $booking)
                                     <tr>
                                         <td>
-                                            <a href="#">
-                                                #{{ $booking->id }}
+                                            <a href="{{ route('admin.users.show', ['user' => $booking->user->id]) }}">
+                                                {{ $booking->user->full_name }}
                                             </a>
-                                        </td>
-                                        <td>
-                                            {{ $booking->user->full_name}}
                                         </td>
                                         <td>
                                             <span

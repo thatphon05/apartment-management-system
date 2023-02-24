@@ -1,14 +1,14 @@
 @extends('layouts.admin')
-@section('title', 'การตั้งค่า')
+@section('title', 'รายการตั้งค่าบริการ')
+@section('breadcrumb', Breadcrumbs::render('admin.configuration'))
 @section('content')
-
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <!-- Page pre-title -->
                     <h2 class="page-title">
-                        รายการการตั้งค่า
+                        รายการตั้งค่าบริการ
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -38,7 +38,6 @@
         <div class="container-xl">
             <div class="card">
                 <div class="card-header">
-                    รายการการตั้งค่า
                 </div>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter text-nowrap table-striped">
@@ -71,7 +70,7 @@
                                 <td>{{ $config->deposit }}</td>
                                 <td>{{ $config->updated_at }}</td>
                                 <td class="text-end">
-                                    <a href="{{ route('admin.settings.edit', ['setting' => $config->id]) }}"
+                                    <a href="{{ route('admin.configurations.edit', ['configuration' => $config->id]) }}"
                                        class="btn"
                                        role="button">
                                         <svg xmlns="http://www.w3.org/2000/svg"

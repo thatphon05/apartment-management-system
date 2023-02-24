@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AdminSettingRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -23,56 +21,20 @@ class AdminSettingRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function messages(): array
+    public function attributes(): array
     {
         return [
-            'name' => [
-                'required' => 'คุณต้องใส่ประเภทห้อง',
-            ],
-            'rent_fee' => [
-                'required' => 'คุณต้องใส่ค่าเช่าห้อง',
-                'numeric' => 'ค่าเช่าห้องกรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าเช่าห้องต้องมากกว่า 0',
-            ],
-            'electric_fee' => [
-                'required' => 'คุณต้องใส่ค่าไฟฟ้า',
-                'numeric' => 'ค่าไฟฟ้ากรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าไฟฟ้าต้องมากกว่า 0',
-            ],
-            'water_fee' => [
-                'required' => 'คุณต้องใส่ค่าน้ำประปา',
-                'numeric' => 'ค่าน้ำประปากรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าน้ำประปาต้องมากกว่า 0',
-            ],
-            'parking_fee' => [
-                'required' => 'คุณต้องใส่ค่าที่จอดรถ',
-                'numeric' => 'ค่าที่จอดรถกรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าที่จอดรถต้องมากกว่า 0',
-            ],
-            'common_fee' => [
-                'required' => 'คุณต้องใส่ค่าส่วนกลาง',
-                'numeric' => 'ค่าส่วนกลางกรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าส่วนกลางต้องมากกว่า 0',
-            ],
-            'overdue_fee' => [
-                'required' => 'คุณต้องใส่ค่าปรับชำระเลยกำหนด',
-                'numeric' => 'ค่าปรับชำระเลยกำหนดกรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่าปรับชำระเลยกำหนดต้องมากกว่า 0',
-            ],
-            'deposit' => [
-                'required' => 'คุณต้องใส่ค่ามัดจำ',
-                'numeric' => 'ค่ามัดจำกรอกต้องเป็นตัวเลขเท่านั้น',
-                'min' => 'ค่ามัดจำต้องมากกว่า 0',
-            ],
+            'name' => 'ประเภทห้อง',
+            'rent_fee' => 'ค่าเช่าห้อง',
+            'electric_fee' => 'ค่าเช่าห้องไฟฟ้า',
+            'water_fee' => 'ค่าน้ำประปา',
+            'parking_fee' => 'ค่าที่จอดรถ',
+            'common_fee' => 'ค่าส่วนกลาง',
+            'overdue_fee' => 'ค่าปรับชำระเลยกำหนด',
+            'deposit' => 'ค่ามัดจำ'
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

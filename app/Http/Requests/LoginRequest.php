@@ -6,9 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -17,21 +15,14 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function messages(): array
+    public function attributes(): array
     {
         return [
-            'email.required' => 'กรุณากรอก Email',
-            'email.email' => 'รูปแบบ Email ไม่ถูกต้อง',
-            'password.required' => 'กรุณากรอกรหัสผ่าน'
+            'email' => 'อีเมล',
+            'password' => 'รหัสผ่าน'
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

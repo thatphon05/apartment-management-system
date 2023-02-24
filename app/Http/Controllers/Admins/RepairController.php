@@ -2,46 +2,44 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Enums\RepairStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminEditRepairRequest;
 use App\Models\Repair;
+use App\Services\RepairService;
+use App\Services\RoomService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RepairController extends Controller
 {
-
-    public function index()
+    public function __construct(
+        private readonly RoomService   $roomService,
+        private readonly RepairService $repairService,
+    )
     {
-        $search = request()->query('search', '');
-        $searchLike = '%' . $search . '%';
-        $status = request()->query('status', RepairStatusEnum::cases());
+    }
 
-        // filter
-        $repairs = Repair::with(['room.floor.building'])
-            ->orWhere(function ($query) use ($searchLike) {
-                $query->orWhere('subject', 'like', $searchLike);
-            })
-            ->whereIn('status', $status)
-            ->orderBy('id', 'desc')
-            ->paginate(40);
-
+    public function index(Request $request): View
+    {
         return view('admins.repairs.index', [
-            'repairs' => $repairs,
+            'repairs' => $this->repairService->searchRepair($request),
+            'rooms' => $this->roomService->getRooms(),
         ]);
     }
 
-    public function edit($id)
+    public function edit(string $id): View
     {
         return view('admins.repairs.edit', [
             'repair' => Repair::findOrFail($id),
         ]);
     }
 
-    public function update(AdminEditRepairRequest $request, $id)
+    public function update(AdminEditRepairRequest $request, string $id): RedirectResponse
     {
         Repair::where('id', $id)->update([
             'status' => $request->status,
-            'repair_date' => convertDateToAD($request->repair_date),
+            'repair_date' => $request->repair_date !== null ? convertDateToAD($request->repair_date) : null,
             'note' => $request->note,
         ]);
 

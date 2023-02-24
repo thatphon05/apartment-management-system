@@ -7,19 +7,25 @@ use Illuminate\Support\ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
 
     }
 
-    public function boot()
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
     {
         $this->useNavActive();
     }
 
-    private function useNavActive()
+    /**
+     * Activate active class
+     */
+    protected function useNavActive(): void
     {
-        Blade::directive('navactive', function ($expression) {
+        Blade::directive('navactive', function (string $expression) {
             return "<?php echo request()->is($expression) ? 'active' : ''; ?>";
         });
     }

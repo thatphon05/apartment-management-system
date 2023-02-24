@@ -9,10 +9,8 @@ class BuildingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Building::count() < 1) {
             Building::create([

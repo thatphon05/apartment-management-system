@@ -12,22 +12,17 @@ class Building extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
     protected $table = 'buildings';
 
-    /**
-     * @return HasMany
-     */
     public function floors(): HasMany
     {
         return $this->hasMany(Floor::class, 'building_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function rooms(): HasMany
     {
         return $this->hasMany(Room::class, 'building_id');

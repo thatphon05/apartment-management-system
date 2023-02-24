@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'จัดการผู้เช่า ' . $user->full_name)
+@section('breadcrumb', Breadcrumbs::render('admin.user-show', $user))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
@@ -116,7 +117,7 @@
                                     </div>
                                     <div class="col text-truncate">
                                         <a href="{{ route('admin.users.download.idcardcopy', ['filename' => $user->id_card_copy]) }}"
-                                           class="text-body d-block">
+                                           class="text-body d-block" target="_blank">
                                             สำเนาบัตรประชาชน
                                         </a>
                                         <div class="text-muted text-truncate mt-n1">
@@ -152,9 +153,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card">
-                        <h3 class="card-header">รายการห้องที่พัก</h3>
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                รายการห้องที่เช่า
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <a href="{{ route('admin.booking.create', ['user' => $user->id]) }}"
+                                   class="btn btn-outline-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 5l0 14"></path>
+                                        <path d="M5 12l14 0"></path>
+                                    </svg>
+                                    เพิ่มข้อมูลการเช่า
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-table table-responsive">
                             <table class="table">
                                 <thead>
@@ -168,7 +187,7 @@
                                 @forelse($bookings as $booking)
                                     <tr>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{ route('admin.rooms.show', ['room' => $booking->room->id]) }}">
                                                 อาคาร {{ $booking->room->floor->building->name }}
                                                 ชั้น {{ $booking->room->floor->name }}
                                                 ห้อง {{ $booking->room->name }}
@@ -181,7 +200,8 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="#!" class="btn btn-sm">แก้ไข</a>
+                                            <a href="{{ route('admin.rooms.edit', ['room' => $booking->room->id]) }}"
+                                               class="btn btn-sm">แก้ไข</a>
                                         </td>
                                     </tr>
                                 @empty
@@ -194,13 +214,16 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card-footer text-center">
+                            <a href="">ดูทั้งหมด</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-8">
-                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices])
+                <div class="col-md-8">
+                    @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'parameters' => ['user' => $user->id]])
                 </div>
                 <div class="col-12">
-                    @include('partials.admins.repair_list_view', ['repairs' => $repairs])
+                    @include('partials.admins.repair_list_view', ['repairs' => $repairs, 'parameters' => ['user' => $user->id]])
                 </div>
             </div>
         </div>

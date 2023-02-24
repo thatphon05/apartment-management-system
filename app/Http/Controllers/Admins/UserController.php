@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -9,56 +10,50 @@ use App\Models\Booking;
 use App\Models\Configuration;
 use App\Models\Invoice;
 use App\Models\Repair;
-use App\Models\Room;
 use App\Models\User;
 use App\Services\BookingService;
+use App\Services\RoomService;
 use App\Services\StorageService;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UserController extends Controller
 {
 
     public function __construct(
-        private UserService    $userService,
-        private BookingService $bookingService,
-        private StorageService $storageService,
+        private readonly UserService    $userService,
+        private readonly BookingService $bookingService,
+        private readonly StorageService $storageService,
+        private readonly RoomService    $roomService,
     )
     {
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function index()
+    public function index(Request $request): View
     {
         return view('admins.users.index', [
-            'users' => $this->userService->searchUser(request()),
+            'users' => $this->userService->searchUser($request),
         ]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function create()
+    public function create(): View
     {
-        $rooms = Room::with(['floor.building'])->oldest('id')->get();
-        $rooms = $rooms->sortBy(
-            ['floor.building.name', 'floor.name', 'name'],
-        );
         return view('admins.users.create', [
-            'rooms' => $rooms,
+            'rooms' => $this->roomService->getRooms(),
             'config' => Configuration::latest()->first(),
         ]);
     }
 
-    /**
-     * @param UserCreateRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(UserCreateRequest $request)
+    public function store(UserCreateRequest $request): RedirectResponse
     {
-        DB::transaction(function () {
+        static $user;
+
+        DB::transaction(function () use ($request, &$user) {
 
             $user = $this->userService->createUser($request);
 
@@ -68,20 +63,16 @@ class UserController extends Controller
 
             $booking = $this->bookingService->createBooking($request, $user);
 
-            $this->bookingService->uploadDocs($request, $booking->rent_contract);
-
-            return to_route('admin.users.show', ['user' => $user->id])
-                ->with(['success' => 'เพิ่มผู้เช่าใหม่สำเร็จ']);
+            $this->bookingService->uploadDocs($request, $booking->rental_contract);
 
         });
 
+        return to_route('admin.users.show', ['user' => $user->id])
+            ->with(['success' => 'เพิ่มผู้เช่าใหม่สำเร็จ']);
+
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function show($id)
+    public function show(string $id): View
     {
         $user = User::findOrFail($id);
 
@@ -93,33 +84,37 @@ class UserController extends Controller
 
         return view('admins.users.show', [
             'user' => $user,
-            'bookings' => Booking::with('room.floor.building')->where('user_id', $id)
-                ->latest('id')->get(),
-            'invoices' => Invoice::with('room.floor.building')->where('user_id', $id)
-                ->latest('id')->take(5)->get(),
-            'repairs' => Repair::where('user_id', $id)->latest('id')->take(5)->get(),
+            'bookings' => Booking::with('room.floor.building')
+                ->where('user_id', $id)
+                ->latest('id')
+                ->get(),
+            'invoices' => Invoice::with(['room.floor.building', 'payments'])
+                ->where('user_id', $id)
+                ->latest('id')
+                ->take(5)
+                ->get(),
+            'repairs' => Repair::where('user_id', $id)
+                ->latest('id')
+                ->take(5)
+                ->get(),
             'idCardCopySize' => $idCardCopySizeMB,
             'copyHouseRegSize' => $copyHouseRegSizeMB,
         ]);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function edit($id)
+    public function edit(string $id): View
     {
         return view('admins.users.edit', [
-            'user' => User::findOrFail($id)->first(),
+            'user' => User::findOrFail($id),
+            'booking' => Booking::where('user_id', $id)
+                ->where('status', BookingStatusEnum::ACTIVE)
+                ->select('id')->first(),
+            'config' => Configuration::latest()->first(),
+            'rooms' => $this->roomService->getRooms(),
         ]);
     }
 
-    /**
-     * @param UserUpdateRequest $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, string $id): RedirectResponse
     {
         $user = $this->userService->updateUser($request, $id);
 
@@ -127,21 +122,13 @@ class UserController extends Controller
             ->with(['success' => 'แก้ไขสำเร็จ']);
     }
 
-    /**
-     * @param $filename
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function downloadIdCardCopy($filename)
+    public function downloadIdCardCopy(string $filename): StreamedResponse|Response
     {
-        return $this->storageService->download(config('custom.id_card_copy_path') . '/' . $filename);
+        return $this->storageService->viewFile(config('custom.id_card_copy_path') . '/' . $filename);
     }
 
-    /**
-     * @param $filename
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
-     */
-    public function downloadHouseRegCopy($filename)
+    public function downloadHouseRegCopy(string $filename): StreamedResponse|Response
     {
-        return $this->storageService->download(config('custom.copy_house_registration_path') . '/' . $filename);
+        return $this->storageService->viewFile(config('custom.copy_house_registration_path') . '/' . $filename);
     }
 }

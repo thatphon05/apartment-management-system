@@ -20,6 +20,6 @@ return [
      */
     'labels' => [
         'room_available' => 'ว่าง',
-        'room_booking' => 'มีผู้พักแล้ว',
+        'room_booking' => 'ไม่ว่าง',
     ]
 ];

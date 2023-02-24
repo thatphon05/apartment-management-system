@@ -6,12 +6,7 @@ enum BookingStatusEnum: int
 {
     case INACTIVE = 0;
     case ACTIVE = 1;
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getLabel($value): string
+    public static function getLabel(self|string $value): string
     {
         return match ($value) {
             'INACTIVE', self::INACTIVE => 'ยกเลิก',
@@ -20,11 +15,7 @@ enum BookingStatusEnum: int
         };
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getColor($value): string
+    public static function getColor(self|string $value): string
     {
         return match ($value) {
             'INACTIVE', self::INACTIVE => 'red',

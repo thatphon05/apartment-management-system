@@ -9,11 +9,7 @@ enum RepairStatusEnum: int
     case COMPLETE = 2;
     case CANCEL = 3;
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getLabel($value): string
+    public static function getLabel(self|string $value): string
     {
         return match ($value) {
             'NEW', self::NEW => 'ใหม่',
@@ -23,11 +19,7 @@ enum RepairStatusEnum: int
         };
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getColor($value): string
+    public static function getColor(self|string $value): string
     {
         return match ($value) {
             'NEW', self::NEW => 'yellow',
@@ -37,9 +29,6 @@ enum RepairStatusEnum: int
         };
     }
 
-    /**
-     * @return array
-     */
     public static function values(): array
     {
         return array_column(self::cases(), 'name', 'value');

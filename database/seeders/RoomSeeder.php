@@ -9,10 +9,8 @@ class RoomSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Room::count() < 1) {
             $count = 1;
@@ -24,11 +22,6 @@ class RoomSeeder extends Seeder
                     'floor_id' => $count,
                     'building_id' => 1,
                     'configuration_id' => 1,
-                    'rent_price' => 2500,
-                    'electric_price' => 5,
-                    'water_price' => 10,
-                    'parking_price' => 300,
-                    'common_fee' => 200,
                 ]);
 
                 if ($i % 10 == 0) {

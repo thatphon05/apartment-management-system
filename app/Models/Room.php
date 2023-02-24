@@ -13,62 +13,42 @@ class Room extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
     protected $table = 'rooms';
 
-    /**
-     * @return BelongsTo
-     */
     public function floor(): BelongsTo
     {
         return $this->belongsTo(Floor::class, 'floor_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function repairs(): HasMany
     {
         return $this->hasMany(Repair::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function utilityExpenses(): HasMany
     {
         return $this->hasMany(UtilityExpense::class, 'room_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function building(): BelongsTo
     {
         return $this->belongsTo(Building::class, 'building_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function configuration(): BelongsTo
     {
         return $this->belongsTo(Configuration::class, 'configuration_id');

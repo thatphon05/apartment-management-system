@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'เพิ่มผู้เช่า')
+@section('breadcrumb', Breadcrumbs::render('admin.user-create'))
 @section('content')
     <div class="page-header d-print-none">
         <div class="container-xl">
@@ -44,8 +45,8 @@
 
                         <div class="row gx-4">
                             <div class="col-md-6">
-                                <h3 class="card-title">ข้อมูลส่วนตัว</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header fw-bold">ข้อมูลส่วนตัว</h3>
+                                <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label required">อีเมล</label>
@@ -115,11 +116,11 @@
                                     </div>
                                     <div class="col-sm-6 col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">ชื่อจริง</label>
+                                            <label class="form-label required">ชื่อ</label>
                                             <input value="{{ old('name') }}" name="name" type="text"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('name') is-invalid @enderror"
-                                                   placeholder="ชื่อจริง">
+                                                   placeholder="ชื่อ">
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -198,9 +199,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <h3 class="card-title">อัพโหลดเอกสาร</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header row-cards fw-bold">อัพโหลดเอกสาร</h3>
+                                <div class="row card-body">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label required">สำเนาบัตรประชาชน
                                             (.pdf)</label>
@@ -223,7 +225,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label required">หนังสือสัญญา (.pdf)</label>
+                                        <label for="formFile" class="form-label required">หนังสือสัญญาเช่าห้องพัก
+                                            (.pdf)</label>
                                         <input value="{{ old('rent_contract"') }}" name="rent_contract"
                                                onchange="inputChange(event)"
                                                class="form-control @error('rent_contract') is-invalid @enderror"
@@ -232,12 +235,12 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                                <h3 class="card-title">รายละเอียดการเช่า</h3>
-                                <div class="row row-cards form-fieldset">
+                                <h3 class="card-header fw-bold">รายละเอียดการเช่า</h3>
+                                <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label required">วันที่จะเข้าพัก</label>
-                                            <input value="{{ old('arrival_date') ?? 0 }}" name="arrival_date"
+                                            <label class="form-label">วันที่จะเข้าพัก</label>
+                                            <input value="{{ old('arrival_date') }}" name="arrival_date"
                                                    type="date"
                                                    onchange="inputChange(event)"
                                                    class="form-control @error('arrival_date') is-invalid @enderror"
@@ -248,7 +251,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">จำนวนที่จอดรถ</label>
+                                            <label class="form-label">จำนวนที่จอดรถ</label>
                                             <input value="{{ old('parking_amount') ?? 0 }}" name="parking_amount"
                                                    type="text"
                                                    onchange="inputChange(event)"
@@ -261,7 +264,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">ค่ามัดจำ</label>
+                                            <label class="form-label">ค่ามัดจำ</label>
                                             <input value="{{ old('deposit') ?? $config->deposit }}" name="deposit"
                                                    type="number"
                                                    onchange="inputChange(event)"
@@ -272,20 +275,8 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label required">ห้องพัก</div>
-                                        <select onchange="inputChange(event)"
-                                                class="form-select @error('room_id') is-invalid @enderror"
-                                                name="room_id">
-                                            <option value="0">โปรดเลือกห้อง</option>
-                                            @foreach($rooms as $room)
-                                                <option value="{{ $room->id }}" @selected(old('room_id') == $room->id)>
-                                                    อาคาร {{ $room->floor->building->name }}
-                                                    ชั้น {{ $room->floor->name }} ห้อง {{ $room->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('room_id')
-                                        <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        <div class="form-label required">เลือกห้องพัก</div>
+                                        @include('partials.admins.room_select', ['rooms' => $rooms])
                                     </div>
                                 </div>
                             </div>
