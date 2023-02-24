@@ -3,22 +3,25 @@
         <div class="col-auto fs-3">
             รายการใบแจ้งหนี้
         </div>
-        <div class="col-auto ms-auto">
-            <a href="{{ route('admin.invoices.create', $parameters ?? []) }}"
-               class="btn btn-outline-success btn-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
-                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                     stroke="currentColor" fill="none" stroke-linecap="round"
-                     stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M12 5l0 14"></path>
-                    <path d="M5 12l14 0"></path>
-                </svg>
-                สร้างใบแจ้งหนี้
-            </a>
-        </div>
-    </div>
 
+        @unless(request()->is('admin/invoices*'))
+            <div class="col-auto ms-auto">
+                <a href="{{ route('admin.invoices.create', $parameters ?? []) }}"
+                   class="btn btn-outline-success btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                         stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 5l0 14"></path>
+                        <path d="M5 12l14 0"></path>
+                    </svg>
+                    สร้างใบแจ้งหนี้
+                </a>
+            </div>
+        @endif
+
+    </div>
     <div class="card-table table-responsive">
         <table class="table">
             <thead>
