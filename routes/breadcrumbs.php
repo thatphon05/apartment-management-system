@@ -3,6 +3,10 @@
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
+/**
+ * Admin
+ */
+
 // Dashboard
 Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('หน้าแรก', route('admin.dashboard.index'));
@@ -106,4 +110,21 @@ Breadcrumbs::for('admin.summary', function (BreadcrumbTrail $trail) {
     $trail->push('สรุปยอดประจำเดือน', route('admin.summary.index'));
 });
 
+/**
+ * User
+ */
+
+// Dashboard
+Breadcrumbs::for('user.dashboard', function (BreadcrumbTrail $trail) {
+    $trail->push('หน้าแรก', route('user.dashboard.index'));
+});
+
+// Repair
+Breadcrumbs::for('user.repair', function (BreadcrumbTrail $trail) {
+    $trail->push('รายการแจ้งซ่อม', route('user.repairs.index'));
+});
+Breadcrumbs::for('user.repair-create', function (BreadcrumbTrail $trail) {
+    $trail->parent('user.repair');
+    $trail->push('เพิ่มรายการแจ้งซ่อม', route('user.repairs.create'));
+});
 

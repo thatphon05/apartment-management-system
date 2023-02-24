@@ -29,6 +29,16 @@
 
     <div class="page-wrapper">
 
+        <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
+            <div class="container-xl">
+                <div class="row g-2 align-items-center">
+                    <div class="col">
+                        @yield('breadcrumb')
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @yield('content')
 
         @include('partials.users.footer')

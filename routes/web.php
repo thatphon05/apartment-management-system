@@ -12,6 +12,7 @@ use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
 use App\Http\Controllers\Users\DashboardController as UserDashboardController;
+use App\Http\Controllers\Users\RepairController as UserRepairController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,9 @@ Route::prefix('/')->name('user.')->group(function () {
         Route::controller(UserDashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard.index');
         });
+
+        // Repair
+        Route::resource('repairs', UserRepairController::class)->except(['destroy']);
 
     });
 });

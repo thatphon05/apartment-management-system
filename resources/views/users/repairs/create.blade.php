@@ -1,13 +1,13 @@
 @extends('layouts.user')
-@section('title', 'หน้าแรก')
-@section('breadcrumb', Breadcrumbs::render('user.dashboard'))
+@section('title', 'แจ้งซ่อม')
+@section('breadcrumb', Breadcrumbs::render('user.repair-create'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        หน้าแรก
+                        เพิ่มรายการแจ้งซ่อม
                     </h2>
                 </div>
             </div>
