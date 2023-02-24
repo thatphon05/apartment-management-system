@@ -10,26 +10,25 @@
                         รายการแจ้งซ่อมทั้งหมด
                     </h2>
                 </div>
-            </div>
-            <div class="col-auto ms-auto d-print-none">
-                <div class="btn-list">
-                    <div class="col-auto ms-auto">
-                        <a href="{{ route('user.repairs.create', ['room' => request()->query('room')]) }}"
-                           class="btn btn-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
-                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                 stroke="currentColor" fill="none" stroke-linecap="round"
-                                 stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M12 5l0 14"></path>
-                                <path d="M5 12l14 0"></path>
-                            </svg>
-                            เพิ่มรายการซ่อม
-                        </a>
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <div class="col-auto ms-auto">
+                            <a href="{{ route('user.repairs.create', ['room' => request()->query('room')]) }}"
+                               class="btn btn-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 5l0 14"></path>
+                                    <path d="M5 12l14 0"></path>
+                                </svg>
+                                เพิ่มรายการซ่อม
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 

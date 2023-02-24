@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 @section('title', 'แก้ไขการแจ้งซ่อม')
 @section('breadcrumb', Breadcrumbs::render('user.repair-show', $repair))
 @section('content')
