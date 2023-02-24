@@ -7,7 +7,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        เพิ่มรายการแจ้งซ่อม
+                        สร้างใบแจ้งหนี้
                     </h2>
                 </div>
             </div>
@@ -16,7 +16,67 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
-            <h1>ว่างเปล่า</h1>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mt-2">
+                        <form action="{{ route('user.repairs.store') }}" method="post">
+                            @csrf
+                            <div class="card-body">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-label required">เรื่องที่แจ้ง</label>
+                                        <input value="{{ old('subject')}}"
+                                               name="subject" type="text"
+                                               onchange="inputChange(event)"
+                                               class="form-control @error('subject') is-invalid @enderror"
+                                               placeholder="เรื่องที่แจ้ง">
+                                        @error('subject')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <div class="form-label required">ห้อง</div>
+                                        <select onchange="inputChange(event)"
+                                                class="form-select @error('booking_id') is-invalid @enderror"
+                                                name="booking_id">
+                                            <option value="">โปรดเลือกห้อง</option>
+                                            @foreach($bookings as $booking)
+                                                <option value="{{$booking->id}}">
+                                                    อาคาร {{ $booking->room->floor->building->name }}
+                                                    ชั้น {{ $booking->room->floor->name }}
+                                                    ห้อง {{ $booking->room->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('booking_id')
+                                        <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-label required">รายละเอียด</label>
+                                        <textarea
+                                            name="description" type="text"
+                                            onchange="inputChange(event)"
+                                            class="form-control @error('description') is-invalid @enderror"
+                                            placeholder="รายละเอียด">{{ old('description')}}</textarea>
+                                        @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">แจ้งซ่อม</button>
+                                <a href="{{ route('user.repairs.index') }}"
+                                   class="btn btn-ghost-secondary">ยกเลิก</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -30,6 +30,15 @@ class Repair extends Model
         'repair_date' => 'datetime:Y-m-d H:i',
     ];
 
+    protected $fillable = [
+        'booking_id',
+        'user_id',
+        'room_id',
+        'subject',
+        'description',
+        'status',
+    ];
+
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
