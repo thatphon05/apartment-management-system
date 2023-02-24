@@ -78,7 +78,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown @navactive('admin/users*')">
+                    <li class="nav-item dropdown @navactive('admin/users*') @navactive('admin/bookings*')">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
