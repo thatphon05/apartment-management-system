@@ -95,7 +95,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            รายการผู้แจ้งซ่อม
+                            รายการแจ้งซ่อม
                         </div>
                         <div class="table-responsive">
                             <table class="table card-table table-vcenter text-nowrap table-striped">

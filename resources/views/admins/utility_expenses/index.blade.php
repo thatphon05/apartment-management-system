@@ -122,7 +122,7 @@
                                     <tr>
                                         <td>
                                             <span class="text-muted">
-                                            <a href="{{ route('admin.rooms.show', ['room' => $expense->room->id]) }}">
+                                            <a href="{{ route('admin.expenses.edit', ['expense' => $expense->id]) }}">
                                                     #{{ $expense->id }}
                                             </a>
                                             </span>

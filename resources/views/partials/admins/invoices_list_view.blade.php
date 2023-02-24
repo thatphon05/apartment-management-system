@@ -23,7 +23,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#เลขใบแจ้งหนี้</th>
+                <th>#ใบแจ้งหนี้</th>
                 <th>ห้อง</th>
                 <th>สถานะ</th>
                 <th>ประจำเดือน</th>
@@ -64,7 +64,7 @@
                     <td>
                         {{ $invoice->due_date_format }}
                     </td>
-                    <td>
+                    <td class="text-{{ count($invoice->payments) < 1 ? 'red' : 'green' }}">
                         {{ count($invoice->payments) < 1 ? 'ยังไม่ได้แจ้งชำระเงิน' : 'แจ้งชำระเงินแล้ว' }}
                     </td>
                 </tr>

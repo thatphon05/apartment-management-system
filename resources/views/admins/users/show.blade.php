@@ -153,7 +153,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card">
                         <div class="card-header row align-items-center">
                             <div class="col-auto fs-3">
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-md-8">
                     @include('partials.admins.invoices_list_view', ['invoices' => $invoices, 'parameters' => ['user' => $user->id]])
                 </div>
                 <div class="col-12">
