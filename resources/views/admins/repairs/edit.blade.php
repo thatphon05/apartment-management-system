@@ -26,9 +26,9 @@
                             </div>
                             <div class="card-body">
                                 <dl class="row">
-                                    <dt class="col-3">หมายเลขแจ้งซ่อม</dt>
+                                    <dt class="col-3">หมายเลขแจ้งซ่อม:</dt>
                                     <dd class="col-9">#{{$repair->id}}</dd>
-                                    <dt class="col-3">ห้อง</dt>
+                                    <dt class="col-3">ห้อง:</dt>
                                     <dd class="col-9">
                                         <a href="{{ route('admin.rooms.show', ['room' => $repair->room->id]) }}">
                                             อาคาร {{$repair->room->floor->building->name}}
@@ -36,22 +36,22 @@
                                             ห้อง {{$repair->room->name}}
                                         </a>
                                     </dd>
-                                    <dt class="col-3">วันที่แจ้ง</dt>
+                                    <dt class="col-3">วันที่แจ้ง:</dt>
                                     <dd class="col-9">{{$repair->created_at}}</dd>
-                                    <dt class="col-3">ชื่อผู้แจ้ง</dt>
+                                    <dt class="col-3">ชื่อผู้แจ้ง:</dt>
                                     <dd class="col-9"><a
                                             href="{{ route('admin.users.show', ['user' => $repair->user->id]) }}">
                                             {{$repair->user->full_name}}
                                         </a>
                                     </dd>
-                                    <dt class="col-3">สถานะ</dt>
+                                    <dt class="col-3">สถานะ:</dt>
                                     <dd class="col-9">
                                         <span
                                             class="badge bg-{{ \App\Enums\RepairStatusEnum::getColor($repair->status) }}">
                                                 {{ \App\Enums\RepairStatusEnum::getLabel($repair->status) }}
                                         </span>
                                     </dd>
-                                    <dt class="col-3">เรื่องที่แจ้ง</dt>
+                                    <dt class="col-3">เรื่องที่แจ้ง:</dt>
                                     <dd class="col-9">{{$repair->subject}}</dd>
                                     <dt class="col-3">รายละเอียด:</dt>
                                     <dd class="col-9">
@@ -86,10 +86,10 @@
                                             <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label class="form-label">รายละเอียดเพิ่มเติม</label>
-                                            <textarea name="note" type="text"
+                                            <textarea rows="5" name="note" type="text"
                                                       onchange="inputChange(event)"
                                                       class="form-control @error('note') is-invalid @enderror"
                                                       placeholder="รายละเอียดเพิ่มเติม">{{ old('note') ?? $repair->note }}</textarea>

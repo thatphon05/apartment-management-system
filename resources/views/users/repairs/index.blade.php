@@ -158,7 +158,7 @@
                                         <td>{{ $repair->created_at }}</td>
                                         <td>{{ $repair->repair_date ?? 'ยังไม่ได้กำหนด' }}</td>
                                         <td class="text-end">
-                                            <a href="{{ route('user.repairs.index', ['repair' => $repair->id]) }}"
+                                            <a href="{{ route('user.repairs.show', ['repair' => $repair->id]) }}"
                                                class="btn"
                                                role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"

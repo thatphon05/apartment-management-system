@@ -81,4 +81,12 @@ class RepairController extends Controller
         ]);
         return to_route('user.repairs.index');
     }
+
+    public function show(string $id): View
+    {
+        return view('users.repairs.show', [
+            'repair' => Repair::findOrFail($id),
+        ]);
+    }
+
 }

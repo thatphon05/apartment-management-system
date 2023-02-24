@@ -121,10 +121,15 @@ Breadcrumbs::for('user.dashboard', function (BreadcrumbTrail $trail) {
 
 // Repair
 Breadcrumbs::for('user.repair', function (BreadcrumbTrail $trail) {
+    $trail->parent('user.dashboard');
     $trail->push('รายการแจ้งซ่อม', route('user.repairs.index'));
 });
 Breadcrumbs::for('user.repair-create', function (BreadcrumbTrail $trail) {
     $trail->parent('user.repair');
     $trail->push('เพิ่มรายการแจ้งซ่อม', route('user.repairs.create'));
+});
+Breadcrumbs::for('user.repair-show', function (BreadcrumbTrail $trail, $repair) {
+    $trail->parent('user.repair');
+    $trail->push('#' . $repair->id, route('user.repairs.show', $repair));
 });
 
