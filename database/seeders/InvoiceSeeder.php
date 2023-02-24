@@ -10,10 +10,8 @@ class InvoiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Invoice::count() < 1) {
             Invoice::create([
@@ -56,12 +54,12 @@ class InvoiceSeeder extends Seeder
                 'electric_unit_last' => 1950,
                 'electric_unit_later' => 1957,
                 'electric_unit' => 7,
-                'electric_unit_price' => 10,
+                'electric_unit_price' => 5,
                 'electric_total' => 70,
                 'water_unit_last' => 440,
                 'water_unit_later' => 442,
                 'water_unit' => 2,
-                'water_unit_price' => 20,
+                'water_unit_price' => 10,
                 'water_total' => 40,
                 'parking_total' => 200,
                 'common_total' => 200,

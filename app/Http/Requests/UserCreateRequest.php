@@ -8,9 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     */
+
     public function rules(): array
     {
         return [
@@ -30,20 +28,36 @@ class UserCreateRequest extends FormRequest
             'id_card_copy' => 'required|file|mimes:pdf',
             'copy_house_registration' => 'required|file|mimes:pdf',
             'rent_contract' => 'required|file|mimes:pdf',
-            'room_id' => ['required', new HasRoomRule(), new AvailableRoomRule],
+            'room_id' => ['required', new HasRoomRule, new AvailableRoomRule],
             'arrival_date' => 'required|date',
             'deposit' => 'required|numeric',
             'parking_amount' => 'required|numeric|min:0',
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function messages(): array
+    public function attributes(): array
     {
         return [
-
+            'email' => 'อีเมล',
+            'telephone' => 'เบอร์โทรศัพท์',
+            'password' => 'รหัสผ่าน',
+            'id_card' => 'หมายเลขบัตรประชาชน',
+            'birthdate' => 'วันเกิด',
+            'religion' => 'ศาสนา',
+            'name' => 'ชื่อจริง',
+            'surname' => 'นามสกุล',
+            'address' => 'ที่อยู่',
+            'sub_district' => 'ตำบล',
+            'district' => 'อำเภอ',
+            'province' => 'จังหวัด',
+            'postal_code' => 'รหัสไปรษณีย์',
+            'id_card_copy' => 'ไฟล์สำเนาบัตรประชาชน',
+            'copy_house_registration' => 'ไฟล์สำเนาทะเบียนบ้าน',
+            'rent_contract' => 'ไฟล์หนังสือสัญญาเช่าห้องพัก',
+            'room_id' => 'ห้อง',
+            'arrival_date' => 'วันที่จะเข้าพัก',
+            'deposit' => 'ค่ามัดจำ',
+            'parking_amount' => 'จำนวนที่จอดรถ',
         ];
     }
 

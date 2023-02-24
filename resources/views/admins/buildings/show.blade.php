@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-@section('title', 'จัดหารห้องพักอาคาร ' . $building->name)
+@section('title', 'จัดการห้องพักอาคาร ' . $building->name)
+@section('breadcrumb', Breadcrumbs::render('admin.building-show', $building))
 @section('content')
-
     <div class="page-header d-print-none">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
@@ -78,20 +78,34 @@
                                             </td>
                                             <td>
                                                 <div class="text-end">
-                                                    <a href="{{ route('admin.rooms.show', ['room' => $room->id]) }}"
-                                                       class="btn btn-info">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                             class="icon icon-tabler icon-tabler-eye" width="24"
-                                                             height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                             stroke="currentColor" fill="none" stroke-linecap="round"
-                                                             stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <circle cx="12" cy="12" r="2"></circle>
-                                                            <path
-                                                                d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
-                                                        </svg>
-                                                        ดู
-                                                    </a>
+                                                    <div class="dropdown d-inline">
+                                                        <button type="button" class="btn dropdown-toggle btn-info"
+                                                                data-bs-toggle="dropdown">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                 class="icon icon-tabler icon-tabler-eye" width="24"
+                                                                 height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                 stroke="currentColor" fill="none"
+                                                                 stroke-linecap="round"
+                                                                 stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z"
+                                                                      fill="none"></path>
+                                                                <circle cx="12" cy="12" r="2"></circle>
+                                                                <path
+                                                                    d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
+                                                            </svg>
+                                                            ดู
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item"
+                                                               href="{{ route('admin.rooms.show', ['room' => $room->id]) }}">
+                                                                ดูข้อมูลห้องพัก
+                                                            </a>
+                                                            <a class="dropdown-item"
+                                                               href="{{ route('admin.expenses.index', ['room' => $room->id]) }}">
+                                                                ดูค่าน้ำค่าไฟ
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                     <a href="{{ route('admin.rooms.edit', ['room' => $room->id]) }}"
                                                        class="btn">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +160,7 @@
 
                             </div>
                             <div class="list-group-item list-group-item-action">
-                                ห้องพักที่จองแล้ว {{ $bookingCount }}
+                                ห้องพักที่ไม่ว่าง {{ $bookingCount }}
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Casts\FormatYearCast;
 use App\Enums\UserStatusEnum;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +21,7 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
+
     /**
      * @var bool
      */
@@ -76,51 +78,65 @@ class User extends Authenticatable
         'age',
     ];
 
-    /**
-     * @return HasMany
-     */
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'invoice_id');
     }
 
     /**
-     * @return string
+     * Hash the user's password.
      */
-    public function getFullNameAttribute(): string
+    protected function password(): Attribute
     {
-        return $this->name . ' ' . $this->surname;
+        return Attribute::make(
+            set: fn($value) => bcrypt($value),
+        );
     }
 
-    public function getFullAddressAttribute(): string
+    protected function fullName(): Attribute
     {
-        return $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.'
-            . $this->province . ' ' . $this->postal_code;
+        $value = $this->name . ' ' . $this->surname;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    public function getBirthDateFormatAttribute(): string
+    protected function fullAddress(): Attribute
     {
-        return $this->birthdate->translatedFormat('l j F Y');
+        $value = $this->address . ' ต.' . $this->subdistrict . ' อ.' . $this->district . ' จ.' .
+            $this->province . ' ' . $this->postal_code;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    public function getAgeAttribute(): string
+    protected function birthDateFormat(): Attribute
     {
-        return $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+        $value = $this->birthdate->translatedFormat('l j F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
+    }
+
+    protected function age(): Attribute
+    {
+        $value = $this->birthdate->diff(Carbon::now())->format('%y ปี, %m เดือน, %d วัน');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 }

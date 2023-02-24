@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admins\BookingController;
 use App\Http\Controllers\Admins\BuildingController;
+use App\Http\Controllers\Admins\ConfigurationController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\InvoiceController;
 use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
-use App\Http\Controllers\Admins\SettingController;
+use App\Http\Controllers\Admins\SummaryController;
 use App\Http\Controllers\Admins\UserController;
+use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
 use App\Http\Controllers\Users\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -60,13 +63,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // After admin login
     Route::middleware('auth.admin')->group(function () {
 
-        // dashboard
+        // Dashboard
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard.index');
         });
 
         // User management
-        Route::resource('users', UserController::class);
+        Route::resource('users', UserController::class)->except(['destroy']);
 
         // Download file
         Route::get('users/idcardcopy/{filename}', [UserController::class, 'downloadIdCardCopy'])
@@ -74,14 +77,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('users/housecopy/{filename}', [UserController::class, 'downloadHouseRegCopy'])
             ->name('users.download.housecopy');
 
-        // Setting management
-        Route::resource('settings', SettingController::class)->only(['index', 'edit', 'update']);
+        // Room Configuration management
+        Route::resource('configurations', ConfigurationController::class)->only(['index', 'edit', 'update']);
 
         // Building management
-        Route::resource('buildings', BuildingController::class);
+        Route::resource('buildings', BuildingController::class)->only(['index', 'show']);
 
         // Room management
-        Route::resource('rooms', RoomController::class);
+        Route::resource('rooms', RoomController::class)->only(['show', 'edit', 'update']);
+
+        // Booking
+        Route::patch('bookings/{id}', [BookingController::class, 'cancelBooking'])
+            ->name('booking.booking-cancel');
+        Route::get('bookings/create', [BookingController::class, 'create'])
+            ->name('booking.create');
+        Route::post('bookings', [BookingController::class, 'store'])
+            ->name('booking.store');
 
         /// For download rent contract
         Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])
@@ -90,11 +101,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Repair management
         Route::resource('repairs', RepairController::class)->only(['index', 'edit', 'update']);
 
-        // Payment management
-        Route::resource('invoices', InvoiceController::class)->only(['index', 'edit', 'update']);
+        // Invoice and Payment management
+        Route::resource('invoices', InvoiceController::class)->except(['destroy', 'edit']);
+        Route::patch('payments/{id}/update', [InvoiceController::class, 'updatePayment'])->name('payments.update');
 
+        // Summary report
+        Route::get('summary', [SummaryController::class, 'index'])
+            ->name('summary.index');
+        Route::post('summary', [SummaryController::class, 'exportPdf'])
+            ->name('summary.export-pdf');
+
+        // Download payment attach file
         Route::get('payments/paymentattach/{filename}', [InvoiceController::class, 'downloadPaymentAttach'])
             ->name('payments.download.payment_attach');
+
+        // Utility Expense management
+        Route::resource('expenses', UtilityExpenseController::class)->except(['destroy', 'show']);
 
     });
 });

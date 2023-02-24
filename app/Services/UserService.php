@@ -5,48 +5,49 @@ namespace App\Services;
 use App\Enums\BookingStatusEnum;
 use App\Enums\UserStatusEnum;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class UserService
 {
-    /**
-     * @param Request $request
-     * @return User[]|\Illuminate\Pagination\LengthAwarePaginator|\LaravelIdea\Helper\App\Models\_IH_User_C
-     */
-    public function searchUser(Request $request)
-    {
 
+    public function searchUser(Request $request): LengthAwarePaginator
+    {
         // Get query parameter
         $search = $request->query('search', '');
         $searchLike = '%' . $search . '%';
         $status = $request->query('status', UserStatusEnum::cases());
 
         // filter all users and room information
-        return User::with(['bookings' => function ($query) {
-            $query->with(['room.floor.building'])
-                ->where('status', BookingStatusEnum::ACTIVE)
-                ->latest()->get('id');
-        }])
-            ->orWhere(function ($query) use ($searchLike) {
-                $query->orWhere('name', 'like', $searchLike)
+        return User::with([
+            'bookings' => function (HasMany $hasMany) {
+                $hasMany->with([
+                    'room.floor.building'
+                ])
+                    ->where('status', BookingStatusEnum::ACTIVE)
+                    ->latest('id');
+            }
+        ])
+            ->whereIn('status', $status)
+            ->when($search != '', function (Builder $query) use ($searchLike) {
+                $query->where('name', 'like', $searchLike)
                     ->orWhere('surname', 'like', $searchLike)
                     ->orWhere('telephone', 'like', $searchLike);
             })
-            ->whereIn('status', $status)
-            ->orderBy('id', 'desc')
-            ->paginate(40);
+            ->latest('id')
+            ->paginate(40)
+            ->withQueryString();
     }
 
-    /**
-     * @param Request $request
-     * @return User
-     */
     public function createUser(Request $request): User
     {
         return User::create([
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
             'id_card_number' => $request->id_card,
             'birthdate' => $request->birthdate,
             'religion' => $request->religion,
@@ -63,69 +64,97 @@ class UserService
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @param $filename
-     * @return void
-     */
-    public function uploadIdCardDoc(Request $request, $filename): void
+    public function uploadIdCardDoc(Request $request, string $filename): void
     {
         $request->file('id_card_copy')->storeAs(
-            config('custom.id_card_copy_path'), $filename
+            config('custom.id_card_copy_path'),
+            $filename
         );
     }
 
-    /**
-     * @param Request $request
-     * @param $filename
-     * @return void
-     */
-    public function uploadCopyHouseDoc(Request $request, $filename): void
+    public function uploadCopyHouseDoc(Request $request, string $filename): void
     {
         $request->file('copy_house_registration')->storeAs(
-            config('custom.copy_house_registration_path'), $filename
+            config('custom.copy_house_registration_path'),
+            $filename
         );
     }
 
-    /**
-     * @param Request $request
-     * @param int $id
-     * @return User
-     */
-    public function updateUser(Request $request, int $id): User
+    public function deletePreviousIdCardDoc(string $filename): void
     {
+        (new StorageService())->removeFile(
+            config('custom.id_card_copy_path') . '/' . $filename
+        );
+    }
 
+    public function deletePreviousCopyHouseDoc(string $filename): void
+    {
+        (new StorageService())->removeFile(
+            config('custom.copy_house_registration_path') . '/' . $filename
+        );
+    }
+
+    public function updateUser(Request $request, string $id): User
+    {
         $user = User::findOrFail($id);
 
-        $user->telephone = $request->telephone;
-        $user->id_card_number = $request->id_card;
-        $user->birthdate = $request->birthdate;
-        $user->religion = $request->religion;
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->address = $request->address;
-        $user->subdistrict = $request->sub_district;
-        $user->district = $request->district;
-        $user->province = $request->province;
-        $user->postal_code = $request->postal_code;
+        DB::transaction(function () use ($user, $request) {
 
-        if ($request->password) {
-            $user->password = bcrypt($user->password);
-        }
+            $user->telephone = $request->telephone;
+            $user->id_card_number = $request->id_card;
+            $user->birthdate = $request->birthdate;
+            $user->religion = $request->religion;
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->address = $request->address;
+            $user->subdistrict = $request->sub_district;
+            $user->district = $request->district;
+            $user->province = $request->province;
+            $user->postal_code = $request->postal_code;
+            $user->status = $request->status;
 
-        if ($request->hasFile('id_card_copy')) {
-            $user->id_card_copy = $request->file('id_card_copy')->hashName();
-            $this->uploadIdCardDoc($request, $user->id_card_copy);
-        }
+            if ($request->password) {
+                $user->password = $request->password;
+            }
 
-        if ($request->hasFile('copy_house_registration')) {
-            $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
-            $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
-        }
+            if ($request->hasFile('id_card_copy')) {
+                $oldIdCardCopy = $user->id_card_copy;
+                $user->id_card_copy = $request->file('id_card_copy')->hashName();
 
-        $user->save();
+                $this->uploadIdCardDoc($request, $user->id_card_copy);
+
+                $this->deletePreviousIdCardDoc($oldIdCardCopy);
+            }
+
+            if ($request->hasFile('copy_house_registration')) {
+                $oldCopyHouseRegistration = $user->copy_house_registration;
+                $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
+
+                $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
+
+                $this->deletePreviousCopyHouseDoc($oldCopyHouseRegistration);
+            }
+
+            // if user exist and you want to create a new booking.
+            if ($request->create_booking) {
+                $bookingService = new BookingService();
+                $bookingService->createBooking($request, $user);
+                $bookingService->uploadDocs($request, $request->file('rent_contract')->hashName());
+                $user->status = UserStatusEnum::ACTIVE;
+            }
+
+            $user->save();
+        });
+
 
         return $user;
+    }
+
+    public function suspendUser(string $userId): bool
+    {
+        return User::findOrFail($userId)->update([
+            'status' => UserStatusEnum::INACTIVE,
+        ]);
     }
 
 }

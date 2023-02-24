@@ -8,9 +8,7 @@ use Illuminate\Validation\Rules\Enum;
 
 class AdminEditRepairRequest extends FormRequest
 {
-    /**
-     * @return string[]
-     **/
+
     public function rules(): array
     {
         return [
@@ -19,19 +17,14 @@ class AdminEditRepairRequest extends FormRequest
         ];
     }
 
-    /*
-    * @return string[]
-    **/
-    public function messages(): array
+    public function attributes(): array
     {
         return [
-
+            'status' => 'สถานะ',
+            'repair_date' => 'วันที่เข้าซ่อม',
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;

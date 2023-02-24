@@ -44,41 +44,21 @@ class Booking extends Model
         'arrival_date',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function utilytyExpenses(): HasMany
-    {
-        return $this->hasMany(UtilityExpense::class, 'booking_id');
-    }
-
-    /**
-     * @return HasMany
-     */
     public function repairs(): HasMany
     {
         return $this->hasMany(Repair::class, 'booking_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'room_id');

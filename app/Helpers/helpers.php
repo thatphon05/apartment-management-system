@@ -7,7 +7,6 @@ if (!function_exists('convertDateToAD')) {
     /**
      * Convert B.E. to A.D.
      * @param $date
-     * @return Carbon
      */
     function convertDateToAD($date): Carbon
     {
@@ -25,7 +24,6 @@ if (!function_exists('convertDateToBE')) {
     /**
      * Convert to B.E.
      * @param $date
-     * @return Carbon
      */
     function convertDateToBE($date): Carbon
     {
@@ -36,7 +34,7 @@ if (!function_exists('convertDateToBE')) {
 if (!function_exists('getAllMonth')) {
     /**
      * get all month available
-     * @return string[]
+     * @return array<string>
      */
     function getAllMonth(): array
     {
@@ -59,8 +57,8 @@ if (!function_exists('getAllMonth')) {
 
 if (!function_exists('getAllProvinces')) {
     /**
-     * get all province in thailand available
-     * @return string[]
+     * get all available province in Thailand.
+     * @return array<string>
      */
     function getAllProvince(): array
     {

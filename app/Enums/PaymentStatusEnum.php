@@ -8,31 +8,21 @@ enum PaymentStatusEnum: int
     case COMPLETE = 1;
     case CANCEL = 2;
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getLabel($value): string
+    public static function getLabel(self|string $value): string
     {
         return match ($value) {
             'PENDING', self::PENDING => 'รอตรวจสอบ',
             'COMPLETE', self::COMPLETE => 'ชำระเงินแล้ว',
             'CANCEL', self::CANCEL => 'ยกเลิก',
-            default => 'ผิดพลาด',
         };
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getColor($value): string
+    public static function getColor(self|string $value): string
     {
         return match ($value) {
             'PENDING', self::PENDING => 'azure',
             'COMPLETE', self::COMPLETE => 'green',
             'CANCEL', self::CANCEL => '',
-            default => '',
         };
     }
 

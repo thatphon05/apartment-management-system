@@ -7,21 +7,14 @@ enum AdminStatusEnum: int
     case INACTIVE = 0;
     case ACTIVE = 1;
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getLabel($value): string
+    public static function getLabel(self|string $value): string
     {
         return match ($value) {
-            'INACTIVE', 0 => 'ระงับ',
-            'ACTIVE', 1 => 'ใช้งานได้',
+            'INACTIVE', self::INACTIVE => 'ระงับ',
+            'ACTIVE', self::ACTIVE => 'ใช้งานได้',
         };
     }
 
-    /**
-     * @return array
-     */
     public static function values(): array
     {
         return array_column(self::cases(), 'name', 'value');

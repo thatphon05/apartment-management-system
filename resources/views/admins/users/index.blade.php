@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'จัดการผู้เช่า')
+@section('breadcrumb', Breadcrumbs::render('admin.user'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
@@ -112,6 +113,8 @@
                                                     ชั้น {{ $user->bookings->first()->room->floor->name ?? '' }}
                                                     ห้อง {{ $user->bookings->first()->room->name ?? '' }}
                                                 </a>
+                                            @else
+                                                ไม่ได้เช่าห้อง
                                             @endif
                                         </td>
                                         <td>{{ $user->updated_at }}</td>
@@ -130,7 +133,7 @@
                                                 </svg>
                                                 ดูข้อมูล
                                             </a>
-                                            <a href="{{ route('admin.users.edit', ['user' => 1]) }}" class="btn"
+                                            <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn"
                                                role="button">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      class="icon icon-tabler icon-tabler-edit" width="24" height="24"

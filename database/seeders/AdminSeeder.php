@@ -9,10 +9,8 @@ class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         // Admin account
         if (Admin::count() < 1) {
@@ -20,8 +18,16 @@ class AdminSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'email' => 'thatphon.t@ku.th',
-                'password' => bcrypt('123'),
-                'name' => 'Administration',
+                'password' => '123',
+                'name' => 'Thatpon',
+                'status' => 1,
+            ]);
+            Admin::create([
+                'created_at' => now(),
+                'updated_at' => now(),
+                'email' => 'tanawit.w@ku.th',
+                'password' => '123',
+                'name' => 'Tanawit',
                 'status' => 1,
             ]);
         }

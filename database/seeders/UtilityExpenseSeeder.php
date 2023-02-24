@@ -10,10 +10,8 @@ class UtilityExpenseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (UtilityExpense::count() < 1) {
             UtilityExpense::create([
@@ -21,10 +19,8 @@ class UtilityExpenseSeeder extends Seeder
                 'updated_at' => now(),
                 'electric_unit' => 5,
                 'water_unit' => 5,
-                'booking_id' => 1,
                 'room_id' => 1,
                 'cycle' => now(),
-                'note_date' => now(),
             ]);
 
             UtilityExpense::create([
@@ -32,10 +28,8 @@ class UtilityExpenseSeeder extends Seeder
                 'updated_at' => now(),
                 'electric_unit' => 10,
                 'water_unit' => 10,
-                'booking_id' => 1,
                 'room_id' => 1,
                 'cycle' => Carbon::now()->addMonth(),
-                'note_date' => Carbon::now()->addMonth(),
             ]);
         }
 

@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 @section('title', 'จัดการรายการแจ้งซ่อมทั้งหมด')
+@section('breadcrumb', Breadcrumbs::render('admin.repair'))
 @section('content')
     <div class="page-header d-print-none" xmlns="http://www.w3.org/1999/html">
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        จัดการรายการแจ้งซ่อมทั้งหมด
+                        รายการแจ้งซ่อมทั้งหมด
                     </h2>
                 </div>
             </div>
@@ -20,22 +21,53 @@
                     <div class="card">
                         <div class="card-body">
                             <form action="{{route('admin.repairs.index')}}" method="get">
-                                <div class="mb-3">
-                                    <label class="form-label">ค้นหา</label>
-                                    <div class="input-icon mb-3">
-                                        <input type="text" name="search"
-                                               value="{{ request()->query('search') }}"
-                                               class="form-control" placeholder="รายการแจ้งช่อม">
-                                        <span class="input-icon-addon">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                             stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <circle cx="10" cy="10" r="7"/>
-                                            <line x1="21" y1="21" x2="15" y2="15"/>
-                                        </svg>
-                                    </span>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <label class="form-label">ค้นหา</label>
+                                            <div class="input-icon mb-3">
+                                                <input type="text" name="search"
+                                                       value="{{ request()->query('search') }}"
+                                                       class="form-control" placeholder="รายการแจ้งช่อม">
+                                                <span class="input-icon-addon">
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                         height="24"
+                                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                         fill="none"
+                                                         stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                        <circle cx="10" cy="10" r="7"/>
+                                                        <line x1="21" y1="21" x2="15" y2="15"/>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <div class="form-label">เลือกวันที่เข้าซ่อม</div>
+                                            <input value="{{ request()->query('repair_date') }}" name="repair_date"
+                                                   class="form-control"
+                                                   type="date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <div class="form-label">เลือกห้อง</div>
+                                            <select name="room" class="form-select">
+                                                <option value="0" selected>ทั้งหมด</option>
+                                                @foreach($rooms as $room)
+                                                    <option value="{{ $room->id }}"
+                                                        @selected(request()->query('room') == $room->id)
+                                                        @selected(old('room') == $room->id)
+                                                    >
+                                                        อาคาร {{ $room->floor->building->name }}
+                                                        ชั้น {{ $room->floor->name }} ห้อง {{ $room->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'แก้ไขการแจ้งซ่อม')
+@section('breadcrumb', Breadcrumbs::render('admin.repair-edit', $repair))
 @section('content')
     <div class="page-wrapper">
         <!-- Page header -->
@@ -8,7 +9,7 @@
                 <div class="row g-2 align-items-center">
                     <div class="col">
                         <h2 class="page-title">
-                            แก้ไขการแจ้งซ่อม
+                            ดูการแจ้งซ่อม
                         </h2>
                     </div>
                 </div>
@@ -26,15 +27,23 @@
                             <div class="card-body">
                                 <dl class="row">
                                     <dt class="col-3">หมายเลขแจ้งซ่อม</dt>
-                                    <dd class="col-9">{{$repair->id}}</dd>
+                                    <dd class="col-9">#{{$repair->id}}</dd>
                                     <dt class="col-3">ห้อง</dt>
-                                    <dd class="col-9">อาคาร {{$repair->room->floor->building->name}}
-                                        ชั้น {{$repair->room->floor->name}}
-                                        ห้อง {{$repair->room->name}}</dd>
+                                    <dd class="col-9">
+                                        <a href="{{ route('admin.rooms.show', ['room' => $repair->room->id]) }}">
+                                            อาคาร {{$repair->room->floor->building->name}}
+                                            ชั้น {{$repair->room->floor->name}}
+                                            ห้อง {{$repair->room->name}}
+                                        </a>
+                                    </dd>
                                     <dt class="col-3">วันที่แจ้ง</dt>
                                     <dd class="col-9">{{$repair->created_at}}</dd>
                                     <dt class="col-3">ชื่อผู้แจ้ง</dt>
-                                    <dd class="col-9">{{$repair->user->full_name}}</dd>
+                                    <dd class="col-9"><a
+                                            href="{{ route('admin.users.show', ['user' => $repair->user->id]) }}">
+                                            {{$repair->user->full_name}}
+                                        </a>
+                                    </dd>
                                     <dt class="col-3">สถานะ</dt>
                                     <dd class="col-9">
                                         <span

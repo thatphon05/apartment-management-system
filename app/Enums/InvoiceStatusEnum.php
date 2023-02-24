@@ -9,11 +9,7 @@ enum InvoiceStatusEnum: int
     case OVERDUE = 2;
     case CANCEL = 3;
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getLabel($value): string
+    public static function getLabel(self|string $value): string
     {
         return match ($value) {
             'PENDING', self::PENDING => 'รอชำระเงิน',
@@ -23,11 +19,7 @@ enum InvoiceStatusEnum: int
         };
     }
 
-    /**
-     * @param $value
-     * @return string
-     */
-    public static function getColor($value): string
+    public static function getColor(self|string $value): string
     {
         return match ($value) {
             'PENDING', self::PENDING => 'azure',
@@ -42,11 +34,7 @@ enum InvoiceStatusEnum: int
      */
     public static function values(): array
     {
-        $listOfEnum = array_column(self::cases(), 'name', 'value');
-
-        unset($listOfEnum[self::OVERDUE->value]);
-
-        return $listOfEnum;
+        return array_column(self::cases(), 'name', 'value');
     }
 
 }

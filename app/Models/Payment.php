@@ -13,6 +13,7 @@ class Payment extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
@@ -27,25 +28,16 @@ class Payment extends Model
         'status' => PaymentStatusEnum::class,
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');

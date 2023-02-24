@@ -9,10 +9,8 @@ class FloorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Floor::count() < 1) {
             for ($i = 1; $i <= 4; $i++) {

@@ -9,10 +9,8 @@ class ConfigurationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (Configuration::count() < 1) {
             Configuration::create([

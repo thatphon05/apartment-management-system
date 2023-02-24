@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 class CreateRoomsTable extends Migration
 {
 
-    public function up()
+    public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
@@ -14,16 +14,11 @@ class CreateRoomsTable extends Migration
             $table->integer('floor_id')->unsigned();
             $table->integer('building_id')->unsigned();
             $table->integer('configuration_id')->unsigned();
-            $table->decimal('rent_price');
-            $table->decimal('electric_price');
-            $table->decimal('water_price');
-            $table->decimal('parking_price');
-            $table->decimal('common_fee');
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::drop('rooms');
     }

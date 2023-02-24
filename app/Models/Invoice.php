@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\InvoiceStatusEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,10 +15,39 @@ class Invoice extends Model
      * @var bool
      */
     public $timestamps = true;
+
     /**
      * @var string
      */
     protected $table = 'invoices';
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'user_id',
+        'booking_id',
+        'room_id',
+        'util_expense_id',
+        'cycle',
+        'status',
+        'rent_total',
+        'electric_unit_last',
+        'electric_unit_later',
+        'electric_total',
+        'electric_unit',
+        'electric_unit_price',
+        'water_unit_last',
+        'water_unit_later',
+        'water_unit',
+        'water_unit_price',
+        'water_total',
+        'parking_total',
+        'common_total',
+        'due_date',
+        'overdue_total',
+        'summary',
+    ];
 
     /**
      * The attributes that should be cast.
@@ -41,95 +71,83 @@ class Invoice extends Model
         'electric_total_divided',
         'dynamic_summary',
         'dynamic_overdue_total',
-        'electric_unit_price_divide',
-        'water_unit_price_divide',
+        'due_date_late',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class, 'booking_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function utilExpenses(): HasMany
     {
         return $this->hasMany(UtilityExpense::class, 'util_expense_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
     public function room(): BelongsTo
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    /**
-     * @return HasMany
-     */
     public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class, 'booking_id');
+        return $this->hasMany(Payment::class, 'invoice_id');
     }
 
-    /**
-     * @return string
-     */
-    public function getCycleDateAttribute(): string
+    protected function cycleDate(): Attribute
     {
-        return $this->cycle->translatedFormat('F Y');
+        $value = $this->cycle->translatedFormat('F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return string
-     */
-    public function getDueDateFormatAttribute(): string
+    protected function dueDateFormat(): Attribute
     {
-        return $this->due_date->translatedFormat('d F Y');
+        $value = $this->due_date->translatedFormat('d F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return string
-     */
-    public function getIsDueDateAttribute(): bool
+    protected function isDueDate(): Attribute
     {
-        return $this->due_date->lt(now());
+        $value = $this->due_date->lt(now());
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return float
-     */
-    public function getWaterTotalDividedAttribute(): float
+    protected function waterTotalDivided(): Attribute
     {
-        return (float)$this->water_total / 2;
+        $value = (float)$this->water_total / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return float
-     */
-    public function getElectricTotalDividedAttribute(): float
+    protected function electricTotalDivided(): Attribute
     {
-        return (float)$this->electric_total / 2;
+        $value = (float)$this->electric_total / 2;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return float
-     */
-    public function getDynamicOverdueTotalAttribute(): float
+    protected function dynamicOverdueTotal(): Attribute
     {
+        $value = 0;
+
         if ($this->is_due_date) {
 
             $payWithinDay = config('custom.pay_within_day');
@@ -138,35 +156,31 @@ class Invoice extends Model
 
             $dayOfDue = $this->due_date->diff(now())->days;
 
-            return (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
+            $value = (float)$dayOfDue <= $payWithinDay ? $dayOfDue * $overdue_fee : $payWithinDay * $overdue_fee;
         }
 
-        return 0;
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
-    /**
-     * @return float
-     */
-    public function getElectricUnitPriceDivideAttribute(): float
+    protected function dynamicSummary(): Attribute
     {
-        return (float)$this->electric_unit_price / 2;
-    }
-
-    /**
-     * @return float
-     */
-    public function getWaterUnitPriceDivideAttribute(): float
-    {
-        return (float)$this->water_unit_price / 2;
-    }
-
-    /**
-     * @return float
-     */
-    public function getDynamicSummaryAttribute(): float
-    {
-        return (float)$this->rent_total + $this->electric_total + $this->water_total
+        $value = (float)$this->rent_total + $this->electric_total + $this->water_total
             + $this->parking_total + $this->common_total + $this->dynamic_overdue_total;
+
+        return new Attribute(
+            get: fn() => $value,
+        );
+    }
+
+    protected function dueDateLate(): Attribute
+    {
+        $value = $this->due_date->addDays(config('custom.pay_within_day'))->translatedFormat('d F Y');
+
+        return new Attribute(
+            get: fn() => $value,
+        );
     }
 
 }
