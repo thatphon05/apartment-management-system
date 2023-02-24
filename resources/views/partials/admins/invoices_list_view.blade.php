@@ -4,7 +4,7 @@
             รายการใบแจ้งหนี้
         </div>
 
-        @unless(request()->is('admin/invoices*'))
+        @unless(request()->routeIs('admin.invoices.*'))
             <div class="col-auto ms-auto">
                 <a href="{{ route('admin.invoices.create', $parameters ?? []) }}"
                    class="btn btn-outline-success btn-sm">

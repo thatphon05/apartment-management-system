@@ -55,7 +55,7 @@
         <div class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item @navactive('/')">
+                    <li class="nav-item @navactive('user.dashboard.index')">
                         <a class="nav-link" href="{{ route('user.dashboard.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -103,7 +103,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item @navactive('repairs*')">
+                    <li class="nav-item @navactive('user.repairs.*')">
                         <a class="nav-link" href="{{ route('user.repairs.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->

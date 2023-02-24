@@ -56,7 +56,7 @@
         <div class="navbar navbar-light">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item @navactive('admin')">
+                    <li class="nav-item @navactive('admin.dashboard.index')">
                         <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -78,7 +78,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown @navactive('admin/users*') @navactive('admin/bookings*')">
+                    <li class="nav-item dropdown @navactive('admin.users.*') @navactive('admin.bookings.*')">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -104,7 +104,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item @navactive('admin/buildings*') @navactive('admin/rooms*')">
+                    <li class="nav-item @navactive('admin.buildings.*') @navactive('admin.rooms.*')">
                         <a class="nav-link" href="{{ route('admin.buildings.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -126,7 +126,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/repairs*')">
+                    <li class="nav-item @navactive('admin.repairs.*')">
                         <a class="nav-link" href="{{ route('admin.repairs.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -145,7 +145,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/expense*')">
+                    <li class="nav-item @navactive('admin.expenses.*')">
                         <a class="nav-link" href="{{ route('admin.expenses.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-engine"
@@ -165,7 +165,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/invoices*')">
+                    <li class="nav-item @navactive('admin.invoices.*')">
                         <a class="nav-link" href="{{ route('admin.invoices.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -187,7 +187,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/summary*')">
+                    <li class="nav-item @navactive('admin.summary.*')">
                         <a class="nav-link" href="{{ route('admin.summary.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item @navactive('admin/configurations*')">
+                    <li class="nav-item @navactive('admin.configurations.*')">
                         <a class="nav-link" href="{{ route('admin.configurations.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/home -->
