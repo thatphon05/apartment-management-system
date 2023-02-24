@@ -26,7 +26,7 @@
                     </svg>
                 </a>
             </div>
-            <div class="nav-item dropdown">
+            <div class="nav-item dropdown @navactive('admin.profile.*')">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                    aria-label="Open user menu">
                     <span class="avatar avatar-sm">
@@ -44,7 +44,9 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">เปลี่ยนรหัสผ่าน</a>
+                    <a href="{{ route('admin.profile.change-password.get') }}" class="dropdown-item">
+                        เปลี่ยนรหัสผ่าน
+                    </a>
                     <a href="{{ route('admin.logout') }}" class="dropdown-item">ออกจากระบบ</a>
                 </div>
             </div>

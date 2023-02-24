@@ -5,6 +5,7 @@ use App\Http\Controllers\Admins\BuildingController;
 use App\Http\Controllers\Admins\ConfigurationController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\InvoiceController;
+use App\Http\Controllers\Admins\ProfileController;
 use App\Http\Controllers\Admins\RepairController;
 use App\Http\Controllers\Admins\RoomController;
 use App\Http\Controllers\Admins\SummaryController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admins\UserController;
 use App\Http\Controllers\Admins\UtilityExpenseController;
 use App\Http\Controllers\Auths\AuthController;
 use App\Http\Controllers\Users\DashboardController as UserDashboardController;
+use App\Http\Controllers\Users\ProfileController as UserProfileController;
 use App\Http\Controllers\Users\RepairController as UserRepairController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +50,12 @@ Route::prefix('/')->name('user.')->group(function () {
 
         // Repair
         Route::resource('repairs', UserRepairController::class)->except(['destroy', 'edit', 'update']);
+
+        // Change self password
+        Route::get('profile/change-password', [UserProfileController::class, 'getChangePassword'])
+            ->name('profile.change-password.get');
+        Route::post('profile/change-password', [UserProfileController::class, 'postChangePassword'])
+            ->name('profile.change-password.post');
 
     });
 });
@@ -121,6 +129,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Utility Expense management
         Route::resource('expenses', UtilityExpenseController::class)->except(['destroy', 'show']);
+
+        // Change self password
+        Route::get('profile/change-password', [ProfileController::class, 'getChangePassword'])
+            ->name('profile.change-password.get');
+        Route::post('profile/change-password', [ProfileController::class, 'postChangePassword'])
+            ->name('profile.change-password.post');
 
     });
 });

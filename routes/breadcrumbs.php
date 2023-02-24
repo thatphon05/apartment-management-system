@@ -12,6 +12,12 @@ Breadcrumbs::for('admin.dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('หน้าแรก', route('admin.dashboard.index'));
 });
 
+// Change password
+Breadcrumbs::for('admin.change-password', function (BreadcrumbTrail $trail) {
+    $trail->parent('admin.dashboard');
+    $trail->push('เปลี่ยนรหัสผ่าน', route('admin.profile.change-password.get'));
+});
+
 // User management
 Breadcrumbs::for('admin.user', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
@@ -117,6 +123,12 @@ Breadcrumbs::for('admin.summary', function (BreadcrumbTrail $trail) {
 // Dashboard
 Breadcrumbs::for('user.dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('หน้าแรก', route('user.dashboard.index'));
+});
+
+// Change password
+Breadcrumbs::for('user.change-password', function (BreadcrumbTrail $trail) {
+    $trail->parent('user.dashboard');
+    $trail->push('เปลี่ยนรหัสผ่าน', route('user.profile.change-password.get'));
 });
 
 // Repair
