@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class UserService
 {
@@ -97,42 +98,54 @@ class UserService
     {
         $user = User::findOrFail($id);
 
-        $user->telephone = $request->telephone;
-        $user->id_card_number = $request->id_card;
-        $user->birthdate = $request->birthdate;
-        $user->religion = $request->religion;
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->address = $request->address;
-        $user->subdistrict = $request->sub_district;
-        $user->district = $request->district;
-        $user->province = $request->province;
-        $user->postal_code = $request->postal_code;
-        $user->status = $request->status;
+        DB::transaction(function () use ($user, $request) {
 
-        if ($request->password) {
-            $user->password = $request->password;
-        }
+            $user->telephone = $request->telephone;
+            $user->id_card_number = $request->id_card;
+            $user->birthdate = $request->birthdate;
+            $user->religion = $request->religion;
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->address = $request->address;
+            $user->subdistrict = $request->sub_district;
+            $user->district = $request->district;
+            $user->province = $request->province;
+            $user->postal_code = $request->postal_code;
+            $user->status = $request->status;
 
-        if ($request->hasFile('id_card_copy')) {
-            $oldIdCardCopy = $user->id_card_copy;
-            $user->id_card_copy = $request->file('id_card_copy')->hashName();
+            if ($request->password) {
+                $user->password = $request->password;
+            }
 
-            $this->uploadIdCardDoc($request, $user->id_card_copy);
+            if ($request->hasFile('id_card_copy')) {
+                $oldIdCardCopy = $user->id_card_copy;
+                $user->id_card_copy = $request->file('id_card_copy')->hashName();
 
-            $this->deletePreviousIdCardDoc($oldIdCardCopy);
-        }
+                $this->uploadIdCardDoc($request, $user->id_card_copy);
 
-        if ($request->hasFile('copy_house_registration')) {
-            $oldCopyHouseRegistration = $user->copy_house_registration;
-            $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
+                $this->deletePreviousIdCardDoc($oldIdCardCopy);
+            }
 
-            $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
+            if ($request->hasFile('copy_house_registration')) {
+                $oldCopyHouseRegistration = $user->copy_house_registration;
+                $user->copy_house_registration = $request->file('copy_house_registration')->hashName();
 
-            $this->deletePreviousCopyHouseDoc($oldCopyHouseRegistration);
-        }
+                $this->uploadCopyHouseDoc($request, $user->copy_house_registration);
 
-        $user->save();
+                $this->deletePreviousCopyHouseDoc($oldCopyHouseRegistration);
+            }
+
+            // if user exist and you want to create a new booking.
+            if ($request->create_booking) {
+                $bookingService = new BookingService();
+                $bookingService->createBooking($request, $user);
+                $bookingService->uploadDocs($request, $request->file('rent_contract')->hashName());
+                $user->status = UserStatusEnum::ACTIVE;
+            }
+
+            $user->save();
+        });
+
 
         return $user;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
+use App\Enums\BookingStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -105,6 +106,11 @@ class UserController extends Controller
     {
         return view('admins.users.edit', [
             'user' => User::findOrFail($id),
+            'booking' => Booking::where('user_id', $id)
+                ->where('status', BookingStatusEnum::ACTIVE)
+                ->select('id')->first(),
+            'config' => Configuration::latest()->first(),
+            'rooms' => $this->roomService->getRooms(),
         ]);
     }
 

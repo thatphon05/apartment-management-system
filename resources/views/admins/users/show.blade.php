@@ -155,7 +155,25 @@
                 </div>
                 <div class="col-4">
                     <div class="card">
-                        <h3 class="card-header">รายการห้องที่พัก</h3>
+                        <div class="card-header row align-items-center">
+                            <div class="col-auto fs-3">
+                                รายการห้องที่เช่า
+                            </div>
+                            <div class="col-auto ms-auto">
+                                <a href="{{ route('admin.booking.create', ['user' => $user->id]) }}"
+                                   class="btn btn-outline-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                         width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                         stroke="currentColor" fill="none" stroke-linecap="round"
+                                         stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 5l0 14"></path>
+                                        <path d="M5 12l14 0"></path>
+                                    </svg>
+                                    เพิ่มข้อมูลการเช่า
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-table table-responsive">
                             <table class="table">
                                 <thead>
@@ -169,7 +187,7 @@
                                 @forelse($bookings as $booking)
                                     <tr>
                                         <td>
-                                            <a href="#">
+                                            <a href="{{ route('admin.rooms.show', ['room' => $booking->room->id]) }}">
                                                 อาคาร {{ $booking->room->floor->building->name }}
                                                 ชั้น {{ $booking->room->floor->name }}
                                                 ห้อง {{ $booking->room->name }}
@@ -182,7 +200,8 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="#!" class="btn btn-sm">แก้ไข</a>
+                                            <a href="{{ route('admin.rooms.edit', ['room' => $booking->room->id]) }}"
+                                               class="btn btn-sm">แก้ไข</a>
                                         </td>
                                     </tr>
                                 @empty

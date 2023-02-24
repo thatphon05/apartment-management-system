@@ -255,6 +255,77 @@
                                         @endforeach
                                     </div>
                                 </div>
+                                @if(!$booking)
+                                    <div class="row card-body">
+                                        <div class="card-header fw-bold ps-1">
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                       name="create_booking" id="create_booking"
+                                                       onchange="handleCreateBooking()"
+                                                    @checked(old('create_booking'))
+                                                >
+                                                <h3 class="card-title fw-bold">ต้องการเพิ่มข้อมูลการเช่า</h3>
+                                            </label>
+                                        </div>
+                                        <div class="" id="show_create_booking">
+                                            <div class="col-md-12">
+                                                <div class="mb-3 mt-3">
+                                                    <label for="formFile" class="form-label required">หนังสือสัญญาเช่าห้องพัก
+                                                        (.pdf)</label>
+                                                    <input value="{{ old('rent_contract"') }}" name="rent_contract"
+                                                           onchange="inputChange(event)"
+                                                           class="form-control @error('rent_contract') is-invalid @enderror"
+                                                           type="file" id="formFile" accept="application/pdf">
+                                                    @error('rent_contract')
+                                                    <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label required">วันที่จะเข้าพัก</label>
+                                                    <input value="{{ old('arrival_date') }}" name="arrival_date"
+                                                           type="date"
+                                                           onchange="inputChange(event)"
+                                                           class="form-control @error('arrival_date') is-invalid @enderror"
+                                                           placeholder="วันที่จะเข้าพัก">
+                                                    @error('arrival_date')
+                                                    <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label required">จำนวนที่จอดรถ</label>
+                                                    <input value="{{ old('parking_amount') ?? 0 }}"
+                                                           name="parking_amount"
+                                                           type="text"
+                                                           onchange="inputChange(event)"
+                                                           class="form-control @error('parking_amount') is-invalid @enderror"
+                                                           placeholder="จำนวนที่จอดรถ">
+                                                    @error('parking_amount')
+                                                    <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label required">ค่ามัดจำ</label>
+                                                    <input value="{{ old('deposit') ?? $config->deposit }}"
+                                                           name="deposit"
+                                                           type="number"
+                                                           onchange="inputChange(event)"
+                                                           class="form-control @error('parking_amount') is-invalid @enderror"
+                                                           placeholder="ค่ามัดจำ">
+                                                    @error('deposit')
+                                                    <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="form-label required">เลือกห้องพัก</div>
+                                                @include('partials.admins.room_select', ['rooms' => $rooms])
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -267,4 +338,22 @@
             </form>
         </div>
     </div>
+    <script>
+
+        var createBooking = document.getElementById('create_booking');
+
+        var showCreateBooking = document.getElementById('show_create_booking');
+
+        window.addEventListener("load", (event) => {
+            handleCreateBooking();
+        });
+
+        function handleCreateBooking() {
+            if (createBooking.checked) {
+                showCreateBooking.classList.remove('d-none');
+            } else {
+                showCreateBooking.className = 'd-none';
+            }
+        }
+    </script>
 @endsection

@@ -89,6 +89,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Booking
         Route::patch('bookings/{id}', [BookingController::class, 'cancelBooking'])
             ->name('booking.booking-cancel');
+        Route::get('bookings/create', [BookingController::class, 'create'])
+            ->name('booking.create');
+        Route::post('bookings', [BookingController::class, 'store'])
+            ->name('booking.store');
 
         /// For download rent contract
         Route::get('bookings/rentcontract/{filename}', [RoomController::class, 'downloadRentContract'])

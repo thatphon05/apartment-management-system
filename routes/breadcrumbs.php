@@ -26,6 +26,12 @@ Breadcrumbs::for('admin.user-edit', function (BreadcrumbTrail $trail, $user) {
     $trail->push('แก้ไข', route('admin.users.edit', $user));
 });
 
+// Booking under user management
+Breadcrumbs::for('admin.booking-create', function (BreadcrumbTrail $trail, $user) {
+    $trail->parent('admin.user-show', $user);
+    $trail->push('เพิ่มข้อมูลการเช่า', route('admin.users.edit', $user));
+});
+
 // ฺBuilding and Room management
 Breadcrumbs::for('admin.building', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');

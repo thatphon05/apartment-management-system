@@ -225,7 +225,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label required">หนังสือสัญญา (.pdf)</label>
+                                        <label for="formFile" class="form-label required">หนังสือสัญญาเช่าห้องพัก
+                                            (.pdf)</label>
                                         <input value="{{ old('rent_contract"') }}" name="rent_contract"
                                                onchange="inputChange(event)"
                                                class="form-control @error('rent_contract') is-invalid @enderror"
@@ -238,7 +239,7 @@
                                 <div class="row card-body">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <label class="form-label required">วันที่จะเข้าพัก</label>
+                                            <label class="form-label">วันที่จะเข้าพัก</label>
                                             <input value="{{ old('arrival_date') }}" name="arrival_date"
                                                    type="date"
                                                    onchange="inputChange(event)"
@@ -250,7 +251,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">จำนวนที่จอดรถ</label>
+                                            <label class="form-label">จำนวนที่จอดรถ</label>
                                             <input value="{{ old('parking_amount') ?? 0 }}" name="parking_amount"
                                                    type="text"
                                                    onchange="inputChange(event)"
@@ -263,7 +264,7 @@
 
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label class="form-label required">ค่ามัดจำ</label>
+                                            <label class="form-label">ค่ามัดจำ</label>
                                             <input value="{{ old('deposit') ?? $config->deposit }}" name="deposit"
                                                    type="number"
                                                    onchange="inputChange(event)"
