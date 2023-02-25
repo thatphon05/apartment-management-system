@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">เปลี่ยรหัสผ่าน</button>
+                                    <button type="submit" class="btn btn-primary">เปลี่ยนรหัสผ่าน</button>
                                 </div>
                             </form>
                         </div>

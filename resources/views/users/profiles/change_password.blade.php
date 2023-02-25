@@ -16,6 +16,61 @@
     <!-- Page body -->
     <div class="page-body">
         <div class="container-xl">
+            <div class="container-xl">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mt-2">
+                            <form action="{{ route('user.profile.change-password.post') }}" method="post">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label required">รหัสผ่านเก่า</label>
+                                            <input value="{{ old('password_old')}}"
+                                                   name="password_old" type="password"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('password_old') is-invalid @enderror"
+                                                   placeholder="รหัสผ่านเก่า">
+                                            @error('password_old')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label required">รหัสผ่านใหม่</label>
+                                            <input value="{{ old('password_new')}}"
+                                                   name="password_new" type="password"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('password_new') is-invalid @enderror"
+                                                   placeholder="รหัสผ่านใหม่">
+                                            @error('password_new')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label class="form-label required">ยืนยันรหัสผ่านใหม่</label>
+                                            <input value="{{ old('password_new_confirmation')}}"
+                                                   name="password_new_confirmation" type="password"
+                                                   onchange="inputChange(event)"
+                                                   class="form-control @error('password_new_confirmation') is-invalid @enderror"
+                                                   placeholder="ยืนยันรหัสผ่านใหม่">
+                                            @error('password_new_confirmation')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">เปลี่ยนรหัสผ่าน</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
